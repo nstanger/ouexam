@@ -1,0 +1,45 @@
+ouexam v2.0
+===========
+
+ouexam document class v2.0, 30 January 2002
+
+Copyright 1999--2002 Nigel Stanger and University of Otago
+
+This LaTeX2e document class enables the production of University of Otago
+formatted examination papers. It handles all the fiddly layout requirements
+(such as printing `TURN OVER' at the bottom of every page except the last),
+and also ensures that the actual number of marks for questions in the
+examination add up to the expected number of marks.
+
+
+REQUIREMENTS
+
+ouexam requires the verbatim class, which should be standard on most LaTeX
+installations. The class documentation uses the graphicx and hyperref
+packages, so you will have to install these first if you don't have them
+already.
+
+
+INSTALLING (UNIX OR SIMILAR)
+
+A makefile is provided:
+
+	* `make' will produce both ouexam.cls and ouexam.dvi (see below).
+
+	* `make class' will produce ouexam.cls. Place this file in a directory
+	  somewhere in your TeX search path (e.g., if you use teTeX, put it in
+	  texmf/tex/latex/ouexam or somewhere similar).
+
+	* `make doc' will produce ouexam.dvi.
+	
+	* If you have GhostScript and the dvipdf command, `make pdfdoc' will
+	  produce PDF documentation.
+
+
+INSTALLING (EVERYTHING ELSE)
+
+Run ouexam.ins through LaTeX to produce ouexam.cls. Place this file in a
+directory somewhere in your LaTeX search path. Then run ouexam.dtx through
+LaTeX _three_ (yes, three) times to produce the documentation (ouexam.dvi).
+PDF documentation can be produced from the DVI by whatever means you
+normally use to do so.

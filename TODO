@@ -1,0 +1,16 @@
+¥ Add up marks for marking schedule and check they are the same as the total
+  marks for a question (Richard?).
+
+¥ Generate marking sheets from the marking schedule info? (to appear at end
+  of document)
+
+¥ Reinstate question mark subtotals as a class option (format [Question y total
+  x marks]).
+
+¥ Options for positioning of mark amounts (end of question vs. in margin).
+
+¥ Options for positioning of page numbers (footer vs. header).
+
+¥ Different types of questions (e.g., multiple choice, fill in the blank, etc.).
+
+¥ Does the draft option need to be passed to the article class?
