@@ -1,6 +1,6 @@
-\def\ouexamdate{10 April 2004}
+\def\ouexamdate{16 April 2004}
 \def\ouexamversion{2.1}
-\def\ouexamshortdate{2004/04/10}
+\def\ouexamshortdate{2004/04/16}
 % \iffalse meta-comment
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -36,7 +36,7 @@
 %
 % \fi
 %
-%% \CheckSum{796}
+%% \CheckSum{793}
 %%
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -2029,7 +2029,8 @@
 % \end{environment}
 % \end{environment}
 % 
-% \begin{macro}{\marks}
+% \changes{2.1}{2004/04/16}{NJS Removed the \texttt{marks} macro entirely
+% because it conflicts with a macro in e-TeX.}
 % \changes{1.1}{1999/04/20}{NJS This macro now increments the \texttt{marks}
 % counter.}
 % \begin{macro}{\totalmarks}
@@ -2040,10 +2041,8 @@
 % question-building environments. The \cs{totalmarks} macro has been replaced
 % by automatic calculations within these environments.
 %    \begin{macrocode}
-\newcommand{\marks}[1]{\@unsupported{marks macro}}
 \newcommand{\totalmarks}{\@unsupported{totalmarks macro}}
 %    \end{macrocode}
-% \end{macro}
 % \end{macro}
 % 
 %
