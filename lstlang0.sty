@@ -1,0 +1,112 @@
+\lst@definelanguage{ODL}%
+{	morekeywords={class,extent,key,keys,module,interface,const,true,false,%
+		typedef,date,time,interval,timestamp,dictionary,set,list,bag,float,%
+		double,long,short,unsigned,char,boolean,octet,any,struct,union,switch,%
+		case,default,enum,array,sequence,string,readonly,attribute,relationship,%
+		inverse,exception,oneway,void,in,out,inout,raises,context,extends},%
+	sensitive=true,%
+	morecomment=[l]//,%
+	morecomment=[s]{/*}{*/},%
+	morestring=[b]",%
+	morestring=[b]'%
+}[keywords,comments,strings]
+
+
+\lst@definelanguage{OQL}%
+{	morekeywords={abs,all,and,andthen,any,array,as,asc,avg,bag,boolean,by,%
+		char,count,date,define,desc,dictionary,distinct,double,element,enum,%
+		except,exists,false,first,flatten,float,for,from,group,having,import,%
+		in,intersect,interval,is_defined,is_undefined,last,like,list,listtoset,%
+		long,max,min,mod,nil,not,octet,or,order,orelse,query,select,set,short,%
+		some,string,struct,sum,time,timestamp,true,undefine,undefined,union,%
+		unique,unsigned,where},%
+	sensitive=true,%
+	morecomment=[l]//,%
+	morecomment=[s]{/*}{*/},%
+	morestring=[b]",%
+	morestring=[b]'%
+}[keywords,comments,strings]
+
+\lst@definelanguage[Oracle8]{SQL}%
+{	morekeywords={access,account,activate,add,admin,after,all,allocate,%
+		all_rows,alter,analyze,and,any,archive,archivelog,array,as,asc,%
+		at,audit,authenticated,authorization,autoextend,automatic,avg,backup,%
+		become,before,begin,between,bfile,bitmap,blob,block,body,by,cache,%
+		cache_instances,cancel,cascade,cast,cfile,chained,change,char,character,%
+		char_cs,check,checkpoint,choose,chunk,clear,clob,clone,close,%
+		close_open_cached_cursors,cluster,coalesce,column,columns,comment,%
+		commit,committed,compatibility,compile,complete,composite_limit,%
+		compress,compute,connect,connect_time,constraint,constraints,contents,%
+		continue,controlfile,convert,cost,count,cpu_per_call,cpu_per_session,%
+		create,current,current_schema,current_user,cursor,cycle,dangling,%
+		database,datafile,datafiles,dataobjno,date,dba,deallocate,debug,dec,%
+		decimal,declare,default,deferrable,deferred,degree,delete,deref,desc,%
+		directory,disable,disconnect,dismount,distinct,distributed,dml,double,%
+		drop,dump,each,else,enable,end,enforce,entry,escape,estimate,events,%
+		except,exceptions,exchange,excluding,exclusive,execute,exists,expire,%
+		explain,extent,extents,externally,failed_login_attempts,false,fast,%
+		file,first_rows,flagger,float,flush,for,force,foreign,freelist,%
+		freelists,from,full,function,global,globally,global_name,grant,%
+		group,groups,hash,hashkeys,having,header,heap,identified,idle_time,%
+		if,immediate,in,including,increment,index,indexed,indexes,indicator,%
+		ind_partition,initial,initially,initrans,insert,instance,instances,%
+		instead,int,integer,intermediate,intersect,into,is,isolation,%
+		isolation_level,keep,key,kill,layer,less,level,library,like,limit,%
+		link,list,lob,local,lock,log,logfile,logging,logical_reads_per_call,%
+		logical_reads_per_session,long,manage,master,max,maxarchlogs,%
+		maxdatafiles,maxextents,maxinstances,maxlogfiles,maxloghistory,%
+		maxlogmembers,maxsize,maxtrans,maxvalue,member,min,minextents,%
+		minimum,minus,minvalue,mode,modify,mount,move,mts_dispatchers,%
+		multiset,national,nchar,nchar_cs,nclob,needed,nested,network,new,%
+		next,nls_calendar,nls_characterset,nls_iso_currency,nls_language,%
+		nls_numeric_characters,nls_sort,nls_special_chars,nls_territory,%
+		noarchivelog,noaudit,nocache,nocompress,nocycle,noforce,nologging,%
+		nomaxvalue,nominvalue,none,noorder,nooveride,noparallel,noresetlogs,%
+		noreverse,normal,nosort,not,nothing,nowait,null,number,numeric,%
+		nvarchar2,object,objno,objno_reuse,of,off,offline,oid,oidindex,%
+		old,on,online,only,opcode,open,optimal,optimizer_goal,option,or,%
+		order,organization,overflow,own,package,parallel,partition,%
+		password,password_grace_time,password_life_time,password_lock_time,%
+		password_reuse_max,password_reuse_time,password_verify_function,%
+		pctfree,pctincrease,pctthreshold,pctused,pctversion,percent,%
+		permanent,plan,plsql_debug,post_transaction,precision,preserve,%
+		primary,prior,private,private_sga,privilege,privileges,procedure,%
+		profile,public,purge,queue,quota,range,raw,rba,read,real,rebuild,%
+		recover,recoverable,recovery,ref,references,referencing,refresh,%
+		rename,replace,reset,resetlogs,resize,resource,restricted,return,%
+		returning,reuse,reverse,revoke,role,roles,rollback,row,rowid,rowlabel,%
+		rownum,rows,rule,sample,savepoint,scan_instances,schema,scn,scope,%
+		sd_all,sd_inhibit,sd_show,segment,seg_block,seg_file,select,sequence,%
+		serializable,session,sessions_per_user,session_cached_cursors,set,%
+		share,shared,shared_pool,shrink,size,skim_unusable_indexes,smallint,%
+		snapshot,some,sort,specification,split,sqlcode,sqlerror,sql_trace,%
+		standby,start,statement_id,statistics,stop,storage,store,structure,%
+		successful,sum,switch,synonym,sysdate,sysdba,sysoper,system,table,%
+		tables,tablespace,tablespaces,tablespace_no,tabno,temporary,than,%
+		the,then,thread,time,timestamp,to,toplevel,trace,tracing,transaction,%
+		transitional,trigger,triggers,true,truncate,tx,type,uba,uid,unarchived,%
+		under,undo,union,unique,unlimited,unlock,unrecoverable,until,unusable,%
+		unused,updatable,update,usage,use,user,using,validate,validation,value,%
+		values,varchar,varchar2,varray,varying,view,when,whenever,where,with,%
+		without,work,write,xid},%
+	sensitive=false,%
+	morecomment=[l]--,%
+	morecomment=[s]{/*}{*/},%
+	morestring=[b]",%
+	morestring=[b]'%
+}[keywords,comments,strings]
+
+\lst@definelanguage[Oracle8]{PLSQL}[Oracle8]{SQL}
+{	morekeywords={ abort,accept,arraylen,assert,assign,base_table,binary_integer,%
+		boolean,case,char_base,clusters,colauth,constant,crash,currval,%
+		data_base,debugoff,debugon,definition,delay,digits,dispose,do,%
+		elsif,exception,exit,fetch,form,generic,goto,interface,limited,%
+		loop,mlslabel,mod,natural,naturaln,nextval,number_base,others,out,%
+		pls_integer,positive,positiven,pragma,raise,record,release,remr,%
+		rowtype,run,separate,signtype,space,sql,sqlerrm,statement,stddev,%
+		subtype,tabauth,task,terminate,variance,views,while,xor},%
+	sensitive=false%
+}[keywords]
+\endinput
+%%
+%% End of file `lstlang0.sty'.
