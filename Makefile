@@ -81,15 +81,18 @@ install: class doc example
 	mkdir -p $(TEXMF_INSTALL)/tex/latex/ouexam
 	cp ouexam.cls $(TEXMF_INSTALL)/tex/latex/ouexam
 	mkdir -p $(TEXMF_INSTALL)/doc/latex/ouexam/example
-	cp ouexam.pdf ouexam.dvi ouexam.dtx ouexam.ins $(TEXMF_INSTALL)/doc/latex/ouexam
-	cp example/*.eps example/example.tex example/example.dvi example/example.pdf \
+	cp eg*.eps ouexam.pdf ouexam.dvi ouexam.dtx ouexam.ins \
+		FAQ INSTALL MANIFEST README TODO \
+		$(TEXMF_INSTALL)/doc/latex/ouexam
+	cp Create*.eps example*.tex example*.dvi example*.pdf lstlang0.sty \
 		$(TEXMF_INSTALL)/doc/latex/ouexam/example
 	texhash
 
 
 # Clean up: remove temporary files.
 tidy:
-	rm -f *.tmp *.aux *.out *.log *.glo *.toc *.ps $(EXAMPLE_IMAGES)
+	rm -f *.tmp *.aux *.out *.log *.glo *.toc *.ps \
+		$(EXAMPLE1_IMAGES) $(EXAMPLE2_IMAGES)
 
 # Clean up: remove everything except the original source.
 clean: tidy
