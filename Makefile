@@ -9,11 +9,15 @@
 SHELL=/bin/sh
 
 
-.PHONY: class doc pdfdoc install tidy clean
+.PHONY: class doc example install tidy clean
+
+
+# files
+IMAGES = eg1-1.eps eg1-2.eps eg1-3.eps eg2-2.eps eg2-3.eps eg2-4.eps eg2-5.eps
 
 
 # Build everything.
-all: class doc
+all: class doc example
 
 
 # Build the class file only.
@@ -23,29 +27,36 @@ ouexam.cls: ouexam.dtx
 
 
 # Build the documentation only.
-doc: ouexam.dvi
+# Note: requires ps2pdf (GhostScript) to build the PDF version.
+doc: ouexam.pdf
 
-# only make pdfdoc if you have GhostScript and dvipdf installed
-pdfdoc: ouexam.pdf
+ouexam.pdf:	ouexam.ps
+	ps2pdf $<
 
-ouexam.pdf:	ouexam.dvi
-	dvipdf ouexam.dvi ouexam.pdf
+ouexam.ps: ouexam.dvi
+	dvips -o $@ $<
 
 ouexam.dvi:	ouexam.dtx
-	latex ouexam.dtx
-	latex ouexam.dtx
-	latex ouexam.dtx
+	latex $<
+	latex $<
+	latex $<
+
+
+# Build the example only.
+example:
+	(cd example; latex example.tex; latex example.tex)
 
 
 # Install files in the appropriate locations in the texmf tree rooted at
 # $(TEXMF_INSTALL). Either define this as a shell variable or pass it as
 # command line argument, e.g., make install TEXMF_INSTALL=/usr/local/texmf.
-install:
+install: class doc example
 	mkdir -p $(TEXMF_INSTALL)/tex/latex/ouexam
 	cp ouexam.cls $(TEXMF_INSTALL)/tex/latex/ouexam
-	mkdir -p $(TEXMF_INSTALL)/doc/latex/ouexam
-	cp ouexam.dvi ouexam.dtx ouexam.ins $(TEXMF_INSTALL)/doc/latex/ouexam
-	if [ -f ouexam.pdf ]; then cp ouexam.pdf $(TEXMF_INSTALL)/doc/latex/ouexam; fi
+	mkdir -p $(TEXMF_INSTALL)/doc/latex/ouexam/example
+	cp ouexam.pdf ouexam.dvi ouexam.dtx ouexam.ins $(TEXMF_INSTALL)/doc/latex/ouexam
+	cp example/*.eps example/example.tex example/example.dvi example/example.pdf \
+		$(TEXMF_INSTALL)/doc/latex/ouexam/example
 	texhash
 
 
