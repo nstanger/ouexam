@@ -7,6 +7,9 @@
 THINGS TO DO
 ============
 
+- ouexam appears to be incompatible with hyperref? Crashes during
+  \maketitlepage. (Mark)
+
 - Specify questions with no marks attached. \question* perhaps?
 
 - Marks totalling currently doesn't work with sections where not all
