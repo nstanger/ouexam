@@ -1,3 +1,18 @@
-Q: The number of marks for my questions are not going at the end of the line even though there is plenty of room for them to fit.
+********************************************************************************
+**
+** File: $Id$
+**
+********************************************************************************
 
-A: You probably have a blank line between the end of your question text and the \end{question} macro that actually generates the number of marks. The line break gets processed by TeX before the number of marks is generated and effectively generates a new paragraph. Until I figure out how to stop this from happening, the workaround is to not leave blank lines between the end of the question text and the \end{question}.
+ouexam 2.1 FAQ
+==============
+
+Q: The number of marks for my questions are not going at the end of the
+line even though there is plenty of room for them to fit.
+
+A: You probably have a blank line between the end of your question text
+and the \end{question} macro that actually generates the number of
+marks. The line break gets processed by TeX before the number of marks
+is generated and effectively generates a new paragraph. Until I figure
+out how to stop this from happening, the workaround is to not leave
+blank lines between the end of the question text and the \end{question}.
