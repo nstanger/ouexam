@@ -1,7 +1,7 @@
-ouexam v2.0.1
+ouexam v2.0.2
 =============
 
-ouexam document class v2.0.1, 30 April 2002
+ouexam document class v2.0.2, 22 August 2002
 
 Copyright 1999--2002 Nigel Stanger and University of Otago
 
@@ -10,6 +10,16 @@ formatted examination papers. It handles all the fiddly layout requirements
 (such as printing `TURN OVER' at the bottom of every page except the last),
 and also ensures that the actual number of marks for questions in the
 examination add up to the expected number of marks.
+
+
+WHAT'S NEW IN VERSION 2.0.2
+
+* If you omitted any of the required title page macros (\examyear,
+  \papernumber, \papertitle or \department), ouexam crashed when trying
+  to report the error. Fixed.
+
+* Added the ability to specify "FY" (full-year) as a semester type in the
+  \semester macro.
 
 
 WHAT'S NEW IN VERSION 2.0.1

@@ -1,6 +1,6 @@
-\def\filedate{30 January 2002}
-\def\fileversion{2.0.1}
-\def\shortdate{2002/04/30}
+\def\ouexamdate{22 August 2002}
+\def\ouexamversion{2.0.2}
+\def\ouexamshortdate{2002/08/22}
 % \iffalse meta-comment
 %%
 %% ouexam.dtx Copyright 1999--2002 Nigel Stanger and University of Otago
@@ -21,9 +21,9 @@
 \usepackage[dvips,colorlinks,pdfpagemode=None,a4paper,urlcolor=blue,
             linkcolor=red,pdfauthor={Nigel Stanger}]{hyperref}
 
-\title{The \textsf{ouexam} document class, v\fileversion}
+\title{The \textsf{ouexam} document class, v\ouexamversion}
 \author{Nigel Stanger\\nstanger@infoscience.otago.ac.nz}
-\date{\filedate}
+\date{\ouexamdate}
 
 \begin{document}
 \maketitle
@@ -33,7 +33,7 @@
 %
 % \fi
 %
-%% \CheckSum{760}
+%% \CheckSum{771}
 %%
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -162,17 +162,102 @@
 % \section{Writing an examination paper}
 % 
 % 
+% \changes{2.0.2}{2002/05/11}{NJS Moved the title page subsection to the start
+% of this section.}
+% \subsection{The title page}
+% \label{Sec:TitlePage}
+% 
+% This class defines a collection of macros that let you fill in the various
+% parts of the examination title page. This is analogous to the process you use
+% to generate the title of a document in, for example, the \textsf{article} class
+% (using \cs{title}, \cs{author}, \cs{date} and \cs{maketitle}). That is, you
+% issue the macros described below in the document preamble, then issue a
+% \cs{maketitlepage} in the document body.
+% 
+% The \DescribeMacro{\examyear} \cs{examyear} macro lets you specify the year
+% in which the examination is being held, for example, |\examyear{1999}|. This
+% macro is mandatory.
+% 
+% The \DescribeMacro{\department} \cs{department} macro lets you specify the
+% name of the department that produced the examination paper, for example,
+% |\department{Information| |Science}|. This macro is mandatory.
+% 
+% The \DescribeMacro{\papernumber} \cs{papernumber} macro lets you specify the
+% paper number that the examination is for, for example,
+% |\papernumber{COMP 101}|. This macro is mandatory. \textbf{Warning:} Do not make
+% the paper number string too long or it will overlap the page number. Be
+% particularly careful when you specify semester information using \cs{semester},
+% because this is appended to the paper number in the page header. For example,
+% if you specify |\papernumber{COMP 101}| and |\semester{2}|, the header will
+% contain ``COMP 101 (Semester Two)'' rather than just ``COMP 101''. The worst
+% case you will need to consider in such situations is a special examination,
+% which inserts the text ``(Special Examination)'' after the paper number.
+% 
+% The \DescribeMacro{\papertitle} \cs{papertitle} macro lets you specify the
+% title of the paper, for example, 
+% |\papertitle{Systems Analysis and Design Methods}|. This macro is mandatory.
+% 
+% \changes{2.0.2}{2002/08/22}{NJS Added `FY' to the \cs{semester} macro
+% description.}
+% Some papers are offered in more than one semester. The
+% \DescribeMacro{\semester} \cs{semester} macro lets you specify which
+% semester the examination is for. The argument can be either ``1'' or ``2''
+% for semesters 1 and 2, ``SS'' for summer school, ``FY'' for a full-year
+% paper or ``SP'' for a special examination, for example, |\semester{2}|.
+% Invalid values for the argument cause a warning to be raised. This macro is
+% optional---if you omit it, no semester information is generated.
+% 
+% The \DescribeMacro{\timeallowed} \cs{timeallowed} macro lets you specify the
+% length of the examination in hours, for example, |\timeallowed{2}|. This
+% macro is optional---if you omit it, it defaults to three (3) hours.
+% 
+% If calculators are allowed in the examination, use the
+% \DescribeMacro{\allowcalculators} \cs{allowcalculators} macro. This macro is
+% optional---if you omit it, a sentence is printed saying that calculators
+% are \emph{not} allowed.
+% 
+% The \DescribeMacro{\instructions} \cs{instructions} macro lets you specify
+% instructions on how candidates should complete the
+% examination, for example, |\instructions{Answer ALL| |questions.}|. This macro
+% is optional. Note that the content of the instructions can be just about
+% anything. It is up to you to control formatting, such as how you want lines
+% broken, etc. This also true of the \cs{material}, \cs{copiesof} and
+% \cs{otherinstructions} macros described below.
+% 
+% The \DescribeMacro{\material} \cs{material} macro lets you specify any
+% additional material that candidates are provided in addition to the
+% examination paper itself, for example, |\material{SQL schema definition}|.
+% This macro is optional.
+% 
+% The \DescribeMacro{\copiesof} \cs{copiesof} macro lets you specify any
+% material that candidates are allowed to bring into the examination, for
+% example, |\copiesof{McFadden &| |Hoffer, 5th edition}|. This macro is
+% optional.
+% 
+% The \DescribeMacro{\otherinstructions} \cs{otherinstructions} macro lets you
+% specify any other instructions not covered by any of the above, for example,
+% |\otherinstructions{No smoking| |allowed.}|. This macro is optional.
+% 
+% Once you have specified the content of the title page using the above
+% macros, you simply issue a \DescribeMacro{\maketitlepage} \cs{maketitlepage}
+% to generate the front page of the examination (cf. \cs{maketitle}). The title
+% page generated meets University formatting requirements.
+% Note that the number of pages in the examination paper is generated
+% and inserted into the title page automatically---you do not need to specify
+% it manually.
+% 
+% 
 % \subsection{Sections}
 % \label{Sec:Sections}
 % 
-% Examination papers may have multiple sections, ``numbered'' A, B, \ldots.
-% Rather than redefine the existing section macros, this class defines an
-% \DescribeEnv{examsection} \textsf{examsection} environment\footnote{Note that
-% the old \cs{newsection} macro has been retained for backwards compatibility
-% with earlier development versions of \textsf{ouexam}. The \textsf{examsection}
-% environment replaces this macro and should be used in all new documents.} that
-% generates a new section. The \textsf{examsection} environment has three
-% mandatory arguments:
+% Examination papers may optionally have multiple sections, ``numbered'' A,
+% B, \ldots. Rather than redefine the existing section macros, this class
+% defines an \DescribeEnv{examsection} \textsf{examsection}
+% environment\footnote{Note that the old \cs{newsection} macro has been
+% retained for backwards compatibility with earlier development versions of
+% \textsf{ouexam}. The \textsf{examsection} environment replaces this macro
+% and should be used in all new documents.} that generates a new section. The
+% \textsf{examsection} environment has three mandatory arguments:
 % \begin{enumerate}
 % 	\item The expected number of marks for the question. If you leave this
 % 	argument empty it defaults to zero. \textsf{ouexam} keeps a running total
@@ -181,7 +266,6 @@
 % 	An error is raised if the values are not equal. The running total is also
 % 	typeset right-justified in the form ``\textbf{[SECTION A TOTAL 20 MARKS]}''
 % 	as an additional verification.
-% 
 % 	
 % 	\item Instructions for answering questions in this section (such as
 % 	``Answer any TWO questions.''). If you leave this argument empty it
@@ -249,7 +333,7 @@
 % \end{question}
 % \end{verbatim}
 % 
-% \newpage\noindent will produce the following:
+% \noindent will produce the following:
 % \begin{center}
 % 	\fbox{%
 % 	\begin{minipage}{0.9\columnwidth}
@@ -294,87 +378,6 @@
 % \emph{italics} to differentiate it from the main body of the examination,
 % and \fbox{MARKING SCHEDULE} will also be printed in the footer of every
 % page.
-% 
-% 
-% \subsection{The title page}
-% \label{Sec:TitlePage}
-% 
-% This class defines a collection of macros that let you fill in the various
-% parts of the examination title page. This is analogous to the process you use
-% to generate the title of a document in, for example, the \textsf{article} class
-% (using \cs{title}, \cs{author}, \cs{date} and \cs{maketitle}). That is, you
-% issue the macros described below in the document preamble, then issue a
-% \cs{maketitlepage} in the document body.
-% 
-% The \DescribeMacro{\examyear} \cs{examyear} macro lets you specify the year
-% in which the examination is being held, for example, |\examyear{1999}|. This
-% macro is mandatory.
-% 
-% The \DescribeMacro{\department} \cs{department} macro lets you specify the
-% name of the department that produced the examination paper, for example,
-% |\department{Information| |Science}|. This macro is mandatory.
-% 
-% The \DescribeMacro{\papernumber} \cs{papernumber} macro lets you specify the
-% paper number that the examination is for, for example,
-% |\papernumber{COMP 101}|. This macro is mandatory. \textbf{Warning:} Do not make
-% the paper number string too long or it will overlap the page number. Be
-% particularly careful when you specify semester information using \cs{semester},
-% because this is appended to the paper number in the page header. For example,
-% if you specify |\papernumber{COMP 101}| and |\semester{2}|, the header will
-% contain ``COMP 101 (Semester Two)'' rather than just ``COMP 101''. The worst
-% case you will need to consider in such situations is a special examination,
-% which inserts the text ``(Special Examination)'' after the paper number.
-% 
-% The \DescribeMacro{\papertitle} \cs{papertitle} macro lets you specify the
-% title of the paper, for example, 
-% |\papertitle{Systems Analysis and Design Methods}|. This macro is mandatory.
-% 
-% Some papers are offered in more than one semester. The
-% \DescribeMacro{\semester} \cs{semester} macro lets you specify which semester
-% the examination is for. The argument can be either ``1'' or ``2'' for semesters
-% 1 and 2, ``SS'' for summer school or ``SP'' for a special examination, for
-% example, |\semester{2}|. Invalid values for the argument cause a warning to be
-% raised. This macro is optional---if you omit it, no semester information is
-% generated.
-% 
-% The \DescribeMacro{\timeallowed} \cs{timeallowed} macro lets you specify the
-% length of the examination in hours, for example, |\timeallowed{2}|. This
-% macro is optional---if you omit it, it defaults to three (3) hours.
-% 
-% If calculators are allowed in the examination, use the
-% \DescribeMacro{\allowcalculators} \cs{allowcalculators} macro. This macro is
-% optional---if you omit it, a sentence is printed saying that calculators
-% are \emph{not} allowed.
-% 
-% The \DescribeMacro{\instructions} \cs{instructions} macro lets you specify
-% instructions on how candidates should complete the
-% examination, for example, |\instructions{Answer ALL| |questions.}|. This macro
-% is optional. Note that the content of the instructions can be just about
-% anything. It is up to you to control formatting, such as how you want lines
-% broken, etc. This also true of the \cs{material}, \cs{copiesof} and
-% \cs{otherinstructions} macros described below.
-% 
-% The \DescribeMacro{\material} \cs{material} macro lets you specify any
-% additional material that candidates are provided in addition to the
-% examination paper itself, for example, |\material{SQL schema definition}|.
-% This macro is optional.
-% 
-% The \DescribeMacro{\copiesof} \cs{copiesof} macro lets you specify any
-% material that candidates are allowed to bring into the examination, for
-% example, |\copiesof{McFadden &| |Hoffer, 5th edition}|. This macro is
-% optional.
-% 
-% The \DescribeMacro{\otherinstructions} \cs{otherinstructions} macro lets you
-% specify any other instructions not covered by any of the above, for example,
-% |\otherinstructions{No smoking| |allowed.}|. This macro is optional.
-% 
-% Once you have specified the content of the title page using the above
-% macros, you simply issue a \DescribeMacro{\maketitlepage} \cs{maketitlepage}
-% to generate the front page of the examination (cf. \cs{maketitle}). The title
-% page generated meets University formatting requirements.
-% Note that the number of pages in the examination paper is generated
-% and inserted into the title page automatically---you do not need to specify
-% it manually.
 % 
 % 
 % \subsection{Miscellaneous}
@@ -455,13 +458,16 @@
 % disappear. You should use the \textsf{examsection} environment
 % instead.	\\
 % 
+% \changes{2.0.2}{2002/08/22}{NJS Added `FY' to \cs{semester} error
+% description.}
 % \noindent\texttt{invalid value `\ldots' for \cs{semester}; valid values are
-% `1', `2', `SS'}	\\*
-% \texttt{and `SP'. No semester information will be printed}	\\*
-% You have given an invalid value as the argument to the \cs{semester} macro.
-% The allowed values are `1' (semester one), `2' (semester two), `SS' (summer
-% school) and `SP' (special examination). Any other values will be ignored.
-% Note that these are case-sensitive, for example, `sp' is invalid. 	\\
+% `1', `2', `SS',}	\\*
+% \texttt{`FY' and `SP'. No semester information will be printed}	\\* You
+% have given an invalid value as the argument to the \cs{semester} macro. The
+% allowed values are `1' (semester one), `2' (semester two), `SS' (summer
+% school), `FY' (full-year) and `SP' (special examination). Any other values
+% will be ignored. Note that these are case-sensitive, for example, `sp' is
+% invalid. 	\\
 % 
 % 
 % \section{Example}
@@ -630,7 +636,6 @@
 % \end{question}
 % 
 % \newpage
-% 
 % \begin{question}{10}
 %   There are two generic parameters that affect the structure of a B-tree
 %   index.
@@ -783,8 +788,9 @@
 % 
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}[1998/06/01]
-\ProvidesClass{ouexam}[\shortdate\space v\fileversion\space Otago %
-                                      University examination paper]
+\ProvidesClass{ouexam}[\ouexamshortdate\space %
+                           v\ouexamversion\space Otago %
+                           University examination paper]
 %    \end{macrocode}
 % 
 % \begin{macro}{\@unsupported}
@@ -797,9 +803,9 @@
 %    \begin{macrocode}
 \def\@unsupported#1{\ClassError{ouexam}{INCOMPATIBLE (#1): this %
   document was written for an earlier version of ouexam and is %
-  not compatible with ouexam v\fileversion\space Please use ouexam %
+  not compatible with ouexam v\ouexamversion\space Please use ouexam %
   v1.2 or earlier to process this document. Version 1.2 can be %
-  downloaded from the same location as version\space\fileversion}}
+  downloaded from the same location as version\space\ouexamversion}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1537,6 +1543,8 @@
 % 
 % \begin{macro}{\examyear}
 % \begin{macro}{\@year}
+% \changes{2.0.2}{2002/08/22}{NJS Put back \@eha at end of the \ClassError. Don't
+% know what this does, but the macro crashes without it there.}
 % The \cs{examyear} macro specifies the year in which the examination is being
 % held. It redefines the \cs{@year} macro which is used in \cs{@maketitlepage}:
 %    \begin{macrocode}
@@ -1545,7 +1553,7 @@
 % This macro is required:
 %    \begin{macrocode}
 \def\@year{%
-  \ClassError{ouexam}{no \protect\examyear\space was specified}
+  \ClassError{ouexam}{no \protect\examyear\space was specified}\@eha
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1553,12 +1561,14 @@
 % 
 % \begin{macro}{\department}
 % \begin{macro}{\@dept}
+% \changes{2.0.2}{2002/08/22}{NJS Put back \@eha at end of the \ClassError. Don't
+% know what this does, but the macro crashes without it there.}
 % The \cs{department} macro specifies the name of the department, and is required.
 % It redefines the \cs{@dept} macro which is used in \cs{@maketitlepage}:
 %    \begin{macrocode}
 \newcommand{\department}[1]{\def\@dept{#1}}
 \def\@dept{%
-  \ClassError{ouexam}{no \protect\department\space was specified}
+  \ClassError{ouexam}{no \protect\department\space was specified}\@eha
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1566,12 +1576,14 @@
 % 
 % \begin{macro}{\papernumber}
 % \begin{macro}{\@pnumber}
+% \changes{2.0.2}{2002/08/22}{NJS Put back \@eha at end of the \ClassError. Don't
+% know what this does, but the macro crashes without it there.}
 % The \cs{papernumber} macro specifies the paper number, and is required.
 % It redefines the \cs{@pnumber} macro which is used in \cs{@maketitlepage}:
 %    \begin{macrocode}
 \newcommand{\papernumber}[1]{\def\@pnumber{#1}}
 \def\@pnumber{%
-  \ClassError{ouexam}{no \protect\papernumber\space was specified}
+  \ClassError{ouexam}{no \protect\papernumber\space was specified}\@eha
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1579,12 +1591,14 @@
 % 
 % \begin{macro}{\papertitle}
 % \begin{macro}{\@ptitle}
+% \changes{2.0.2}{2002/08/22}{NJS Put back \@eha at end of the \ClassError. Don't
+% know what this does, but the macro crashes without it there.}
 % The \cs{papertitle} macro specifies the title of the paper, and is required.
 % It redefines the \cs{@ptitle} macro which is used in \cs{@maketitlepage}:
 %    \begin{macrocode}
 \newcommand{\papertitle}[1]{\def\@ptitle{#1}}
 \def\@ptitle{%
-  \ClassError{ouexam}{no \protect\papertitle\space was specified}
+  \ClassError{ouexam}{no \protect\papertitle\space was specified}\@eha
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1592,15 +1606,18 @@
 % 
 % \begin{macro}{\semester}
 % \begin{macro}{\@semester}
+% \changes{2.0.2}{2002/08/22}{NJS Added full-year support to \cs{semester}.}
 % \changes{2.0}{2002/01/14}{NJS Rewrote \cs{semester} to support summer school
 % and special exams.}
-% The \cs{semester} macro specifies which semester the examination is for. Legal
-% values for the argument are ``1'', ``2'', ``SS'' for summer school or ``SP'' for
-% a special examination---anything else is ignored.
+% The \cs{semester} macro specifies which semester the examination is for.
+% Legal values for the argument are ``1'', ``2'', ``SS'' for summer school,
+% ``FY'' for full-year or ``SP'' for a special examination---anything else is
+% ignored.
 %    \begin{macrocode}
 \def\@ONE{1}
 \def\@TWO{2}
 \def\@SS{SS}
+\def\@FY{FY}
 \def\@SP{SP}
 %    \end{macrocode}
 % This macro redefines the \cs{@semester} macro which is used in
@@ -1611,10 +1628,11 @@
   \ifx\@sem\@ONE\def\@semester{Semester One}
   \else\ifx\@sem\@TWO\def\@semester{Semester Two}
   \else\ifx\@sem\@SS\def\@semester{Summer School}
+  \else\ifx\@sem\@FY\def\@semester{Full Year}
   \else\ifx\@sem\@SP\def\@semester{Special Examination}
   \else\ClassWarning{ouexam}{invalid value `#1' for %
-    \protect\semester\space; valid values are `1', `2', `SS' %
-    and `SP'. No semester information will be printed}
+    \protect\semester; valid values are `1', `2', `SS', %
+    `FY' and `SP'. No semester information will be printed}
   \fi\fi\fi\fi
 }
 %    \end{macrocode}

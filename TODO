@@ -1,3 +1,15 @@
+¥ Figure out how to gobble line breaks before a \end{subquestion} so that they
+  don't screw up the positioning of the number of marks. A similar issue seems
+  to arise with lgrind'ed listings that appear at the end of questions (but
+  this actually causes things to break).
+
+¥ Some way of entering timings for questions (Andrew L.):
+
+> Further to our discussion on exam timings. Maybe it would be 
+> useful to provide a way to show the timings for each question
+> using your LaTeX exam class? Perhaps they could appear in the 
+> margin next to each question.
+
 ¥ Add up marks for marking schedule and check they are the same as the total
   marks for a question (Richard?).
 
@@ -8,6 +20,8 @@
   x marks]).
 
 ¥ Options for positioning of mark amounts (end of question vs. in margin).
+
+¥ Styles for number of marks?
 
 ¥ Options for positioning of page numbers (footer vs. header).
 
