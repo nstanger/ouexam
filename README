@@ -1,7 +1,7 @@
-ouexam v2.0
-===========
+ouexam v2.0.1
+=============
 
-ouexam document class v2.0, 30 January 2002
+ouexam document class v2.0.1, 30 April 2002
 
 Copyright 1999--2002 Nigel Stanger and University of Otago
 
@@ -10,6 +10,21 @@ formatted examination papers. It handles all the fiddly layout requirements
 (such as printing `TURN OVER' at the bottom of every page except the last),
 and also ensures that the actual number of marks for questions in the
 examination add up to the expected number of marks.
+
+
+WHAT'S NEW IN VERSION 2.0.1
+
+* There was a bug in the definition of the macros for numbering
+  sub-sub-questions that meant they were numbered as "(a)" instead of the
+  correct "(i)". Fixed.
+
+* When referencing sub-questions or sub-sub-questions, the entire question
+  number was included (that is, "1(b)(iii)" instead of just "(iii)"). This
+  made it difficult to sensibly reference these items, so the relevant
+  macros have been changed to omit this prefixed information. References to
+  questions now print as "1", sub-questions as "(b)" and sub-sub-questions
+  as "(iii)". If this does not suit your requirements, change the
+  \labelquestion, \labelsubquestion or \labelsubsubquestion macros.
 
 
 REQUIREMENTS
