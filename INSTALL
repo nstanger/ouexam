@@ -12,7 +12,7 @@ This should come standard with most TeX installations. To build the
 documentation and example files, you will need at least version 1.1 of
 the listings package, and GhostScript.
 
-To install:
+To install the easy way:
 
 	1 Unpack the distribution archive and cd to the distribution
 	  directory.
@@ -26,4 +26,28 @@ To install:
 	  also define TEXMF_INSTALL as an environment variable then simply
 	  type make install.
 
-Of course, you may always install manually if you wish.
+To install manually, unpack the distribution archive, cd to the
+distribution directory, and do the following (now you know why there's a
+Makefile :)
+
+latex ouexam.ins
+latex example1.tex
+latex example1.tex
+dvips -pp 1 -E -o eg1-1.eps example1.dvi
+dvips -pp 2 -E -o eg1-2.eps example1.dvi
+dvips -pp 3 -E -o eg1-3.eps example1.dvi
+latex example2.tex
+latex example2.tex
+dvips -pp 2 -E -o eg2-2.eps example2.dvi
+dvips -pp 3 -E -o eg2-3.eps example2.dvi
+dvips -pp 4 -E -o eg2-4.eps example2.dvi
+dvips -pp 5 -E -o eg2-5.eps example2.dvi
+latex ouexam.dtx
+latex ouexam.dtx
+latex ouexam.dtx
+dvips -o ouexam.ps ouexam.dvi
+ps2pdf ouexam.ps
+dvips -o example1.ps example1.dvi
+ps2pdf example1.ps
+dvips -o example2.ps example2.dvi
+ps2pdf example2.ps
