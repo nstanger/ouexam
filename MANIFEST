@@ -4,7 +4,7 @@
 **
 ********************************************************************************
 
-CreateCluster.eps
+CreateCluster.eps		- images for the example document
 CreateIndex.eps
 CreateObjectType.eps
 CreateTable1.eps
@@ -14,9 +14,9 @@ MANIFEST
 Makefile
 README
 TODO
-example.tex
+example.tex				- example document source files
 example1.tex
 example2.tex
-lstlang0.sty
-ouexam.dtx
-ouexam.ins
+lstlang0.sty			- listings language definitions for the example
+ouexam.dtx				- ouexam class and documentation
+ouexam.ins				- ouexam installation driver
