@@ -1,9 +1,10 @@
-\def\ouexamdate{22 August 2002}
-\def\ouexamversion{2.0.2}
-\def\ouexamshortdate{2002/08/22}
+\def\ouexamdate{5 April 2004}
+\def\ouexamversion{2.1}
+\def\ouexamshortdate{2004/04/05}
 % \iffalse meta-comment
 %%
-%% ouexam.dtx Copyright 1999--2002 Nigel Stanger and University of Otago
+%% File: $Id$
+%% Copyright 1999--2004 Nigel Stanger and University of Otago
 %% 
 %% You may use this package freely, and also distribute it
 %% provided that you don't change it, make any money off
@@ -33,7 +34,7 @@
 %
 % \fi
 %
-%% \CheckSum{771}
+%% \CheckSum{796}
 %%
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -105,7 +106,7 @@
 % 	included graphics will be drawn in draft mode unless you specify the
 % 	|draft=false| option to \cs{includegraphics}.
 % 	
-% 	\item[\textsf{markingschedule}] \DescribeMacro{markingschedule} This option
+% 	\item[\textsf{markingschedule}] \DescribeMacro{markingschedule}
 % 	Rather than write a separate marking schedule for an examination paper, you
 % 	can use the \textsf{marking} environment to embed marking information
 % 	within questions (see 
@@ -211,10 +212,32 @@
 % length of the examination in hours, for example, |\timeallowed{2}|. This
 % macro is optional---if you omit it, it defaults to three (3) hours.
 % 
-% If calculators are allowed in the examination, use the
-% \DescribeMacro{\allowcalculators} \cs{allowcalculators} macro. This macro is
-% optional---if you omit it, a sentence is printed saying that calculators
-% are \emph{not} allowed.
+% \changes{2.1}{2004/04/05}{NJS Modified \cs{allowcalculators} to conform
+% to the new University calculator regulations.}
+% \changes{2.1}{2004/04/05}{NJS Added \cs{permitcalculators} as a synonym
+% for \cs{allowcalculators}.}
+% If calculators are permitted in the examination, use the
+% \DescribeMacro{\allowcalculators}
+% \DescribeMacro{\permitcalculators}
+% \cs{allowcalculators} macro (\cs{permitcalculators} will also work).
+% This macro is optional---if you omit it, a sentence is inserted saying
+% that calculators are \emph{not} permitted. \cs{allowcalculators} has a
+% single optional argument that specifies the kind of calculators
+% permitted. If omitted, it defaults to ``any'' (see below). Otherwise,
+% this argument must be one of the following values:
+% \begin{description}
+% 
+% 	\item[none:] a sentence is inserted noting that no calculators are
+% 	permitted.
+% 
+% 	\item[approved:] a sentence is inserted noting that only approved
+% 	calculators are permitted.
+% 
+% 	\item[any (default):] a sentence is inserted noting that any
+% 	calculator that does not have a communication capability is
+% 	permitted.
+% 
+% \end{description}
 % 
 % The \DescribeMacro{\instructions} \cs{instructions} macro lets you specify
 % instructions on how candidates should complete the
@@ -462,11 +485,23 @@
 % description.}
 % \noindent\texttt{invalid value `\ldots' for \cs{semester}; valid values are
 % `1', `2', `SS',}	\\*
-% \texttt{`FY' and `SP'. No semester information will be printed}	\\* You
-% have given an invalid value as the argument to the \cs{semester} macro. The
-% allowed values are `1' (semester one), `2' (semester two), `SS' (summer
-% school), `FY' (full-year) and `SP' (special examination). Any other values
-% will be ignored. Note that these are case-sensitive, for example, `sp' is
+% \texttt{`FY' and `SP'. No semester information will be printed}	\\*
+% You have given an invalid value as the argument to the \cs{semester}
+% macro. The allowed values are ``1'' (semester one), ``2'' (semester
+% two), ``SS'' (summer school), ``FY'' (full-year) and ``SP'' (special
+% examination). Any other values will be ignored. Note that these are
+% case-sensitive, for example, `sp' is invalid. 	\\
+% 
+% \changes{2.1}{2004/04/05}{NJS Added \cs{allowcalculators} error
+% description.}
+% \noindent\texttt{invalid value `\ldots' for \cs{allowcalculators}; valid values are	\\*
+% `none', `any' and `approved'. No calculators will be permitted}	\\*
+% You have given an invalid value as the argument to the
+% \cs{allowcalculators} macro. The allowed values are ``none'' (no
+% calculators permitted), ``any'' (any calculator permitted) and
+% ``approved'' (only approved calculators permitted). Any other values
+% will be ignored, and \textsf{ouexam} will assume that no calculators are
+% permitted. Note that these are case-sensitive, for example, `NONE' is
 % invalid. 	\\
 % 
 % 
@@ -484,7 +519,7 @@
 % 
 % 	\item The number of hours is not specified, so it defaults to three.
 % 
-% 	\item This examination allows calculators.
+% 	\item This examination allows only approved calculators.
 % 	
 % 	\item The \textsf{listings} package is used to typeset code listings.
 % 
@@ -512,7 +547,7 @@
 % \department{Information Science}
 % \papernumber{INFO 321}
 % \papertitle{Database Systems}
-% \allowcalculators
+% \allowcalculators[approved]
 % 
 % \begin{document}
 % 
@@ -818,7 +853,7 @@
 %
 %    \begin{macrocode}
 \DeclareOption{multichoice}{%
-  \OptionNotUsed\@unsupported{multichoice class option}
+  \OptionNotUsed\@unsupported{multichoice class option}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -959,13 +994,13 @@
 % careful that the value of \cs{@pnumber} isn't so long that it overwrites the
 % page number.
 %    \begin{macrocode}
-    \rlap{\parbox[b]{\columnwidth}{\raggedright\@draft\strut}}\hfill
-    \parbox[b]{\columnwidth}{\centering\textrm{\thepage}\strut}\hfill
-    \llap{\parbox[b]{\columnwidth}{\raggedleft\@pnumber
-      \ifx\@semester\@empty\else\ (\@semester)\fi\strut}}}
-  \let\@evenhead\@oddhead
-  \def\@oddfoot{\@markingschedule\hfill\textbf{TURN OVER}}
-  \let\@evenfoot\@oddfoot
+    \rlap{\parbox[b]{\columnwidth}{\raggedright\@draft\strut}}\hfill%
+    \parbox[b]{\columnwidth}{\centering\textrm{\thepage}\strut}\hfill%
+    \llap{\parbox[b]{\columnwidth}{\raggedleft\@pnumber%
+      \ifx\@semester\@empty\else\ (\@semester)\fi\strut}}}%
+  \let\@evenhead\@oddhead%
+  \def\@oddfoot{\@markingschedule\hfill\textbf{TURN OVER}}%
+  \let\@evenfoot\@oddfoot%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -980,13 +1015,13 @@
 %    \begin{macrocode}
 \def\ps@lastpage{%
   \def\@oddhead{%
-    \rlap{\parbox[b]{\columnwidth}{\raggedright\@draft\strut}}\hfill
-    \parbox[b]{\columnwidth}{\centering\textrm{\thepage}\strut}\hfill
-    \llap{\parbox[b]{\columnwidth}{\raggedleft\@pnumber
-      \ifx\@semester\@empty\else\ (\@semester)\fi\strut}}}
-  \let\@evenhead\@oddhead
-  \def\@oddfoot{\@markingschedule}
-  \let\@evenfoot\@oddfoot
+    \rlap{\parbox[b]{\columnwidth}{\raggedright\@draft\strut}}\hfill%
+    \parbox[b]{\columnwidth}{\centering\textrm{\thepage}\strut}\hfill%
+    \llap{\parbox[b]{\columnwidth}{\raggedleft\@pnumber%
+      \ifx\@semester\@empty\else\ (\@semester)\fi\strut}}}%
+  \let\@evenhead\@oddhead%
+  \def\@oddfoot{\@markingschedule}%
+  \let\@evenfoot\@oddfoot%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1157,11 +1192,11 @@
 % 
 %    \begin{macrocode}
 \AtEndDocument{%
-  \ifnum\theexamexpected=\theexamrunning
+  \ifnum\theexamexpected=\theexamrunning%
   \else\ClassWarning{ouexam}{actual number of marks for exam %
       (\theexamrunning) does not match expected number of marks %
-      (\theexamexpected)}
-  \fi
+      (\theexamexpected)}%
+  \fi%
 }
 %    \end{macrocode}
 % 
@@ -1199,20 +1234,20 @@
 % 
 %    \begin{macrocode}
 \newenvironment{question}[1]{%
-  \def\@nummarks{#1}
-  \ifx\@nummarks\@empty\setcounter{qexpected}{0}
-  \else\setcounter{qexpected}{#1}\fi
+  \def\@nummarks{#1}%
+  \ifx\@nummarks\@empty\setcounter{qexpected}{0}%
+  \else\setcounter{qexpected}{#1}\fi%
 %    \end{macrocode}
 % 
 % For each top-level question, we increment the |question| counter, which also
 % resets the |hassubs| and |qrunning| counters to zero:
 %    \begin{macrocode}
-  \refstepcounter{question}
+  \refstepcounter{question}%
 %    \end{macrocode}
 % The question itself is built using a single-item \textsf{list} environment.
 %    \begin{macrocode}
-  \begin{list}{\labelquestion}{}
-    \item 
+  \begin{list}{\labelquestion}{}%
+    \item %
 %    \end{macrocode}
 % 
 % When the environment closes, the following things happen:
@@ -1223,10 +1258,10 @@
 % 
 %    \begin{macrocode}
 }{%
-    \ifnum\thehassubs=0
-      \addtocounter{examrunning}{\value{qexpected}}
-      \addtocounter{sectrunning}{\value{qexpected}}
-      \setcounter{qrunning}{\value{qexpected}}
+    \ifnum\thehassubs=0%
+      \addtocounter{examrunning}{\value{qexpected}}%
+      \addtocounter{sectrunning}{\value{qexpected}}%
+      \setcounter{qrunning}{\value{qexpected}}%
 %    \end{macrocode}
 % 
 % 	The total number of marks for the question is then printed right-justified
@@ -1238,9 +1273,9 @@
 % 	106 of \emph{The \TeX{}book}:
 % 
 %    \begin{macrocode}
-      \unskip\nobreak\hfil\penalty50\hskip2em\hbox{}\nobreak
-      \hfil(\theqrunning~\ifnum\theqrunning=1 mark\else marks\fi)
-      \parfillskip=0pt \finalhyphendemerits=0 \par
+      \unskip\nobreak\hfil\penalty50\hskip2em\hbox{}\nobreak%
+      \hfil(\theqrunning~\ifnum\theqrunning=1 mark\else marks\fi)%
+      \parfillskip=0pt \finalhyphendemerits=0 \par%
 %    \end{macrocode}
 % 
 % 	\item If the question \emph{does} have sub-questions, then |qrunning|,
@@ -1250,21 +1285,21 @@
 % 	of marks for the question is \emph{not} printed in this case.
 % 
 %    \begin{macrocode}
-    \else
-      \ifnum\theqrunning=\theqexpected
+    \else%
+      \ifnum\theqrunning=\theqexpected%
       \else\ClassWarning{ouexam}{actual mark (\theqrunning) for %
           question \thequestion\space doesn't match expected mark %
-          (\theqexpected)}
-      \fi
-    \fi
+          (\theqexpected)}%
+      \fi%
+    \fi%
 %    \end{macrocode}
 % 
 % 	\item |lastexpected| is set to the value of |qexpected| so it can be used
 % 	in any subsequent \textsf{marking} environment.
 % 
 %    \begin{macrocode}
-    \setcounter{lastexpected}{\value{qexpected}}
-  \end{list}
+    \setcounter{lastexpected}{\value{qexpected}}%
+  \end{list}%
 }
 %    \end{macrocode}
 % 
@@ -1286,14 +1321,14 @@
 % 
 %    \begin{macrocode}
 \newenvironment{subquestion}[1]{%
-  \def\@nummarks{#1}
-  \ifx\@nummarks\@empty\setcounter{subqexpected}{0}
-  \else\setcounter{subqexpected}{#1}\fi
-  \setcounter{subqexpected}{#1}
-  \addtocounter{hassubs}{1}
-  \refstepcounter{subquestion}
-  \begin{list}{\labelsubquestion}{}
-    \item 
+  \def\@nummarks{#1}%
+  \ifx\@nummarks\@empty\setcounter{subqexpected}{0}%
+  \else\setcounter{subqexpected}{#1}\fi%
+  \setcounter{subqexpected}{#1}%
+  \addtocounter{hassubs}{1}%
+  \refstepcounter{subquestion}%
+  \begin{list}{\labelsubquestion}{}%
+    \item %
 }{%
 %    \end{macrocode}
 % 
@@ -1302,36 +1337,36 @@
 % the value of |subqexpected| is added to |qrunning| and |sectrunning|:
 % 
 %    \begin{macrocode}
-    \ifnum\thehassubsubs=0
-      \addtocounter{examrunning}{\value{subqexpected}}
-      \addtocounter{sectrunning}{\value{subqexpected}}
-      \addtocounter{qrunning}{\value{subqexpected}}
-      \setcounter{subqrunning}{\value{subqexpected}}
+    \ifnum\thehassubsubs=0%
+      \addtocounter{examrunning}{\value{subqexpected}}%
+      \addtocounter{sectrunning}{\value{subqexpected}}%
+      \addtocounter{qrunning}{\value{subqexpected}}%
+      \setcounter{subqrunning}{\value{subqexpected}}%
 %    \end{macrocode}
 % Then the number of marks for the sub-question are typeset in a similar manner
 % to the \textsf{question} environment:
 %    \begin{macrocode}
-      \unskip\nobreak\hfil\penalty50\hskip2em\hbox{}\nobreak
-      \hfil(\thesubqrunning~\ifnum\thesubqrunning=1 mark\else marks\fi)
-      \parfillskip=0pt \finalhyphendemerits=0 \par
+      \unskip\nobreak\hfil\penalty50\hskip2em\hbox{}\nobreak%
+      \hfil(\thesubqrunning~\ifnum\thesubqrunning=1 mark\else marks\fi)%
+      \parfillskip=0pt \finalhyphendemerits=0 \par%
 %    \end{macrocode}
 % 
 % If the sub-question \emph{does} have sub-sub-questions, check the running total
 % against the expected number and raise an error if they don't match.
 %    \begin{macrocode}
-    \else
-      \ifnum\thesubqrunning=\thesubqexpected
+    \else%
+      \ifnum\thesubqrunning=\thesubqexpected%
       \else\ClassWarning{ouexam}{actual mark (\thesubqrunning) for %
           question \thesubquestion\space doesn't match expected mark %
-          (\thesubqexpected)}
-      \fi
-    \fi
+          (\thesubqexpected)}%
+      \fi%
+    \fi%
 %    \end{macrocode}
 % Finally, set |lastexpected| to the value of |qexpected| so it can be used
 % in any subsequent \textsf{marking} environment.
 %    \begin{macrocode}
-    \setcounter{lastexpected}{\value{subqexpected}}
-  \end{list}
+    \setcounter{lastexpected}{\value{subqexpected}}%
+  \end{list}%
 }
 %    \end{macrocode}
 % \end{environment}
@@ -1345,17 +1380,17 @@
 % generates an appropriately numbered sub-sub-question (``(i)'', ``(ii)'', etc.).
 %    \begin{macrocode}
 \newenvironment{subsubquestion}[1]{%
-  \def\@nummarks{#1}
-  \ifx\@nummarks\@empty\setcounter{subsubqexpected}{0}
-  \else\setcounter{subsubqexpected}{#1}\fi
+  \def\@nummarks{#1}%
+  \ifx\@nummarks\@empty\setcounter{subsubqexpected}{0}%
+  \else\setcounter{subsubqexpected}{#1}\fi%
 %    \end{macrocode}
 % Increment |hassubsubs| so that the enclosing \textsf{subquestion} environment
 % can react appropriately:
 %    \begin{macrocode}
-  \addtocounter{hassubsubs}{1}
-  \refstepcounter{subsubquestion}
-  \begin{list}{\labelsubsubquestion}{}
-    \item 
+  \addtocounter{hassubsubs}{1}%
+  \refstepcounter{subsubquestion}%
+  \begin{list}{\labelsubsubquestion}{}%
+    \item %
 }{%
 %    \end{macrocode}
 % 
@@ -1365,16 +1400,16 @@
 % the number of marks.
 % 
 %    \begin{macrocode}
-    \addtocounter{examrunning}{\value{subsubqexpected}}
-    \addtocounter{sectrunning}{\value{subsubqexpected}}
-    \addtocounter{qrunning}{\value{subsubqexpected}}
-    \addtocounter{subqrunning}{\value{subsubqexpected}}
-    \setcounter{lastexpected}{\value{subsubqexpected}}
-    \unskip\nobreak\hfil\penalty50\hskip2em\hbox{}\nobreak
-    \hfil(\thesubsubqexpected~\ifnum\thesubsubqexpected=1 mark
-                              \else marks\fi)
-    \parfillskip=0pt \finalhyphendemerits=0 \par
-  \end{list}
+    \addtocounter{examrunning}{\value{subsubqexpected}}%
+    \addtocounter{sectrunning}{\value{subsubqexpected}}%
+    \addtocounter{qrunning}{\value{subsubqexpected}}%
+    \addtocounter{subqrunning}{\value{subsubqexpected}}%
+    \setcounter{lastexpected}{\value{subsubqexpected}}%
+    \unskip\nobreak\hfil\penalty50\hskip2em\hbox{}\nobreak%
+    \hfil(\thesubsubqexpected~\ifnum\thesubsubqexpected=1 mark%
+                              \else marks\fi)%
+    \parfillskip=0pt \finalhyphendemerits=0 \par%
+  \end{list}%
 }
 %    \end{macrocode}
 % \end{environment}
@@ -1472,25 +1507,25 @@
 %    \end{macrocode}
 % Every section begins on a new page.
 %    \begin{macrocode}
-  \newpage
+  \newpage%
 %    \end{macrocode}
 % If the argument for the number of marks is left empty, default to zero.
 %    \begin{macrocode}
-  \def\@nummarks{#1}
-  \ifx\@nummarks\@empty\setcounter{sectexpected}{0}
-  \else\setcounter{sectexpected}{#1}\fi
-  \refstepcounter{xsection}
-  \setcounter{sectrunning}{0}
+  \def\@nummarks{#1}%
+  \ifx\@nummarks\@empty\setcounter{sectexpected}{0}%
+  \else\setcounter{sectexpected}{#1}\fi%
+  \refstepcounter{xsection}%
+  \setcounter{sectrunning}{0}%
 %    \end{macrocode}
 % The section title is formatted as ``\textbf{\underline{Section A}}'', in
 % \cs{large} size.
 %    \begin{macrocode}
-  {\large\noindent\textbf{\underline{Section~\thexsection}}}
-  \\[0.5\baselineskip]
-  \def\@usersecinst{#2}
-  \ifx\@usersecinst\@empty\@defsecinst\else\@usersecinst\fi\par
-  \def\@usersectopic{#3}
-  \ifx\@usersectopic\@empty\else\par\noindent\@usersectopic\fi \\
+  {\large\noindent\textbf{\underline{Section~\thexsection}}}%
+  \\[0.5\baselineskip]%
+  \def\@usersecinst{#2}%
+  \ifx\@usersecinst\@empty\@defsecinst\else\@usersecinst\fi\par%
+  \def\@usersectopic{#3}%
+  \ifx\@usersectopic\@empty\else\par\noindent\@usersectopic\fi \\%
 }{%
 %    \end{macrocode}
 % 
@@ -1500,12 +1535,12 @@
 % \emph{m} MARKS]}'' where \emph{m} is the value of |sectrunning|.
 % 
 %    \begin{macrocode}
-  \ifnum\thesectrunning=\thesectexpected
+  \ifnum\thesectrunning=\thesectexpected%
   \else\ClassWarning{ouexam}{actual mark (\thesectrunning) for section %
-      \thexsection\space doesn't match expected mark (\thesectexpected)}
-  \fi
+      \thexsection\space doesn't match expected mark (\thesectexpected)}%
+  \fi%
   \bigskip\hfill\textbf{[SECTION \thexsection\ TOTAL %
-                              \thesectrunning\ MARKS]}
+                              \thesectrunning\ MARKS]}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1521,19 +1556,19 @@
 %    \begin{macrocode}
 \newcommand{\newsection}[1][ANSWER ALL QUESTIONS.]{%
   \ClassWarning{ouexam}{DEPRECATED: The \protect\newsection\space %
-      macro is deprecated; use the examsection environment instead}
+      macro is deprecated; use the examsection environment instead}%
 %    \end{macrocode}
 % Every section begins on a new page.
 %    \begin{macrocode}
-  \newpage
-  \refstepcounter{xsection}
+  \newpage%
+  \refstepcounter{xsection}%
 %    \end{macrocode}
 % The section title is formatted as ``\textbf{\underline{Section A}}'', in
 % \cs{large} size. Note that sections are ``numbered'' A, B, \ldots.
 %    \begin{macrocode}
-  {\large\noindent\textbf{\underline{Section~\thexsection}}}
-  \\[0.5\baselineskip]
-  #1
+  {\large\noindent\textbf{\underline{Section~\thexsection}}}%
+  \\[0.5\baselineskip]%
+  #1%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1553,7 +1588,7 @@
 % This macro is required:
 %    \begin{macrocode}
 \def\@year{%
-  \ClassError{ouexam}{no \protect\examyear\space was specified}\@eha
+  \ClassError{ouexam}{no \protect\examyear\space was specified}\@eha%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1568,7 +1603,7 @@
 %    \begin{macrocode}
 \newcommand{\department}[1]{\def\@dept{#1}}
 \def\@dept{%
-  \ClassError{ouexam}{no \protect\department\space was specified}\@eha
+  \ClassError{ouexam}{no \protect\department\space was specified}\@eha%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1583,7 +1618,7 @@
 %    \begin{macrocode}
 \newcommand{\papernumber}[1]{\def\@pnumber{#1}}
 \def\@pnumber{%
-  \ClassError{ouexam}{no \protect\papernumber\space was specified}\@eha
+  \ClassError{ouexam}{no \protect\papernumber\space was specified}\@eha%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1598,7 +1633,7 @@
 %    \begin{macrocode}
 \newcommand{\papertitle}[1]{\def\@ptitle{#1}}
 \def\@ptitle{%
-  \ClassError{ouexam}{no \protect\papertitle\space was specified}\@eha
+  \ClassError{ouexam}{no \protect\papertitle\space was specified}\@eha%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1624,16 +1659,16 @@
 % \cs{@maketitlepage}:
 %    \begin{macrocode}
 \newcommand{\semester}[1]{%
-  \def\@sem{#1}
-  \ifx\@sem\@ONE\def\@semester{Semester One}
-  \else\ifx\@sem\@TWO\def\@semester{Semester Two}
-  \else\ifx\@sem\@SS\def\@semester{Summer School}
-  \else\ifx\@sem\@FY\def\@semester{Full Year}
-  \else\ifx\@sem\@SP\def\@semester{Special Examination}
+  \def\@sem{#1}%
+  \ifx\@sem\@ONE\def\@semester{Semester One}%
+  \else\ifx\@sem\@TWO\def\@semester{Semester Two}%
+  \else\ifx\@sem\@SS\def\@semester{Summer School}%
+  \else\ifx\@sem\@FY\def\@semester{Full Year}%
+  \else\ifx\@sem\@SP\def\@semester{Special Examination}%
   \else\ClassWarning{ouexam}{invalid value `#1' for %
     \protect\semester; valid values are `1', `2', `SS', %
-    `FY' and `SP'. No semester information will be printed}
-  \fi\fi\fi\fi
+    `FY' and `SP'. No semester information will be printed}%
+  \fi\fi\fi\fi\fi%
 }
 %    \end{macrocode}
 % \cs{semester} is optional---if you omit it or give it an invalid argument,
@@ -1665,7 +1700,7 @@
 % page directly into the |.aux| file:
 %    \begin{macrocode}
 \AtEndDocument{%
-  \immediate\write\@auxout{\string\newlabel{num.pages}{{}{\thepage}}}
+  \immediate\write\@auxout{\string\newlabel{num.pages}{{}{\thepage}}}%
 }
 %    \end{macrocode}
 % This label is then referenced in \cs{@maketitlepage}.
@@ -1680,8 +1715,8 @@
 %    \begin{macrocode}
 \AtEndDocument{%
   \immediate\write\@auxout{%
-    \string\newlabel{num.questions}{{}{\thequestion}}
-  }
+    \string\newlabel{num.questions}{{}{\thequestion}}%
+  }%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -1716,19 +1751,49 @@
 % 
 % \begin{macro}{\allowcalculators}
 % \begin{macro}{\@calculators}
+% \changes{2.1}{2004/04/05}{NJS Modified calculator macros to conform to
+% new University calculator regulations.}
 % The \cs{allowcalculators} macro specifies whether or not calculators are
-% allowed in the examination. If \cs{allowcalculators} is omitted, \cs{@calculators}
-% defaults to ``may not'':
+% allowed in the examination (\cs{permitcalculators} is a synonym). If
+% \cs{allowcalculators} is omitted, \cs{@calculators} defaults to ``No
+% calculators are permitted.'':
 %    \begin{macrocode}
-\def\@calculators{may not}
+\def\@calculators{No calculators are permitted.}
 %    \end{macrocode}
-% Issuing an \cs{allowcalculators} changes the redefines \cs{@calculators} to
-% ``may'':
+% Issuing an \cs{allowcalculators[none]} does nothing, as the default is
+% to disallow calculators anyway. Issuing an \cs{allowcalculators} or
+% \cs{allowcalculators[any]} redefines \cs{@calculators} to ``No
+% restriction on the model of calculator to be used, but no device with
+% communication capability shall be accepted as a calculator.'' Issuing an
+% \cs{allowcalculators[approved]} redefines \cs{@calculators} to ``Only
+% calculators on the University of Otago list of approved calculators are
+% permitted.'':
 %    \begin{macrocode}
-\newcommand{\allowcalculators}{\def\@calculators{may}}
+\def\@CalcNONE{none}
+\def\@CalcANY{any}
+\def\@CalcAPPROVED{approved}
+\newcommand{\allowcalculators}[1][any]{%
+  \def\@calc{#1}%
+  \ifx\@calc\@CalcNONE%
+  \else\ifx\@calc\@CalcANY\def\@calculators{No restriction on the model of calculator to be used, but no device with communication capability shall be accepted as a calculator.}%
+  \else\ifx\@calc\@CalcAPPROVED\def\@calculators{Only calculators on the University of Otago list of approved calculators are permitted.}%
+  \else\ClassWarning{ouexam}{invalid argument `#1' for %
+    \protect\allowcalculators; valid values are `none', `any' and `approved'. %
+    No calculators will be permitted}%
+  \fi\fi\fi%
+}
 %    \end{macrocode}
 % \cs{@calculators} is used in \cs{@maketitlepage}.
 % \end{macro}
+% \end{macro}
+% 
+% \begin{macro}{\permitcalculators}
+% \changes{2.1}{2004/04/05}{NJS Added \cs{permitcalculators} as a synonym
+% for \cs{allowcalculators}.}
+% \cs{permitcalculators} is a synonym for \cs{allowcalculators}.
+%    \begin{macrocode}
+\let\permitcalculators\allowcalculators
+%    \end{macrocode}
 % \end{macro}
 % 
 % \begin{macro}{\copiesof}
@@ -1774,87 +1839,81 @@
 % not do this.
 %    \begin{macrocode}
 \def\@maketitlepage{%
-  \thispagestyle{titlepage}
+  \thispagestyle{titlepage}%
 %    \end{macrocode}
 % The header information for the examination is printed centered at the top
 % of the page. The department, paper number and paper title (and the semester
 % information if required) are placed inside a double box.
 %    \begin{macrocode}
-  \begin{center}
-    {\Large \textbf{UNIVERSITY OF OTAGO EXAMINATIONS \@year}}
-    \\[\baselineskip]
+  \begin{center}%
+    {\Large \textbf{UNIVERSITY OF OTAGO EXAMINATIONS \@year}}%
+    \\[\baselineskip]%
     \fbox{\framebox[\linewidth]{%
-      \begin{tabular}{c}
-        \\
-        {\large \@dept} \\
-        \\
-        {\large Paper \@pnumber} \\
-        \\
-        {\large \@ptitle} \\
-        \ifx\@semester\@empty\else\@semester \\ \fi
-        \\
+      \begin{tabular}{c}%
+        \\%
+        {\large \@dept} \\%
+        \\%
+        {\large Paper \@pnumber} \\%
+        \\%
+        {\large \@ptitle} \\%
+        \ifx\@semester\@empty\else\@semester \\ \fi%
+        \\%
       \end{tabular}%
-    }}
-    \mbox{}\\[\baselineskip]
+    }}%
+    \mbox{}\\[\baselineskip]%
 %    \end{macrocode}
 % Next, the time allowed for completing the examination:
 %    \begin{macrocode}
-    \textbf{(TIME ALLOWED: \@hours\ HOURS)}
-    \\[\baselineskip]
-  \end{center}
+    \textbf{(TIME ALLOWED: \@hours\ HOURS)}%
+    \\[\baselineskip]%
+  \end{center}%
 %    \end{macrocode}
 % The number of pages is automatically calculated, as described earlier. All we
 % need to do is reference the |num.pages| label that we put into the |.aux|
 % file:
 %    \begin{macrocode}
-  \underline{This examination paper comprises \pageref{num.pages}
-             pages.}
-  \\[\baselineskip]
+  \underline{This examination paper comprises \pageref{num.pages} pages.}%
+  \\[\baselineskip]%
 %    \end{macrocode}
 % Print out the instructions for answering questions:
 %    \begin{macrocode}
-  \underline{Candidates should answer questions as follows:}
-  \\[\baselineskip]
-  \hspace*{1cm}\begin{minipage}{13.5cm}\@instructions\end{minipage}
-  \\[\baselineskip]
+  \underline{Candidates should answer questions as follows:}%
+  \\[\baselineskip]%
+  \hspace*{1cm}\begin{minipage}{13.5cm}\@instructions\end{minipage}%
+  \\[\baselineskip]%
 %    \end{macrocode}
 % Print out any provided material:
 %    \begin{macrocode}
-  \underline{The following material is provided:}
-  \\[\baselineskip]
-  \hspace*{1cm}\begin{minipage}{13.5cm}\@material\end{minipage}
-  \\[\baselineskip]
+  \underline{The following material is provided:}%
+  \\[\baselineskip]%
+  \hspace*{1cm}\begin{minipage}{13.5cm}\@material\end{minipage}%
+  \\[\baselineskip]%
 %    \end{macrocode}
 % Print out use of calculators section:
 %    \begin{macrocode}
-  \underline{Use of calculators:} \\[\baselineskip]
-  \hspace*{1cm}\begin{minipage}{13.5cm}
-    Electronic calculators \@calculators\ be used in this examination.
-    \\[\baselineskip]
-    Please note: where the use of calculators is permitted, these
-    must be non-pro\-gram\-ma\-ble, hand-held calculators without
-    alphabetic key pads.
-  \end{minipage} \\[\baselineskip]
-  \mbox{}\hfill(Subject to inspection by the examiners.)
-  \\[\baselineskip]
+  \underline{Use of calculators:} \\[\baselineskip]%
+  \hspace*{1cm}\begin{minipage}{13.5cm}\@calculators\end{minipage}%
+  \\[\baselineskip]%
+  \mbox{}\hfill(Subject to inspection by the examiners.)%
+  \\[\baselineskip]%
 %    \end{macrocode}
 % Print out anything that candidates are allowed to bring:
 %    \begin{macrocode}
-  \underline{Candidates are permitted copies of:}
-  \\[\baselineskip]
-  \hspace*{1cm}\begin{minipage}{13.5cm}\@copiesof\end{minipage}
-  \\[\baselineskip]
-  \mbox{}\hfill(Subject to inspection by the examiners.)
-  \\[\baselineskip]
+  \underline{Candidates are permitted copies of:}%
+  \\[\baselineskip]%
+  \hspace*{1cm}\begin{minipage}{13.5cm}\@copiesof\end{minipage}%
+  \\[\baselineskip]%
+  \mbox{}\hfill(Subject to inspection by the examiners.)%
+  \\[\baselineskip]%
 %    \end{macrocode}
 % Print out other instructions, and finish.
 %    \begin{macrocode}
-  \underline{Other Instructions:}
-  \\[\baselineskip]
-  \hspace*{1cm}\begin{minipage}{13.5cm}\@otherinst\end{minipage}
-  \\[\baselineskip]
+  \underline{Other Instructions:}%
+  \\[\baselineskip]%
+  \hspace*{1cm}\begin{minipage}{13.5cm}\@otherinst\end{minipage}%
+  \\[\baselineskip]%
  
-  \newpage
+  \newpage%
 }
 %    \end{macrocode}
 % \end{macro}
