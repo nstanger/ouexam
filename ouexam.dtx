@@ -1135,13 +1135,13 @@
 % appropriately:
 %    \begin{macrocode}
 \renewcommand{\thequestion}{\arabic{question}}
-\newcommand{\labelquestion}{\arabic{question}.}
+\newcommand{\labelquestion}{\hfil\arabic{question}.}
 
 \renewcommand{\thesubquestion}{(\alph{subquestion})}
-\newcommand{\labelsubquestion}{(\alph{subquestion})}
+\newcommand{\labelsubquestion}{\hfil(\alph{subquestion})}
 
 \renewcommand{\thesubsubquestion}{(\roman{subsubquestion})}
-\newcommand{\labelsubsubquestion}{(\roman{subsubquestion})}
+\newcommand{\labelsubsubquestion}{\hfil(\roman{subsubquestion})}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -1304,8 +1304,8 @@
 %    \end{macrocode}
 % The question itself is built using a single-item \textsf{list} environment.
 %    \begin{macrocode}
-  \begin{list}{\labelquestion}{}%
-    \item %
+  \begin{list}{\labelquestion}{\settowidth{\labelwidth}{88.}}%
+    \item \ignorespaces%
 %    \end{macrocode}
 % 
 % When the environment closes, the following things happen:
@@ -1385,8 +1385,8 @@
   \setcounter{subqexpected}{#1}%
   \addtocounter{hassubs}{1}%
   \refstepcounter{subquestion}%
-  \begin{list}{\labelsubquestion}{}%
-    \item %
+  \begin{list}{\labelsubquestion}{\settowidth{\labelwidth}{(m)}}%
+    \item \ignorespaces%
 }{%
 %    \end{macrocode}
 % 
@@ -1447,8 +1447,8 @@
 %    \begin{macrocode}
   \addtocounter{hassubsubs}{1}%
   \refstepcounter{subsubquestion}%
-  \begin{list}{\labelsubsubquestion}{}%
-    \item %
+  \begin{list}{\labelsubsubquestion}{\settowidth{\labelwidth}{(viii)}}%
+    \item \ignorespaces%
 }{%
 %    \end{macrocode}
 % 
