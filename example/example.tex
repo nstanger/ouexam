@@ -1,4 +1,4 @@
-\documentclass[markingschedule]{ouexam}
+\documentclass{ouexam}
 
 \usepackage{graphicx}
 \usepackage{listings}
@@ -8,21 +8,22 @@
 \papernumber{INFO 321}
 \papertitle{Database Systems}
 \instructions{Answer \underline{ALL} questions.}
-\allowcalculators
+\allowcalculators[approved]
 
 \begin{document}
 
 \lstloadlanguages{ODL,OQL,[Oracle8]SQL,[Oracle8]PLSQL}
 \lstset%
 {	basicstyle=\sffamily,
-	stringspaces=false,
+	showstringspaces=false,
 	tabsize=2,
-	indent=1cm,
+	xleftmargin=1cm,
 	belowskip=0pt,
 	commentstyle=\itshape,
-	labelstyle=\scriptsize,
-	labelsep=5pt,
-	labelstep=1,
+	numbers=left,
+	numberstyle=\scriptsize,
+	numbersep=5pt,
+	columns=fullflexible,
 }
 
 \maketitlepage
@@ -137,7 +138,7 @@ physical database design and tuning.}
 
 		\begin{subsubquestion}{2}
 			Briefly discuss the relative advantages and/or disadvantages of the
-			two alternative solutions you described in part~(\ref{nonindex})
+			two alternative solutions you described in part~\ref{nonindex}
 			above.
 			\begin{marking}
 				The partitioning solution given above doesn't really help with
@@ -626,7 +627,7 @@ distributed database systems.}
 
 	\begin{subquestion}{2}
 		Consider the following Oracle8 SQL statement:
-		\begin{lstlisting}[language={[Oracle8]SQL},labelstep=0]{}
+		\begin{lstlisting}[language={[Oracle8]SQL},numbers=none]{}
 create synonym exam_synonym for sales.customer@db_chch.world;
 		\end{lstlisting}
 		Explain the purpose of this statement.
