@@ -13,7 +13,8 @@ SHELL=/bin/sh
 
 
 # files
-IMAGES = eg1-1.eps eg1-2.eps eg1-3.eps eg2-2.eps eg2-3.eps eg2-4.eps eg2-5.eps
+EXAMPLE1_IMAGES = eg1-1.eps eg1-2.eps eg1-3.eps
+EXAMPLE2_IMAGES = eg2-2.eps eg2-3.eps eg2-4.eps eg2-5.eps
 
 
 # Build everything.
@@ -27,7 +28,8 @@ ouexam.cls: ouexam.dtx
 
 
 # Build the documentation only.
-# Note: requires ps2pdf (GhostScript) to build the PDF version.
+# Note: requires ps2pdf (GhostScript) to build the PDF version and
+# ps2epsi to build the example images.
 doc: ouexam.pdf
 
 ouexam.pdf:	ouexam.ps
@@ -36,15 +38,40 @@ ouexam.pdf:	ouexam.ps
 ouexam.ps: ouexam.dvi
 	dvips -o $@ $<
 
-ouexam.dvi:	ouexam.dtx
+ouexam.dvi:	ouexam.dtx $(EXAMPLE1_IMAGES) $(EXAMPLE2_IMAGES)
 	latex $<
 	latex $<
 	latex $<
+
+$(EXAMPLE1_IMAGES): example1.dvi
+	dvips -pp `echo $@ | cut -c 5` -E -o $@ $<
+
+$(EXAMPLE2_IMAGES): example2.dvi
+	dvips -pp `echo $@ | cut -c 5` -E -o $@ $<
 
 
 # Build the example only.
-example:
-	(cd example; latex example.tex; latex example.tex)
+example: example1.pdf example2.pdf
+
+example1.pdf: example1.ps
+	ps2pdf $<
+
+example1.ps: example1.dvi
+	dvips -o $@ $<
+
+example1.dvi: example1.tex example.tex ouexam.cls
+	latex $<
+	latex $<
+
+example2.pdf: example2.ps
+	ps2pdf $<
+
+example2.ps: example2.dvi
+	dvips -o $@ $<
+
+example2.dvi: example2.tex example.tex ouexam.cls
+	latex $<
+	latex $<
 
 
 # Install files in the appropriate locations in the texmf tree rooted at
@@ -62,7 +89,7 @@ install: class doc example
 
 # Clean up: remove temporary files.
 tidy:
-	rm -f *.tmp *.aux *.out *.log *.glo *.toc
+	rm -f *.tmp *.aux *.out *.log *.glo *.toc *.ps $(EXAMPLE_IMAGES)
 
 # Clean up: remove everything except the original source.
 clean: tidy
