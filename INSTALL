@@ -1,0 +1,29 @@
+********************************************************************************
+**
+** File: $Id$
+**
+********************************************************************************
+
+ouexam 2.1 Requirements and Installation
+========================================
+
+You will need Rainer Schopf's verbatim package in order to use ouexam.
+This should come standard with most TeX installations. To build the
+documentation and example files, you will need at least version 1.1 of
+the listings package, and GhostScript.
+
+To install:
+
+	1 Unpack the distribution archive and cd to the distribution
+	  directory.
+
+	2 make
+	
+	3 make install TEXMF_INSTALL=/path/to/texmf.
+	  /path/to/texmf should be the root of your preferred texmf tree
+	  (e.g., /usr/share/texmf). You may need to do this as root
+	  depending on which texmf tree you are installing into. You can
+	  also define TEXMF_INSTALL as an environment variable then simply
+	  type make install.
+
+Of course, you may always install manually if you wish.
