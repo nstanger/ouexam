@@ -1,8 +1,8 @@
-\def\filedate{20 April 1999}
-\def\fileversion{1.1}
+\def\filedate{14 April 2000}
+\def\fileversion{1.2}
 % \iffalse meta-comment
 %%
-%% ouexam.dtx Copyright 1999 Nigel Stanger
+%% ouexam.dtx Copyright 1999--2000 Nigel Stanger
 %% 
 %% You may use this package freely, and also distribute it
 %% provided that you don't change it, make any money off
@@ -25,7 +25,7 @@
 %
 % \fi
 %
-%% \CheckSum{490}
+%% \CheckSum{575}
 %%
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -68,7 +68,7 @@
 % \textsf{onecolumn}, \textsf{oneside}, \textsf{a4paper} and \textsf{12pt}.
 % Normally the only one you might want to change is the last one.
 % 
-% \changes{1.1}{1999/04/20}{Documented \textsf{multichoice} class option.}
+% \changes{1.1}{1999/04/20}{NJS Documented \textsf{multichoice} class option.}
 % The only `native' option recognised by \textsf{ouexam} is
 % \DescribeMacro{multichoice} \textsf{multichoice}, which tells
 % \textsf{ouexam} to format the examination paper as a multiple-choice
@@ -144,7 +144,7 @@
 % \textsf{questions} environment is started, unlike the |enumi|
 % counter. The |enumii| and |enumiii| counters are unchanged.
 % 
-% \changes{1.1}{1999/04/20}{Documented changes to the \cs{marks} macro.}
+% \changes{1.1}{1999/04/20}{NJS Documented changes to the \cs{marks} macro.}
 % Each part of a question is worth some number of marks, which needs to be
 % displayed somewhere after the question. You can specify the number of marks
 % for a question using the \DescribeMacro{\marks} |\marks| macro, which prints
@@ -155,7 +155,8 @@
 % formatting or positioning; how you position the marks relative to a question
 % is up to you.
 % 
-% \changes{1.1}{1999/04/20}{Documented changes to the \cs{totalmarks} macro.}
+% \changes{1.1}{1999/04/20}{NJS Documented changes to the \cs{totalmarks}
+% macro.}
 % If you have a question with several sub-parts, each worth some number of
 % marks, you should display the total number of marks for the question at the
 % end of the question. You can do this with the \DescribeMacro{\totalmarks}
@@ -165,36 +166,77 @@
 % `MARK' or `MARKS' automatically, and does no other formatting or
 % positioning. The value of the |marks| counter is reset to zero by this
 % macro.
+%
+% \subsubsection{Marking schedule information}
+% \label{Sec:Questions:Marking}
+% 
+% \changes{1.2}{1999/10/26}{NJS Documented new \textsf{marking} environment and
+% \cs{markingschedule} macro.}
+% Rather than writing a separate marking schedule for an examination paper, you
+% can use the \DescribeEnv{marking} \textsf{marking} environment to include
+% marking information with the question. By default this information is not
+% printed (for obvious reasons!), but when it comes time to print a marking
+% schedule for the examination, use the \DescribeMacro{\markingschedule}
+% |\markingschedule| macro in the document preamble to print the hidden content.
+% 
+% These macros do not apply to multiple-choice examinations (see next section).
 % 
 % \subsubsection{Multiple-choice questions}
 % \label{Sec:Questions:MP}
 % 
-% \changes{1.1}{1999/04/20}{Documented new \textsf{options} environment for
+% \changes{1.1}{1999/04/20}{NJS Documented new \textsf{options} environment for
 % \textsf{multichoice}.}
 % If the \textsf{multichoice} option to \textsf{ouexam} is specified, you can
-% still use the \textsf{questions} environment, but the \textsf{subquestions}
-% and \textsf{subsubquestions} are not defined, as these are not required in
+% still use the \textsf{questions} environment, but the \textsf{subquestions},
+% \textsf{subsubquestions} and \textsf{marking} environments, and the
+% |\markingschedule| macro are not defined, as these are not required in
 % multiple-choice examinations. Instead, the \DescribeEnv{options}
 % \textsf{options} environment is defined to allow you to specify the possible
 % answers for a question. As with the other question environments, this is a
 % redefinition of the \textsf{enumerate} environment.
 % 
-% \changes{1.1}{1999/04/20}{Documented new \cs{citem} macro for
+% \changes{1.1}{1999/04/20}{NJS Documented new \cs{citem} macro for
 % \textsf{multichoice}.}
+% \changes{1.2}{1999/10/26}{NJS Deprecated \cs{citem} macro and introduced
+% replacement \cs{answer} macro.}
 % You can specify the correct answer for a question using the
-% \DescribeMacro{\citem} |\citem| macro. Normally this is identical to the
-% |\item| macro, but if you issue a \DescribeMacro{\showanswers}
-% |\showanswers| in the document preamble, the item label of the correct
-% answer will have a box drawn around it, for example `\fbox{a)}' instead of
-% `a)'.
+% \DescribeMacro{\answer} |\answer|\footnote{Note that this replaces the
+% \cs{citem} macro from version 1.1. \cs{citem} is deprecated but will still
+% work for backwards compatibility. New documents should use \cs{answer}
+% instead.} macro. Normally this is identical to the |\item| macro, but if you
+% issue a \DescribeMacro{\showanswers} |\showanswers| in the document preamble,
+% the item label of the correct answer will have a box drawn around it, for
+% example `\fbox{a)}' instead of `a)'.
 % 
-% There is no control at present over the formatting of question numbers or
-% option labels. These may be added later.
+% \changes{1.2}{2000/04/14}{NJS Documented new question number style feature.}
+% You can specify how the question numbers for multiple-choice questions are
+% drawn using the \DescribeMacro{\qnumberstyle} \cs{qnumberstyle} macro, which
+% works in a manner analogous to \cs{pagestyle}. There are four question number
+% styles currently defined:
+% \begin{description}
+% 	\item[\textsf{plain}] No special formatting, e.g.: 3. (the default)
+% 	\item[\textsf{bold}] The question number is printed in bold face, e.g.:
+%                        \textbf{3.}
+% 	\item[\textsf{boxed}] The question number is printed inside a box, e.g.:
+%                         \fbox{3.}
+% 	\item[\textsf{boxedbold}] The question number is printed in bold face inside
+%                             a box, e.g.: \fbox{\textbf{3.}}
+% \end{description}
+% There is no special formatting for question numbers in `normal' examinations,
+% and \cs{qnumberstyle} will only work with the \textsf{multichoice} option
+% turned on.
+% 
+% \changes{1.2}{2000/04/14}{NJS Documented new \cs{allabove} and \cs{noneabove}
+% macros.}
+% Often a multi-choice question will include an option that says `all of the
+% above' or `none of the above'. For convenience, the macros
+% \DescribeMacro{\allabove} \cs{allabove} and \DescribeMacro{\noneabove}
+% \cs{noneabove} will create these options respectively. \cs{allabove} will produce the string ``All of the above.'', and \cs{noneabove} will produce the string ``None of the above.''.
 % 
 % \subsection{Generating the title page}
 % \label{Sec:TitlePage}
 % 
-% \changes{1.1}{1999/04/20}{Minor changes to title page documentation.}
+% \changes{1.1}{1999/04/20}{NJS Minor changes to title page documentation.}
 % This class defines a collection of macros that let you fill in the various
 % parts of the examination title page. This is analogous to the process you
 % use to generate the title of a document in, for example, the
@@ -215,7 +257,7 @@
 % paper number that the examination is for, for example,
 % |\papernumber{INFO 211}|. This macro is required.
 % 
-% \changes{1.1}{1999/04/20}{Documented changes to \cs{papertitle} macro.}
+% \changes{1.1}{1999/04/20}{NJS Documented changes to \cs{papertitle} macro.}
 % The \DescribeMacro{\papertitle} |\papertitle| macro lets you specify the
 % title of the paper, for example, 
 % |\papertitle{Systems Analysis and Design Methods}|. This macro is required
@@ -269,7 +311,7 @@
 % \subsubsection{Title pages for multiple-choice examinations}
 % \label{Sec:TitlePage:MP}
 % 
-% \changes{1.1}{1999/04/20}{Documented effect of \textsf{multichoice} on
+% \changes{1.1}{1999/04/20}{NJS Documented effect of \textsf{multichoice} on
 % various title page macros.}
 % The \textsf{multichoice} option to \textsf{ouexam} does not remove any of
 % the macros described above, but the following macros will have no effect, as
@@ -280,7 +322,7 @@
 % 	\item |\allowcalculators|
 % \end{itemize}
 % The |\papertitle| macro becomes optional rather than mandatory.
-% \changes{1.1}{1999/04/20}{Documented new \cs{testtitle} macro.}
+% \changes{1.1}{1999/04/20}{NJS Documented new \cs{testtitle} macro.}
 % One new macro is also defined, \DescribeMacro{\testtitle} |\testtitle|,
 % which allows you to specify the title of the test, for example,
 % |\testtitle{Theory Test}|. This macro is required.
@@ -290,7 +332,7 @@
 %
 % \section{Example}
 % 
-% \changes{1.1}{1999/04/20}{Updated example to conform to 1.1 changes.}
+% \changes{1.1}{1999/04/20}{NJS Updated example to conform to 1.1 changes.}
 % The code shown below is for a subset of the INFO212 1998 final examination.
 % The title page produced by this code is shown in figure~\ref{Fig.Output1},
 % and the second page of the examination is shown in figure~\ref{Fig.Output2}.
@@ -511,6 +553,15 @@
 % 	\label{Fig.Output2}
 % \end{figure}
 % 
+% \section{To do}
+% 
+% \begin{itemize}
+% 	\item Add option label styles for multiple-choice questions, for example,
+% 	      `a)', % `(a)', `A)', `(A)', etc.
+% 	\item Add marks for marking schedules in a similar manner to marks
+% 	      for questions.
+% \end{itemize}
+% 
 % 
 % \StopEventually{}
 % 
@@ -521,13 +572,13 @@
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}[1998/06/01]
 \ProvidesClass{ouexam}%
-  [1999/20/01 Otago University examination paper class, v1.1]
+  [2000/04/14 v1.2 Otago University examination paper]
 %    \end{macrocode}
 % 
 % \begin{macro}{multichoice}
-% \changes{1.1}{1999/04/20}{New class option.}
+% \changes{1.1}{1999/04/20}{NJS New class option.}
 % \begin{macro}{\if@multichoice}
-% \changes{1.1}{1999/04/20}{New switch for \textsf{multichoice}.}
+% \changes{1.1}{1999/04/20}{NJS New switch for \textsf{multichoice}.}
 % This document class is based on the \textsf{article} class and accepts any
 % of the options accepted by \textsf{article}. The only `native' option to
 % \textsf{ouexam} is \textsf{multichoice}; the |\if@multichoice| switch is used
@@ -540,7 +591,7 @@
 % \end{macro}
 %
 % \begin{macro}{twoside}
-% \changes{1.1}{1999/04/20}{Turned off \textsf{twoside} option.}
+% \changes{1.1}{1999/04/20}{NJS Turned off \textsf{twoside} option.}
 % The \textsf{twoside} option does not really make sense --- all Otago
 % examination papers are printed single-sided anyway, and the format is such
 % that two-sided printing would look no different. The \textsf{twoside} option
@@ -555,7 +606,7 @@
 \ProcessOptions
 %    \end{macrocode}
 %
-% \changes{1.1}{1999/04/20}{Changed default point size to 12pt.}
+% \changes{1.1}{1999/04/20}{NJS Changed default point size to 12pt.}
 % The defaults for this class are \textsf{onecolumn}, \textsf{oneside},
 % \textsf{a4paper} and \textsf{12pt}. The font size is the only one that might
 % change.
@@ -566,11 +617,13 @@
 % 
 % \subsection{Required packages}
 % 
-% The required packages are \textsf{calc} and \textsf{ifthen}, but these may
+% The required packages are \textsf{calc}, \textsf{ifthen} and
+% \textsf{verbatim} (for the \textsf{comment} environment), but these may
 % change.
 %    \begin{macrocode}
 \RequirePackage{calc}
 \RequirePackage{ifthen}
+\RequirePackage{verbatim}
 %    \end{macrocode}
 %
 % 
@@ -649,19 +702,119 @@
 % \end{macro}
 % 
 % 
+% \subsection{Question number styles}
+% 
+% \begin{macro}{\@drawqnumber}
+% \changes{1.2}{2000/04/14}{NJS Added \cs{@drawqnumber} macro to facilitate
+% question number styles for multi-choice examinations.}
+% Questions numbers in a University final examination have a prescribed
+% style, but for internal multi-choice examinations, we are free to choose
+% the style of the question numbers. This can be useful to for multi-choice
+% examinations in order to clearly distinguish the question numbers from the
+% surrounding text. This package now supports question number styles for
+% multi-choice examinations, but not for `normal' examinations. To facilitate
+% this change, all question numbers are now drawn by the \cs{@drawqnumber}
+% macro. The default action is to draw the question numbers with no special
+% formatting.
+%    \begin{macrocode}
+\newcommand{\@drawqnumber}{\arabic{question}.}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{\qnumberstyle}
+% \changes{1.2}{2000/04/14}{NJS Added \cs{qnumberstyle} macro to support
+% question number styles for multi-choice examinations.}
+% The \cs{qnumberstyle} macro allows us to change the question number style
+% for all questions in a multi-choice examination (cf. the \cs{pagestyle}
+% macro).
+%    \begin{macrocode}
+\if@multichoice
+  \def\qnumberstyle#1{%
+    \@ifundefined{qns@#1}%
+      \undefinedqnumberstyle
+      {\@nameuse{qns@#1}}}
+%    \end{macrocode}
+% \end{macro}
+% 
+% The four question number styles currently defined are:
+% 
+% \begin{macro}{\qns@plain}
+% \changes{1.2}{2000/04/14}{NJS Added \cs{qns@plain} macro to support question
+% number styles for multi-choice examinations.}
+% \begin{macro}{\qns@bold}
+% \changes{1.2}{2000/04/14}{NJS Added \cs{qns@bold} macro to support question
+% number styles for multi-choice examinations.}
+% \begin{macro}{\qns@boxed}
+% \changes{1.2}{2000/04/14}{NJS Added \cs{qns@boxed} macro to support question
+% number styles for multi-choice examinations.}
+% \begin{macro}{\qns@boxedbold}
+% \changes{1.2}{2000/04/14}{NJS Added \cs{qns@boxedbold} macro to support
+% question number styles for multi-choice examinations.}
+% \begin{description}
+% 	\item[\textsf{plain}] No formatting: 3. (default)
+% 	\item[\textsf{bold}] The question number is printed in bold face:
+%                        \textbf{3.}
+% 	\item[\textsf{boxed}] The question number is printed inside a box: \fbox{3.}
+% 	\item[\textsf{boxedbold}] The question number is printed in bold face inside
+%                             a box: \fbox{\textbf{3.}}
+% \end{description}
+%    \begin{macrocode}
+  \newcommand{\qns@plain}{%
+    \renewcommand{\@drawqnumber}{\arabic{question}.}
+  }
+  \newcommand{\qns@bold}{%
+    \renewcommand{\@drawqnumber}{\textbf{\arabic{question}.}}
+  }
+  \newcommand{\qns@boxed}{%
+    \renewcommand{\@drawqnumber}{\fbox{\arabic{question}.}}
+  }
+  \newcommand{\qns@boxedbold}{%
+    \renewcommand{\@drawqnumber}{\fbox{\textbf{\arabic{question}.}}}
+  }
+  
+  \qnumberstyle{plain}
+
+\fi
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% 
+% 
 % \subsection{Environments and associated items}
 % 
 % \begin{environment}{questions}
 % \begin{environment}{subquestions}
-% \changes{1.1}{1999/04/20}{Now disabled when \textsf{multichoice} is active.}
+% \changes{1.1}{1999/04/20}{NJS Now disabled when \textsf{multichoice} is
+% active.}
 % \begin{environment}{subsubquestions}
-% \changes{1.1}{1999/04/20}{Now disabled when \textsf{multichoice} is active.}
+% \changes{1.1}{1999/04/20}{NJS Now disabled when \textsf{multichoice} is
+% active.}
+% \begin{environment}{marking}
+% \changes{1.2}{1999/10/26}{NJS New environment for including answers and/or
+% marking schedule information.}
 % \begin{environment}{options}
-% \changes{1.1}{1999/04/20}{New environment for \textsf{multichoice}.}
+% \changes{1.1}{1999/04/20}{NJS New environment for \textsf{multichoice}.}
+% \begin{macro}{markingschedule}
+% \changes{1.2}{1999/10/26}{NJS New macro to turn marking information on and
+% off.}
 % The \textsf{questions}, \textsf{subsubquestions}, \textsf{subsubquestions}
 % and \textsf{options} environments are just redefinitions of the
-% \textsf{enumerate} environment. If \textsf{multichoice} is not set, then
-% \textsf{questions}, \textsf{subquestions} and \textsf{subsubquestions} are
+% \textsf{enumerate} environment. The \textsf{marking} environment allows the
+% specification of marking schedule information in the same location as the
+% questions. Normally \textsf{marking} is just a redefinition of the
+% \textsf{comment} environment from Rainer Sch\"{o}pf's \textsf{verbatim}
+% package, i.e., marking information is not printed. The |\markingschedule|
+% macro is used to enable printing of marking information. At present, this is
+% printed in italics.
+% 
+% Note that a straight redefinition of \textsf{comment} to \textsf{marking} does
+% not work --- the code below is taken directly from the \textsf{verbatim}
+% package.
+% 
+% If \textsf{multichoice} is not set, then \textsf{questions},
+% \textsf{subquestions}, \textsf{subsubquestions} and \textsf{marking} are
 % available. If \textsf{multichoice} is set, then \textsf{questions} and
 % \textsf{options} are available.
 %   \begin{macrocode}
@@ -671,38 +824,77 @@
 \else
   \newenvironment{subquestions}{\begin{enumerate}}{\end{enumerate}}
   \newenvironment{subsubquestions}{\begin{enumerate}}{\end{enumerate}}
+  \def\marking{\@bsphack
+             \let\do\@makeother\dospecials\catcode`\^^M\active
+             \let\verbatim@startline\relax
+             \let\verbatim@addtoline\@gobble
+             \let\verbatim@processline\relax
+             \let\verbatim@finish\relax
+             \verbatim@}
+  \let\endmarking=\@esphack
+  \newcommand{\markingschedule}{%
+    \renewenvironment{marking}{\itshape}{\normalfont}}
 \fi
 %    \end{macrocode}
+% \end{macro}
 % \end{environment}
 % \end{environment}
 % \end{environment}
 % \end{environment}
+% \end{environment}
+
 % 
+% \begin{macro}{\answer}
+% \changes{1.2}{1999/10/26}{NJS The \cs{answer} macro replaces the \cs{citem}
+% macro.}
 % \begin{macro}{\citem}
-% \changes{1.1}{1999/04/20}{New macro for \textsf{options} environment.}
-% The |\citem| macro is used to indicate the correct answer for a
-% multiple-choice question. If a |\showanswers| has not been issued in the
-% document preamble (see below), then |\citem| is identical to |\item|.
+% \changes{1.1}{1999/04/20}{NJS New macro for \textsf{options} environment.}
+% The |\answer| or |\citem| macros are used to indicate the correct answer for a
+% multiple-choice question (they are identical). |\citem| is deprecated but will
+% continue to work for backwards compatibilty. If a |\showanswers| has not been
+% issued in the document preamble (see below), then both of these macros are
+% identical to |\item|.
 %    \begin{macrocode}
 \if@multichoice
-  \def\citem{%
+  \def\answer{%
     \@inmatherr\item
     \@ifnextchar [\@item{\@noitemargtrue \@item[\@itemlabel]}}
+  \newcommand{\citem}{%
+    \ClassWarning{ouexam}{\protect\citem\space is deprecated %
+        --- it will still work, but you should use %
+        \protect\answer\space instead}\@eha
+    \answer}
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 % 
 % \begin{macro}{\showanswers}
-% \changes{1.1}{1999/04/20}{New macro for \textsf{multichoice}.}
-% Issuing the |\showanswers| macro in the document preamble redefines |\citem|
+% \changes{1.1}{1999/04/20}{NJS New macro for \textsf{multichoice}.}
+% \changes{1.2}{1999/10/26}{NJS Updated for new \cs{answer} macro.}
+% Issuing the |\showanswers| macro in the document preamble redefines |\answer|
 % so that a box is drawn around the label of the correct answer, for example
 % `\fbox{b)}'.
 %    \begin{macrocode}
   \newcommand{\showanswers}{%
-    \renewcommand{\citem}{%
+    \renewcommand{\answer}{%
       \@inmatherr\item
       \@ifnextchar [\@item{\@noitemargtrue \@item[\fbox{\@itemlabel}]}}}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{\allabove}
+% \begin{macro}{\noneabove}
+% \changes{1.2}{2000/04/14}{NJS Added new \cs{allabove} and \cs{noneabove}
+% macros.}
+% Issuing the \cs{allabove} macro causes the string ``All of the above.'' to be
+% printed. Similarly, the \cs{noneabove} macro causes the string ``None of the
+% above.'' to be printed.
+%    \begin{macrocode}
+  \newcommand{\allabove}{All of the above.}
+  \newcommand{\noneabove}{None of the above.}
 \fi
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 % 
 % \begin{macro}{question}
@@ -715,8 +907,8 @@
 % \end{macro}
 % 
 % \begin{macro}{marks}
-% \changes{1.1}{1999/04/20}{New counter for calculating question marks.}
-% If \textsf{multichoice} is not set, we may need to keep track of the total
+% \changes{1.1}{1999/04/20}{NJS New counter for calculating question marks.}
+% If \textsf{multichoice} is not set, we need to keep track of the total
 % number of marks for each question. The |marks| counter is used for this
 % purpose. It is reset to zero every time a |\totalmarks| macro is issued.
 %    \begin{macrocode}
@@ -729,19 +921,22 @@
 % \end{macro}
 % 
 % \begin{macro}{\labelenumi}
-% \changes{1.1}{1999/04/20}{Changed so that it prints differently when
+% \changes{1.1}{1999/04/20}{NJS Changed so that it prints differently when
 % \textsf{multichoice} is in effect.}
+% \changes{1.2}{2000/04/14}{NJS Updated to use the new question number label
+% styles.}
 % There are certain formats for numbering questions that need to be adhered
 % to. We therefore need to redefine the label-generating macros slightly. In
 % particular, we need to redefine |\labelenumi| so that it uses the new
 % |question| counter. For multiple-choice examinations, the question number is
-% drawn in bold face and a box is drawn around it to make it easier to
-% differentiate between different questions.
+% drawn using the currently defined question number label style. The default is
+% to draw the number in bold face in order to distinguish it from the
+% surrounding text.
 %    \begin{macrocode}
 \if@multichoice
   \renewcommand{\labelenumi}{%
       \refstepcounter{question}
-      \fbox{\textbf{\arabic{question}.}}
+      \@drawqnumber
     }
 %    \end{macrocode}
 % For final examinations, the question number is drawn normally.
@@ -756,7 +951,7 @@
 % \end{macro}
 %
 % \begin{macro}{\labelenumii}
-% \changes{1.1}{1999/04/20}{Changes to list labels are now contingent on
+% \changes{1.1}{1999/04/20}{NJS Changes to list labels are now contingent on
 % \textsf{multichoice}.}
 % For multiple-choice examinations, we arbitrarily define the format for the
 % question numbers for answer labels as `a)', `b)', \ldots. Future versions of
@@ -812,7 +1007,7 @@
 % \end{macro}
 % 
 % \begin{macro}{\marks}
-% \changes{1.1}{1999/04/20}{This macro now increments the \texttt{marks}
+% \changes{1.1}{1999/04/20}{NJS This macro now increments the \texttt{marks}
 % counter.}
 % The |\marks| macro specifies the number of marks for a question, and prints
 % it right-justified on the line as `(\emph{n} marks)', where \emph{n} is
@@ -829,7 +1024,7 @@
 % \end{macro}
 % 
 % \begin{macro}{\totalmarks}
-% \changes{1.1}{1999/04/20}{Removed the parameter for the number of marks;
+% \changes{1.1}{1999/04/20}{NJS Removed the parameter for the number of marks;
 % this is now retrieved from the \texttt{marks} counter.}
 % The |\totalmarks| macro calculates the total marks for a question that
 % comprises several sub-parts, and prints it out right-justified on the line
@@ -858,7 +1053,7 @@
 % This macro is required:
 %    \begin{macrocode}
 \newcommand{\@year}{%
-    \ClassError{ouexam}{No {\protect\examyear} given}\@eha
+    \ClassError{ouexam}{No \protect\examyear\space given}\@eha
   }
 %    \end{macrocode}
 % \end{macro}
@@ -871,7 +1066,7 @@
 %    \begin{macrocode}
 \newcommand{\department}{\renewcommand{\@dept}}
 \newcommand{\@dept}{%
-    \ClassError{ouexam}{No {\protect\department} given}\@eha
+    \ClassError{ouexam}{No \protect\department\space given}\@eha
   }
 %    \end{macrocode}
 % \end{macro}
@@ -884,7 +1079,7 @@
 %    \begin{macrocode}
 \newcommand{\papernumber}{\renewcommand{\@pnumber}}
 \newcommand{\@pnumber}{%
-    \ClassError{ouexam}{No {\protect\papernumber} given}\@eha
+    \ClassError{ouexam}{No \protect\papernumber\space given}\@eha
   }
 %    \end{macrocode}
 % \end{macro}
@@ -892,7 +1087,7 @@
 % 
 % \begin{macro}{\papertitle}
 % \begin{macro}{\@ptitle}
-% \changes{1.1}{1999/04/20}{Made this macro optional under
+% \changes{1.1}{1999/04/20}{NJS Made this macro optional under
 % \textsf{multichoice}.}
 % The |\papertitle| macro specifies the title of the paper. It is required for
 % final examinations, but optional for multiple-choice examinations.
@@ -904,7 +1099,7 @@
 \else
   \newcommand{\papertitle}{\renewcommand{\@ptitle}}
   \newcommand{\@ptitle}{%
-      \ClassError{ouexam}{No {\protect\papertitle} given}\@eha
+      \ClassError{ouexam}{No \protect\papertitle\space given}\@eha
     }
 \fi
 %    \end{macrocode}
@@ -923,7 +1118,7 @@
       {\renewcommand{\@semester}{Semester Two  \\}}
   }
 %    \end{macrocode}
-% \changes{1.1}{1999/04/20}{Updated slightly for \textsf{multichoice}.}
+% \changes{1.1}{1999/04/20}{NJS Updated slightly for \textsf{multichoice}.}
 % |\semester| is optional --- if you omit it, |\@semester| remains empty. Note
 % the slight difference for \textsf{multichoice}, which ensures there is
 % always a something there:
@@ -952,7 +1147,7 @@
 % \end{macro}
 % 
 % \begin{macro}{num.pages}
-% \changes{1.1}{1999/04/20}{Renamed label from \texttt{page.last}.}
+% \changes{1.1}{1999/04/20}{NJS Renamed label from \texttt{page.last}.}
 % There is no macro to specify the number of pages in the examination because
 % it is done automatically by inserting a |\newlabel| that refers to the last
 % page directly into the |.aux| file:
@@ -967,7 +1162,7 @@
 % \end{macro}
 % 
 % \begin{macro}{num.questions}
-% \changes{1.1}{1999/04/20}{New label representing the number of questions.}
+% \changes{1.1}{1999/04/20}{NJS New label representing the number of questions.}
 % Similarly, there is no macro to specify the number of questions in the
 % examination. This is calculated using the same method as for the number of
 % pages:
@@ -1046,7 +1241,7 @@
 % 
 % \begin{macro}{\testtitle}
 % \begin{macro}{\@ttitle}
-% \changes{1.1}{1999/04/20}{New macro.}
+% \changes{1.1}{1999/04/20}{NJS New macro.}
 % The |\testtitle| macro specifies the title of the test for a multiple-choice
 % examination, and is required. It redefines the |\@ttitle| macro which is
 % used in |\mc@maketitlepage|:
@@ -1054,7 +1249,7 @@
 \if@multichoice
   \newcommand{\testtitle}{\renewcommand{\@ttitle}}
   \newcommand{\@ttitle}{%
-      \ClassError{ouexam}{No {\protect\testtitle} given}\@eha
+      \ClassError{ouexam}{No \protect\testtitle\space given}\@eha
     }
 \fi
 %    \end{macrocode}
@@ -1062,7 +1257,8 @@
 % \end{macro}
 % 
 % \begin{macro}{\maketitlepage}
-% \changes{1.1}{1999/04/20}{Redefined to take account of \textsf{multichoice}.}
+% \changes{1.1}{1999/04/20}{NJS Redefined to take account of
+% \textsf{multichoice}.}
 % The |\maketitlepage| macro is the \textsf{ouexam} analogue of |\maketitle|.
 % It takes all of the information provided by the above macros and generates a
 % properly formatted examination title page. If the \textsf{multichoice}
@@ -1081,7 +1277,7 @@
 % \end{macro}
 %
 % \begin{macro}{\final@maketitlepage}
-% \changes{1.1}{1999/04/20}{Renamed macro from \cs{maketitlepage}.}
+% \changes{1.1}{1999/04/20}{NJS Renamed macro from \cs{maketitlepage}.}
 % The |\final@maketitlepage| macro generates an examination title page that
 % meets the Otago University requirements for final examination papers. You
 % can redefine this if you want to change the format, but normally you would
@@ -1189,7 +1385,7 @@
 % \end{macro}
 %
 % \begin{macro}{\mc@maketitlepage}
-% \changes{1.1}{1999/04/20}{New macro for \textsf{multichoice}.}
+% \changes{1.1}{1999/04/20}{NJS New macro for \textsf{multichoice}.}
 % The |\mc@maketitlepage| macro generates an examination title page that for a
 % multiple-choice examination paper. There is no prescribed format for this,
 % so you are free to redefine this macro if the default format does not meet
