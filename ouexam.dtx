@@ -1,7 +1,8 @@
-\def\ouexamdate{5 April 2004}
+\def\ouexamdate{10 April 2004}
 \def\ouexamversion{2.1}
-\def\ouexamshortdate{2004/04/05}
+\def\ouexamshortdate{2004/04/10}
 % \iffalse meta-comment
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% File: $Id$
 %% Copyright 1999--2004 Nigel Stanger and University of Otago
@@ -10,6 +11,7 @@
 %% provided that you don't change it, make any money off
 %% it or pretend that you wrote it.
 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %<*driver>
 \documentclass{ltxdoc}
 \usepackage{doc}
@@ -73,6 +75,34 @@
 % 
 % 
 % \section{Overview}
+% 
+% \changes{2.1}{2004/04/10}{NJS Added requirements and installation instructions.}
+% \subsection{Requirements and installation}
+% 
+% The \textsf{ouexam} package requires only one other package: Rainer
+% Sch\"{o}pf's \textsf{verbatim} package, which should come standard with
+% most \TeX\ installations. To build the documentation and example files,
+% you will need at least version 1.1 of the \textsf{listings} package, and
+% GhostScript.
+% 
+% Installing is relatively simple:
+% \begin{enumerate}
+% 
+% 	\item Unpack the distribution archive and \texttt{cd} to the
+% 	distribution directory.
+% 	
+% 	\item \texttt{make}.
+% 	
+% 	\item \texttt{make install TEXMF\_INSTALL=/path/to/texmf}.
+% 	\texttt{/path/to/texmf} should be the root of your preferred
+% 	\texttt{texmf} tree (e.g., \texttt{/usr/share/texmf}). You may need
+% 	to do this as root depending on which \texttt{texmf} tree you are
+% 	installing into. You can also define \texttt{TEXMF\_INSTALL} as an
+% 	environment variable then simply type \texttt{make install}.
+% 
+% \end{enumerate}
+% You can, of course, always install manually if you wish.
+% 
 % 
 % \changes{2.0}{2002/01/11}{NJS Added note on backwards compatibility.}
 % \subsection{Important note on backwards compatibility}
@@ -402,6 +432,26 @@
 % and \fbox{MARKING SCHEDULE} will also be printed in the footer of every
 % page.
 % 
+% \changes{2.1}{2004/04/10}{NJS Added driver file tip.}
+% A useful tip for writing examination papers is to create two separate
+% ``driver'' documents that are set up the document class for the
+% ``plain'' and ``marking schedule'' versions of the examination,
+% respectively. Each should then include a separate document that contains
+% the actual content of the examination paper, for example:
+% 
+% \begin{verbatim}
+% \documentclass[markingschedule]{ouexam}
+% 
+% \input{exampaper} % contains the actual examination content
+% \end{verbatim}
+% 
+% Doing this enables you to build the ``plain'' and ``marking schedule''
+% versions independently, without overwriting each other or having to
+% change the original source file. Simply run \LaTeX\ on the appropriate
+% driver file to produce the version that you want. See the example files
+% that came with the \textsf{ouexam} distribution for an example of this
+% approach in action.
+% 
 % 
 % \subsection{Miscellaneous}
 % 
@@ -507,6 +557,7 @@
 % 
 % \section{Example}
 % 
+% \changes{2.1}{2004/04/10}{NJS Updated example to conform to 2.1 changes.}
 % \changes{2.0}{2002/01/25}{NJS Updated example to conform to 2.0 changes.}
 % \changes{1.1}{1999/04/20}{NJS Updated example to conform to 1.1 changes.}
 % The code given below is for the first three pages of the INFO~321 2001
@@ -514,14 +565,14 @@
 % \hyperref[Fig.Example]{figure~\ref*{Fig.Example} on
 % page~\pageref*{Fig.Example}}. Particular points to note in this example
 % are:
-% 
 % \begin{itemize}
 % 
 % 	\item The number of hours is not specified, so it defaults to three.
 % 
 % 	\item This examination allows only approved calculators.
 % 	
-% 	\item The \textsf{listings} package is used to typeset code listings.
+% 	\item The \textsf{listings} package (v1.1 or later) is used to
+% 	typeset code listings.
 % 
 % 	\item The argument of the \cs{instructions} macro can be just about
 % 	anything, as can the arguments of the \cs{material}, \cs{copiesof} and
@@ -535,6 +586,8 @@
 % 	when the \textsf{markingschedule} class option is used.
 % 
 % \end{itemize}
+% The full source for this example may be found in the
+% \texttt{example*.tex} files that came with this distribution.
 % 
 % \small
 % \begin{verbatim}
@@ -552,14 +605,16 @@
 % \begin{document}
 % 
 % \lstloadlanguages{ODL,OQL,[Oracle8]SQL,[Oracle8]PLSQL}
-% \lstset{basicstyle=\sffamily, stringspaces=false, tabsize=2,
-%   indent=1cm, belowskip=0pt, commentstyle=\itshape,
-%   labelstyle=\scriptsize, labelsep=5pt, labelstep=1,}
+% \lstset{basicstyle=\sffamily, showstringspaces=false, tabsize=2,
+%   xleftmargin=1cm, belowskip=0pt, commentstyle=\itshape,
+%   numbers=left, numberstyle=\scriptsize, numbersep=5pt,
+%   columns=fullflexible,}
 % 
 % \maketitlepage
 % 
 % \begin{examsection}{25}{}{Questions in this section (total 25 marks) 
 %   relate to physical database design and tuning.}
+% 
 % 
 % 
 % \begin{question}{10}
@@ -721,6 +776,7 @@
 %     \end{subsubquestion}
 %   \end{subquestion}
 % \end{question}
+%   
 %   
 %   
 % \begin{question}{5}\label{clusterq}
@@ -1777,10 +1833,14 @@
 \newcommand{\allowcalculators}[1][any]{%
   \def\@calc{#1}%
   \ifx\@calc\@CalcNONE%
-  \else\ifx\@calc\@CalcANY\def\@calculators{No restriction on the model of calculator to be used, but no device with communication capability shall be accepted as a calculator.}%
-  \else\ifx\@calc\@CalcAPPROVED\def\@calculators{Only calculators on the University of Otago list of approved calculators are permitted.}%
+  \else\ifx\@calc\@CalcANY\def\@calculators{No restriction on the %
+    model of calculator to be used, but no device with communication %
+    capability shall be accepted as a calculator.}%
+  \else\ifx\@calc\@CalcAPPROVED\def\@calculators{Only calculators on %
+    the University of Otago list of approved calculators are permitted.}%
   \else\ClassWarning{ouexam}{invalid argument `#1' for %
-    \protect\allowcalculators; valid values are `none', `any' and `approved'. %
+    \protect\allowcalculators; valid values are `none', `any' and %
+      `approved'. %
     No calculators will be permitted}%
   \fi\fi\fi%
 }
