@@ -7,6 +7,14 @@
 THINGS TO DO
 ============
 
+- Specify questions with no marks attached. \question* perhaps?
+
+- Marks totalling currently doesn't work with sections where not all
+  questions are to be answered (e.g., "Answer any 2 questions"). At the
+  moment it totals up all the questions, when in fact the total should be
+  less. Workaround: reset the counter to the correct total after the last
+  question in the section.
+
 - Look at bundling all the various support files into the .dtx file?
 
 - Figure out how to gobble line breaks before a \end{subquestion} so that they
