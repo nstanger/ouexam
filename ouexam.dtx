@@ -1,5 +1,5 @@
-\def\filedate{15 April 1999}
-\def\fileversion{1.0}
+\def\filedate{20 April 1999}
+\def\fileversion{1.1}
 % \iffalse meta-comment
 %%
 %% ouexam.dtx Copyright 1999 Nigel Stanger
@@ -9,10 +9,11 @@
 %% it or pretend that you wrote it.
 %%
 %<*driver>
-\documentclass{article}
+\documentclass{ltxdoc}
 \usepackage{doc}
 \DisableCrossrefs
 \CodelineNumbered
+\RecordChanges
 \title{The \textsf{ouexam} document class, v\fileversion}
 \author{Nigel Stanger\\nstanger@infoscience.otago.ac.nz}
 \date{\filedate}
@@ -24,7 +25,7 @@
 %
 % \fi
 %
-%% \CheckSum{339}
+%% \CheckSum{490}
 %%
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -44,6 +45,8 @@
 %%
 %
 % \MakeShortVerb{\|}
+% 
+% \changes{1.0}{1999/04/15}{Initial version.}
 %
 % \begin{abstract}
 % This document class allows you to create Otago University final
@@ -51,8 +54,9 @@
 % requirements specified by the University and also provides some useful
 % macros to ease the process of building the title page and automatically
 % deals with fiddly little issues such as question and section numbering,
-% the number of pages in the paper and printing `\textbf{TURN OVER}' in the
-% bottom right corner of every page except the last one.
+% the number of pages in the paper, printing `\textbf{TURN OVER}' in the
+% bottom right corner of every page except the last one and adding up the
+% total number of marks for a question.
 % \end{abstract}
 %
 % \section{Introduction}
@@ -63,6 +67,16 @@
 % the options accepted by \textsf{article}. The default options are
 % \textsf{onecolumn}, \textsf{oneside}, \textsf{a4paper} and \textsf{12pt}.
 % Normally the only one you might want to change is the last one.
+% 
+% \changes{1.1}{1999/04/20}{Documented \textsf{multichoice} class option.}
+% The only `native' option recognised by \textsf{ouexam} is
+% \DescribeMacro{multichoice} \textsf{multichoice}, which tells
+% \textsf{ouexam} to format the examination paper as a multiple-choice
+% examination. The title page format is different, and several of the title
+% page macros have no effect when this option is specified. The
+% \textsf{multichoice} option also defines some additional macros that are
+% useful for multiple-choice examination papers. See
+% sections~\ref{Sec:Questions:MP} and~\ref{Sec:TitlePage:MP}.
 % 
 % \subsection{Required packages}
 % 
@@ -111,11 +125,13 @@
 % title is formatted as `\textbf{\underline{Section A}}', in |\large| size.
 % 
 % \subsection{Questions}
+% \label{Sec:Questions}
 % 
-% The \DescribeEnv{questions} \textsf{questions}, \DescribeEnv{subquestions}
-% \textsf{subquestions} and \DescribeEnv{subsubquestions}
-% \textsf{subsubquestions} environments are used to write questions. These
-% three environments are actually just defined to be identical to the
+% If the \textsf{multichoice} option is not specified, \textsf{ouexam}
+% provides three environments for writing questions: \DescribeEnv{questions}
+% \textsf{questions}, \DescribeEnv{subquestions} \textsf{subquestions} and
+% \DescribeEnv{subsubquestions} \textsf{subsubquestions}. These three
+% environments are actually just defined to be identical to the
 % \textsf{enumerate} environment, and work in the same manner. The labels for
 % list items have been redefined so that questions are numbered according to
 % University formatting requirements.
@@ -128,32 +144,63 @@
 % \textsf{questions} environment is started, unlike the |enumi|
 % counter. The |enumii| and |enumiii| counters are unchanged.
 % 
+% \changes{1.1}{1999/04/20}{Documented changes to the \cs{marks} macro.}
 % Each part of a question is worth some number of marks, which needs to be
 % displayed somewhere after the question. You can specify the number of marks
 % for a question using the \DescribeMacro{\marks} |\marks| macro, which prints
 % `(\emph{n} marks)' right-justified on the line. It has a single parameter,
-% the number of marks. The macro automatically determines whether to print
-% `mark' or `marks' as appropriate. Other than right-justifying, the macro
-% does no other formatting or positioning; how you position the marks relative
-% to a question is up to you.
+% the number of marks, which is added to the \DescribeMacro{marks} |marks|
+% counter. The macro automatically determines whether to print `mark' or
+% `marks' as appropriate. Other than right-justifying, the macro does no other
+% formatting or positioning; how you position the marks relative to a question
+% is up to you.
 % 
+% \changes{1.1}{1999/04/20}{Documented changes to the \cs{totalmarks} macro.}
 % If you have a question with several sub-parts, each worth some number of
 % marks, you should display the total number of marks for the question at the
 % end of the question. You can do this with the \DescribeMacro{\totalmarks}
 % |\totalmarks| macro, which prints `\textbf{[TOTAL \emph{n} MARKS]}
-% right-justifed on the line. It has a single parameter, the number of marks
-% (that is, it does not add up the total for you!). As with |\marks|, it
-% determines whether to print `MARK' or `MARKS' automatically, and does no
-% other formatting or positioning.
+% right-justifed on the line, where \emph{n} is the current value of the
+% |marks| counter. As with |\marks|, |\totalmarks| determines whether to print
+% `MARK' or `MARKS' automatically, and does no other formatting or
+% positioning. The value of the |marks| counter is reset to zero by this
+% macro.
+% 
+% \subsubsection{Multiple-choice questions}
+% \label{Sec:Questions:MP}
+% 
+% \changes{1.1}{1999/04/20}{Documented new \textsf{options} environment for
+% \textsf{multichoice}.}
+% If the \textsf{multichoice} option to \textsf{ouexam} is specified, you can
+% still use the \textsf{questions} environment, but the \textsf{subquestions}
+% and \textsf{subsubquestions} are not defined, as these are not required in
+% multiple-choice examinations. Instead, the \DescribeEnv{options}
+% \textsf{options} environment is defined to allow you to specify the possible
+% answers for a question. As with the other question environments, this is a
+% redefinition of the \textsf{enumerate} environment.
+% 
+% \changes{1.1}{1999/04/20}{Documented new \cs{citem} macro for
+% \textsf{multichoice}.}
+% You can specify the correct answer for a question using the
+% \DescribeMacro{\citem} |\citem| macro. Normally this is identical to the
+% |\item| macro, but if you issue a \DescribeMacro{\showanswers}
+% |\showanswers| in the document preamble, the item label of the correct
+% answer will have a box drawn around it, for example `\fbox{a)}' instead of
+% `a)'.
+% 
+% There is no control at present over the formatting of question numbers or
+% option labels. These may be added later.
 % 
 % \subsection{Generating the title page}
 % \label{Sec:TitlePage}
 % 
+% \changes{1.1}{1999/04/20}{Minor changes to title page documentation.}
 % This class defines a collection of macros that let you fill in the various
 % parts of the examination title page. This is analogous to the process you
 % use to generate the title of a document in, for example, the
 % \textsf{article} class (using |\title|, |\author|, |\date| and
-% |\maketitle|).
+% |\maketitle|). That is, you issue the macros described below in the document
+% preamble, then issue a |\maketitlepage| in the document body.
 % 
 % The \DescribeMacro{\examyear} |\examyear| macro lets you specify the year
 % in which the examination is being held, for example, |\examyear{1999}|. This
@@ -168,9 +215,11 @@
 % paper number that the examination is for, for example,
 % |\papernumber{INFO 211}|. This macro is required.
 % 
+% \changes{1.1}{1999/04/20}{Documented changes to \cs{papertitle} macro.}
 % The \DescribeMacro{\papertitle} |\papertitle| macro lets you specify the
-% title of the paper, for example,
-% |\papertitle{Systems Analysis and Design Methods}|. This macro is required.
+% title of the paper, for example, 
+% |\papertitle{Systems Analysis and Design Methods}|. This macro is required
+% for final examinations, and optional for multiple-choice examinations.
 % 
 % Some papers are offered in both semesters. The \DescribeMacro{\semester}
 % |\semester| macro lets you specify which semester the examination is for.
@@ -216,9 +265,32 @@
 % Note that the number of pages in the examination paper is generated
 % and inserted into the title page automatically --- you do not need to specify
 % it manually.
+% 
+% \subsubsection{Title pages for multiple-choice examinations}
+% \label{Sec:TitlePage:MP}
+% 
+% \changes{1.1}{1999/04/20}{Documented effect of \textsf{multichoice} on
+% various title page macros.}
+% The \textsf{multichoice} option to \textsf{ouexam} does not remove any of
+% the macros described above, but the following macros will have no effect, as
+% they are not relevant:
+% \begin{itemize}
+% 	\item |\copiesof|
+% 	\item |\material|
+% 	\item |\allowcalculators|
+% \end{itemize}
+% The |\papertitle| macro becomes optional rather than mandatory.
+% \changes{1.1}{1999/04/20}{Documented new \cs{testtitle} macro.}
+% One new macro is also defined, \DescribeMacro{\testtitle} |\testtitle|,
+% which allows you to specify the title of the test, for example,
+% |\testtitle{Theory Test}|. This macro is required.
+% 
+% The title page produced by |\maketitlepage| will also have a different format.
+% This can be altered by redefining the |\mc@maketitlepage| macro.
 %
 % \section{Example}
 % 
+% \changes{1.1}{1999/04/20}{Updated example to conform to 1.1 changes.}
 % The code shown below is for a subset of the INFO212 1998 final examination.
 % The title page produced by this code is shown in figure~\ref{Fig.Output1},
 % and the second page of the examination is shown in figure~\ref{Fig.Output2}.
@@ -287,7 +359,7 @@
 % 
 %     \item ...  \\
 %   \end{subquestions}
-%   \totalmarks{20}
+%   \totalmarks
 %     .
 %     .
 %     .
@@ -446,16 +518,48 @@
 % 
 % \subsection{Preamble}
 % 
-% This document class is based on the \textsf{article} class and accepts any
-% of the options accepted by \textsf{article}. The only `native' option to
-% \textsf{ouexam} is \textsf{multichoice}; the rest are passed through to
-% \textsf{article}.
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}[1998/06/01]
 \ProvidesClass{ouexam}%
-  [1999/04/15 Otago University examination paper class]
+  [1999/20/01 Otago University examination paper class, v1.1]
+%    \end{macrocode}
+% 
+% \begin{macro}{multichoice}
+% \changes{1.1}{1999/04/20}{New class option.}
+% \begin{macro}{\if@multichoice}
+% \changes{1.1}{1999/04/20}{New switch for \textsf{multichoice}.}
+% This document class is based on the \textsf{article} class and accepts any
+% of the options accepted by \textsf{article}. The only `native' option to
+% \textsf{ouexam} is \textsf{multichoice}; the |\if@multichoice| switch is used
+% to determine whether this is in effect (default false).
+%    \begin{macrocode}
+\newif\if@multichoice \@multichoicefalse
+\DeclareOption{multichoice}{\@multichoicetrue}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{twoside}
+% \changes{1.1}{1999/04/20}{Turned off \textsf{twoside} option.}
+% The \textsf{twoside} option does not really make sense --- all Otago
+% examination papers are printed single-sided anyway, and the format is such
+% that two-sided printing would look no different. The \textsf{twoside} option
+% is therefore not used in this class.
+%    \begin{macrocode}
+\DeclareOption{twoside}{\OptionNotUsed}
+%    \end{macrocode}
+% \end{macro}
+% All other options are passed directly to \textsf{article}.
+%    \begin{macrocode}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions
+%    \end{macrocode}
+%
+% \changes{1.1}{1999/04/20}{Changed default point size to 12pt.}
+% The defaults for this class are \textsf{onecolumn}, \textsf{oneside},
+% \textsf{a4paper} and \textsf{12pt}. The font size is the only one that might
+% change.
+%    \begin{macrocode}
 \LoadClass[onecolumn,oneside,a4paper,12pt]{article}
 %    \end{macrocode}
 % 
@@ -490,6 +594,7 @@
 % \end{macro}
 % \end{macro}
 % \end{macro}
+% 
 % 
 % \subsection{Page styles}
 % 
@@ -543,52 +648,141 @@
 %    \end{macrocode}
 % \end{macro}
 % 
-% \subsection{Environments}
+% 
+% \subsection{Environments and associated items}
 % 
 % \begin{environment}{questions}
 % \begin{environment}{subquestions}
+% \changes{1.1}{1999/04/20}{Now disabled when \textsf{multichoice} is active.}
 % \begin{environment}{subsubquestions}
-% The \textsf{questions}, \textsf{subsubquestions} and
-% \textsf{subsubquestions} environments are just redefinitions of the
-% \textsf{enumerate} environment:
-%    \begin{macrocode}
+% \changes{1.1}{1999/04/20}{Now disabled when \textsf{multichoice} is active.}
+% \begin{environment}{options}
+% \changes{1.1}{1999/04/20}{New environment for \textsf{multichoice}.}
+% The \textsf{questions}, \textsf{subsubquestions}, \textsf{subsubquestions}
+% and \textsf{options} environments are just redefinitions of the
+% \textsf{enumerate} environment. If \textsf{multichoice} is not set, then
+% \textsf{questions}, \textsf{subquestions} and \textsf{subsubquestions} are
+% available. If \textsf{multichoice} is set, then \textsf{questions} and
+% \textsf{options} are available.
+%   \begin{macrocode}
 \newenvironment{questions}{\begin{enumerate}}{\end{enumerate}}
-\newenvironment{subquestions}{\begin{enumerate}}{\end{enumerate}}
-\newenvironment{subsubquestions}{\begin{enumerate}}{\end{enumerate}}
+\if@multichoice
+  \newenvironment{options}{\begin{enumerate}}{\end{enumerate}}
+\else
+  \newenvironment{subquestions}{\begin{enumerate}}{\end{enumerate}}
+  \newenvironment{subsubquestions}{\begin{enumerate}}{\end{enumerate}}
+\fi
 %    \end{macrocode}
 % \end{environment}
 % \end{environment}
 % \end{environment}
+% \end{environment}
 % 
+% \begin{macro}{\citem}
+% \changes{1.1}{1999/04/20}{New macro for \textsf{options} environment.}
+% The |\citem| macro is used to indicate the correct answer for a
+% multiple-choice question. If a |\showanswers| has not been issued in the
+% document preamble (see below), then |\citem| is identical to |\item|.
+%    \begin{macrocode}
+\if@multichoice
+  \def\citem{%
+    \@inmatherr\item
+    \@ifnextchar [\@item{\@noitemargtrue \@item[\@itemlabel]}}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{\showanswers}
+% \changes{1.1}{1999/04/20}{New macro for \textsf{multichoice}.}
+% Issuing the |\showanswers| macro in the document preamble redefines |\citem|
+% so that a box is drawn around the label of the correct answer, for example
+% `\fbox{b)}'.
+%    \begin{macrocode}
+  \newcommand{\showanswers}{%
+    \renewcommand{\citem}{%
+      \@inmatherr\item
+      \@ifnextchar [\@item{\@noitemargtrue \@item[\fbox{\@itemlabel}]}}}
+\fi
+%    \end{macrocode}
+% \end{macro}
 % 
 % \begin{macro}{question}
 % We cannot use the |enumi| counter for the \textsf{questions} environment
-% because |enumi| will get reset every time we start a new \textsf{questions}
+% because |enumi| would get reset every time we start a new \textsf{questions}
 % environment. We therefore need a separate counter:
 %    \begin{macrocode}
 \newcounter{question}
 %    \end{macrocode}
 % \end{macro}
 % 
+% \begin{macro}{marks}
+% \changes{1.1}{1999/04/20}{New counter for calculating question marks.}
+% If \textsf{multichoice} is not set, we may need to keep track of the total
+% number of marks for each question. The |marks| counter is used for this
+% purpose. It is reset to zero every time a |\totalmarks| macro is issued.
+%    \begin{macrocode}
+\if@multichoice
+\else
+  \newcounter{marks}
+  \setcounter{marks}{0}
+\fi
+%    \end{macrocode}
+% \end{macro}
+% 
 % \begin{macro}{\labelenumi}
+% \changes{1.1}{1999/04/20}{Changed so that it prints differently when
+% \textsf{multichoice} is in effect.}
+% There are certain formats for numbering questions that need to be adhered
+% to. We therefore need to redefine the label-generating macros slightly. In
+% particular, we need to redefine |\labelenumi| so that it uses the new
+% |question| counter. For multiple-choice examinations, the question number is
+% drawn in bold face and a box is drawn around it to make it easier to
+% differentiate between different questions.
+%    \begin{macrocode}
+\if@multichoice
+  \renewcommand{\labelenumi}{%
+      \refstepcounter{question}
+      \fbox{\textbf{\arabic{question}.}}
+    }
+%    \end{macrocode}
+% For final examinations, the question number is drawn normally.
+%    \begin{macrocode}
+\else
+  \renewcommand{\labelenumi}{%
+      \refstepcounter{question}
+      \arabic{question}.
+    }
+\fi
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\labelenumii}
+% \changes{1.1}{1999/04/20}{Changes to list labels are now contingent on
+% \textsf{multichoice}.}
+% For multiple-choice examinations, we arbitrarily define the format for the
+% question numbers for answer labels as `a)', `b)', \ldots. Future versions of
+% this class may make this configurable.
+%    \begin{macrocode}
+\if@multichoice
+  \renewcommand{\labelenumii}{\alph{enumii})}
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{\p@enumii}
 % \begin{macro}{\p@enumiii}
 % \begin{macro}{\labelenumiii}
-% The University requires that questions be numbered as `1.', `2.', \ldots,
-% sub-questions be numbered as `(a)', `(b)', \ldots, and sub-sub-questions be
-% numbered as `(i)', `(ii)', \ldots. We therefore need to redefine the
-% label-generating macros slightly. In particular, we need to redefine
-% |\labelenumi| so that it uses the new |question| counter.
+% For final examinations, the University requires that questions be numbered
+% as `1.', `2.', \ldots, sub-questions be numbered as `(a)', `(b)', \ldots,
+% and sub-sub-questions be numbered as `(i)', `(ii)', \ldots. We also redefine
+% |\p@enumii| and |\p@enumiii| to make referring to other parts of questions
+% slightly tidier (for example, `see part (a) above' versus `see part 1(a)
+% above').
 %    \begin{macrocode}
-\renewcommand{\labelenumi}{%
-    \refstepcounter{question}
-    \arabic{question}.
-  }
-\renewcommand{\p@enumii}{}
-\renewcommand{\p@enumiii}{(\theenumii)}
-\renewcommand{\labelenumiii}{(\roman{enumiii})}
+\else
+  \renewcommand{\p@enumii}{}
+  \renewcommand{\p@enumiii}{(\theenumii)}
+  \renewcommand{\labelenumiii}{(\roman{enumiii})}
+\fi
 %    \end{macrocode}
-% \end{macro}
 % \end{macro}
 % \end{macro}
 % \end{macro}
@@ -618,29 +812,36 @@
 % \end{macro}
 % 
 % \begin{macro}{\marks}
+% \changes{1.1}{1999/04/20}{This macro now increments the \texttt{marks}
+% counter.}
 % The |\marks| macro specifies the number of marks for a question, and prints
 % it right-justified on the line as `(\emph{n} marks)', where \emph{n} is
 % passed as a parameter to the macro. It uses \textsf{ifthenelse} to determine
-% whether to print `mark' or `marks', based on the value of the parameter.
+% whether to print `mark' or `marks', based on the value of the parameter. The
+% number of marks is added to the |marks| counter.
 %    \begin{macrocode}
 \newcommand{\marks}[1]{%
     \mbox{}\hfill
     (#1~\ifthenelse{#1=1}{mark}{marks})
+    \addtocounter{marks}{#1}
   }
 %    \end{macrocode}
 % \end{macro}
 % 
 % \begin{macro}{\totalmarks}
-% The |\totalmarks| macro specifies the total marks for a question that
+% \changes{1.1}{1999/04/20}{Removed the parameter for the number of marks;
+% this is now retrieved from the \texttt{marks} counter.}
+% The |\totalmarks| macro calculates the total marks for a question that
 % comprises several sub-parts, and prints it out right-justified on the line
-% as `\textbf{[TOTAL \emph{n} MARKS]}, where \emph{n} is passed as a parameter
-% to the macro. As with |\marks|, it determines whether to print `MARK' or
-% `MARKS' automatically. A future extension might be to calculate the total
-% number of marks automatically, but not yet!
+% as `\textbf{[TOTAL \emph{n} MARKS]}, where \emph{n} is is the value of the
+% |marks| counter. to the macro. As with |\marks|, |\totalmarks| determines
+% whether to print `MARK' or `MARKS' automatically. Note that the |marks|
+% counter is reset to zero by this macro.
 %    \begin{macrocode}
-\newcommand{\totalmarks}[1]{%
+\newcommand{\totalmarks}{%
     \mbox{}\hfill
-    \textbf{[TOTAL #1~\ifthenelse{#1=1}{MARK}{MARKS}]}
+    \textbf{[TOTAL \themarks~\ifthenelse{\themarks=1}{MARK}{MARKS}]}
+    \setcounter{marks}{0}
   }
 %    \end{macrocode}
 % \end{macro}
@@ -691,13 +892,21 @@
 % 
 % \begin{macro}{\papertitle}
 % \begin{macro}{\@ptitle}
-% The |\papertitle| macro specifies the title of the paper, and is required.
+% \changes{1.1}{1999/04/20}{Made this macro optional under
+% \textsf{multichoice}.}
+% The |\papertitle| macro specifies the title of the paper. It is required for
+% final examinations, but optional for multiple-choice examinations.
 % It redefines the |\@ptitle| macro which is used in |\maketitlepage|:
 %    \begin{macrocode}
-\newcommand{\papertitle}{\renewcommand{\@ptitle}}
-\newcommand{\@ptitle}{%
-    \ClassError{ouexam}{No {\protect\papertitle} given}\@eha
-  }
+\if@multichoice
+  \newcommand{\papertitle}{\renewcommand{\@ptitle}}
+  \newcommand{\@ptitle}{}
+\else
+  \newcommand{\papertitle}{\renewcommand{\@ptitle}}
+  \newcommand{\@ptitle}{%
+      \ClassError{ouexam}{No {\protect\papertitle} given}\@eha
+    }
+\fi
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -714,9 +923,16 @@
       {\renewcommand{\@semester}{Semester Two  \\}}
   }
 %    \end{macrocode}
-% |\semester| is optional --- if you omit it, |\@semester| remains empty:
+% \changes{1.1}{1999/04/20}{Updated slightly for \textsf{multichoice}.}
+% |\semester| is optional --- if you omit it, |\@semester| remains empty. Note
+% the slight difference for \textsf{multichoice}, which ensures there is
+% always a something there:
 %    \begin{macrocode}
-\newcommand{\@semester}{}
+\if@multichoice
+  \newcommand{\@semester}{\mbox{}}
+\else
+  \newcommand{\@semester}{}
+\fi
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -735,17 +951,34 @@
 % \end{macro}
 % \end{macro}
 % 
+% \begin{macro}{num.pages}
+% \changes{1.1}{1999/04/20}{Renamed label from \texttt{page.last}.}
 % There is no macro to specify the number of pages in the examination because
 % it is done automatically by inserting a |\newlabel| that refers to the last
 % page directly into the |.aux| file:
 %    \begin{macrocode}
 \AtEndDocument{%
     \immediate\write\@auxout{%
-        \string\newlabel{page.last}{{}{\thepage}}
+        \string\newlabel{num.pages}{{}{\thepage}}
     }
   }
 %    \end{macrocode}
 % This label is then referenced in |\maketitlepage|.
+% \end{macro}
+% 
+% \begin{macro}{num.questions}
+% \changes{1.1}{1999/04/20}{New label representing the number of questions.}
+% Similarly, there is no macro to specify the number of questions in the
+% examination. This is calculated using the same method as for the number of
+% pages:
+%    \begin{macrocode}
+\AtEndDocument{%
+    \immediate\write\@auxout{%
+        \string\newlabel{num.questions}{{}{\thequestion}}
+    }
+  }
+%    \end{macrocode}
+% \end{macro}
 % 
 % \begin{macro}{\instructions}
 % \begin{macro}{\@instructions}
@@ -810,16 +1043,54 @@
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
-%
+% 
+% \begin{macro}{\testtitle}
+% \begin{macro}{\@ttitle}
+% \changes{1.1}{1999/04/20}{New macro.}
+% The |\testtitle| macro specifies the title of the test for a multiple-choice
+% examination, and is required. It redefines the |\@ttitle| macro which is
+% used in |\mc@maketitlepage|:
+%    \begin{macrocode}
+\if@multichoice
+  \newcommand{\testtitle}{\renewcommand{\@ttitle}}
+  \newcommand{\@ttitle}{%
+      \ClassError{ouexam}{No {\protect\testtitle} given}\@eha
+    }
+\fi
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% 
 % \begin{macro}{\maketitlepage}
+% \changes{1.1}{1999/04/20}{Redefined to take account of \textsf{multichoice}.}
 % The |\maketitlepage| macro is the \textsf{ouexam} analogue of |\maketitle|.
 % It takes all of the information provided by the above macros and generates a
-% properly formatted examination title page.
+% properly formatted examination title page. If the \textsf{multichoice}
+% option is used, the title page will be different, and some of the macros
+% described above will have no effect. If you want to design your own title
+% page styles, redefine |\mc@maketitlepage| for multiple choice examinations,
+% and |\final@maketitlepage| for `conventional' final examinations. (I would
+% not normally recommend redefining |\final@maketitlepage|.)
 %    \begin{macrocode}
-\newcommand{\maketitlepage}{%
+\if@multichoice
+  \newcommand{\maketitlepage}{\mc@maketitlepage}
+\else
+  \newcommand{\maketitlepage}{\final@maketitlepage}
+\fi
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\final@maketitlepage}
+% \changes{1.1}{1999/04/20}{Renamed macro from \cs{maketitlepage}.}
+% The |\final@maketitlepage| macro generates an examination title page that
+% meets the Otago University requirements for final examination papers. You
+% can redefine this if you want to change the format, but normally you would
+% not do this.
+%    \begin{macrocode}
+\newcommand{\final@maketitlepage}{%
   \thispagestyle{titlepage}
 %    \end{macrocode}
-% This header information for the examination is printed centered at the top
+% The header information for the examination is printed centered at the top
 % of the page. The department, paper number and paper title (and the semester
 % information if required) are placed inside a double box.
 %    \begin{macrocode}
@@ -848,11 +1119,11 @@
   \end{center}
 %    \end{macrocode}
 % The number of pages is automatically calculated, as descibed earlier. All we
-% need to do is reference the |page.last| label that we put into the |.aux|
+% need to do is reference the |num.pages| label that we put into the |.aux|
 % file:
 %    \begin{macrocode}
   \underline{This examination paper comprises %
-             \pageref{page.last} pages}
+             \pageref{num.pages} pages}
   \\[\baselineskip]
 %    \end{macrocode}
 % Print out the instructions for answering questions:
@@ -916,4 +1187,49 @@
 }
 %    \end{macrocode}
 % \end{macro}
+%
+% \begin{macro}{\mc@maketitlepage}
+% \changes{1.1}{1999/04/20}{New macro for \textsf{multichoice}.}
+% The |\mc@maketitlepage| macro generates an examination title page that for a
+% multiple-choice examination paper. There is no prescribed format for this,
+% so you are free to redefine this macro if the default format does not meet
+% your requirements.
+%    \begin{macrocode}
+\newcommand{\mc@maketitlepage}{%
+  \thispagestyle{titlepage}
+  \large\mbox{}\vfill
+%    \end{macrocode}
+% The title and preamble information is centered on the page in a box:  
+%    \begin{macrocode}
+  \begin{center}
+    \fbox%
+    { \Huge
+      \begin{tabular}{>{\bfseries}c<{\normalfont}}
+        \@dept\ Paper \@pnumber \\
+        \\
+        \@ttitle\ \@semester\ \@year \\
+      \end{tabular}
+    }
+    \vfill
+    This test comprises \pageref{num.questions} multiple choice questions
+    and is \pageref{num.pages} pages long. \\[\baselineskip]
+%    \end{macrocode}
+% General instructions for answering questions are printed next. We need the
+% |\mbox| just in case the instructions are empty:  
+%    \begin{macrocode}
+    \mbox{}\@instructions \\[\baselineskip]
+    \vfill
+%    \end{macrocode}
+% followed by an other instructions:  
+%    \begin{macrocode}
+    \mbox{}\@otherinst \\[\baselineskip]
+  \end{center}
+  \vfill\mbox{}
+  \newpage
+}
+%    \end{macrocode}
+% \end{macro}
+% 
 % \Finale
+% 
+% \PrintChanges
