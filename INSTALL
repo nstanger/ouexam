@@ -51,3 +51,11 @@ dvips -o example1.ps example1.dvi
 ps2pdf example1.ps
 dvips -o example2.ps example2.dvi
 ps2pdf example2.ps
+
+Put ouexam.cls in /path/to/texmf/tex/latex/ouexam.
+
+Put eg*.eps, ouexam.pdf, ouexam.dvi, ouexam.dtx, ouexam.ins, FAQ,
+INSTALL, MANIFEST, README and TODO in /path/to/texmf/doc/latex/ouexam.
+
+Put Create*.eps, example*.tex, example*.dvi, example*.pdf and
+lstlang0.sty in /path/to/texmf/doc/latex/ouexam/example.
