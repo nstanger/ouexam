@@ -1,0 +1,919 @@
+\def\filedate{15 April 1999}
+\def\fileversion{1.0}
+% \iffalse meta-comment
+%%
+%% ouexam.dtx Copyright 1999 Nigel Stanger
+%% 
+%% You may use this package freely, and also distribute it
+%% provided that you don't change it, make any money off
+%% it or pretend that you wrote it.
+%%
+%<*driver>
+\documentclass{article}
+\usepackage{doc}
+\DisableCrossrefs
+\CodelineNumbered
+\title{The \textsf{ouexam} document class, v\fileversion}
+\author{Nigel Stanger\\nstanger@infoscience.otago.ac.nz}
+\date{\filedate}
+\begin{document}
+\maketitle
+\DocInput{ouexam.dtx}
+\end{document}
+%</driver>
+%
+% \fi
+%
+%% \CheckSum{339}
+%%
+%% \CharacterTable
+%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%%   Digits        \0\1\2\3\4\5\6\7\8\9
+%%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%%   Dollar        \$     Percent       \%     Ampersand     \&
+%%   Acute accent  \'     Left paren    \(     Right paren   \)
+%%   Asterisk      \*     Plus          \+     Comma         \,
+%%   Minus         \-     Point         \.     Solidus       \/
+%%   Colon         \:     Semicolon     \;     Less than     \<
+%%   Equals        \=     Greater than  \>     Question mark \?
+%%   Commercial at \@     Left bracket  \[     Backslash     \\
+%%   Right bracket \]     Circumflex    \^     Underscore    \_
+%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%%   Right brace   \}     Tilde         \~}
+%%
+%
+% \MakeShortVerb{\|}
+%
+% \begin{abstract}
+% This document class allows you to create Otago University final
+% examination papers using \LaTeXe\@. It implements the major formatting
+% requirements specified by the University and also provides some useful
+% macros to ease the process of building the title page and automatically
+% deals with fiddly little issues such as question and section numbering,
+% the number of pages in the paper and printing `\textbf{TURN OVER}' in the
+% bottom right corner of every page except the last one.
+% \end{abstract}
+%
+% \section{Introduction}
+%
+% \subsection{Class options}
+%
+% This document class is based on the \textsf{article} class and accepts any of
+% the options accepted by \textsf{article}. The default options are
+% \textsf{onecolumn}, \textsf{oneside}, \textsf{a4paper} and \textsf{12pt}.
+% Normally the only one you might want to change is the last one.
+% 
+% \subsection{Required packages}
+% 
+% This class currently requires the \textsf{calc} and \textsf{ifthen}
+% packages. I may look at removing the requirement for these in a
+% later version, as neither of them are that essential.
+% 
+% \subsection{Page margins}
+% 
+% This class assumes A4 paper. You will probably get weird results if you try
+% to do anything different. The margins are set up as follows: top and bottom
+% 2cm (headers and footers are inside this margin), left and right 2.54cm (1in).
+% 
+% \subsection{Page styles}
+% 
+% There are three main page styles in this class:
+% \begin{description}
+% 	\item[\textsf{plain}] \DescribeMacro{plain} This is a slight modification of
+% the \textsf{plain} page style from \textsf{article}. It produces pages that
+% have the page number centered at the top, the paper number in the top right
+% corner and the text `\textbf{TURN OVER}' in the bottom right. This is the
+% default page style.
+% 	\item[\textsf{lastpage}] \DescribeMacro{lastpage} This is the same as
+% \textsf{plain}, but without the `\textbf{TURN OVER}'. This is used for the
+% last page of the examination. You normally will not have to use this
+% yourself --- the class should take care of it for you. I have managed to
+% confuse it in the past, however, so there may be odd occasions where you
+% have to set the page style of the last page manually. It will be fairly
+% obvious when you need to do this.
+% 	\item[\textsf{titlepage}] \DescribeMacro{titlepage} This is the same as
+% \textsf{plain}, but without the page header, and is used for the title page.
+% Again, you will normally not use this yourself, as the |\maketitlepage|
+% macro handles this for you (see section~\ref{Sec:TitlePage}).
+% \end{description}
+% 
+% \section{Writing the paper}
+% 
+% \subsection{Sections}
+% 
+% Examination papers may have multiple sections, `numbered' A, B, \ldots.
+% Rather than redefine the existing section macros, this class defines a new
+% macro \DescribeMacro{\newsection} |\newsection| that generates a new
+% section. This macro has one optional parameter which is an instruction or
+% instructions for answering the questions in the section. The default is
+% `ANSWER ALL QUESTIONS'. Every section begins on a new page, and the section
+% title is formatted as `\textbf{\underline{Section A}}', in |\large| size.
+% 
+% \subsection{Questions}
+% 
+% The \DescribeEnv{questions} \textsf{questions}, \DescribeEnv{subquestions}
+% \textsf{subquestions} and \DescribeEnv{subsubquestions}
+% \textsf{subsubquestions} environments are used to write questions. These
+% three environments are actually just defined to be identical to the
+% \textsf{enumerate} environment, and work in the same manner. The labels for
+% list items have been redefined so that questions are numbered according to
+% University formatting requirements.
+% 
+% Questions must be numbered sequentially throughout the entire paper
+% regardless of section boundaries. Since it is quite possible to have
+% multiple \textsf{questions} environments within a document, the class
+% defines the \DescribeMacro{question} |question| counter, which is
+% global to the entire document and not reset every time a new
+% \textsf{questions} environment is started, unlike the |enumi|
+% counter. The |enumii| and |enumiii| counters are unchanged.
+% 
+% Each part of a question is worth some number of marks, which needs to be
+% displayed somewhere after the question. You can specify the number of marks
+% for a question using the \DescribeMacro{\marks} |\marks| macro, which prints
+% `(\emph{n} marks)' right-justified on the line. It has a single parameter,
+% the number of marks. The macro automatically determines whether to print
+% `mark' or `marks' as appropriate. Other than right-justifying, the macro
+% does no other formatting or positioning; how you position the marks relative
+% to a question is up to you.
+% 
+% If you have a question with several sub-parts, each worth some number of
+% marks, you should display the total number of marks for the question at the
+% end of the question. You can do this with the \DescribeMacro{\totalmarks}
+% |\totalmarks| macro, which prints `\textbf{[TOTAL \emph{n} MARKS]}
+% right-justifed on the line. It has a single parameter, the number of marks
+% (that is, it does not add up the total for you!). As with |\marks|, it
+% determines whether to print `MARK' or `MARKS' automatically, and does no
+% other formatting or positioning.
+% 
+% \subsection{Generating the title page}
+% \label{Sec:TitlePage}
+% 
+% This class defines a collection of macros that let you fill in the various
+% parts of the examination title page. This is analogous to the process you
+% use to generate the title of a document in, for example, the
+% \textsf{article} class (using |\title|, |\author|, |\date| and
+% |\maketitle|).
+% 
+% The \DescribeMacro{\examyear} |\examyear| macro lets you specify the year
+% in which the examination is being held, for example, |\examyear{1999}|. This
+% macro is required. I may look at defaulting this to the current year at some
+% later stage.
+% 
+% The \DescribeMacro{\department} |\department| macro lets you specify the
+% name of the department that produced the examination paper, for example,
+% |\department{Information| |Science}|. This macro is required.
+% 
+% The \DescribeMacro{\papernumber} |\papernumber| macro lets you specify the
+% paper number that the examination is for, for example,
+% |\papernumber{INFO 211}|. This macro is required.
+% 
+% The \DescribeMacro{\papertitle} |\papertitle| macro lets you specify the
+% title of the paper, for example,
+% |\papertitle{Systems Analysis and Design Methods}|. This macro is required.
+% 
+% Some papers are offered in both semesters. The \DescribeMacro{\semester}
+% |\semester| macro lets you specify which semester the examination is for.
+% The parameter can be either `1' or `2', for example, |\semester{2}|. This
+% macro is optional --- if you omit it, no semester information is generated.
+% 
+% The \DescribeMacro{\timeallowed} |\timeallowed| macro lets you specify the
+% length of the examination in hours, for example, |\timeallowed{2}|. This
+% macro is optional --- if you omit it, it defaults to three (3) hours.
+% 
+% If calculators are allowed in the examination, use the
+% \DescribeMacro{\allowcalculators} |\allowcalculators| macro. This macro is
+% optional --- if you omit it, a sentence is printed saying that calculators
+% are \emph{not} allowed.
+% 
+% The \DescribeMacro{\instructions} |\instructions| macro lets you specify
+% instructions on how candidates should complete the
+% examination, for example, |\instructions{Answer ALL| |questions.}|. This macro
+% is optional. Note that the content of the instructions can be just about
+% anything. It is up to you to control formatting, such as how you want lines
+% broken, etc. This also true of the |\material|, |\copiesof| and
+% |\otherinstructions| macros described below.
+% 
+% The \DescribeMacro{\material} |\material| macro lets you specify any
+% additional material that candidates are provided in addition to the
+% examination paper itself, for example, |\material{SQL schema definition}|.
+% This macro is optional.
+% 
+% The \DescribeMacro{\copiesof} |\copiesof| macro lets you specify any
+% material that candidates are allowed to bring into the examination, for
+% example, |\copiesof{McFadden &| |Hoffer, 5th edition}|. This macro is
+% optional.
+% 
+% The \DescribeMacro{\otherinstructions} |\otherinstructions| macro lets you
+% specify any other instructions not covered by any of the above, for example,
+% |\otherinstructions{No smoking| |allowed}|. This macro is optional.
+% 
+% Once you have specified the content of the title page using the above
+% macros, you simply issue a \DescribeMacro{\maketitlepage} |\maketitlepage|
+% to generate the front page of the examination (cf. |\maketitle|). The title
+% page generated meets University formatting requirements.
+% 
+% Note that the number of pages in the examination paper is generated
+% and inserted into the title page automatically --- you do not need to specify
+% it manually.
+%
+% \section{Example}
+% 
+% The code shown below is for a subset of the INFO212 1998 final examination.
+% The title page produced by this code is shown in figure~\ref{Fig.Output1},
+% and the second page of the examination is shown in figure~\ref{Fig.Output2}.
+% Particular points to note are:
+% \begin{itemize}
+% 	\item This examination has no sections and only one \textsf{questions}
+% 	  environment, but the usual procedure would be to end any current
+% 	  \textsf{questions} environment, then issue a |\newsection|.
+% 	\item The number of hours is not specified, so it defaults to three.
+% 	\item This exam allows calculators.
+% 	\item The parameter of the |\instructions|, |\material|, |\copiesof| and
+% 	  |\other| |instructions| macros can be just about anything, as illustrated
+% 	  below by the |\material| macro.
+% 	\item Formatting within questions is totally under user control, for
+% 	  example, each question in this examination is terminated with a
+% 	  linebreak (|\\|) to produce some space between questions.
+% \end{itemize}
+% 
+% \begin{verbatim}
+% \documentclass[12pt]{ouexam}
+% 
+% \examyear{1998}
+% \department{INFORMATION SCIENCE}
+% \papernumber{INFO 212}
+% \papertitle{Database Design and Management Principles}
+% \instructions{Answer \underline{ALL} questions.}
+% \material{Happy Joe SQL schema  \\
+%           Oracle Rdb SQL syntax diagrams for:  \\
+%           \hspace*{1cm} CREATE TRIGGER  \\
+%           \hspace*{1cm} CREATE VIEW  }
+% \allowcalculators
+% 
+% \begin{document}
+% 
+% \maketitlepage
+% 
+% \underline{ANSWER ALL QUESTIONS}  \\[\baselineskip]
+% 
+% \begin{questions}
+%   \item Study the Happy Joe schema supplied with this paper
+%         (see pages~\pageref{start.schema}--\pageref{end.schema})
+%         and answer the following questions.
+%   \begin{subquestions}
+%     \item Explain fully in English the purpose of the following items
+%         in the schema (see page~\pageref{end.schema}):
+%     \begin{subsubquestions}
+%       \item Trigger \textbf{T1}.           \marks{2}  \\
+%       \item Trigger \textbf{T2}.           \marks{1}  \\
+%       \item View \textbf{V1}.              \marks{1}  \\
+%       \item View \textbf{V2}.              \marks{2}  \\
+%       \item View \textbf{V3}.              \marks{2}  \\
+%       \item Stored procedure \textbf{P1}.  \marks{3}  \\
+%     \end{subsubquestions}
+%     
+%     \item Write SQL code to define a single view that will show all
+%           cars that have travelled more than 80,000 kilometres (or
+%           50,000 miles for older cars), and which have been sold for
+%           less than their purchase price. (Note: the odometers of older
+%           cars use miles instead of kilometres. The attribute miles\_km
+%           in the Car table contains `K' if the odometer reading is in
+%           kilometres or `M' if it is in miles.)  \\
+% 
+%           The syntax diagram for the CREATE VIEW statement has been
+%           supplied with this paper (see page~\pageref{page.syntax}).  \\
+%           \marks{5}  \\
+% 
+%     \item ...  \\
+%   \end{subquestions}
+%   \totalmarks{20}
+%     .
+%     .
+%     .
+% \end{questions}
+% 
+% \end{document}
+% \end{verbatim}
+% \normalsize
+% 
+% \begin{figure}
+% 	\fbox{%
+% 		\begin{minipage}{\textwidth}
+%			\vspace*{1cm}
+% 			\begin{center}
+% 				{\large \textbf{UNIVERSITY OF OTAGO EXAMINATIONS 1998}}
+% 				\\[0.625\baselineskip]
+% 				\fbox{%
+% 				  \framebox[9.9cm]{%
+% 					\begin{tabular}{c}
+% 					  \\
+% 					  {INFORMATION SCIENCE}  \\
+% 					  \\
+% 					  {Paper INFO 212}  \\
+% 					  \\
+% 					  {Database Design and Management Principles}  \\
+% 					  \\
+% 					\end{tabular}%
+% 				  }%
+% 				}
+% 				\mbox{}\\[0.625\baselineskip]
+% 				{\small \textbf{(TIME ALLOWED: 3 HOURS)}}
+% 				\\[0.625\baselineskip]
+% 			\end{center}
+% 			\small
+% 			\hspace*{1cm}\underline{This examination paper comprises 9 pages}
+% 			\\[0.625\baselineskip]
+% 			\hspace*{1cm}\underline{Candidates should answer questions as %
+% 			                        follows:}
+% 			\\[0.625\baselineskip]
+% 			\hspace*{1.625cm}
+% 			\begin{minipage}{8.4cm}
+% 				Answer \underline{ALL} questions.
+% 			\end{minipage}
+% 			\\[0.625\baselineskip]
+% 			\hspace*{1cm}\underline{The following material is provided:}
+% 			\\[0.625\baselineskip]
+% 			\hspace*{1.625cm}
+% 			\begin{minipage}{8.4cm}
+% 				Happy Joe SQL schema	\\
+% 				Oracle Rdb SQL syntax diagrams for:	\\
+% 				\hspace*{0.625cm} CREATE TRIGGER	\\
+% 				\hspace*{0.625cm} CREATE VIEW
+% 			\end{minipage}
+% 			\\[0.625\baselineskip]
+% 			\hspace*{1cm}\underline{Use of calculators:}
+% 			\\[0.625\baselineskip]
+% 			\hspace*{1.625cm}
+% 			\begin{minipage}{8.4cm}
+% 				Electronic calculators may be used in this examination.
+% 				\\[0.625\baselineskip]
+% 				Please note: where the use of calculators is permitted, these
+% 				must be non-pro\-gram\-ma\-ble, hand-held calculators without
+% 				alphabetic key pads.
+% 			\end{minipage}
+% 			\\[0.625\baselineskip]
+% 			\mbox{}\hfill(Subject to inspection by the examiners.)\hspace*{1cm}
+% 			\\[0.625\baselineskip]
+% 			\hspace*{1cm}\underline{Candidates are permitted copies of:}
+% 			\\[0.625\baselineskip]
+% 			\hspace*{1.625cm}
+% 			\begin{minipage}{8.4cm}
+% 			\end{minipage}
+% 			\\[0.625\baselineskip]
+% 			\mbox{}\hfill(Subject to inspection by the examiners.)\hspace*{1cm}
+% 			\\[0.625\baselineskip]
+% 			\hspace*{1cm}\underline{Other Instructions:}
+% 			\\[0.625\baselineskip]
+% 			\hspace*{1.625cm}
+% 			\begin{minipage}{8.4cm}
+% 			\end{minipage}
+% 			\\[0.75cm]
+% 			\mbox{}\hfill\textbf{TURN OVER}\hspace*{1cm}
+% 			\vspace*{1cm}
+% 		\end{minipage}
+% 	}
+% 	\caption{Title page produced by \textsf{ouexam}.}
+% 	\label{Fig.Output1}
+% \end{figure}
+% 
+% \begin{figure}
+% 	\fbox{%
+% 		\begin{minipage}{\textwidth}
+% 			\small
+% 			\vspace*{1cm}
+% 			\hspace*{1cm}\hfill 2 \hfill INFO 211 \hspace*{1cm}
+% 			\\[0.625\baselineskip]
+% 			\hspace*{1cm}\underline{ANSWER ALL QUESTIONS}
+% 			\\[1cm]
+% 			\hspace*{0.8cm}
+% 			\begin{minipage}{10cm}
+% 			\renewcommand{\labelenumiii}{(\theenumiii)}
+% 			\begin{enumerate}
+% 				\item Study the Happy Joe schema supplied with this paper (see
+% 				   pages~6--8) and answer the following questions.
+% 				\begin{enumerate}
+% 					\item Explain fully in English the purpose of the following
+% 					   items in the schema (see page~9):
+% 					\begin{enumerate}
+% 						\item Trigger \textbf{T1}. \hfill (2 marks)
+% 						\item Trigger \textbf{T2}. \hfill (1 mark)
+% 						\item View \textbf{V1}. \hfill (1 mark)
+% 						\item View \textbf{V2}. \hfill (2 marks)
+% 						\item View \textbf{V3}. \hfill (2 marks)
+% 						\item Stored procedure \textbf{P1}. \hfill (3 marks)
+% 						\\[-0.5\baselineskip]
+% 					\end{enumerate}
+% 					
+% 					\item Write SQL code to define a single view that will show
+% 					  all cars that have travelled more than 80,000 kilometres
+% 					  (or 50,000 miles for older cars), and which have been sold
+% 					  for less than their purchase price. (Note: the odometers
+% 					  of older cars use miles instead of kilometres. The
+% 					  attribute miles\_km in the Car table contains `K' if the
+% 					  odometer reading is in kilometres or `M' if it is in
+% 					  miles.)	\\[-0.5\baselineskip]
+% 			
+% 					  The syntax diagram for the CREATE VIEW statement has been
+% 					  supplied with this paper (see page~9).	\\
+% 					  \mbox{}\hfill (5 marks)	\\[-0.5\baselineskip]
+% 				
+% 					\item When a feature code is changed in the Feature table,
+% 					  this change should be automatically cascaded to the
+% 					  Car\_feature table. Write SQL code to define a trigger
+% 					  that does this.	\\[-0.5\baselineskip]
+% 			
+% 					  The syntax diagram for the CREATE TRIGGER statement has
+% 					  been supplied with this paper (see page~9).	\\
+% 					  \mbox{}\hfill (4 marks)	\\[-0.5\baselineskip]
+% 				\end{enumerate}
+% 				\mbox{}\hfill \textbf{[TOTAL 20 MARKS]}
+% 				\\[1cm]
+% 				\mbox{}\hfill\textbf{TURN OVER}
+% 				\vspace*{1cm}
+% 			\end{enumerate}
+% 			\end{minipage}
+% 		\end{minipage}
+% 	}
+% 	\caption{Second page of the examination paper.}
+% 	\label{Fig.Output2}
+% \end{figure}
+% 
+% 
+% \StopEventually{}
+% 
+% \section{The code}
+% 
+% \subsection{Preamble}
+% 
+% This document class is based on the \textsf{article} class and accepts any
+% of the options accepted by \textsf{article}. The only `native' option to
+% \textsf{ouexam} is \textsf{multichoice}; the rest are passed through to
+% \textsf{article}.
+%    \begin{macrocode}
+\NeedsTeXFormat{LaTeX2e}[1998/06/01]
+\ProvidesClass{ouexam}%
+  [1999/04/15 Otago University examination paper class]
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
+\ProcessOptions
+\LoadClass[onecolumn,oneside,a4paper,12pt]{article}
+%    \end{macrocode}
+% 
+% 
+% \subsection{Required packages}
+% 
+% The required packages are \textsf{calc} and \textsf{ifthen}, but these may
+% change.
+%    \begin{macrocode}
+\RequirePackage{calc}
+\RequirePackage{ifthen}
+%    \end{macrocode}
+%
+% 
+% \subsection{Page setup}
+% 
+% \begin{macro}{\oddsidemargin}
+% \begin{macro}{\topmargin}
+% \begin{macro}{\textwidth}
+% \begin{macro}{\textheight}
+% A4 paper is assumed (since this class is intended only for Otago examination
+% papers, this seems a reasonable assumption). The margins are top and bottom
+% 2cm, left and right 2.54cm (1in). This is the only place where the
+% \textsf{calc} package is used, and could easily be rewritten to not use it.
+%    \begin{macrocode}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\topmargin}{-0.54cm}
+\setlength{\textwidth}{15.9cm}
+\setlength{\textheight}{25.7cm-\headheight-\headsep-\footskip}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% 
+% \subsection{Page styles}
+% 
+% \begin{macro}{\ps@plain}
+% The \textsf{plain} page style is the same as that in the \textsf{article}
+% class, except that it produces pages with the page number centered at the
+% top, the paper number in the top right corner and the text `\textbf{TURN
+% OVER}' in the bottom right:
+%    \begin{macrocode}
+\renewcommand{\ps@plain}{%
+    \renewcommand{\@oddhead}{\hfil\textrm{\thepage}\hfil\@pnumber}%
+    \renewcommand{\@evenhead}{\@oddhead}%
+    \renewcommand{\@oddfoot}{\hfil\textbf{TURN OVER}}%
+    \renewcommand{\@evenfoot}{\@oddfoot}%
+  }
+%    \end{macrocode}
+% \end{macro}
+% \textsf{plain} is the default page style.
+%    \begin{macrocode}
+\pagestyle{plain}
+%    \end{macrocode}
+% 
+% \begin{macro}{\ps@lastpage}
+% The \textsf{lastpage} page style is the same as \textsf{plain}, but without
+% the `\textbf{TURN OVER}':
+%    \begin{macrocode}
+\newcommand{\ps@lastpage}{%
+    \renewcommand{\@oddhead}{\hfil\textrm{\thepage}\hfil\@pnumber}%
+    \renewcommand{\@evenhead}{\@oddhead}%
+    \renewcommand{\@oddfoot}{}%
+    \renewcommand{\@evenfoot}{\@oddfoot}%
+  }
+%    \end{macrocode}
+% \end{macro}
+% This page style should be automatically applied to the last page of the
+% document.
+%    \begin{macrocode}
+\AtEndDocument{\thispagestyle{lastpage}}
+%    \end{macrocode}
+% 
+% \begin{macro}{\ps@titlepage}
+% The \textsf{titlepage} page style is the same as \textsf{plain}, but without
+% the header:
+%    \begin{macrocode}
+\newcommand{\ps@titlepage}{%
+    \renewcommand{\@oddhead}{}%
+    \renewcommand{\@evenhead}{\@oddhead}%
+    \renewcommand{\@oddfoot}{\hfil\textbf{TURN OVER}}%
+    \renewcommand{\@evenfoot}{\@oddfoot}%
+  }
+%    \end{macrocode}
+% \end{macro}
+% 
+% \subsection{Environments}
+% 
+% \begin{environment}{questions}
+% \begin{environment}{subquestions}
+% \begin{environment}{subsubquestions}
+% The \textsf{questions}, \textsf{subsubquestions} and
+% \textsf{subsubquestions} environments are just redefinitions of the
+% \textsf{enumerate} environment:
+%    \begin{macrocode}
+\newenvironment{questions}{\begin{enumerate}}{\end{enumerate}}
+\newenvironment{subquestions}{\begin{enumerate}}{\end{enumerate}}
+\newenvironment{subsubquestions}{\begin{enumerate}}{\end{enumerate}}
+%    \end{macrocode}
+% \end{environment}
+% \end{environment}
+% \end{environment}
+% 
+% 
+% \begin{macro}{question}
+% We cannot use the |enumi| counter for the \textsf{questions} environment
+% because |enumi| will get reset every time we start a new \textsf{questions}
+% environment. We therefore need a separate counter:
+%    \begin{macrocode}
+\newcounter{question}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{\labelenumi}
+% \begin{macro}{\p@enumii}
+% \begin{macro}{\p@enumiii}
+% \begin{macro}{\labelenumiii}
+% The University requires that questions be numbered as `1.', `2.', \ldots,
+% sub-questions be numbered as `(a)', `(b)', \ldots, and sub-sub-questions be
+% numbered as `(i)', `(ii)', \ldots. We therefore need to redefine the
+% label-generating macros slightly. In particular, we need to redefine
+% |\labelenumi| so that it uses the new |question| counter.
+%    \begin{macrocode}
+\renewcommand{\labelenumi}{%
+    \refstepcounter{question}
+    \arabic{question}.
+  }
+\renewcommand{\p@enumii}{}
+\renewcommand{\p@enumiii}{(\theenumii)}
+\renewcommand{\labelenumiii}{(\roman{enumiii})}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% 
+% \subsection{Miscellaneous macros}
+% 
+% \begin{macro}{\newsection}
+% The |\newsection| macro generates a new examination section, appropriately
+% numbered. The optional parameter contains instructions for answering the
+% questions in the new section, and defaults to `ANSWER ALL QUESTIONS'.
+%    \begin{macrocode}
+\newcommand{\newsection}[1][ANSWER ALL QUESTIONS.]{%
+%    \end{macrocode}
+% Every section begins on a new page.
+%    \begin{macrocode}
+    \newpage
+%    \end{macrocode}
+% The section title is formatted as `\textbf{\underline{Section A}}', in
+% |\large| size. Note that sections are `numbered' A, B, \ldots.
+%    \begin{macrocode}
+    \refstepcounter{section}
+    {\large\noindent\textbf{\underline{Section~\Alph{section}}}}
+    \\[0.5\baselineskip]
+    #1
+  }
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{\marks}
+% The |\marks| macro specifies the number of marks for a question, and prints
+% it right-justified on the line as `(\emph{n} marks)', where \emph{n} is
+% passed as a parameter to the macro. It uses \textsf{ifthenelse} to determine
+% whether to print `mark' or `marks', based on the value of the parameter.
+%    \begin{macrocode}
+\newcommand{\marks}[1]{%
+    \mbox{}\hfill
+    (#1~\ifthenelse{#1=1}{mark}{marks})
+  }
+%    \end{macrocode}
+% \end{macro}
+% 
+% \begin{macro}{\totalmarks}
+% The |\totalmarks| macro specifies the total marks for a question that
+% comprises several sub-parts, and prints it out right-justified on the line
+% as `\textbf{[TOTAL \emph{n} MARKS]}, where \emph{n} is passed as a parameter
+% to the macro. As with |\marks|, it determines whether to print `MARK' or
+% `MARKS' automatically. A future extension might be to calculate the total
+% number of marks automatically, but not yet!
+%    \begin{macrocode}
+\newcommand{\totalmarks}[1]{%
+    \mbox{}\hfill
+    \textbf{[TOTAL #1~\ifthenelse{#1=1}{MARK}{MARKS}]}
+  }
+%    \end{macrocode}
+% \end{macro}
+% 
+% \subsection{Title page macros}
+% 
+% \begin{macro}{\examyear}
+% \begin{macro}{\@year}
+% The |\examyear| macro specifies the year in which the examination is being
+% held. It redefines the |\@year| macro which is used in |\maketitlepage|:
+%    \begin{macrocode}
+\newcommand{\examyear}{\renewcommand{\@year}}
+%    \end{macrocode}
+% This macro is required:
+%    \begin{macrocode}
+\newcommand{\@year}{%
+    \ClassError{ouexam}{No {\protect\examyear} given}\@eha
+  }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% 
+% \begin{macro}{\department}
+% \begin{macro}{\@dept}
+% The |\department| macro specifies the name of the department, and is required.
+% It redefines the |\@dept| macro which is used in |\maketitlepage|:
+%    \begin{macrocode}
+\newcommand{\department}{\renewcommand{\@dept}}
+\newcommand{\@dept}{%
+    \ClassError{ouexam}{No {\protect\department} given}\@eha
+  }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% 
+% \begin{macro}{\papernumber}
+% \begin{macro}{\@pnumber}
+% The |\papernumber| macro specifies the paper number, and is required.
+% It redefines the |\@pnumber| macro which is used in |\maketitlepage|:
+%    \begin{macrocode}
+\newcommand{\papernumber}{\renewcommand{\@pnumber}}
+\newcommand{\@pnumber}{%
+    \ClassError{ouexam}{No {\protect\papernumber} given}\@eha
+  }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% 
+% \begin{macro}{\papertitle}
+% \begin{macro}{\@ptitle}
+% The |\papertitle| macro specifies the title of the paper, and is required.
+% It redefines the |\@ptitle| macro which is used in |\maketitlepage|:
+%    \begin{macrocode}
+\newcommand{\papertitle}{\renewcommand{\@ptitle}}
+\newcommand{\@ptitle}{%
+    \ClassError{ouexam}{No {\protect\papertitle} given}\@eha
+  }
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% 
+% \begin{macro}{\semester}
+% \begin{macro}{\@semester}
+% The |\semester| macro specifies which semester the examination is for. Legal
+% values for the parameter are `1' or `2'. This macro uses \textsf{ifthenelse}.
+% It redefines the |\@semester| macro which is used in |\maketitlepage|:
+%    \begin{macrocode}
+\newcommand{\semester}[1]{%
+    \ifthenelse{#1=1}%
+      {\renewcommand{\@semester}{Semester One  \\}}%
+      {\renewcommand{\@semester}{Semester Two  \\}}
+  }
+%    \end{macrocode}
+% |\semester| is optional --- if you omit it, |\@semester| remains empty:
+%    \begin{macrocode}
+\newcommand{\@semester}{}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% 
+% \begin{macro}{\timeallowed}
+% \begin{macro}{\@hours}
+% The |\timeallowed| macro specifies the length of the examination in hours.
+% It redefines the |\@hours| macro which is used in |\maketitlepage|:
+%    \begin{macrocode}
+\newcommand{\timeallowed}{\renewcommand{\@hours}}
+%    \end{macrocode}
+% |\timeallowed| is optional --- if you omit it, |\@hours| defaults to three:
+%    \begin{macrocode}
+\newcommand{\@hours}{3}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% 
+% There is no macro to specify the number of pages in the examination because
+% it is done automatically by inserting a |\newlabel| that refers to the last
+% page directly into the |.aux| file:
+%    \begin{macrocode}
+\AtEndDocument{%
+    \immediate\write\@auxout{%
+        \string\newlabel{page.last}{{}{\thepage}}
+    }
+  }
+%    \end{macrocode}
+% This label is then referenced in |\maketitlepage|.
+% 
+% \begin{macro}{\instructions}
+% \begin{macro}{\@instructions}
+% The |\instructions| macro specifies instructions on how candidates should
+% answer questions, and is optional. It redefines the |\@instructions| macro
+% which is used in |\maketitlepage|:
+%    \begin{macrocode}
+\newcommand{\@instructions}{}
+\newcommand{\instructions}[1]{\renewcommand{\@instructions}{#1}}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% 
+% \begin{macro}{\material}
+% \begin{macro}{\@material}
+% The |\material| macro lets specifies any additional material that candidates
+% are provided in addition to the examination paper itself, and is optional.
+% It redefines the |\@material| macro which is used in |\maketitlepage|:
+%    \begin{macrocode}
+\newcommand{\@material}{}
+\newcommand{\material}[1]{\renewcommand{\@material}{#1}}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% 
+% \begin{macro}{\allowcalculators}
+% \begin{macro}{\@calculators}
+% The |\allowcalculators| macro specifies whether or not calculators are
+% allowed in the examination. If |\allowcalculators| is omitted, |\@calculators|
+% defaults to `may not':
+%    \begin{macrocode}
+\newcommand{\@calculators}{may not}
+%    \end{macrocode}
+% Issuing |\allowcalculators| changes the redefines |\@calculators| to `may':
+%    \begin{macrocode}
+\newcommand{\allowcalculators}{\renewcommand{\@calculators}{may}}
+%    \end{macrocode}
+% |\@calculators| is used in |\maketitlepage|.
+% \end{macro}
+% \end{macro}
+% 
+% \begin{macro}{\copiesof}
+% \begin{macro}{\@copiesof}
+% The |\copiesof| macro specifies any material that candidates are allowed to
+% bring into the examination, and is optional. It redefines the |\@copiesof|
+% macro which is used in |\maketitlepage|:
+%    \begin{macrocode}
+\newcommand{\@copiesof}{}
+\newcommand{\copiesof}[1]{\renewcommand{\@copiesof}{#1}}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% 
+% \begin{macro}{\otherinstructions}
+% \begin{macro}{\@otherinst}
+% The |\otherinstructions| macro specifies any other instructions not covered
+% by any of the above, and is optional. It redefines the |\@otherinst|
+% macro which is used in |\maketitlepage|:
+%    \begin{macrocode}
+\newcommand{\@otherinst}{}
+\newcommand{\otherinstructions}[1]{\renewcommand{\@otherinst}{#1}}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\maketitlepage}
+% The |\maketitlepage| macro is the \textsf{ouexam} analogue of |\maketitle|.
+% It takes all of the information provided by the above macros and generates a
+% properly formatted examination title page.
+%    \begin{macrocode}
+\newcommand{\maketitlepage}{%
+  \thispagestyle{titlepage}
+%    \end{macrocode}
+% This header information for the examination is printed centered at the top
+% of the page. The department, paper number and paper title (and the semester
+% information if required) are placed inside a double box.
+%    \begin{macrocode}
+  \begin{center}
+    {\Large \textbf{UNIVERSITY OF OTAGO EXAMINATIONS \@year}}
+    \\[\baselineskip]
+    \fbox{%
+      \framebox[\linewidth]{%
+        \begin{tabular}{c}
+          \\
+          {\large \@dept}  \\
+          \\
+          {\large Paper \@pnumber}  \\
+          \\
+          {\large \@ptitle}  \\
+          \@semester  \\
+        \end{tabular}%
+      }%
+    }
+    \mbox{}\\[\baselineskip]
+%    \end{macrocode}
+% Next, the time allowed for completing the examination:
+%    \begin{macrocode}
+    \textbf{(TIME ALLOWED: \@hours\ HOURS)}
+    \\[\baselineskip]
+  \end{center}
+%    \end{macrocode}
+% The number of pages is automatically calculated, as descibed earlier. All we
+% need to do is reference the |page.last| label that we put into the |.aux|
+% file:
+%    \begin{macrocode}
+  \underline{This examination paper comprises %
+             \pageref{page.last} pages}
+  \\[\baselineskip]
+%    \end{macrocode}
+% Print out the instructions for answering questions:
+%    \begin{macrocode}
+  \underline{Candidates should answer questions as follows:}
+  \\[\baselineskip]
+  \hspace*{1cm}
+  \begin{minipage}{13.5cm}
+    \@instructions
+  \end{minipage}
+  \\[\baselineskip]
+%    \end{macrocode}
+% Print out any provided material:
+%    \begin{macrocode}
+  \underline{The following material is provided:}
+  \\[\baselineskip]
+  \hspace*{1cm}
+  \begin{minipage}{13.5cm}
+    \@material
+  \end{minipage}
+  \\[\baselineskip]
+%    \end{macrocode}
+% Print out use of calculators section:
+%    \begin{macrocode}
+  \underline{Use of calculators:}
+  \\[\baselineskip]
+  \hspace*{1cm}
+  \begin{minipage}{13.5cm}
+    Electronic calculators \@calculators\ be used in this examination.
+    \\[\baselineskip]
+    Please note: where the use of calculators is permitted, these
+    must be non-pro\-gram\-ma\-ble, hand-held calculators without
+    alphabetic key pads.
+  \end{minipage}
+  \\[\baselineskip]
+  \mbox{}\hfill (Subject to inspection by the examiners.)
+  \\[\baselineskip]
+%    \end{macrocode}
+% Print out anything that candidates are allowed to bring:
+%    \begin{macrocode}
+  \underline{Candidates are permitted copies of:}
+  \\[\baselineskip]
+  \hspace*{1cm}
+  \begin{minipage}{13.5cm}
+    \@copiesof
+  \end{minipage}
+  \\[\baselineskip]
+  \mbox{}\hfill (Subject to inspection by the examiners.)
+  \\[\baselineskip]
+%    \end{macrocode}
+% Print out other instructions, and finish.
+%    \begin{macrocode}
+  \underline{Other Instructions:}
+  \\[\baselineskip]
+  \hspace*{1cm}
+  \begin{minipage}{13.5cm}
+    \@otherinst
+  \end{minipage}
+  \\[\baselineskip]
+  \newpage
+}
+%    \end{macrocode}
+% \end{macro}
+% \Finale
