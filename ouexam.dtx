@@ -1,11 +1,11 @@
-\def\ouexamdate{16 April 2004}
-\def\ouexamversion{2.1}
-\def\ouexamshortdate{2004/04/16}
+\def\ouexamdate{21 August 2006}
+\def\ouexamversion{2.1.1}
+\def\ouexamshortdate{2006/08/21}
 % \iffalse meta-comment
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% File: $Id$
-%% Copyright 1999--2004 Nigel Stanger and University of Otago
+%% Copyright 1999--2006 Nigel Stanger and University of Otago
 %% 
 %% You may use this package freely, and also distribute it
 %% provided that you don't change it, make any money off
@@ -36,7 +36,7 @@
 %
 % \fi
 %
-%% \CheckSum{793}
+%% \CheckSum{807}
 %%
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -163,6 +163,8 @@
 % 2cm (headers and footers are inside this margin), left and right 2.54cm (1in).
 % 
 % 
+% \changes{2.1.1}{2006/08/21}{NJS Updated \textsf{lastpage} style to display
+% ``\textbf{END}''.}
 % \subsection{Page styles}
 % 
 % There are three page styles defined in this class:
@@ -174,12 +176,13 @@
 % 	is the default page style.
 % 	
 % 	\item[\textsf{lastpage}] \DescribeMacro{lastpage} This is similar to
-% 	\textsf{plain} but without the ``\textbf{TURN OVER}''. It is used for the
-% 	last page of the examination. You normally will not have to use this
-% 	yourself---the class should take care of it automatically. The class does
-% 	however occasionally seem to get confused, so there may times when you have
-% 	to set the page style of the last page manually. It will be fairly obvious
-% 	when you need to do this---the usual effect is that the last page
+% 	\textsf{plain} but with ``\textbf{END}'' instead of ``\textbf{TURN
+% 	OVER}''. It is used for the last page of the examination. You
+% 	normally will not have to use this yourself---the class should take
+% 	care of it automatically. The class does however occasionally seem
+% 	to get confused, so there may times when you have to set the page
+% 	style of the last page manually. It will be fairly obvious when you
+% 	need to do this---the usual effect is that the last page
 % 	has``\textbf{TURN OVER}'' printed on it when it should not.
 % 	
 % 	\item[\textsf{titlepage}] \DescribeMacro{titlepage} This is similar to
@@ -1030,6 +1033,8 @@
 % and \textsf{markingschedule} class options.}
 % \changes{2.0}{2002/01/15}{NJS Fixed headers so that the page number is always
 % centered.}
+% \changes{2.1.1}{2006/08/21}{NJS Updated \textsf{lastpage} style to display
+% ``\textbf{END}''.}
 %
 % \begin{macro}{\ps@plain}
 % The \textsf{plain} page style is based on that in the \textsf{article} class,
@@ -1068,8 +1073,8 @@
 %    \end{macrocode}
 % 
 % \begin{macro}{\ps@lastpage}
-% The \textsf{lastpage} page style is similar to \textsf{plain}, but without the
-% ``\textbf{TURN OVER}'':
+% The \textsf{lastpage} page style is similar to \textsf{plain}, but with
+% ``\textbf{END}'' instead of ``\textbf{TURN OVER}'':
 %    \begin{macrocode}
 \def\ps@lastpage{%
   \def\@oddhead{%
@@ -1078,7 +1083,7 @@
     \llap{\parbox[b]{\columnwidth}{\raggedleft\@pnumber%
       \ifx\@semester\@empty\else\ (\@semester)\fi\strut}}}%
   \let\@evenhead\@oddhead%
-  \def\@oddfoot{\@markingschedule}%
+  \def\@oddfoot{\@markingschedule\hfill\textbf{END}}%
   \let\@evenfoot\@oddfoot%
 }
 %    \end{macrocode}
