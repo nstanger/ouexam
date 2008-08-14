@@ -4,8 +4,8 @@
 **
 ********************************************************************************
 
-ouexam 2.1 Requirements and Installation
-========================================
+ouexam 2.1.2 Requirements and Installation
+==========================================
 
 You will need Rainer Schopf's verbatim package in order to use ouexam.
 This should come standard with most TeX installations. To build the
