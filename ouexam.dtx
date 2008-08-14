@@ -1,6 +1,6 @@
-\def\ouexamdate{21 August 2006}
-\def\ouexamversion{2.1.1}
-\def\ouexamshortdate{2006/08/21}
+\def\ouexamdate{14 August 2008}
+\def\ouexamversion{2.1.2}
+\def\ouexamshortdate{2008/08/14}
 % \iffalse meta-comment
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -36,7 +36,7 @@
 %
 % \fi
 %
-%% \CheckSum{807}
+%% \CheckSum{817}
 %%
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -1961,7 +1961,14 @@
   \underline{Use of calculators:} \\[\baselineskip]%
   \hspace*{1cm}\begin{minipage}{13.5cm}\@calculators\end{minipage}%
   \\[\baselineskip]%
-  \mbox{}\hfill(Subject to inspection by the examiners.)%
+%    \end{macrocode}
+% \changes{2.1.2}{2008/08/14}{NJS Ensure that the ``subject to inspection''
+% line for calculators is only printed when calculators actually are allowed.}
+% Only print out the ``subject to inspection'' line if calculators actually
+% are allowed (irrelevant otherwise):
+%    \begin{macrocode}
+  \ifx\@calc\@CalcNONE%
+  \else\mbox{}\hfill(Subject to inspection by the examiners.)\fi%
   \\[\baselineskip]%
 %    \end{macrocode}
 % Print out anything that candidates are allowed to bring:
@@ -1970,7 +1977,15 @@
   \\[\baselineskip]%
   \hspace*{1cm}\begin{minipage}{13.5cm}\@copiesof\end{minipage}%
   \\[\baselineskip]%
-  \mbox{}\hfill(Subject to inspection by the examiners.)%
+%    \end{macrocode}
+% \changes{2.1.2}{2008/08/14}{NJS Ensure that the ``subject to inspection''
+% line for other material is only printed when there actually \emph{is}
+% other material.}
+% Only print out the ``subject to inspection'' line if there actually
+% \emph{is} other material (irrelevant otherwise):
+%    \begin{macrocode}
+  \ifx\@copiesof\@empty%
+  \else\mbox{}\hfill(Subject to inspection by the examiners.)\fi%
   \\[\baselineskip]%
 %    \end{macrocode}
 % Print out other instructions, and finish.
