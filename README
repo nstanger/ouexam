@@ -4,18 +4,31 @@
 **
 ********************************************************************************
 
-ouexam v2.1
+ouexam v2.1.2
 =============
 
-ouexam document class v2.1, 10 April 2004
+ouexam document class v2.1.2, 14 August 2008
 
-Copyright 1999--2004 Nigel Stanger and University of Otago
+Copyright 1999--2008 Nigel Stanger and University of Otago
 
 This LaTeX2e document class enables the production of University of Otago
 formatted examination papers. It handles all the fiddly layout requirements
 (such as printing `TURN OVER' at the bottom of every page except the last),
 and also ensures that the actual number of marks for questions in the
 examination add up to the expected number of marks.
+
+
+WHAT'S NEW IN VERSION 2.1.2
+
+* The "subject to inspection" messages that appear in the calculators and
+  permitted material sections of the title page now only appear when
+  calculators are allowed or there actually is additional permitted
+  material, respectively.
+
+
+WHAT'S NEW IN VERSION 2.1.1
+
+* "END" is now printed at the bottom of the last page of the exam.
 
 
 WHAT'S NEW IN VERSION 2.1
