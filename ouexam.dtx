@@ -36,7 +36,7 @@
 %
 % \fi
 %
-%% \CheckSum{817}
+%% \CheckSum{820}
 %%
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -1835,6 +1835,11 @@
 \def\@CalcNONE{none}
 \def\@CalcANY{any}
 \def\@CalcAPPROVED{approved}
+%    \end{macrocode}
+% \changes{2.1.2}{2008/08/14}{NJS Ensured that the correct default is set
+% regardless of whether the calculators macro is called.}
+%    \begin{macrocode}
+\let\@calc\@CalcNONE
 \newcommand{\allowcalculators}[1][any]{%
   \def\@calc{#1}%
   \ifx\@calc\@CalcNONE%
