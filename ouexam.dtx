@@ -1,6 +1,6 @@
 \def\ouexamdate{14 August 2008}
-\def\ouexamversion{2.1.2}
-\def\ouexamshortdate{2008/08/14}
+\def\ouexamversion{2.1.3}
+\def\ouexamshortdate{2009/04/28}
 % \iffalse meta-comment
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -36,7 +36,7 @@
 %
 % \fi
 %
-%% \CheckSum{820}
+%% \CheckSum{819}
 %%
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -1799,16 +1799,28 @@
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
+%
+% \begin{macro}{\@NA}
+% \changes{2.1.3}{2009/04/28}{NJS Added \cs{@NA} macro.}
+% The \cs{@NA} macro enables us to easily assign and test for the default value
+% (``N/A'') for some of the title page macros. (There is certain text that
+% should not be output when particular macros are allowed to default.)
+%    \begin{macrocode}
+\def\@NA{N/A}
+%    \end{macrocode}
+% \end{macro}
 % 
 % \begin{macro}{\material}
 % \begin{macro}{\@material}
+% \changes{2.1.3}{2009/04/28}{NJS Changed default to ``N/A'' for \cs{material}.}
 % The \cs{material} macro lets specifies any additional material that candidates
 % are provided in addition to the examination paper itself, and is optional.
 % It redefines the \cs{@material} macro that is used in \cs{@maketitlepage}:
 %    \begin{macrocode}
-\let\@material\@empty
+\let\@material\@NA
 \newcommand{\material}[1]{\def\@material{#1}}
 %    \end{macrocode}
+% If you omit it, it defaults to ``N/A''.
 % \end{macro}
 % \end{macro}
 % 
@@ -1870,11 +1882,12 @@
 % 
 % \begin{macro}{\copiesof}
 % \begin{macro}{\@copiesof}
+% \changes{2.1.3}{2009/04/28}{NJS Changed default to ``N/A'' for \cs{copiesof}.}
 % The \cs{copiesof} macro specifies any material that candidates are allowed to
 % bring into the examination, and is optional. It redefines the \cs{@copiesof}
 % macro that is used in \cs{@maketitlepage}:
 %    \begin{macrocode}
-\let\@copiesof\@empty
+\let\@copiesof\@NA
 \newcommand{\copiesof}[1]{\def\@copiesof{#1}}
 %    \end{macrocode}
 % \end{macro}
@@ -1882,11 +1895,13 @@
 % 
 % \begin{macro}{\otherinstructions}
 % \begin{macro}{\@otherinst}
+% \changes{2.1.3}{2009/04/28}{NJS Changed default to ``N/A'' for
+% \cs{otherinstructions}.}
 % The \cs{otherinstructions} macro specifies any other instructions not covered
 % by any of the above, and is optional. It redefines the \cs{@otherinst}
 % macro that is used in \cs{@maketitlepage}:
 %    \begin{macrocode}
-\let\@otherinst\@empty
+\let\@otherinst\@NA
 \newcommand{\otherinstructions}[1]{\def\@otherinst{#1}}
 %    \end{macrocode}
 % \end{macro}
@@ -1967,14 +1982,16 @@
   \hspace*{1cm}\begin{minipage}{13.5cm}\@calculators\end{minipage}%
   \\[\baselineskip]%
 %    \end{macrocode}
+% \changes{2.1.3}{2009/04/28}{NJS Fixed vertical spacing.}
 % \changes{2.1.2}{2008/08/14}{NJS Ensure that the ``subject to inspection''
 % line for calculators is only printed when calculators actually are allowed.}
 % Only print out the ``subject to inspection'' line if calculators actually
 % are allowed (irrelevant otherwise):
 %    \begin{macrocode}
   \ifx\@calc\@CalcNONE%
-  \else\mbox{}\hfill(Subject to inspection by the examiners.)\fi%
-  \\[\baselineskip]%
+  \else\mbox{}\hfill(Subject to inspection by the examiners.)%
+    \\[\baselineskip]%
+  \fi%
 %    \end{macrocode}
 % Print out anything that candidates are allowed to bring:
 %    \begin{macrocode}
@@ -1983,22 +2000,24 @@
   \hspace*{1cm}\begin{minipage}{13.5cm}\@copiesof\end{minipage}%
   \\[\baselineskip]%
 %    \end{macrocode}
+% \changes{2.1.3}{2009/04/28}{NJS Fixed vertical spacing.}
 % \changes{2.1.2}{2008/08/14}{NJS Ensure that the ``subject to inspection''
 % line for other material is only printed when there actually \emph{is}
 % other material.}
 % Only print out the ``subject to inspection'' line if there actually
 % \emph{is} other material (irrelevant otherwise):
 %    \begin{macrocode}
-  \ifx\@copiesof\@empty%
-  \else\mbox{}\hfill(Subject to inspection by the examiners.)\fi%
-  \\[\baselineskip]%
+  \ifx\@copiesof\@NA%
+  \else\mbox{}\hfill(Subject to inspection by the examiners.)%
+    \\[\baselineskip]%
+  \fi%
 %    \end{macrocode}
+% \changes{2.1.3}{2009/04/28}{NJS Removed superfluous blank line.}
 % Print out other instructions, and finish.
 %    \begin{macrocode}
   \underline{Other Instructions:}%
   \\[\baselineskip]%
   \hspace*{1cm}\begin{minipage}{13.5cm}\@otherinst\end{minipage}%
-  \\[\baselineskip]%
  
   \newpage%
 }
