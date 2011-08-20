@@ -75,17 +75,17 @@ example2.dvi: example2.tex example.tex ouexam.cls
 
 
 # Install files in the appropriate locations in the texmf tree rooted at
-# $(TEXMF_INSTALL). Either define this as a shell variable or pass it as
-# command line argument, e.g., make install TEXMF_INSTALL=/usr/local/texmf.
+# $(TEXMFHOME). Either define this as a shell variable or pass it as
+# command line argument, e.g., make install TEXMFHOME=/usr/local/texmf.
 install: class doc example
-	mkdir -p $(TEXMF_INSTALL)/tex/latex/ouexam
-	cp ouexam.cls $(TEXMF_INSTALL)/tex/latex/ouexam
-	mkdir -p $(TEXMF_INSTALL)/doc/latex/ouexam/example
+	mkdir -p $(TEXMFHOME)/tex/latex/ouexam
+	cp ouexam.cls $(TEXMFHOME)/tex/latex/ouexam
+	mkdir -p $(TEXMFHOME)/doc/latex/ouexam/example
 	cp eg*.eps ouexam.pdf ouexam.dvi ouexam.dtx ouexam.ins \
 		FAQ INSTALL MANIFEST README TODO \
-		$(TEXMF_INSTALL)/doc/latex/ouexam
+		$(TEXMFHOME)/doc/latex/ouexam
 	cp Create*.eps example*.tex example*.dvi example*.pdf lstlang0.sty \
-		$(TEXMF_INSTALL)/doc/latex/ouexam/example
+		$(TEXMFHOME)/doc/latex/ouexam/example
 	texhash
 
 
