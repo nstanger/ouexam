@@ -57,10 +57,10 @@ install: class doc example
 	mkdir -p $(TEXMFHOME)/tex/latex/ouexam
 	cp ouexam.cls $(TEXMFHOME)/tex/latex/ouexam
 	mkdir -p $(TEXMFHOME)/doc/latex/ouexam/example
-	cp eg*.eps ouexam.pdf ouexam.dtx ouexam.ins \
+	cp eg*.pdf ouexam.pdf ouexam.dtx ouexam.ins \
 		FAQ INSTALL MANIFEST README TODO \
 		$(TEXMFHOME)/doc/latex/ouexam
-	cp Create*.eps example*.tex example*.pdf lstlang0.sty \
+	cp Create*.pdf example*.tex example*.pdf lstlang0.sty \
 		$(TEXMFHOME)/doc/latex/ouexam/example
 	texhash
 
