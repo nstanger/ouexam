@@ -4,13 +4,13 @@
 **
 ********************************************************************************
 
-ouexam 2.1.2 Requirements and Installation
+ouexam 2.3 Requirements and Installation
 ==========================================
 
-You will need Rainer Schopf's verbatim package in order to use ouexam.
-This should come standard with most TeX installations. To build the
-documentation and example files, you will need at least version 1.1 of
-the listings package, and GhostScript.
+You will need the verbatim, fontenc, textcomp and lmodern packages in
+order to use ouexam. These should come standard with most TeX
+installations. To build the documentation and example files, you will
+need at least version 1.1 of the listings package, and pdfjam.
 
 To install the easy way:
 
@@ -31,31 +31,25 @@ distribution directory, and do the following (now you know why there's a
 Makefile :)
 
 latex ouexam.ins
-latex example1.tex
-latex example1.tex
-dvips -pp 1 -E -o eg1-1.eps example1.dvi
-dvips -pp 2 -E -o eg1-2.eps example1.dvi
-dvips -pp 3 -E -o eg1-3.eps example1.dvi
-latex example2.tex
-latex example2.tex
-dvips -pp 2 -E -o eg2-2.eps example2.dvi
-dvips -pp 3 -E -o eg2-3.eps example2.dvi
-dvips -pp 4 -E -o eg2-4.eps example2.dvi
-dvips -pp 5 -E -o eg2-5.eps example2.dvi
-latex ouexam.dtx
-latex ouexam.dtx
-latex ouexam.dtx
-dvips -o ouexam.ps ouexam.dvi
-ps2pdf ouexam.ps
-dvips -o example1.ps example1.dvi
-ps2pdf example1.ps
-dvips -o example2.ps example2.dvi
-ps2pdf example2.ps
+pdflatex example1.tex
+pdflatex example1.tex
+pdfjam --outfile eg1-1.pdf example1.pdf 1
+pdfjam --outfile eg1-2.pdf example1.pdf 2
+pdfjam --outfile eg1-3.pdf example1.pdf 3
+pdflatex example2.tex
+pdflatex example2.tex
+pdfjam --outfile eg2-1.pdf example2.pdf 1
+pdfjam --outfile eg2-2.pdf example2.pdf 2
+pdfjam --outfile eg2-3.pdf example2.pdf 3
+pdfjam --outfile eg2-4.pdf example2.pdf 4
+pdflatex ouexam.dtx
+pdflatex ouexam.dtx
+pdflatex ouexam.dtx
 
 Put ouexam.cls in /path/to/texmf/tex/latex/ouexam.
 
-Put eg*.eps, ouexam.pdf, ouexam.dvi, ouexam.dtx, ouexam.ins, FAQ,
+Put eg*.pdf, ouexam.pdf, ouexam.dtx, ouexam.ins, FAQ,
 INSTALL, MANIFEST, README and TODO in /path/to/texmf/doc/latex/ouexam.
 
-Put Create*.eps, example*.tex, example*.dvi, example*.pdf and
+Put Create*.pdf, example*.tex, example*.pdf and
 lstlang0.sty in /path/to/texmf/doc/latex/ouexam/example.

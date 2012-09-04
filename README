@@ -4,18 +4,40 @@
 **
 ********************************************************************************
 
-ouexam v2.1.2
+ouexam v2.3
 =============
 
-ouexam document class v2.1.2, 14 August 2008
+ouexam document class v2.3, 4 September 2012
 
-Copyright 1999--2008 Nigel Stanger and University of Otago
+Copyright 1999--2012 Nigel Stanger and University of Otago
 
 This LaTeX2e document class enables the production of University of Otago
 formatted examination papers. It handles all the fiddly layout requirements
 (such as printing `TURN OVER' at the bottom of every page except the last),
 and also ensures that the actual number of marks for questions in the
 examination add up to the expected number of marks.
+
+
+WHAT'S NEW IN VERSION 2.3
+
+* Updated exam paper formatting to conform to latest University standards.
+
+* Added "times" class option.
+
+* ouexam now requires the fontenc, textcomp and lmodern packages.
+
+* Generating the class documentation now required PDFLaTeX.
+
+
+WHAT'S NEW IN VERSION 2.2
+
+* Added time allocation macros.
+
+
+WHAT'S NEW IN VERSION 2.1.3
+
+* Changed the defaults for \material, \copiesof and \otherinstructions to
+  "N/A".
 
 
 WHAT'S NEW IN VERSION 2.1.2
@@ -77,22 +99,17 @@ INSTALLING (UNIX OR SIMILAR)
 
 A makefile is provided:
 
-	* `make' will produce both ouexam.cls and ouexam.dvi (see below).
+	* "make" will produce both ouexam.cls and ouexam.pdf.
 
-	* `make class' will produce ouexam.cls. Place this file in a directory
+	* "make class" will produce ouexam.cls. Place this file in a directory
 	  somewhere in your TeX search path (e.g., if you use teTeX, put it in
 	  texmf/tex/latex/ouexam or somewhere similar).
 
-	* `make doc' will produce ouexam.dvi.
+	* "make doc" will produce ouexam.pdf.
 	
-	* If you have GhostScript and the dvipdf command, `make pdfdoc' will
-	  produce PDF documentation.
-
 
 INSTALLING (EVERYTHING ELSE)
 
 Run ouexam.ins through LaTeX to produce ouexam.cls. Place this file in a
 directory somewhere in your LaTeX search path. Then run ouexam.dtx through
-LaTeX _three_ (yes, three) times to produce the documentation (ouexam.dvi).
-PDF documentation can be produced from the DVI by whatever means you
-normally use to do so.
+PDFLaTeX _three_ (yes, three) times to produce the documentation.
