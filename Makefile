@@ -13,8 +13,8 @@ SHELL=/bin/sh
 
 
 # files
-EXAMPLE1_IMAGES = eg1-1.eps eg1-2.eps eg1-3.eps
-EXAMPLE2_IMAGES = eg2-2.eps eg2-3.eps eg2-4.eps eg2-5.eps
+EXAMPLE1_IMAGES = eg1-1.pdf eg1-2.pdf eg1-3.pdf
+EXAMPLE2_IMAGES = eg2-2.pdf eg2-3.pdf eg2-4.pdf eg2-5.pdf
 
 
 # Build everything.
@@ -28,50 +28,26 @@ ouexam.cls: ouexam.dtx
 
 
 # Build the documentation only.
-# Note: requires ps2pdf (GhostScript) to build the PDF version and
-# ps2epsi to build the example images.
 doc: ouexam.pdf
 
-ouexam.pdf:	ouexam.ps
-	ps2pdf $<
+ouexam.pdf:	ouexam.dtx $(EXAMPLE1_IMAGES) $(EXAMPLE2_IMAGES)
+	pdflatex $<
+	pdflatex $<
+	pdflatex $<
 
-ouexam.ps: ouexam.dvi
-	dvips -o $@ $<
+$(EXAMPLE1_IMAGES): example1.pdf
+	pdfjam --outfile $@ $< `echo $@ | cut -c 5`
 
-ouexam.dvi:	ouexam.dtx $(EXAMPLE1_IMAGES) $(EXAMPLE2_IMAGES)
-	latex $<
-	latex $<
-	latex $<
-
-$(EXAMPLE1_IMAGES): example1.dvi
-	dvips -pp `echo $@ | cut -c 5` -E -o $@ $<
-
-$(EXAMPLE2_IMAGES): example2.dvi
-	dvips -pp `echo $@ | cut -c 5` -E -o $@ $<
+$(EXAMPLE2_IMAGES): example2.pdf
+	pdfjam --outfile $@ $< `echo $@ | cut -c 5`
 
 
 # Build the example only.
 example: example1.pdf example2.pdf
 
-example1.pdf: example1.ps
-	ps2pdf $<
-
-example1.ps: example1.dvi
-	dvips -o $@ $<
-
-example1.dvi: example1.tex example.tex ouexam.cls
-	latex $<
-	latex $<
-
-example2.pdf: example2.ps
-	ps2pdf $<
-
-example2.ps: example2.dvi
-	dvips -o $@ $<
-
-example2.dvi: example2.tex example.tex ouexam.cls
-	latex $<
-	latex $<
+example%.pdf: example%.tex example.tex ouexam.cls
+	pdflatex $<
+	pdflatex $<
 
 
 # Install files in the appropriate locations in the texmf tree rooted at
@@ -81,10 +57,10 @@ install: class doc example
 	mkdir -p $(TEXMFHOME)/tex/latex/ouexam
 	cp ouexam.cls $(TEXMFHOME)/tex/latex/ouexam
 	mkdir -p $(TEXMFHOME)/doc/latex/ouexam/example
-	cp eg*.eps ouexam.pdf ouexam.dvi ouexam.dtx ouexam.ins \
+	cp eg*.eps ouexam.pdf ouexam.dtx ouexam.ins \
 		FAQ INSTALL MANIFEST README TODO \
 		$(TEXMFHOME)/doc/latex/ouexam
-	cp Create*.eps example*.tex example*.dvi example*.pdf lstlang0.sty \
+	cp Create*.eps example*.tex example*.pdf lstlang0.sty \
 		$(TEXMFHOME)/doc/latex/ouexam/example
 	texhash
 
@@ -96,4 +72,4 @@ tidy:
 
 # Clean up: remove everything except the original source.
 clean: tidy
-	rm -f *.dvi *.pdf *.cls
+	rm -f ouexam.pdf eg*.pdf example*.pdf *.cls

@@ -1,6 +1,6 @@
-\def\ouexamdate{26 April 2010}
-\def\ouexamversion{2.2}
-\def\ouexamshortdate{2010/04/26}
+\def\ouexamdate{4 September 2012}
+\def\ouexamversion{2.3}
+\def\ouexamshortdate{2012/09/04}
 % \iffalse meta-comment
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -13,7 +13,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %<*driver>
-\documentclass{ltxdoc}
+\documentclass[a4paper]{ltxdoc}
 \usepackage{doc}
 \DisableCrossrefs
 \CodelineNumbered
@@ -21,7 +21,7 @@
 
 \usepackage{graphicx}
 % change hyperref options as required
-\usepackage[dvips,colorlinks,pdfpagemode=None,a4paper,urlcolor=blue,
+\usepackage[colorlinks,pdfpagemode=None,urlcolor=blue,
             linkcolor=red,pdfauthor={Nigel Stanger}]{hyperref}
 
 \title{The \textsf{ouexam} document class, v\ouexamversion}
@@ -36,7 +36,7 @@
 %
 % \fi
 %
-%% \CheckSum{825}
+%% \CheckSum{889}
 %%
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -77,15 +77,16 @@
 % \section{Overview}
 % 
 % \changes{2.1}{2004/04/10}{NJS Added requirements and installation instructions.}
+% \changes{2.3}{2012/09/04}{NJS Dropped vanilla \LaTeX\ for building docs.}
 % \subsection{Requirements and installation}
 % 
-% The \textsf{ouexam} package requires only one other package: Rainer
-% Sch\"{o}pf's \textsf{verbatim} package, which should come standard with
-% most \TeX\ installations. To build the documentation and example files,
-% you will need at least version 1.1 of the \textsf{listings} package, and
-% GhostScript.
+% The \textsf{ouexam} package requires the \textsf{verbatim},
+% \textsf{fontenc}, \textsf{lmodern} and \textsf{textcomp} packages, all
+% of which should come standard with most \TeX\ installations. To build
+% the documentation and example files, you will need at least version 1.1
+% of the \textsf{listings} package, and the \textsf{pdfjam} tool.
 % 
-% Installing is relatively simple:
+% Installation is relatively simple:
 % \begin{enumerate}
 % 
 % 	\item Unpack the distribution archive and \texttt{cd} to the
@@ -107,7 +108,7 @@
 % \changes{2.0}{2002/01/11}{NJS Added note on backwards compatibility.}
 % \subsection{Important note on backwards compatibility}
 % 
-% Version 2.0 of \textsf{ouexam} introduces several major changes from earlier
+% Version 2.0 of \textsf{ouexam} introduced several major changes from earlier
 % versions. Consequently, documents created using an earlier version of
 % \textsf{ouexam} are \emph{incompatible} with version 2.0 or later. Versions 2.0
 % and greater of \textsf{ouexam} will detect attempts to process version 1.x
@@ -122,16 +123,17 @@
 % 
 % \subsection{Class options}
 %
-% This document class is based on the \textsf{article} class and accepts any of
-% the options accepted by \textsf{article}. The default options are
-% \textsf{onecolumn}, \textsf{oneside}, \textsf{a4paper} and \textsf{12pt}.
-% Normally the only one you might want to change is the last one.
-% In addition, \textsf{ouexam} accepts the following ``native'' class options:
+% This document class is based on the \textsf{article} class and accepts
+% most of the options accepted by \textsf{article} (the \textsf{twoside},
+% \textsf{10pt} and \textsf{11pt} options are ignored). The standard
+% options are \textsf{onecolumn}, \textsf{oneside}, \textsf{a4paper} and
+% \textsf{12pt}. In addition, \textsf{ouexam} accepts the following
+% ``native'' class options:
 % \begin{description}
 % 	\item[\textsf{draft}] \DescribeMacro{draft} This option has the usual
 % 	effects that you would expect for \textsf{draft} mode in the
 % 	\textsf{article} class, plus \fbox{DRAFT} is printed in
-% 	the header of every page. Note that if you use the \textsf{graphicx}
+% 	the footer of every page. Note that if you use the \textsf{graphicx}
 % 	package and turn on the \textsf{draft} option in \textsf{ouexam}, all
 % 	included graphics will be drawn in draft mode unless you specify the
 % 	|draft=false| option to \cs{includegraphics}.
@@ -145,15 +147,23 @@
 % 	when it comes time to print a marking schedule for the examination,
 % 	including the \textsf{markingschedule} class option in the
 % 	\cs{usepackage} command will cause \textsf{ouexam} to print the hidden
-% 	content. It will also print \fbox{MARKING SCHEDULE} in the footer of
+% 	content. It will also print \fbox{MARKING SCHEDULE} in the header of
 % 	every page.
+% 	
+% 	\item[\textsf{times}] \DescribeMacro{times}
+% 	The Examinations Office prefers all examination papers to be set in 12pt
+% 	Palatino. However, if this is not available, they will accept 13pt Times
+% 	instead. The \textsf{times} class option enables the latter, but should
+% 	only be used if Palatino is not available.
 % \end{description}
 % 
 % 
 % \subsection{Required packages}
 % 
 % This class requires the \textsf{verbatim} package in order to implement
-% the marking schedule functionality.
+% the marking schedule functionality. It also expects modern \LaTeX\ font
+% handling capabilities, and therefore requires the \textsf{fontenc},
+% \textsf{textcomp} and \textsf{lmodern} classes.
 % 
 % 
 % \subsection{Page margins}
@@ -171,9 +181,9 @@
 % \begin{description}
 % 	\item[\textsf{plain}] \DescribeMacro{plain} This is a slight modification
 % 	of the \textsf{plain} page style from \textsf{article}. It produces pages
-% 	that have the page number centered at the top, the paper number in the top
-% 	right corner and the text ``\textbf{TURN OVER}'' in the bottom right. This
-% 	is the default page style.
+% 	that have the page number centered at the bottom, the paper number in the
+% 	top right corner and the text ``\textbf{TURN OVER}'' in the bottom right.
+% 	This is the default page style.
 % 	
 % 	\item[\textsf{lastpage}] \DescribeMacro{lastpage} This is similar to
 % 	\textsf{plain} but with ``\textbf{END}'' instead of ``\textbf{TURN
@@ -183,7 +193,7 @@
 % 	to get confused, so there may times when you have to set the page
 % 	style of the last page manually. It will be fairly obvious when you
 % 	need to do this---the usual effect is that the last page
-% 	has``\textbf{TURN OVER}'' printed on it when it should not.
+% 	has ``\textbf{TURN OVER}'' printed on it when it should not.
 % 	
 % 	\item[\textsf{titlepage}] \DescribeMacro{titlepage} This is similar to
 % 	\textsf{plain} but without the page header, and is used for the title page
@@ -216,16 +226,13 @@
 % name of the department that produced the examination paper, for example,
 % |\department{Information| |Science}|. This macro is mandatory.
 % 
-% The \DescribeMacro{\papernumber} \cs{papernumber} macro lets you specify the
-% paper number that the examination is for, for example,
-% |\papernumber{COMP 101}|. This macro is mandatory. \textbf{Warning:} Do not make
-% the paper number string too long or it will overlap the page number. Be
-% particularly careful when you specify semester information using \cs{semester},
-% because this is appended to the paper number in the page header. For example,
-% if you specify |\papernumber{COMP 101}| and |\semester{2}|, the header will
-% contain ``COMP 101 (Semester Two)'' rather than just ``COMP 101''. The worst
-% case you will need to consider in such situations is a special examination,
-% which inserts the text ``(Special Examination)'' after the paper number.
+% The \DescribeMacro{\papernumber} \cs{papernumber} macro lets you specify
+% the paper number that the examination is for, for example,
+% |\papernumber{COMP 101}|. This macro is mandatory. Note that when you
+% specify semester information using \cs{semester}, this is appended to
+% the paper number in the page header. For example, if you specify
+% |\papernumber{COMP 101}| and |\semester{2}|, the header will contain
+% ``COMP 101 (Semester Two)'' rather than just ``COMP 101''.
 % 
 % The \DescribeMacro{\papertitle} \cs{papertitle} macro lets you specify the
 % title of the paper, for example, 
@@ -260,13 +267,13 @@
 % this argument must be one of the following values:
 % \begin{description}
 % 
-% 	\item[none:] a sentence is inserted noting that no calculators are
+% 	\item[\textsf{none}] A sentence is inserted noting that no calculators are
 % 	permitted.
 % 
-% 	\item[approved:] a sentence is inserted noting that only approved
+% 	\item[\textsf{approved}] A sentence is inserted noting that only approved
 % 	calculators are permitted.
 % 
-% 	\item[any (default):] a sentence is inserted noting that any
+% 	\item[\textsf{any}] (default) A sentence is inserted noting that any
 % 	calculator that does not have a communication capability is
 % 	permitted.
 % 
@@ -320,8 +327,8 @@
 % 	of the \emph{actual} number of marks encountered within a section, which is
 % 	compared with the value of this argument when the environment is closed.
 % 	An error is raised if the values are not equal. The running total is also
-% 	typeset right-justified in the form ``\textbf{[SECTION A TOTAL 20 MARKS]}''
-% 	as an additional verification.
+% 	typeset right-justified at the end of the section in the form
+% 	``\textbf{[SECTION A TOTAL 20 MARKS]}'' as an additional verification.
 % 	
 % 	\item Instructions for answering questions in this section (such as
 % 	``Answer any TWO questions.''). If you leave this argument empty it
@@ -443,9 +450,9 @@
 % marking information within questions. By default this information is not
 % printed (for obvious reasons!), but when it comes time to print a marking
 % schedule for the examination, use the \textsf{markingschedule} class option
-% to print the hidden content. The marking information will be printed in
+% to print the hidden content. The marking information will be set in
 % \emph{italics} to differentiate it from the main body of the examination,
-% and \fbox{MARKING SCHEDULE} will also be printed in the footer of every
+% and \fbox{MARKING SCHEDULE} will also be printed in the header of every
 % page.
 % 
 % \changes{2.1}{2004/04/10}{NJS Added driver file tip.}
@@ -858,12 +865,12 @@
 % \normalsize
 % 
 % \begin{figure}
-% 	\fbox{\includegraphics[bb=0 -57 596 785,scale=0.28]{eg1-1}}
+% 	\fbox{\includegraphics[scale=0.28]{eg1-1}}
 % 	\hfill
-% 	\fbox{\includegraphics[bb=0 -57 596 785,scale=0.28]{eg1-2}}
+% 	\fbox{\includegraphics[scale=0.28]{eg1-2}}
 % 	
 % 	\begin{center}
-% 		\fbox{\includegraphics[bb=0 -57 596 785,scale=0.28]{eg1-3}}
+% 		\fbox{\includegraphics[scale=0.28]{eg1-3}}
 % 	\end{center}
 % 
 % 	\caption{Output produced by \textsf{ouexam}.}
@@ -871,15 +878,15 @@
 % \end{figure}
 % 
 % \begin{figure}
-% 	\fbox{\includegraphics[bb=0 -57 596 785,scale=0.28]{eg2-2}}
+% 	\fbox{\includegraphics[scale=0.28]{eg2-2}}
 % 	\hfill
-% 	\fbox{\includegraphics[bb=0 -57 596 785,scale=0.28]{eg2-3}}
+% 	\fbox{\includegraphics[scale=0.28]{eg2-3}}
 % 
 % 	\bigskip
 % 	
-% 	\fbox{\includegraphics[bb=0 -57 596 785,scale=0.28]{eg2-4}}
+% 	\fbox{\includegraphics[scale=0.28]{eg2-4}}
 % 	\hfill
-% 	\fbox{\includegraphics[bb=0 -57 596 785,scale=0.28]{eg2-5}}
+% 	\fbox{\includegraphics[scale=0.28]{eg2-5}}
 % 
 % 	\caption{Output produced by \textsf{ouexam} when
 % 			\textsf{markingschedule} is used.}
@@ -946,6 +953,20 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{10pt}
+% \begin{macro}{11pt}
+% \changes{2.3}{1999/04/20}{NJS Turned off \textsf{10pt} and \textsf{11pt}
+% options.}
+% The Examinations Office specifies a minimum of 12pt for the font size, so the
+% \textsf{10pt} and \textsf{11pt} options are not used in this class.
+%
+%    \begin{macrocode}
+\DeclareOption{10pt}{\OptionNotUsed}
+\DeclareOption{11pt}{\OptionNotUsed}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
 % \begin{macro}{draft}
 % \changes{2.0}{2001/05/15}{NJS New \textsf{draft} class option.}
 % \begin{macro}{\if@draft}
@@ -954,7 +975,7 @@
 % in draft mode (default off). The \cs{if@draft} switch is used to determine
 % whether this is in effect (default false). Draft mode has the usual effects
 % that you would expect for draft mode in the \textsf{article} class, plus
-% \fbox{DRAFT} is printed in the header of every page.
+% \fbox{DRAFT} is printed in the footer of every page.
 %
 %    \begin{macrocode}
 \newif\if@draft \@draftfalse
@@ -986,6 +1007,20 @@
 % \end{macro}
 % \end{macro}
 % 
+% \begin{macro}{times}
+% \changes{2.3}{2012/09/03}{NJS New \textsf{times} class option.}
+% \begin{macro}{\if@times}
+% \changes{2.3}{2012/09/03}{NJS New switch for \textsf{times}.}
+% The \textsf{times} option formats the exam paper using 13pt Times. If this
+% option is not specified, then the exam paper is formatted using 12pt Palatino.
+%
+%    \begin{macrocode}
+\newif\if@times \@timesfalse
+\DeclareOption{times}{\@timestrue}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% 
 % All other options are passed directly to the \textsf{article} class:
 %
 %    \begin{macrocode}
@@ -1007,13 +1042,56 @@
 % 
 % \changes{2.0}{2001/05/08}{NJS Removed requirement for \textsf{calc} and
 % \textsf{ifthen} packages.}
-% The only required package is the \textsf{verbatim} package, which is used
-% to implement the \textsf{marking} environment:
+% The \textsf{verbatim} package, is used to implement the \textsf{marking}
+% environment:
 %
 %    \begin{macrocode}
 \RequirePackage{verbatim}
 %    \end{macrocode}
 %
+% \changes{2.3}{2012/09/04}{NJS Added requirement for \textsf{fontenc},
+% \textsf{textcomp} and \textsf{lmodern} packages.}
+%
+% Running under vanilla OT1 encoding often causes all sorts of font substitution
+% warnings, so the \textsf{fontenc} (with \textsf{T1} option), \textsf{textcomp}
+% and \textsf{lmodern} packages are used to bring \textsf{ouexam}'s font
+% handling up to more modern standards.
+%
+%    \begin{macrocode}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{textcomp}
+\RequirePackage{lmodern}
+%    \end{macrocode}
+% 
+%
+% \changes{2.3}{2012/09/04}{NJS Added font setup for \textsf{times} class
+% option.}
+% \subsection{Font setup}
+% 
+% The Examinations Office allows for two standard font styles: 12pt Palatino
+% (preferred) or 13pt Times New Roman. The former is the default; the latter is
+% only used if the \textsf{times} class option is used, and we need to
+% explicitly define all the standard sizes. The following is extrapolated from
+% the definitions in the \textsf{article} class and seems about right:
+%
+%    \begin{macrocode}
+\if@times%
+  \usepackage{mathptmx}%
+  \renewcommand{\normalsize}{\fontsize{13}{15.7}\selectfont}%
+  \renewcommand{\tiny}{\fontsize{\@viipt}{\@viiipt}\selectfont}%
+  \renewcommand{\scriptsize}{\fontsize{\@ixpt}{11}\selectfont}%
+  \renewcommand{\footnotesize}{\fontsize{\@xpt}{\@xiipt}\selectfont}%
+  \renewcommand{\small}{\fontsize{\@xipt}{13.6}\selectfont}%
+  \renewcommand{\large}{\fontsize{\@xivpt}{18}\selectfont}%
+  \renewcommand{\Large}{\fontsize{\@xviipt}{22}\selectfont}%
+  \renewcommand{\LARGE}{\fontsize{\@xxpt}{25}\selectfont}%
+  \renewcommand{\huge}{\fontsize{\@xxvpt}{30}\selectfont}%
+  \let\Huge=\huge%
+\else%
+  \usepackage{mathpazo}%
+\fi%
+%    \end{macrocode}
+% 
 % 
 % \subsection{Page setup}
 % 
@@ -1048,38 +1126,46 @@
 % centered.}
 % \changes{2.1.1}{2006/08/21}{NJS Updated \textsf{lastpage} style to display
 % ``\textbf{END}''.}
+% \changes{2.3}{2012/09/03}{NJS Rearranged headers and footers to conform to
+% the latest formatting requirements. Swapped \fbox{MARKING SCHEDULE} and 
+% \fbox{DRAFT} between header and footer so that the page number doesn't
+% get overprinted.}
 %
 % \begin{macro}{\ps@plain}
 % The \textsf{plain} page style is based on that in the \textsf{article} class,
-% and produces pages with the page number centered at the top, the paper number
-% in the top right corner and the text ``\textbf{TURN OVER}'' in the bottom
-% right. If semester information is specified, this is included in parentheses
-% after the paper code, for example, ``COMP 101 (Semester Two)''.
+% and produces pages with the page number centered at the bottom, the paper
+% number in the top right corner and the text ``\textbf{TURN OVER}'' in the
+% bottom right. If semester information is specified, this is included in
+% parentheses after the paper code, for example, ``COMP 101 (Semester Two)''.
+% \fbox{MARKING SCHEDULE} is printed at top left if the \textsf{markingschedule}
+% class option is used.
 %    \begin{macrocode}
 \def\ps@plain{%
-  \def\@oddhead{%
+  \def\@oddhead{\@markingschedule\hfill\@pnumber%
+      \ifx\@semester\@empty\else\ (\@semester)\fi}%
+  \let\@evenhead\@oddhead%
+  \def\@oddfoot{%
 %    \end{macrocode}
+%
 % Note that we have to get a bit clever to ensure that the page number is
-% properly centered in the page header. The naive solution is just to use
+% properly centered in the page footer. The naive solution is just to use
 % \cs{hfill}s, but this will cause the page number to shift around depending on
-% the length of \cs{@pnumber}. Piet van Oostrum's \textsf{fancyhdr} package will
+% the length of \cs{@pnumber}. The \textsf{fancyhdr} package will
 % do this for us, but it seems a bit of overkill to require this package merely
 % so that we can ensure that the page number remains centered. Instead, we've
 % borrowed the relevant technique from that class, which draws the left, centre
-% and right bits of the header as three overlapping boxes. You just have to be
+% and right bits of the footer as three overlapping boxes. You just have to be
 % careful that the value of \cs{@pnumber} isn't so long that it overwrites the
 % page number.
 %    \begin{macrocode}
     \rlap{\parbox[b]{\columnwidth}{\raggedright\@draft\strut}}\hfill%
     \parbox[b]{\columnwidth}{\centering\textrm{\thepage}\strut}\hfill%
-    \llap{\parbox[b]{\columnwidth}{\raggedleft\@pnumber%
-      \ifx\@semester\@empty\else\ (\@semester)\fi\strut}}}%
-  \let\@evenhead\@oddhead%
-  \def\@oddfoot{\@markingschedule\hfill\textbf{TURN OVER}}%
+    \llap{\parbox[b]{\columnwidth}{\raggedleft\textbf{TURN OVER}}}}%
   \let\@evenfoot\@oddfoot%
 }
 %    \end{macrocode}
 % \end{macro}
+%
 % \textsf{plain} is the default page style:
 %    \begin{macrocode}
 \pagestyle{plain}
@@ -1090,17 +1176,18 @@
 % ``\textbf{END}'' instead of ``\textbf{TURN OVER}'':
 %    \begin{macrocode}
 \def\ps@lastpage{%
-  \def\@oddhead{%
+  \def\@oddhead{\@markingschedule\hfill\@pnumber%
+      \ifx\@semester\@empty\else\ (\@semester)\fi}%
+  \let\@evenhead\@oddhead%
+  \def\@oddfoot{%
     \rlap{\parbox[b]{\columnwidth}{\raggedright\@draft\strut}}\hfill%
     \parbox[b]{\columnwidth}{\centering\textrm{\thepage}\strut}\hfill%
-    \llap{\parbox[b]{\columnwidth}{\raggedleft\@pnumber%
-      \ifx\@semester\@empty\else\ (\@semester)\fi\strut}}}%
-  \let\@evenhead\@oddhead%
-  \def\@oddfoot{\@markingschedule\hfill\textbf{END}}%
+    \llap{\parbox[b]{\columnwidth}{\raggedleft\textbf{END}}}}%
   \let\@evenfoot\@oddfoot%
 }
 %    \end{macrocode}
 % \end{macro}
+%
 % \textsf{lastpage} should be automatically applied to the last page of the
 % document:
 %    \begin{macrocode}
@@ -1112,9 +1199,9 @@
 % the header.
 %    \begin{macrocode}
 \def\ps@titlepage{%
-  \def\@oddhead{\@draft}%
+  \def\@oddhead{\@markingschedule}%
   \let\@evenhead\@oddhead%
-  \def\@oddfoot{\@markingschedule\hfill\textbf{TURN OVER}}%
+  \def\@oddfoot{\@draft\hfill\textbf{TURN OVER}}%
   \let\@evenfoot\@oddfoot%
 }
 %    \end{macrocode}
@@ -1500,11 +1587,11 @@
 % \begin{macro}{\@marking}
 % \changes{2.0}{2001/05/17}{NJS New \cs{@draft} macro.}
 % Specifying the \textsf{draft} option causes \textsf{ouexam} to print
-% \fbox{DRAFT} in large letters in the header of every page. This is drawn by
-% the \cs{@draft} macro, which is included in the page header definition of
+% \fbox{DRAFT} in large letters in the footer of every page. This is drawn by
+% the \cs{@draft} macro, which is included in the page footer definition of
 % all the page styles for this class (see
 % \hyperref[pagestyles]{section~\ref*{pagestyles}}). \textbf{Note:} Because
-% the \cs{@draft} macro is included in the page header, it will usually
+% the \cs{@draft} macro is included in the page footer, it will usually
 % overflow the page boundaries, causing ``|Overfull \vbox|'' warnings. Note
 % the extra set of braces to limit the scope of the \cs{Huge}.
 % 
@@ -1551,8 +1638,8 @@
 % schedule information in the same location as the questions. If the
 % \textsf{markingschedule} class option is specified, marking schedule
 % information is printed in italics. In addition, \fbox{MARKING SCHEDULE} is
-% printed in large letters in the footer of every page. This is drawn by the
-% \cs{@markingschedule} macro, which is included in the page footer
+% printed in large letters in the header of every page. This is drawn by the
+% \cs{@markingschedule} macro, which is included in the page header
 % definition of all the page styles for this class (see
 % \hyperref[pagestyles]{section~\ref*{pagestyles}}). Note the extra set of
 % braces to limit the scope of the \cs{Huge}.
