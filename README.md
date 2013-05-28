@@ -7,7 +7,7 @@ Copyright 1999–2012 Nigel Stanger and University of Otago
 
 This LaTeX2e document class enables the production of University of Otago
 formatted examination papers. It handles all the fiddly layout requirements
-(such as printing `TURN OVER’ at the bottom of every page except the last), and
+(such as printing “TURN OVER” at the bottom of every page except the last), and
 also ensures that the actual number of marks for questions in the examination
 add up to the expected number of marks.
 
@@ -30,7 +30,7 @@ To install the easy way:
 
 2 `make`
 
-3 `make install TEXMF_INSTALL=/path/to/texmf`
+3 `make install TEXMF_INSTALL=/path/to/texmf`.
   `/path/to/texmf` should be the root of your preferred texmf tree
   (e.g., `/usr/share/texmf`). You may need to do this as root
   depending on which texmf tree you are installing into. You can
@@ -41,21 +41,21 @@ To install manually, unpack the distribution archive, cd to the
 distribution directory, and do the following (now you know why there’s a
 Makefile :)
 
-	latex ouexam.ins
-	pdflatex example1.tex
-	pdflatex example1.tex
-	pdfjam --outfile eg1-1.pdf example1.pdf 1
-	pdfjam --outfile eg1-2.pdf example1.pdf 2
-	pdfjam --outfile eg1-3.pdf example1.pdf 3
-	pdflatex example2.tex
-	pdflatex example2.tex
-	pdfjam --outfile eg2-1.pdf example2.pdf 1
-	pdfjam --outfile eg2-2.pdf example2.pdf 2
-	pdfjam --outfile eg2-3.pdf example2.pdf 3
-	pdfjam --outfile eg2-4.pdf example2.pdf 4
-	pdflatex ouexam.dtx
-	pdflatex ouexam.dtx
-	pdflatex ouexam.dtx
+	% latex ouexam.ins
+	% pdflatex example1.tex
+	% pdflatex example1.tex
+	% pdfjam --outfile eg1-1.pdf example1.pdf 1
+	% pdfjam --outfile eg1-2.pdf example1.pdf 2
+	% pdfjam --outfile eg1-3.pdf example1.pdf 3
+	% pdflatex example2.tex
+	% pdflatex example2.tex
+	% pdfjam --outfile eg2-1.pdf example2.pdf 1
+	% pdfjam --outfile eg2-2.pdf example2.pdf 2
+	% pdfjam --outfile eg2-3.pdf example2.pdf 3
+	% pdfjam --outfile eg2-4.pdf example2.pdf 4
+	% pdflatex ouexam.dtx
+	% pdflatex ouexam.dtx
+	% pdflatex ouexam.dtx
 
 Put `ouexam.cls` in `/path/to/texmf/tex/latex/ouexam`.
 
