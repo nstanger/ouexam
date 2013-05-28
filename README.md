@@ -1,115 +1,86 @@
-********************************************************************************
-**
-** File: $Id$
-**
-********************************************************************************
-
 ouexam v2.3
-=============
+===========
 
 ouexam document class v2.3, 4 September 2012
 
-Copyright 1999--2012 Nigel Stanger and University of Otago
+Copyright 1999–2012 Nigel Stanger and University of Otago
 
 This LaTeX2e document class enables the production of University of Otago
 formatted examination papers. It handles all the fiddly layout requirements
-(such as printing `TURN OVER' at the bottom of every page except the last),
-and also ensures that the actual number of marks for questions in the
-examination add up to the expected number of marks.
+(such as printing `TURN OVER’ at the bottom of every page except the last), and
+also ensures that the actual number of marks for questions in the examination
+add up to the expected number of marks.
 
 
-WHAT'S NEW IN VERSION 2.3
+Requirements
+------------
 
-* Updated exam paper formatting to conform to latest University standards.
-
-* Added "times" class option.
-
-* ouexam now requires the fontenc, textcomp and lmodern packages.
-
-* Generating the class documentation now required PDFLaTeX.
+You will need the verbatim, fontenc, textcomp and lmodern packages in order to
+use ouexam. These should all come standard with most TeX installations. To build
+the documentation and example files, you will need at least version 1.1 of the
+listings package, and pdfjam.
 
 
-WHAT'S NEW IN VERSION 2.2
+Installing
+----------
 
-* Added time allocation macros.
+To install the easy way:
 
+1 Unpack the distribution archive and `cd` to the distribution directory.
 
-WHAT'S NEW IN VERSION 2.1.3
+2 `make`
 
-* Changed the defaults for \material, \copiesof and \otherinstructions to
-  "N/A".
+3 `make install TEXMF_INSTALL=/path/to/texmf`
+  `/path/to/texmf` should be the root of your preferred texmf tree
+  (e.g., `/usr/share/texmf`). You may need to do this as root
+  depending on which texmf tree you are installing into. You can
+  also define `TEXMF_INSTALL` as an environment variable then simply
+  type make install.
 
+To install manually, unpack the distribution archive, cd to the
+distribution directory, and do the following (now you know why there’s a
+Makefile :)
 
-WHAT'S NEW IN VERSION 2.1.2
+	latex ouexam.ins
+	pdflatex example1.tex
+	pdflatex example1.tex
+	pdfjam --outfile eg1-1.pdf example1.pdf 1
+	pdfjam --outfile eg1-2.pdf example1.pdf 2
+	pdfjam --outfile eg1-3.pdf example1.pdf 3
+	pdflatex example2.tex
+	pdflatex example2.tex
+	pdfjam --outfile eg2-1.pdf example2.pdf 1
+	pdfjam --outfile eg2-2.pdf example2.pdf 2
+	pdfjam --outfile eg2-3.pdf example2.pdf 3
+	pdfjam --outfile eg2-4.pdf example2.pdf 4
+	pdflatex ouexam.dtx
+	pdflatex ouexam.dtx
+	pdflatex ouexam.dtx
 
-* The "subject to inspection" messages that appear in the calculators and
-  permitted material sections of the title page now only appear when
-  calculators are allowed or there actually is additional permitted
-  material, respectively.
+Put `ouexam.cls` in `/path/to/texmf/tex/latex/ouexam`.
 
+Put `eg*.pdf`, `ouexam.pdf`, `ouexam.dtx`, `ouexam.ins`, `HISTORY`, `MANIFEST`,
+`README` and `TODO` in `/path/to/texmf/doc/latex/ouexam`.
 
-WHAT'S NEW IN VERSION 2.1.1
+Put `Create*.pdf`, `example*.tex`, `example*.pdf` and `lstlang0.sty`
+in `/path/to/texmf/doc/latex/ouexam/example`.
 
-* "END" is now printed at the bottom of the last page of the exam.
-
-
-WHAT'S NEW IN VERSION 2.1
-
-* Updated the calculators macro to conform to the new University calculator
-  regulations. \allowcalculators now has an optional argument to specify
-  the kinds of calculators permitted.
-
-* \permitcalculators has been added as a synonym for \allowcalculators.
-
-
-WHAT'S NEW IN VERSION 2.0.2
-
-* If you omitted any of the required title page macros (\examyear,
-  \papernumber, \papertitle or \department), ouexam crashed when trying
-  to report the error. Fixed.
-
-* Added the ability to specify "FY" (full-year) as a semester type in the
-  \semester macro.
-
-
-WHAT'S NEW IN VERSION 2.0.1
-
-* There was a bug in the definition of the macros for numbering
-  sub-sub-questions that meant they were numbered as "(a)" instead of the
-  correct "(i)". Fixed.
-
-* When referencing sub-questions or sub-sub-questions, the entire question
-  number was included (that is, "1(b)(iii)" instead of just "(iii)"). This
-  made it difficult to sensibly reference these items, so the relevant
-  macros have been changed to omit this prefixed information. References to
-  questions now print as "1", sub-questions as "(b)" and sub-sub-questions
-  as "(iii)". If this does not suit your requirements, change the
-  \labelquestion, \labelsubquestion or \labelsubsubquestion macros.
-
-
-REQUIREMENTS
 
 ouexam requires the verbatim class, which should be standard on most LaTeX
 installations. The class documentation uses the graphicx and hyperref
-packages, so you will have to install these first if you don't have them
+packages, so you will have to install these first if you don’t have them
 already.
 
 
-INSTALLING (UNIX OR SIMILAR)
+FAQ
+---
 
-A makefile is provided:
+**The number of marks for my questions are not appearing at the end of the
+line even though there is plenty of room for them to fit.**
 
-	* "make" will produce both ouexam.cls and ouexam.pdf.
-
-	* "make class" will produce ouexam.cls. Place this file in a directory
-	  somewhere in your TeX search path (e.g., if you use teTeX, put it in
-	  texmf/tex/latex/ouexam or somewhere similar).
-
-	* "make doc" will produce ouexam.pdf.
-	
-
-INSTALLING (EVERYTHING ELSE)
-
-Run ouexam.ins through LaTeX to produce ouexam.cls. Place this file in a
-directory somewhere in your LaTeX search path. Then run ouexam.dtx through
-PDFLaTeX _three_ (yes, three) times to produce the documentation.
+You probably have a blank line between the end of your question text
+and the `\end{question}` macro that actually generates the number of
+marks. The line break gets processed by TeX before the number of marks
+is generated and effectively generates a new paragraph. Until I figure
+out how to stop this from happening, the workaround is to not leave
+blank lines between the end of the question text and the `\end{question}`.
