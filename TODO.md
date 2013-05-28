@@ -2,9 +2,9 @@ Things To Do
 ============
 
 - ouexam appears to be incompatible with hyperref? Crashes during
-  \maketitlepage. (Mark George)
+  `\maketitlepage`. (Mark George)
 
-- Specify questions with no marks attached. \question* perhaps?
+- Specify questions with no marks attached. `\question*` perhaps?
 
 - Marks totalling currently doesn’t work with sections where not all
   questions are to be answered (e.g., “Answer any 2 questions”). At the
@@ -14,7 +14,7 @@ Things To Do
 
 - Look at bundling all the various support files into the .dtx file?
 
-- Figure out how to gobble line breaks before a \end{subquestion} so that they
+- Figure out how to gobble line breaks before a `\end{subquestion}` so that they
   don’t screw up the positioning of the number of marks. A similar issue seems
   to arise with lgrind’ed listings that appear at the end of questions (but
   this actually causes things to break).
@@ -45,5 +45,5 @@ Things To Do
 
 - Does the draft option need to be passed to the article class?
 
-- \questionskip: how much whitespace after a question (default \baselineskip).
-  Turn this off when markingschedule is active?
+- `\questionskip`: how much whitespace after a question (default `\baselineskip`).
+  Turn this off when `markingschedule` is active?
