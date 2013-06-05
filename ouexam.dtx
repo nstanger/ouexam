@@ -501,84 +501,51 @@
 % \noindent\texttt{INCOMPATIBLE (\ldots): this document was written for an
 % earlier}	\\
 % \texttt{version of ouexam \ldots}	\\
-% You are trying to use v2.0 or later of \textsf{ouexam} with a document that
-% was written for \textsf{ouexam} v1.2 or earlier. Versions 2.0 and later of
-% \textsf{ouexam} are \emph{fundamentally incompatible} with earlier
-% versions. The only solutions here are either to revert to \textsf{ouexam}
-% v1.2 or earlier (you can put a copy of the class file in the same directory
-% as the document), or rewrite the document to conform to the current version
-% of \textsf{ouexam}. You should be able to download a copy of v1.2 from the
-% same location that you found the current version.	\\
+% You are trying to use v2.0 or later of \textsf{ouexam} with a document that was written for \textsf{ouexam} v1.2 or earlier. Versions 2.0 and later of \textsf{ouexam} are \emph{fundamentally incompatible} with earlier versions. The only solutions here are either to revert to \textsf{ouexam} v1.2 or earlier (you can put a copy of the class file in the same directory as the document), or rewrite the document to conform to the current version of \textsf{ouexam}. You should be able to download a copy of v1.2 from the same location that you found the current version.	\\
 % 	
 % \noindent\texttt{no \cs{examyear} was specified}	\\
 % \noindent\texttt{no \cs{department} was specified}	\\
 % \noindent\texttt{no \cs{papernumber} was specified}	\\
 % \noindent\texttt{no \cs{papertitle} was specified}	\\
-% You have not specified one of these macros. All four of these macros are
-% mandatory and must be included in the preamble of any \textsf{ouexam}
-% document.	\\
+% You have not specified one of these macros. All four of these macros are mandatory and must be included in the preamble of any \textsf{ouexam} document.	\\
+% 
+% 
+% \noindent\texttt{question environment nested inside another question, subquestion or	\\*
+% \hspace*{1em}subsubquestion environment}	\\
+% \noindent\texttt{subquestion environment either outside a question environment, or	\\*
+% \hspace*{1em}nested inside another subquestion or subsubquestion environment}	\\
+% \noindent\texttt{subsubquestion environment either outside a subquestion environment,	\\*
+% \hspace*{1em}or nested inside another subsubquestion environment}	\\
+% These errors all mean that you have incorrectly nested your \textsf{question} environments in some way. \textsf{question}s must always appear at the outermost level, \textsf{subquestion}s must always appear inside \textsf{question}s, and \textsf{subsubquestion}s must always appear inside \textsf{subquestion}s. Any other kind of nesting is an error.	\\
 % 
 % 
 % \subsection{Warnings}
 % 
-% \noindent\texttt{actual number of marks for exam (\ldots) does not match
-% expected}	\\
-% \texttt{number of marks (\ldots)}	\\
-% The actual number of marks supplied for the whole examination (calculated
-% by summing the marks for all the questions) is not the same as the expected
-% total for the examination. Adjust the marks for the questions until the
-% totals match.	\\
+% \noindent\texttt{actual number of marks for exam (\ldots) does not match expected	\\*
+% \hspace*{1em}number of marks (\ldots)}	\\
+% The actual number of marks supplied for the whole examination (calculated by summing the marks for all the questions) is not the same as the expected total for the examination. Adjust the marks for the questions until the totals match.	\\
 % 
-% \noindent\texttt{actual mark (\ldots) for section \ldots\ does not match
-% expected}	\\
-% \texttt{mark (\ldots)}	\\
-% The actual number of marks supplied for a particular section (calculated by
-% summing the marks for all the questions in that section) is not the same as
-% the expected total for that section. Adjust the marks for the questions in
-% the section concerned until the totals match. The section number is given
-% in the warning.	\\
+% \noindent\texttt{actual mark (\ldots) for section \ldots\ does not match expected	\\*
+% \hspace*{1em}mark (\ldots)}	\\
+% The actual number of marks supplied for a particular section (calculated by summing the marks for all the questions in that section) is not the same as the expected total for that section. Adjust the marks for the questions in the section concerned until the totals match. The section number is given in the warning.	\\
 % 
-% \noindent\texttt{actual mark (\ldots) for question \ldots\ does not match
-% expected}	\\
-% \texttt{mark (\ldots)}	\\
-% The actual number of marks supplied for a particular question (calculated
-% by summing the marks of all its sub-parts) is not the same as the expected
-% total for that question. Adjust the marks for the sub-parts of the
-% question until the totals match. The question number is given
-% in the warning.	\\
+% \noindent\texttt{actual mark (\ldots) for question \ldots\ does not match expected	\\*
+% \hspace*{1em}mark (\ldots)}	\\
+% The actual number of marks supplied for a particular question (calculated by summing the marks of all its sub-parts) is not the same as the expected total for that question. Adjust the marks for the sub-parts of the question until the totals match. The question number is given in the warning.	\\
 % 
-% \noindent\texttt{DEPRECATED: The \cs{newsection} macro is deprecated; use
-% the}	\\
-% \texttt{examsection environment instead}	\\
-% The \cs{newsection} macro is a hangover from earlier versions of
-% \textsf{ouexam}, and has been left in v2.0 for backwards compatibility with
-% some documents that use it. The entire sectioning mechanism was rewritten
-% from scratch for v2.0, so this macro is now deprecated and will eventually
-% disappear. You should use the \textsf{examsection} environment
-% instead.	\\
+% \noindent\texttt{DEPRECATED: The \cs{newsection} macro is deprecated; use the	\\*
+% \hspace*{1em}examsection environment instead}	\\
+% The \cs{newsection} macro is a hangover from earlier versions of \textsf{ouexam}, and has been left in v2.0 for backwards compatibility with some documents that use it. The entire sectioning mechanism was rewritten from scratch for v2.0, so this macro is now deprecated and will eventually disappear. You should use the \textsf{examsection} environment instead.	\\
 % 
-% \changes{2.0.2}{2002/08/22}{NJS Added `FY' to \cs{semester} error
-% description.}
-% \noindent\texttt{invalid value `\ldots' for \cs{semester}; valid values are
-% `1', `2', `SS',}	\\*
-% \texttt{`FY' and `SP'. No semester information will be printed}	\\*
-% You have given an invalid value as the argument to the \cs{semester}
-% macro. The allowed values are ``1'' (semester one), ``2'' (semester
-% two), ``SS'' (summer school), ``FY'' (full-year) and ``SP'' (special
-% examination). Any other values will be ignored. Note that these are
-% case-sensitive, for example, `sp' is invalid. 	\\
+% \changes{2.0.2}{2002/08/22}{NJS Added `FY' to \cs{semester} error description.}
+% \noindent\texttt{invalid value `\ldots' for \cs{semester}; valid values are `1', `2',	\\*
+% \hspace*{1em}`SS', `FY' and `SP'. No semester information will be printed}	\\
+% You have provided an invalid value as the argument to the \cs{semester} macro. The allowed values are ``1'' (semester one), ``2'' (semester two), ``SS'' (summer school), ``FY'' (full-year) and ``SP'' (special examination). Any other values will be ignored. Note that these are case-sensitive, for example, `sp' is invalid. 	\\
 % 
-% \changes{2.1}{2004/04/05}{NJS Added \cs{allowcalculators} error
-% description.}
+% \changes{2.1}{2004/04/05}{NJS Added \cs{allowcalculators} error description.}
 % \noindent\texttt{invalid value `\ldots' for \cs{allowcalculators}; valid values are	\\*
-% `none', `any' and `approved'. No calculators will be permitted}	\\*
-% You have given an invalid value as the argument to the
-% \cs{allowcalculators} macro. The allowed values are ``none'' (no
-% calculators permitted), ``any'' (any calculator permitted) and
-% ``approved'' (only approved calculators permitted). Any other values
-% will be ignored, and \textsf{ouexam} will assume that no calculators are
-% permitted. Note that these are case-sensitive, for example, `NONE' is
-% invalid. 	\\
+% \hspace*{1em}`none', `any' and `approved'. No calculators will be permitted}	\\
+% You have provided an invalid value as the argument to the \cs{allowcalculators} macro. The allowed values are ``none'' (no calculators permitted), ``any'' (any calculator permitted) and ``approved'' (only approved calculators permitted). Any other values will be ignored, and \textsf{ouexam} will assume that no calculators are permitted. Note that these are case-sensitive, for example, `NONE' is invalid. 	\\
 % 
 % 
 % \section{Example}
@@ -1355,7 +1322,7 @@
 % 
 % \begin{macro}{qdepth}
 % \changes{2.3.1}{2013/05/31}{NJS New \texttt{qdepth} counter.}
-% This counter is incremented every time a \textsf{question}, \textsf{subquestion} or \textsf{subsubquestion} environment is opened, and decremented every time these environments close. It measures the nesting depth of questions, and is used to check that we don't have things like a \texttt{subquestion} that isn't enclosed by a \texttt{question}, or a \texttt{question} nested inside another \texttt{question}. Note that this counter does \emph{not} reset inside any other environment.
+% This counter is incremented every time a \textsf{question}, \textsf{subquestion} or \textsf{subsubquestion} environment is opened, and decremented every time these environments close. It measures the nesting depth of questions, and is used to check that we do not have things like a \texttt{subquestion} not enclosed by a \texttt{question}, or a \texttt{question} nested inside another \texttt{question}. Note that this counter does \emph{not} reset inside any other environment.
 % 
 %    \begin{macrocode}
 \newcounter{qdepth}
