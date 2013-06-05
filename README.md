@@ -5,20 +5,13 @@ ouexam document class v2.3, 4 September 2012
 
 Copyright 1999–2012 Nigel Stanger and University of Otago
 
-This LaTeX2e document class enables the production of University of Otago
-formatted examination papers. It handles all the fiddly layout requirements
-(such as printing “TURN OVER” at the bottom of every page except the last), and
-also ensures that the actual number of marks for questions in the examination
-add up to the expected number of marks.
+This LaTeX2e document class enables the production of University of Otago formatted examination papers. It handles all the fiddly layout requirements (such as printing “TURN OVER” at the bottom of every page except the last), and also ensures that the actual number of marks for questions in the examination add up to the expected number of marks.
 
 
 Requirements
 ------------
 
-You will need the verbatim, fontenc, textcomp and lmodern packages in order to
-use ouexam. These should all come standard with most TeX installations. To build
-the documentation and example files, you will need at least version 1.1 of the
-listings package, and pdfjam.
+You will need the `verbatim`, `fontenc`, `textcomp` and `lmodern` packages in order to use `ouexam`. These should all come standard with most TeX installations. To build the documentation and example files, you will need `graphicx`, `hyperref`, at least version 1.1 of the `listings` package, and the `pdfjam` tool.
 
 
 Installing
@@ -37,9 +30,7 @@ To install the easy way:
   also define `TEXMF_INSTALL` as an environment variable then simply
   type make install.
 
-To install manually, unpack the distribution archive, cd to the
-distribution directory, and do the following (now you know why there’s a
-Makefile :)
+To install manually, unpack the distribution archive, cd to the distribution directory, and do the following (now you know why there’s a Makefile ☺).
 
 	% latex ouexam.ins
 	% pdflatex example1.tex
@@ -59,28 +50,14 @@ Makefile :)
 
 Put `ouexam.cls` in `/path/to/texmf/tex/latex/ouexam`.
 
-Put `eg*.pdf`, `ouexam.pdf`, `ouexam.dtx`, `ouexam.ins`, `HISTORY`, `MANIFEST`,
-`README` and `TODO` in `/path/to/texmf/doc/latex/ouexam`.
+Put `eg*.pdf`, `ouexam.pdf`, `ouexam.dtx`, `ouexam.ins`, `HISTORY`, `MANIFEST`, `README` and `TODO` in `/path/to/texmf/doc/latex/ouexam`.
 
-Put `Create*.pdf`, `example*.tex`, `example*.pdf` and `lstlang0.sty`
-in `/path/to/texmf/doc/latex/ouexam/example`.
-
-
-ouexam requires the verbatim class, which should be standard on most LaTeX
-installations. The class documentation uses the graphicx and hyperref
-packages, so you will have to install these first if you don’t have them
-already.
+Put `Create*.pdf`, `example*.tex`, `example*.pdf` and `lstlang0.sty` in `/path/to/texmf/doc/latex/ouexam/example`.
 
 
 FAQ
 ---
 
-**The number of marks for my questions are not appearing at the end of the
-line even though there is plenty of room for them to fit.**
+**The number of marks for my questions are not appearing at the end of the line even though there is plenty of room for them to fit.**
 
-You probably have a blank line between the end of your question text
-and the `\end{question}` macro that actually generates the number of
-marks. The line break gets processed by TeX before the number of marks
-is generated and effectively generates a new paragraph. Until I figure
-out how to stop this from happening, the workaround is to not leave
-blank lines between the end of the question text and the `\end{question}`.
+You probably have a blank line between the end of your question text and the `\end{question}` macro that actually generates the number of marks. The line break gets processed by TeX before the number of marks is generated and effectively generates a new paragraph. Until I figure out how to stop this from happening, the workaround is to not leave blank lines between the end of the question text and the `\end{question}`.
