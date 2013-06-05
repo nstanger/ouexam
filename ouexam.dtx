@@ -36,7 +36,7 @@
 %
 % \fi
 %
-%% \CheckSum{912}
+%% \CheckSum{928}
 %%
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -1930,9 +1930,9 @@
 % \end{macro}
 % 
 % \begin{macro}{num.pages}
-% \changes{1.1}{1999/04/20}{NJS Renamed \textt{page.last} label to \texttt{num.pages}.}
+% \changes{1.1}{1999/04/20}{NJS Renamed \texttt{page.last} label to \texttt{num.pages}.}
 % \changes{2.4}{2013/06/05}{NJS Added check for \textsf{hyperref} being loaded.}
-% There is no macro to specify the number of pages in the examination because it is done automatically by inserting a \cs{newlabel} that refers to the last page directly into the |.aux| file. The \textsf{hyperref} package redefines the \cs{newlabel} macro (in particular it increases the number of arguments), so we need to test whether \textsf{hyperref} is loaded and write the appropriate string to the |.aux| file. We borrow a technique from the \textsf{pageslts} package of checking for the existence of \cs{Hy@Warning}. (Ideally we would use \cs{if@packageloaded}, but this can't be used after \cs{AtBeginDocument}, and can be foiled by a package loading \textsf{hyperref} \cs{\AtBeginDocument}.)
+% There is no macro to specify the number of pages in the examination because it is done automatically by inserting a \cs{newlabel} that refers to the last page directly into the |.aux| file. The \textsf{hyperref} package redefines the \cs{newlabel} macro (in particular it increases the number of arguments), so we need to test whether \textsf{hyperref} is loaded and write the appropriate string to the |.aux| file. We borrow a technique from the \textsf{pageslts} package of checking for the existence of \cs{Hy@Warning}. (Ideally we would use \cs{if@packageloaded}, but this can't be used after \cs{AtBeginDocument}, and can be foiled by a package loading \textsf{hyperref} \cs{AtBeginDocument}.)
 %    \begin{macrocode}
 \AtEndDocument{%
   \@ifundefined{Hy@Warning}{% hyperref not loaded
