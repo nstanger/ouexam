@@ -36,7 +36,7 @@
 %
 % \fi
 %
-%% \CheckSum{928}
+%% \CheckSum{912}
 %%
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -313,14 +313,7 @@
 % \subsection{Sections}
 % \label{Sec:Sections}
 % 
-% Examination papers may optionally have multiple sections, ``numbered'' A,
-% B, \ldots. Rather than redefine the existing section macros, this class
-% defines an \DescribeEnv{examsection} \textsf{examsection}
-% environment\footnote{Note that the old \cs{newsection} macro has been
-% retained for backwards compatibility with earlier development versions of
-% \textsf{ouexam}. The \textsf{examsection} environment replaces this macro
-% and should be used in all new documents.} that generates a new section. The
-% \textsf{examsection} environment has three mandatory arguments:
+% Examination papers may optionally have multiple sections, ``numbered'' A, B, \ldots. Rather than redefine the existing section macros, this class defines an \DescribeEnv{examsection} \textsf{examsection} environment that generates a new section. The \textsf{examsection} environment has three mandatory arguments:
 % \begin{enumerate}
 % 	\item The expected number of marks for the question. If you leave this
 % 	argument empty it defaults to zero. \textsf{ouexam} keeps a running total
@@ -532,10 +525,6 @@
 % \noindent\texttt{actual mark (\ldots) for question \ldots\ does not match expected	\\*
 % \hspace*{1em}mark (\ldots)}	\\
 % The actual number of marks supplied for a particular question (calculated by summing the marks of all its sub-parts) is not the same as the expected total for that question. Adjust the marks for the sub-parts of the question until the totals match. The question number is given in the warning.	\\
-% 
-% \noindent\texttt{DEPRECATED: The \cs{newsection} macro is deprecated; use the	\\*
-% \hspace*{1em}examsection environment instead}	\\
-% The \cs{newsection} macro is a hangover from earlier versions of \textsf{ouexam}, and has been left in v2.0 for backwards compatibility with some documents that use it. The entire sectioning mechanism was rewritten from scratch for v2.0, so this macro is now deprecated and will eventually disappear. You should use the \textsf{examsection} environment instead.	\\
 % 
 % \changes{2.0.2}{2002/08/22}{NJS Added `FY' to \cs{semester} error description.}
 % \noindent\texttt{invalid value `\ldots' for \cs{semester}; valid values are `1', `2',	\\*
@@ -1748,33 +1737,6 @@
 %    \end{macrocode}
 % \end{macro}
 % \end{environment}
-%
-% \begin{macro}{\newsection}
-% \textbf{[DEPRECATED]} The \cs{newsection} macro generates a new examination
-% section, appropriately numbered. The optional argument contains instructions
-% for answering the questions in the new section, and defaults to ``ANSWER ALL
-% QUESTIONS''. This macro is included only for backwards compatibility with
-% previous versions. The \textsf{examsection} environment replaces this macro
-% and should be used in new documents. This macro will eventually be deleted.
-%    \begin{macrocode}
-\newcommand{\newsection}[1][ANSWER ALL QUESTIONS.]{%
-  \ClassWarning{ouexam}{DEPRECATED: The \protect\newsection\space %
-      macro is deprecated; use the examsection environment instead}%
-%    \end{macrocode}
-% Every section begins on a new page.
-%    \begin{macrocode}
-  \newpage%
-  \refstepcounter{xsection}%
-%    \end{macrocode}
-% The section title is formatted as ``\textbf{\underline{Section A}}'', in
-% \cs{large} size. Note that sections are ``numbered'' A, B, \ldots.
-%    \begin{macrocode}
-  {\large\noindent\textbf{\underline{Section~\thexsection}}}%
-  \\[0.5\baselineskip]%
-  #1%
-}
-%    \end{macrocode}
-% \end{macro}
 % 
 % 
 % \subsection{Title page generation}
