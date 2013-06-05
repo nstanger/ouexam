@@ -876,11 +876,12 @@
 % to trap use of the obsolete \textsf{multichoice} class option.
 %
 %    \begin{macrocode}
-\def\@unsupported#1{\ClassError{ouexam}{INCOMPATIBLE (#1): this %
-  document was written for an earlier version of ouexam and is %
-  not compatible with ouexam v\ouexamversion\space Please use ouexam %
-  v1.2 or earlier to process this document. Version 1.2 can be %
-  downloaded from the same location as version\space\ouexamversion}}
+\def\@unsupported#1{\ClassError{ouexam}{%
+  ^^JINCOMPATIBLE (#1)^^J%
+  This document was written for an earlier version of ouexam and is^^J%
+  not compatible with ouexam v\ouexamversion. Please use ouexam v1.2 or earlier^^J%
+  to process this document. Version 1.2 can be downloaded from the^^J%
+  same location as version\space\ouexamversion}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1325,9 +1326,9 @@
 %    \begin{macrocode}
 \AtEndDocument{%
   \ifnum\theexamexpected=\theexamrunning%
-  \else\ClassWarning{ouexam}{actual number of marks for exam %
-      (\theexamrunning) does not match expected number of marks %
-      (\theexamexpected)}%
+  \else\ClassWarning{ouexam}{%
+    actual number of marks for exam (\theexamrunning) does not^^J%
+    match expected number of marks (\theexamexpected)}%
   \fi%
 }
 %    \end{macrocode}
@@ -1376,8 +1377,9 @@
 % Check that the environment is being opened at the correct depth. The \textsf{question} environment should normally only be opened at depth 0:
 %    \begin{macrocode}
   \ifnum\theqdepth=0%
-  \else\ClassError{ouexam}{question environment nested inside another %
-        question, subquestion or subsubquestion environment}%
+  \else\ClassError{ouexam}{%
+    question environment nested inside another question,^^J%
+    subquestion or subsubquestion environment}%
   \fi%
   \addtocounter{qdepth}{1}%
 %    \end{macrocode}
@@ -1430,9 +1432,10 @@
 %    \begin{macrocode}
     \else%
       \ifnum\theqrunning=\theqexpected%
-      \else\ClassWarning{ouexam}{actual mark (\theqrunning) for %
-          question \thequestion\space doesn't match expected mark %
-          (\theqexpected)}%
+      \else\ClassWarning{ouexam}{%
+        actual mark (\theqrunning) for question %
+        \thequestion\space doesn't match^^J%
+        expected mark (\theqexpected)}%
       \fi%
     \fi%
 %    \end{macrocode}
@@ -1482,9 +1485,10 @@
 % The \textsf{subquestion} environment should normally only be opened at depth 1:
 %    \begin{macrocode}
   \ifnum\theqdepth=1%
-  \else\ClassError{ouexam}{subquestion environment either outside a %
-        question environment, or nested inside another subquestion or %
-        subsubquestion environment}%
+  \else\ClassError{ouexam}{%
+    subquestion environment either outside a question^^J%
+    environment, or nested inside another subquestion or subsubquestion^^J%
+    environment}%
   \fi%
   \addtocounter{qdepth}{1}%
   \begin{list}{\labelsubquestion}{\settowidth{\labelwidth}{(m)}}%
@@ -1516,9 +1520,10 @@
 %    \begin{macrocode}
     \else%
       \ifnum\thesubqrunning=\thesubqexpected%
-      \else\ClassWarning{ouexam}{actual mark (\thesubqrunning) for %
-          question \thesubquestion\space doesn't match expected mark %
-          (\thesubqexpected)}%
+      \else\ClassWarning{ouexam}{%
+        actual mark (\thesubqrunning) for question %
+        \thequestion\thesubquestion\space doesn't match^^J%
+        expected mark (\thesubqexpected)}%
       \fi%
     \fi%
 %    \end{macrocode}
@@ -1556,9 +1561,9 @@
 % The \textsf{subsubquestion} environment should normally only be opened at depth 2:
 %    \begin{macrocode}
   \ifnum\theqdepth=2%
-  \else\ClassError{ouexam}{subsubquestion environment either outside a %
-        subquestion environment, or nested inside another subsubquestion %
-        environment}%
+  \else\ClassError{ouexam}{%
+    subsubquestion environment either outside a subquestion^^J%
+    environment, or nested inside another subsubquestion environment}%
   \fi%
   \addtocounter{qdepth}{1}%
   \begin{list}{\labelsubsubquestion}{\settowidth{\labelwidth}{(viii)}}%
@@ -1728,8 +1733,10 @@
 % 
 %    \begin{macrocode}
   \ifnum\thesectrunning=\thesectexpected%
-  \else\ClassWarning{ouexam}{actual mark (\thesectrunning) for section %
-      \thexsection\space doesn't match expected mark (\thesectexpected)}%
+  \else\ClassWarning{ouexam}{%
+    actual mark (\thesectrunning) for section %
+    \thexsection\space doesn't match^^J%
+    expected mark (\thesectexpected)}%
   \fi%
   \bigskip\hfill\textbf{[SECTION \thexsection\ TOTAL %
                               \thesectrunning\ MARKS]}%
@@ -1743,10 +1750,8 @@
 % 
 % \begin{macro}{\examyear}
 % \begin{macro}{\@year}
-% \changes{2.0.2}{2002/08/22}{NJS Put back \@eha at end of the \ClassError. Don't
-% know what this does, but the macro crashes without it there.}
-% The \cs{examyear} macro specifies the year in which the examination is being
-% held. It redefines the \cs{@year} macro which is used in \cs{@maketitlepage}:
+% \changes{2.0.2}{2002/08/22}{NJS Put back \@eha at end of the \ClassError. Don't know what this does, but the macro crashes without it there. It seems to be required if there's a \cs{protect}.}
+% The \cs{examyear} macro specifies the year in which the examination is being held. It redefines the \cs{@year} macro which is used in \cs{@maketitlepage}:
 %    \begin{macrocode}
 \newcommand{\examyear}[1]{\def\@year{#1}}
 %    \end{macrocode}
@@ -1761,10 +1766,8 @@
 % 
 % \begin{macro}{\department}
 % \begin{macro}{\@dept}
-% \changes{2.0.2}{2002/08/22}{NJS Put back \@eha at end of the \ClassError. Don't
-% know what this does, but the macro crashes without it there.}
-% The \cs{department} macro specifies the name of the department, and is required.
-% It redefines the \cs{@dept} macro which is used in \cs{@maketitlepage}:
+% \changes{2.0.2}{2002/08/22}{NJS Put back \@eha at end of the \ClassError. Don't know what this does, but the macro crashes without it there. It seems to be required if there's a \cs{protect}.}
+% The \cs{department} macro specifies the name of the department, and is required. It redefines the \cs{@dept} macro which is used in \cs{@maketitlepage}:
 %    \begin{macrocode}
 \newcommand{\department}[1]{\def\@dept{#1}}
 \def\@dept{%
@@ -1776,10 +1779,8 @@
 % 
 % \begin{macro}{\papernumber}
 % \begin{macro}{\@pnumber}
-% \changes{2.0.2}{2002/08/22}{NJS Put back \@eha at end of the \ClassError. Don't
-% know what this does, but the macro crashes without it there.}
-% The \cs{papernumber} macro specifies the paper number, and is required.
-% It redefines the \cs{@pnumber} macro which is used in \cs{@maketitlepage}:
+% \changes{2.0.2}{2002/08/22}{NJS Put back \@eha at end of the \ClassError. Don't know what this does, but the macro crashes without it there. It seems to be required if there's a \cs{protect}.}
+% The \cs{papernumber} macro specifies the paper number, and is required. It redefines the \cs{@pnumber} macro which is used in \cs{@maketitlepage}:
 %    \begin{macrocode}
 \newcommand{\papernumber}[1]{\def\@pnumber{#1}}
 \def\@pnumber{%
@@ -1791,10 +1792,8 @@
 % 
 % \begin{macro}{\papertitle}
 % \begin{macro}{\@ptitle}
-% \changes{2.0.2}{2002/08/22}{NJS Put back \@eha at end of the \ClassError. Don't
-% know what this does, but the macro crashes without it there.}
-% The \cs{papertitle} macro specifies the title of the paper, and is required.
-% It redefines the \cs{@ptitle} macro which is used in \cs{@maketitlepage}:
+% \changes{2.0.2}{2002/08/22}{NJS Put back \@eha at end of the \ClassError. Don't know what this does, but the macro crashes without it there. It seems to be required if there's a \cs{protect}.}
+% The \cs{papertitle} macro specifies the title of the paper, and is required. It redefines the \cs{@ptitle} macro which is used in \cs{@maketitlepage}:
 %    \begin{macrocode}
 \newcommand{\papertitle}[1]{\def\@ptitle{#1}}
 \def\@ptitle{%
@@ -1830,9 +1829,10 @@
   \else\ifx\@sem\@SS\def\@semester{Summer School}%
   \else\ifx\@sem\@FY\def\@semester{Full Year}%
   \else\ifx\@sem\@SP\def\@semester{Special Examination}%
-  \else\ClassWarning{ouexam}{invalid value `#1' for %
-    \protect\semester; valid values are `1', `2', `SS', %
-    `FY' and `SP'. No semester information will be printed}%
+  \else\ClassWarning{ouexam}{%
+    invalid value `#1' for \protect\semester;^^J%
+    valid values are `1', `2', `SS', `FY' and `SP'. No semester^^J%
+    information will be printed}%
   \fi\fi\fi\fi\fi%
 }
 %    \end{macrocode}
@@ -1965,9 +1965,9 @@
     capability shall be accepted as a calculator.}%
   \else\ifx\@calc\@CalcAPPROVED\def\@calculators{Only calculators on %
     the University of Otago list of approved calculators are permitted.}%
-  \else\ClassWarning{ouexam}{invalid argument `#1' for %
-    \protect\allowcalculators; valid values are `none', `any' and %
-      `approved'. %
+  \else\ClassWarning{ouexam}{%
+    invalid argument `#1' for^^J%
+    \protect\allowcalculators; valid values are `none', `any' and `approved'.^^J%
     No calculators will be permitted}%
   \fi\fi\fi%
 }
