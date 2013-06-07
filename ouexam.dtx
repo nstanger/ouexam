@@ -868,16 +868,14 @@
                            University examination paper]
 %    \end{macrocode}
 % 
-% \begin{macro}{\@unsupported}
+% \begin{macro}{\@ouexam@obsolete}
 % \changes{2.0}{2002/01/10}{NJS New \cs{@unsupported} macro.}
-% This macro is used to handle documents written for older versions of
-% \textsf{ouexam}. All obsolete macros map to this macro, which prints out an
-% appropriate error message. It needs to be defined early because it is used
-% to trap use of the obsolete \textsf{multichoice} class option.
+% \changes{2.4}{2013/06/07}{NJS Renamed \cs{@unsupported} macro to \cs{@ouexam@obsolete}.}
+% This macro is used to handle documents written for older versions of \textsf{ouexam}. All obsolete macros map to this macro, which prints out an appropriate error message. It needs to be defined early because it is used to trap use of the obsolete \textsf{multichoice} class option.
 %
 %    \begin{macrocode}
-\def\@unsupported#1{\ClassError{ouexam}{%
-  ^^JINCOMPATIBLE (#1)^^J%
+\def\@ouexam@obsolete#1{\ClassError{ouexam}{%
+  ^^JOBSOLETE (#1)^^J%
   This document was written for an earlier version of ouexam and is^^J%
   not compatible with ouexam v\ouexamversion. Please use ouexam v1.2 or earlier^^J%
   to process this document. Version 1.2 can be downloaded from the^^J%
@@ -885,31 +883,42 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\@ouexam@unused}
+% \changes{2.4}{2013/06/07}{NJS New \cs{@ouexam@unused} macro.}
+% This macro is used to warn the user about class options that are not used by this class, and that will therefore be ignored. All unused macros map to this macro, which prints out an appropriate warning message.
+%
+%    \begin{macrocode}
+\def\@ouexam@unused#1{\OptionNotUsed\ClassWarning{ouexam}{%
+  specified option ``#1'' is not used by ouexam^^J%
+  and will therefore be ignored}}
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{multichoice}
 % \changes{1.1}{1999/04/20}{NJS New \textsf{multichoice} class option.}
 % \changes{2.0}{2000/09/04}{NJS Removed support for \textsf{multichoice} option.}
-% The \textsf{multichoice} class option is no longer supported, but rather than
-% just breaking older documents, we can at least try to present a reasonable
-% error message.
+% The \textsf{multichoice} class option is no longer supported, but rather than just breaking older documents, we can at least try to present a reasonable error message.
 %
 %    \begin{macrocode}
-\DeclareOption{multichoice}{%
-  \OptionNotUsed\@unsupported{multichoice class option}%
-}
+\DeclareOption{multichoice}{\@ouexam@obsolete{multichoice class option}}
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{twoside}
 % \changes{1.1}{1999/04/20}{NJS Turned off \textsf{twoside} option.}
-% This document class is based on the \textsf{article} class and accepts any of
-% the options accepted by \textsf{article}. The \textsf{twoside} option does
-% not really make sense, however---all Otago examination papers are printed
-% single-sided anyway, and the format is such that two-sided printing would
-% look no different. The \textsf{twoside} option is therefore not used in this
-% class.
+% This document class is based on the \textsf{article} class and accepts any of the options accepted by \textsf{article}. The \textsf{twoside} option does not really make sense, however---all Otago examination papers are printed single-sided anyway, and the format is such that two-sided printing would look no different. The \textsf{twoside} option is therefore not used in this class.
 %
 %    \begin{macrocode}
-\DeclareOption{twoside}{\OptionNotUsed}
+\DeclareOption{twoside}{\@ouexam@unused{twoside}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{twocolumn}
+% \changes{2.3}{2013/06/07}{NJS Turned off \textsf{twocolumn} option.}
+% The \textsf{twocolumn} option also does not make much sense for Otago examination papers.
+%
+%    \begin{macrocode}
+\DeclareOption{twocolumn}{\@ouexam@unused{twocolumn}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -917,12 +926,11 @@
 % \begin{macro}{11pt}
 % \changes{2.3}{1999/04/20}{NJS Turned off \textsf{10pt} and \textsf{11pt}
 % options.}
-% The Examinations Office specifies a minimum of 12pt for the font size, so the
-% \textsf{10pt} and \textsf{11pt} options are not used in this class.
+% The Examinations Office specifies a minimum of 12pt for the font size, so the \textsf{10pt} and \textsf{11pt} options are not used in this class.
 %
 %    \begin{macrocode}
-\DeclareOption{10pt}{\OptionNotUsed}
-\DeclareOption{11pt}{\OptionNotUsed}
+\DeclareOption{10pt}{\@ouexam@unused{10pt}}
+\DeclareOption{11pt}{\@ouexam@unused{11pt}}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -2157,11 +2165,11 @@
 % \textsf{subquestion} and \textsf{subsubquestion} environments respectively.
 %   \begin{macrocode}
 \newenvironment{questions}{%
-  \def\item{\@unsupported{questions environment}}}{}
+  \def\item{\@ouexam@obsolete{questions environment}}}{}
 \newenvironment{subquestions}{%
-  \def\item{\@unsupported{subquestions environment}}}{}
+  \def\item{\@ouexam@obsolete{subquestions environment}}}{}
 \newenvironment{subsubquestions}{%
-  \def\item{\@unsupported{subsubquestions environment}}}{}
+  \def\item{\@ouexam@obsolete{subsubquestions environment}}}{}
 %    \end{macrocode}
 % The \cs{markingschedule} macro has been replaced by the
 % \textsf{markingschedule} class option. We can't map this to the
@@ -2188,7 +2196,7 @@
 % question-building environments. The \cs{totalmarks} macro has been replaced
 % by automatic calculations within these environments.
 %    \begin{macrocode}
-\newcommand{\totalmarks}{\@unsupported{totalmarks macro}}
+\newcommand{\totalmarks}{\@ouexam@obsolete{totalmarks macro}}
 %    \end{macrocode}
 % \end{macro}
 % 
