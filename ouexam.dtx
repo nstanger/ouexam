@@ -36,7 +36,7 @@
 %
 % \fi
 %
-%% \CheckSum{912}
+%% \CheckSum{896}
 %%
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -939,8 +939,7 @@
 %
 %    \begin{macrocode}
 \newif\if@draft \@draftfalse
-\DeclareOption{draft}{\@drafttrue}
-% does this need to be passed to the article class?
+\DeclareOption{draft}{\@drafttrue\PassOptionsToClass{\CurrentOption}{article}}
 %    \end{macrocode}
 % 
 % Note that if you use the \textsf{graphicx} package and turn on the
@@ -1080,25 +1079,24 @@
 % 
 % \subsection{Page styles}\label{pagestyles}
 %
-% \changes{2.0}{2001/05/17}{NJS Added support to page styles for \textsf{draft}
-% and \textsf{markingschedule} class options.}
-% \changes{2.0}{2002/01/15}{NJS Fixed headers so that the page number is always
-% centered.}
-% \changes{2.1.1}{2006/08/21}{NJS Updated \textsf{lastpage} style to display
-% ``\textbf{END}''.}
-% \changes{2.3}{2012/09/03}{NJS Rearranged headers and footers to conform to
-% the latest formatting requirements. Swapped \fbox{MARKING SCHEDULE} and 
-% \fbox{DRAFT} between header and footer so that the page number doesn't
-% get overprinted.}
-%
+% \changes{2.0}{2001/05/17}{NJS Added support to page styles for \textsf{draft} and \textsf{markingschedule} class options.}
+% \changes{2.0}{2002/01/15}{NJS Fixed headers so that the page number is always centered.}
+% \changes{2.1.1}{2006/08/21}{NJS Updated \textsf{lastpage} style to display ``\textbf{END}''.}
+% \changes{2.3}{2012/09/03}{NJS Rearranged headers and footers to conform to the latest formatting requirements. Swapped \fbox{MARKING SCHEDULE} and \fbox{DRAFT} between header and footer so that the page number doesn't get overprinted.}
+% \changes{2.4}{2013/06/06}{NJS Replaced the \texttt{lastpage} page style with direct manipulation of the footer contents, as \cs{pagestyle} and \cs{thispagestyle} don't get applied to automatically generated float pages on the last page of the document.}
+% 
+%\begin{macro}{\if@lastpagetext}
+%\begin{macro}{\if@lastpagefloat}
+% These two switches are used in some slightly convoluted logic to ensure that ``\textbf{END}'' is printed on the last page of the document (see below for details).
+%    \begin{macrocode}
+\newif\if@lastpagetext \@lastpagetextfalse
+\newif\if@lastpagefloat \@lastpagefloatfalse
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% 
 % \begin{macro}{\ps@plain}
-% The \textsf{plain} page style is based on that in the \textsf{article} class,
-% and produces pages with the page number centered at the bottom, the paper
-% number in the top right corner and the text ``\textbf{TURN OVER}'' in the
-% bottom right. If semester information is specified, this is included in
-% parentheses after the paper code, for example, ``COMP 101 (Semester Two)''.
-% \fbox{MARKING SCHEDULE} is printed at top left if the \textsf{markingschedule}
-% class option is used.
+% The \textsf{plain} page style is based on that in the \textsf{article} class, and produces pages with the page number centered at the bottom, the paper number in the top right corner and the text ``\textbf{TURN OVER}'' in the bottom right. If semester information is specified, this is included in parentheses after the paper code, for example, ``COMP 101 (Semester Two)''. \fbox{MARKING SCHEDULE} is printed at top left if the \textsf{markingschedule} class option is used.
 %    \begin{macrocode}
 \def\ps@plain{%
   \def\@oddhead{\@markingschedule\hfill\@pnumber%
@@ -1106,21 +1104,44 @@
   \let\@evenhead\@oddhead%
   \def\@oddfoot{%
 %    \end{macrocode}
-%
-% Note that we have to get a bit clever to ensure that the page number is
-% properly centered in the page footer. The naive solution is just to use
-% \cs{hfill}s, but this will cause the page number to shift around depending on
-% the length of \cs{@pnumber}. The \textsf{fancyhdr} package will
-% do this for us, but it seems a bit of overkill to require this package merely
-% so that we can ensure that the page number remains centered. Instead, we've
-% borrowed the relevant technique from that class, which draws the left, centre
-% and right bits of the footer as three overlapping boxes. You just have to be
-% careful that the value of \cs{@pnumber} isn't so long that it overwrites the
-% page number.
+% 
+% Note that we have to get a bit clever to ensure that the page number is properly centered in the page footer. The naive solution is just to use \cs{hfill}s, but this will cause the page number to shift around depending on the length of \cs{@pnumber}. The \textsf{fancyhdr} package will do this for us, but it seems a bit of overkill to require this package merely so that we can ensure that the page number remains centered. Instead, we've borrowed the relevant technique from that class, which draws the left, centre and right bits of the footer as three overlapping boxes. You just have to be careful that the value of \cs{@pnumber} isn't so long that it overwrites the page number.
 %    \begin{macrocode}
     \rlap{\parbox[b]{\columnwidth}{\raggedright\@draft\strut}}\hfill%
     \parbox[b]{\columnwidth}{\centering\textrm{\thepage}\strut}\hfill%
-    \llap{\parbox[b]{\columnwidth}{\raggedleft\textbf{TURN OVER}}}}%
+    \llap{\parbox[b]{\columnwidth}{\raggedleft\textbf{%
+%    \end{macrocode}
+% 
+% An additional complication is that only the very last page of the document should have ``\textbf{END}'' displayed in the footer instead of ``\textbf{TURN OVER}''. This turns out to be a lot harder than you might think! Simply applying a page style \cs{AtEndDocument} works fine, \emph{except} when you have unprocessed floats at the end of the document. These are placed on an automatically-generated float page at the end, which \cs{pagestyle} and \cs{thispagestyle} don't affect. That is, a \textsf{lastpage} page style simply won't work in this situation.
+% 
+% The solution is therefore to not use a page style, but rather check in the \textsf{plain} page style whether or not this is the last page. Again, this isn't as simple as it sounds! The logic goes like this:
+% 
+% \begin{itemize}
+% 
+% 	\item If there are no unprocessed floats, meaning that the last page of the document will be a text page (indicated by \cs{@lastpagetexttrue}), then output ``\textbf{END}''.
+% 	
+% 	\item If there are unprocessed floats, meaning that the last page of the document will be a float page (indicated by \cs{@lastpagefloattrue}), then:
+% 	
+% 	\begin{itemize}
+% 		
+% 		\item If the float page is currently being generated (indicated by \cs{@fcolmadetrue} from \texttt{latex.ltx}), output ``\textbf{END}''.
+% 	
+% 		\item Otherwise, output ``\textbf{TURN OVER}''.
+% 	
+% 	\end{itemize}
+% 	
+% 	\item Otherwise, output ``\textbf{TURN OVER}''.
+% 
+% \end{itemize}
+% 
+% Note that this currently fails if more than one float page needs to be generated at the end of the document. \emph{All} such pages will have ``\textbf{END}'' printed at the bottom.
+%    \begin{macrocode}
+      \if@lastpagetext END%
+      \else\if@lastpagefloat\if@fcolmade END%
+                            \else TURN OVER\fi%
+            \else TURN OVER\fi%
+      \fi}}}%
+    }%
   \let\@evenfoot\@oddfoot%
 }
 %    \end{macrocode}
@@ -1131,32 +1152,23 @@
 \pagestyle{plain}
 %    \end{macrocode}
 % 
-% \begin{macro}{\ps@lastpage}
-% The \textsf{lastpage} page style is similar to \textsf{plain}, but with
-% ``\textbf{END}'' instead of ``\textbf{TURN OVER}'':
+% \cs{AtEndDocument}, we need to set the \texttt{lastpage} switches accordingly. The \cs{@deferlist} macro from \texttt{latex.ltx} holds a list of any unprocessed floats, so if this is empty, we know that there's nothing more to do and can just set \cs{@lastpagetexttrue}. If the list still contains unprocessed floats, set \cs{@lastpagefloattrue} then \cs{clearpage} to force the floats out. We also need to decrement the page counter by one, otherwise it ends up being one too many, presumably as a result of the \cs{clearpage}.
+% 
+% I suspect that this will fail if the document uses \textsf{twocolumn} and has double floats that span both columns, because there is a separate \cs{@dbldeferlist}. Also, as noted above, this currently doesn't account for multiple float pages at the end of the document.
 %    \begin{macrocode}
-\def\ps@lastpage{%
-  \def\@oddhead{\@markingschedule\hfill\@pnumber%
-      \ifx\@semester\@empty\else\ (\@semester)\fi}%
-  \let\@evenhead\@oddhead%
-  \def\@oddfoot{%
-    \rlap{\parbox[b]{\columnwidth}{\raggedright\@draft\strut}}\hfill%
-    \parbox[b]{\columnwidth}{\centering\textrm{\thepage}\strut}\hfill%
-    \llap{\parbox[b]{\columnwidth}{\raggedleft\textbf{END}}}}%
-  \let\@evenfoot\@oddfoot%
+\AtEndDocument{%
+  \ifx\@deferlist\@empty%
+    \@lastpagetexttrue%
+  \else%
+    \@lastpagefloattrue%
+  	\clearpage%
+  	\addtocounter{page}{-1}%
+  \fi%
 }
-%    \end{macrocode}
-% \end{macro}
-%
-% \textsf{lastpage} should be automatically applied to the last page of the
-% document:
-%    \begin{macrocode}
-\AtEndDocument{\thispagestyle{lastpage}}
 %    \end{macrocode}
 % 
 % \begin{macro}{\ps@titlepage}
-% The \textsf{titlepage} page style is similar to \textsf{plain}, but without
-% the header.
+% The \textsf{titlepage} page style is similar to \textsf{plain}, but without the header.
 %    \begin{macrocode}
 \def\ps@titlepage{%
   \def\@oddhead{\@markingschedule}%
