@@ -420,7 +420,7 @@
 % 	depending on how full the last line of the question is.
 % \end{itemize}
 % 
-% \changes{2.3.1}{2013/05/31}{NJS Enforced proper question environment nesting.}
+% \changes{2.4}{2013/05/31}{NJS Enforced proper question environment nesting.}
 % The various \textsf{question} environments must be correctly nested in order for the features described above to work correctly, i.e., \textsf{question} at the top level, followed by \textsf{subquestion} and \textsf{subsubquestion}. Any variation to this nesting order will cause an error.
 % 
 % 
@@ -1322,7 +1322,7 @@
 % \end{macro}
 % 
 % \begin{macro}{qdepth}
-% \changes{2.3.1}{2013/05/31}{NJS New \texttt{qdepth} counter.}
+% \changes{2.4}{2013/05/31}{NJS New \texttt{qdepth} counter.}
 % This counter is incremented every time a \textsf{question}, \textsf{subquestion} or \textsf{subsubquestion} environment is opened, and decremented every time these environments close. It measures the nesting depth of questions, and is used to check that we do not have things like a \texttt{subquestion} not enclosed by a \texttt{question}, or a \texttt{question} nested inside another \texttt{question}. Note that this counter does \emph{not} reset inside any other environment.
 % 
 %    \begin{macrocode}
@@ -1368,7 +1368,7 @@
 % \changes{2.0}{2001/05/15}{NJS Total marks for a question are now printed only
 % if the question has no sub-questions.}
 % \begin{environment}{question}
-% \changes{2.3.1}{2013/05/31}{NJS Check question depth when opening the
+% \changes{2.4}{2013/05/31}{NJS Check question depth when opening the
 % environment.}
 % The \textsf{question} environment specifies a top-level question, and produces
 % questions numbered in the form ``1.'', ``2.'', etc. It has one mandatory
@@ -1474,7 +1474,7 @@
 % redefinition of \textsf{enumerate}.}
 % \changes{2.0}{2001/05/13}{NJS Added penalty handling to ensure correct placement
 % of marks in output.}
-% \changes{2.3.1}{2013/05/31}{NJS Check question depth when opening the
+% \changes{2.4}{2013/05/31}{NJS Check question depth when opening the
 % environment.}
 % The \textsf{subquestion} environment is the analogue of \textsf{question} for
 % sub-questions. On initialisation, it sets |subqexpected| to the value of the
@@ -1553,7 +1553,7 @@
 % redefinition of \textsf{enumerate}.}
 % \changes{2.0}{2001/05/13}{NJS Added penalty handling to ensure correct placement
 % of marks in output.}
-% \changes{2.3.1}{2013/05/31}{NJS Check question depth when opening the
+% \changes{2.4}{2013/05/31}{NJS Check question depth when opening the
 % environment.}
 % This is similar to both \textsf{question} and \textsf{subquestion}, and
 % generates an appropriately numbered sub-sub-question (``(i)'', ``(ii)'', etc.).
