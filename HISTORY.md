@@ -17,7 +17,8 @@ Version 2.4 (2013)
 * `ouexam` was incompatible with the `hyperref` package. Fixed.
 
 * Float pages on the last page of the document messed up both the page count
-  and the “TURN OVER”/“END” sequencing. Fixed.
+  and the “TURN OVER”/“END” sequencing. Fixed. (Also removed the `lastpage`
+  page style as part of this fix.)
 
 
 Version 2.3 (2012-09-04)
@@ -26,6 +27,8 @@ Version 2.3 (2012-09-04)
 * Updated exam paper formatting to conform to latest University standards.
 
 * Added `times` class option.
+
+* Disabled `10pt` and `11pt` class options.
 
 * `ouexam` now requires the `fontenc`, `textcomp` and `lmodern` packages.
 
@@ -43,6 +46,8 @@ Version 2.1.3 (2009-04-28)
 
 * Changed the defaults for `\material`, `\copiesof` and `\otherinstructions` to
   “N/A”.
+
+* Fixed vertical spacing of title page.
 
 
 Version 2.1.2 (2008-08-14)
@@ -68,6 +73,8 @@ Version 2.1 (2004-04-16)
   the kinds of calculators permitted.
 
 * `\permitcalculators` has been added as a synonym for `\allowcalculators`.
+
+* Removed the `\marks` macro because it conflicts with a macro in e-TeX.
 
 
 Version 2.0.2 (2002-08-22)
@@ -100,14 +107,48 @@ Version 2.0.1 (2002-04-30)
 Version 2.0 (2002-01-30)
 ------------------------
 
+A complete rewrite from scratch. **This version is not backwards compatible
+with earlier versions!** However, the class will detect attempts to use
+obsolete features.
+
+* Added `draft` and `markingschedule` class options.
+
+* Added checking for the correct number of marks.
+
+* Added support for summer school exams.
+
+* Fixed headers so that the page number is always centered.
+
+* Removed `multichoice` class option and all associated macros and environments.
+
+* Disabled `twoside` class option, as exam papers are always printed
+  single-sided.
+
 
 Version 1.2 (2000-04-14)
 ------------------------
+
+* Added support for marking schedule information.
 
 
 Version 1.1 (1999-04-20)
 ------------------------
 
+* Added `multichoice` class option.
+
+* Added automatic calculation of marks totals for questions.
+
+* Added tracking of the number of questions in an exam.
+
+* The `subquestions` and `subsubquestions` environment are now disabled when
+  the `multichoice` class option is specified.
+
+* Changed default font size to 12pt.
+
+* Removed dependence on `calc` and `ifthen` packages.
+
 
 Version 1.0 (1999-04-15)
 ------------------------
+
+Initial release.
