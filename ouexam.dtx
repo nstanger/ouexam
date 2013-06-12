@@ -876,11 +876,11 @@
 % to trap use of the obsolete \textsf{multichoice} class option.
 %
 %    \begin{macrocode}
-\def\@unsupported#1{\ClassError{ouexam}{%
+\def\@unsupported#1#2{\ClassError{ouexam}{%
   ^^JINCOMPATIBLE (#1)^^J%
   This document was written for an earlier version of ouexam and is^^J%
-  not compatible with ouexam v\ouexamversion. Please use ouexam v1.2 or earlier^^J%
-  to process this document. Version 1.2 can be downloaded from the^^J%
+  not compatible with ouexam v\ouexamversion. Please use ouexam v#2 or earlier^^J%
+  to process this document. Version #2 can be downloaded from the^^J%
   same location as version\space\ouexamversion}}
 %    \end{macrocode}
 % \end{macro}
@@ -894,7 +894,7 @@
 %
 %    \begin{macrocode}
 \DeclareOption{multichoice}{%
-  \OptionNotUsed\@unsupported{multichoice class option}%
+  \OptionNotUsed\@unsupported{multichoice class option}{1.2}%
 }
 %    \end{macrocode}
 % \end{macro}
@@ -2169,11 +2169,11 @@
 % \textsf{subquestion} and \textsf{subsubquestion} environments respectively.
 %   \begin{macrocode}
 \newenvironment{questions}{%
-  \def\item{\@unsupported{questions environment}}}{}
+  \def\item{\@unsupported{questions environment}{1.2}}}{}
 \newenvironment{subquestions}{%
-  \def\item{\@unsupported{subquestions environment}}}{}
+  \def\item{\@unsupported{subquestions environment}{1.2}}}{}
 \newenvironment{subsubquestions}{%
-  \def\item{\@unsupported{subsubquestions environment}}}{}
+  \def\item{\@unsupported{subsubquestions environment}{1.2}}}{}
 %    \end{macrocode}
 % The \cs{markingschedule} macro has been replaced by the
 % \textsf{markingschedule} class option. We can't map this to the
@@ -2200,7 +2200,7 @@
 % question-building environments. The \cs{totalmarks} macro has been replaced
 % by automatic calculations within these environments.
 %    \begin{macrocode}
-\newcommand{\totalmarks}{\@unsupported{totalmarks macro}}
+\newcommand{\totalmarks}{\@unsupported{totalmarks macro}{1.2}}
 %    \end{macrocode}
 % \end{macro}
 % 
