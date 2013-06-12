@@ -1,16 +1,35 @@
 Version History
 ===============
 
+Version 2.4
+-----------
+
+* The various question environments must now be correctly nested (sub-sub-questions
+  within sub-questions within questions).
+
+* The `draft` class option now has the full functionality you would expect
+  (change bars, etc.).
+
+* Disabled the `twocolumn` class option.
+
+* Obsoleted the `\examsection` macro, which has been deprecated for ten years!
+
+* `ouexam` was incompatible with the `hyperref` package. Fixed.
+
+* Float pages on the last page of the document messed up both the page count
+  and the “TURN OVER”/“END” sequencing. Fixed.
+
+
 Version 2.3
 -----------
 
 * Updated exam paper formatting to conform to latest University standards.
 
-* Added “times” class option.
+* Added `times` class option.
 
-* ouexam now requires the fontenc, textcomp and lmodern packages.
+* `ouexam` now requires the `fontenc`, `textcomp` and `lmodern` packages.
 
-* Generating the class documentation now required PDFLaTeX.
+* Generating the class documentation now requires PDFLaTeX.
 
 
 Version 2.2
@@ -55,7 +74,7 @@ Version 2.0.2
 -------------
 
 * If you omitted any of the required title page macros (`\examyear`,
-  `\papernumber`, `\papertitle` or `\department`), ouexam crashed when trying
+  `\papernumber`, `\papertitle` or `\department`), `ouexam` crashed when trying
   to report the error. Fixed.
 
 * Added the ability to specify “FY” (full-year) as a semester type in the
