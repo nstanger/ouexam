@@ -35,7 +35,7 @@
 %
 % \fi
 %
-%% \CheckSum{906}
+%% \CheckSum{913}
 %%
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -423,6 +423,9 @@
 % \changes{2.4}{2013/05/31}{NJS Enforced proper question environment nesting.}
 % The various \textsf{question} environments must be correctly nested in order for the features described above to work correctly, i.e., \textsf{question} at the top level, followed by \textsf{subquestion} and \textsf{subsubquestion}. Any variation to this nesting order will cause an error.
 % 
+% \changes{2.4}{2013/06/13}{NJS Added \cs{questionskip} to control spacing between questions.}
+% You can control the spacing between top-level questions by redefining the \DescribeMacro{\questionskip} \cs{questionskip} length. It defaults to \cs{baselineskip}. Note that this applies only to the \textsf{question} environment; there are no equivalent lengths for \textsf{subquestion} or \textsf{subsubquestion}.
+% 
 % 
 % \changes{2.2}{2010/04/26}{NJS Added time allocation macros.}
 % \subsection{Time allocations}
@@ -473,7 +476,7 @@
 % 
 % \subsection{Miscellaneous}
 % 
-% Most examinationss are marked out of 100, and \textsf{ouexam} defaults to
+% Most examinations are marked out of 100, and \textsf{ouexam} defaults to
 % this. However, if you want an examination that is marked out of some other
 % number, for example, 90 marks, you can specify this using the
 % \DescribeMacro{\examoutof} \cs{examoutof} macro. Thus, |\examoutof{90}|
@@ -490,7 +493,7 @@
 % 
 % \subsection{Error messages}
 % 
-% \noindent\texttt{INCOMPATIBLE (\ldots): this document was written for an
+% \noindent\texttt{OBSOLETE (\ldots): this document was written for an
 % earlier}	\\
 % \texttt{version of ouexam \ldots}	\\
 % You are trying to use v2.0 or later of \textsf{ouexam} with a document that was written for \textsf{ouexam} v1.2 or earlier. Versions 2.0 and later of \textsf{ouexam} are \emph{fundamentally incompatible} with earlier versions. The only solutions here are either to revert to \textsf{ouexam} v1.2 or earlier (you can put a copy of the class file in the same directory as the document), or rewrite the document to conform to the current version of \textsf{ouexam}. You should be able to download a copy of v1.2 from the same location that you found the current version.	\\
@@ -1375,15 +1378,20 @@
 % 
 % \subsection{Question-building environments and associated items}
 % 
-% \changes{2.0}{2000/09/11}{NJS \textsf{question} environment no longer a
-% redefinition of \textsf{enumerate}.}
-% \changes{2.0}{2001/05/15}{NJS Added penalty handling to ensure correct
-% placement of marks in output.}
-% \changes{2.0}{2001/05/15}{NJS Total marks for a question are now printed only
-% if the question has no sub-questions.}
+% \changes{2.4}{2013/06/13}{NJS Added \cs{questionskip} to control spacing between questions.}
+% \begin{macro}{\questionskip}
+% \cs{questionskip} is the minimum amount of space between the end of one question and the start of the next. It defaults to the value of \cs{baselineskip}.
+%    \begin{macrocode}
+\newlength{\questionskip}
+\setlength{\questionskip}{\baselineskip}
+%    \end{macrocode}
+% \end{macro}
+%
+% \changes{2.0}{2000/09/11}{NJS \textsf{question} environment no longer a redefinition of \textsf{enumerate}.}
+% \changes{2.0}{2001/05/15}{NJS Added penalty handling to ensure correct placement of marks in output.}
+% \changes{2.0}{2001/05/15}{NJS Total marks for a question are now printed only if the question has no sub-questions.}
+% \changes{2.4}{2013/05/31}{NJS Check question depth when opening the environment.}
 % \begin{environment}{question}
-% \changes{2.4}{2013/05/31}{NJS Check question depth when opening the
-% environment.}
 % The \textsf{question} environment specifies a top-level question, and produces
 % questions numbered in the form ``1.'', ``2.'', etc. It has one mandatory
 % argument, the number of marks allocated to the question, which is used to
@@ -1422,9 +1430,7 @@
 % 
 % When the environment closes, the following things happen:
 % \begin{enumerate}
-% 	\item If the question has no sub-questions, the value of the |qexpected|
-% 	counter is added to |examrunning| and |sectrunning|, and both |qrunning|
-% 	and |lastexpected| are set to the value of |qexpected|.
+%   \item If the question has no sub-questions, the value of the |qexpected| counter is added to |examrunning| and |sectrunning|, and both |qrunning| and |lastexpected| are set to the value of |qexpected|.
 % 
 %    \begin{macrocode}
 }{%
@@ -1434,13 +1440,7 @@
       \setcounter{qrunning}{\value{qexpected}}%
 %    \end{macrocode}
 % 
-% 	The total number of marks for the question is then printed right-justified
-% 	on the line as ``(\emph{m} marks)'' where \emph{m} is the value of the
-% 	|qrunning| counter. The environment determines whether to print ``mark'' or
-% 	``marks'' automatically, and figures out whether the number of marks will fit
-% 	on the last line of the question or needs to be placed on the next line.
-% 	The code for handling the line breaking is derived from an example on page
-% 	106 of \emph{The \TeX{}book}:
+% 	The total number of marks for the question is then printed right-justified on the line as ``(\emph{m} marks)'' where \emph{m} is the value of the |qrunning| counter. The environment determines whether to print ``mark'' or ``marks'' automatically, and figures out whether the number of marks will fit on the last line of the question or needs to be placed on the next line. The code for handling the line breaking is derived from an example on page 106 of \emph{The \TeX{}book}:
 % 
 %    \begin{macrocode}
       \unskip\nobreak\hfil\penalty50\hskip2em\hbox{}\nobreak%
@@ -1448,11 +1448,7 @@
       \parfillskip=0pt \finalhyphendemerits=0 \par%
 %    \end{macrocode}
 % 
-% 	\item If the question \emph{does} have sub-questions, then |qrunning|,
-% 	|examrunning| and |sectrunning| have already been set by the various
-% 	sub-environments. The value of |qrunning| is then compared with
-% 	|qexpected|, and a warning is raised if they do not match. The total number
-% 	of marks for the question is \emph{not} printed in this case.
+%   \item If the question \emph{does} have sub-questions, then |qrunning|, |examrunning| and |sectrunning| have already been set by the various sub-environments. The value of |qrunning| is then compared with |qexpected|, and a warning is raised if they do not match. The total number of marks for the question is \emph{not} printed in this case.
 % 
 %    \begin{macrocode}
     \else%
@@ -1465,18 +1461,20 @@
     \fi%
 %    \end{macrocode}
 % 
-% 	\item |lastexpected| is set to the value of |qexpected| so it can be used
-% 	in any subsequent \textsf{marking} environment.
+%   \item |lastexpected| is set to the value of |qexpected| so it can be used in any subsequent \textsf{marking} environment.
 % 
 %    \begin{macrocode}
     \setcounter{lastexpected}{\value{qexpected}}%
   \end{list}%
 %    \end{macrocode}
 % 
-% 	\item |qdepth| is decremented.
+%   \item |qdepth| is decremented.
+% 
+%   \item \cs{questionskip} vertical space is inserted.
 % 
 %    \begin{macrocode}
   \addtocounter{qdepth}{-1}%
+  \vskip\questionskip%
 }
 %    \end{macrocode}
 % 
