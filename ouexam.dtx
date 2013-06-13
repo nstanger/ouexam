@@ -35,7 +35,7 @@
 %
 % \fi
 %
-%% \CheckSum{906}
+%% \CheckSum{909}
 %%
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -176,29 +176,11 @@
 % ``\textbf{END}''.}
 % \subsection{Page styles}
 % 
-% There are three page styles defined in this class:
+% There are two page styles defined in this class:
 % \begin{description}
-% 	\item[\textsf{plain}] \DescribeMacro{plain} This is a slight modification
-% 	of the \textsf{plain} page style from \textsf{article}. It produces pages
-% 	that have the page number centered at the bottom, the paper number in the
-% 	top right corner and the text ``\textbf{TURN OVER}'' in the bottom right.
-% 	This is the default page style.
+% 	\item[\textsf{plain}] \DescribeMacro{plain} This is a slight modification of the \textsf{plain} page style from \textsf{article}. It produces pages that have the page number centered at the bottom, the paper number in the top right corner and the text ``\textbf{TURN OVER}'' in the bottom right of every page except the last page, which has ``\textbf{END}'' instead. This is the default page style.
 % 	
-% 	\item[\textsf{lastpage}] \DescribeMacro{lastpage} This is similar to
-% 	\textsf{plain} but with ``\textbf{END}'' instead of ``\textbf{TURN
-% 	OVER}''. It is used for the last page of the examination. You
-% 	normally will not have to use this yourself---the class should take
-% 	care of it automatically. The class does however occasionally seem
-% 	to get confused, so there may times when you have to set the page
-% 	style of the last page manually. It will be fairly obvious when you
-% 	need to do this---the usual effect is that the last page
-% 	has ``\textbf{TURN OVER}'' printed on it when it should not.
-% 	
-% 	\item[\textsf{titlepage}] \DescribeMacro{titlepage} This is similar to
-% 	\textsf{plain} but without the page header, and is used for the title page
-% 	of the paper. As with \textsf{lastpage}, you will normally not use this
-% 	yourself, because the \cs{maketitlepage} macro handles this automatically
-% 	(see \hyperref[Sec:TitlePage]{section~\ref*{Sec:TitlePage}}).
+% 	\item[\textsf{titlepage}] \DescribeMacro{titlepage} This is similar to \textsf{plain} but without the page header, and is used for the title page of the paper. You will normally not use this yourself, because the \cs{maketitlepage} macro handles this automatically (see \hyperref[Sec:TitlePage]{section~\ref*{Sec:TitlePage}}).
 % \end{description}
 % 
 % 
@@ -876,9 +858,9 @@
 \def\@ouexam@obsolete#1#2{\ClassError{ouexam}{%
   ^^JOBSOLETE (#1)^^J%
   This document was written for an earlier version of ouexam and is^^J%
-  not compatible with ouexam v\ouexamversion. Please use ouexam v#2 or earlier^^J%
-  to process this document. Version #2 can be downloaded from the^^J%
-  same location as version\space\ouexamversion}}
+  not compatible with ouexam v\ouexamversion. Please either update your document^^J%
+  or use ouexam v#2 or earlier to process it. Version #2 can be^^J%
+  downloaded from the same location as version\space\ouexamversion}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2201,19 +2183,21 @@
 % \end{environment}
 % \end{environment}
 % 
-% \changes{2.1}{2004/04/16}{NJS Removed the \texttt{marks} macro entirely
-% because it conflicts with a macro in e-TeX.}
-% \changes{1.1}{1999/04/20}{NJS This macro now increments the \texttt{marks}
-% counter.}
+% \changes{2.1}{2004/04/16}{NJS Removed the \texttt{marks} macro entirely because it conflicts with a macro in e-TeX.}
+% \changes{1.1}{1999/04/20}{NJS This macro now increments the \texttt{marks} counter.}
 % \begin{macro}{\totalmarks}
-% \changes{1.1}{1999/04/20}{NJS Removed the parameter for the number of marks;
-% Both these macros have been replaced by automatic calculations within the
-% question-building environments.}
-% The \cs{marks} macro has been replaced by the argument to the various
-% question-building environments. The \cs{totalmarks} macro has been replaced
-% by automatic calculations within these environments.
+% \changes{1.1}{1999/04/20}{NJS Removed the parameter for the number of marks; Both these macros have been replaced by automatic calculations within the question-building environments.}
+% The \cs{marks} macro has been replaced by the argument to the various question-building environments. The \cs{totalmarks} macro has been replaced by automatic calculations within these environments.
 %    \begin{macrocode}
 \newcommand{\totalmarks}{\@ouexam@obsolete{totalmarks macro}{1.2}}
+%    \end{macrocode}
+% \end{macro}
+% 
+% \changes{2.4}{2004/06/05}{NJS Obsoleted the long-deprecated \cs{newsection} macro.}
+% \begin{macro}{\newsection}
+% The \cs{newsection} macro has been deprecated since version 2.0. Ten years seems a long enough time for it to now be safe to remove completely!
+%    \begin{macrocode}
+\newcommand{\newsection}{\@ouexam@obsolete{newsection macro}{2.3}}
 %    \end{macrocode}
 % \end{macro}
 % 
