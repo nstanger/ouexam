@@ -12,7 +12,7 @@ Version 2.4 (2013)
 
 * Disabled the `twocolumn` class option.
 
-* Obsoleted the `\examsection` macro, which has been deprecated for ten years!
+* Obsoleted the `\newsection` macro, which has been deprecated for ten years!
 
 * `ouexam` was incompatible with the `hyperref` package. Fixed.
 
