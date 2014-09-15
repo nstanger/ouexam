@@ -1,6 +1,6 @@
-\def\ouexamdate{13 June 2013}
-\def\ouexamversion{2.4}
-\def\ouexamshortdate{2013/06/13}
+\def\ouexamdate{15 September 2014}
+\def\ouexamversion{2.3.1}
+\def\ouexamshortdate{2014/09/15}
 % \iffalse meta-comment
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -2030,6 +2030,7 @@
 %
 % \begin{macro}{\@maketitlepage}
 % \changes{1.1}{1999/04/20}{NJS Renamed macro from \cs{maketitlepage}.}
+% \changes{2.3.1}{2014/09/15}{NJS Removed ``Paper'' from the title box.}
 % \changes{2.4}{2013/06/05}{NJS Added check for \textsf{hyperref} being loaded.}
 % The \cs{@maketitlepage} macro generates an examination title page that meets the Otago University requirements for final examination papers. You can redefine this if you want to change the format, but normally you would not do this.
 %    \begin{macrocode}
@@ -2048,7 +2049,7 @@
         \\%
         {\large \@dept} \\%
         \\%
-        {\large Paper \@pnumber} \\%
+        {\large \@pnumber} \\%
         \\%
         {\large \@ptitle} \\%
         \ifx\@semester\@empty\else\@semester \\ \fi%
