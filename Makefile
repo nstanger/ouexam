@@ -56,7 +56,7 @@ install: class doc example
 	cp ouexam.cls $(TEXMFHOME)/tex/latex/ouexam
 	mkdir -p $(TEXMFHOME)/doc/latex/ouexam/example
 	cp eg*.pdf ouexam.pdf ouexam.dtx ouexam.ins \
-		HISTORY.md MANIFEST README.md TODO.md \
+		HISTORY.md MANIFEST README.md \
 		$(TEXMFHOME)/doc/latex/ouexam
 	cp Create*.pdf example*.tex example*.pdf lstlang0.sty \
 		$(TEXMFHOME)/doc/latex/ouexam/example
