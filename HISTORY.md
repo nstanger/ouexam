@@ -21,6 +21,12 @@ Version 2.4 (2013)
   page style as part of this fix.)
 
 
+Version 2.3.1 (2014-09-15)
+--------------------------
+
+* Removed “Paper” from the title box to conform to University standards.
+
+
 Version 2.3 (2012-09-04)
 ------------------------
 
