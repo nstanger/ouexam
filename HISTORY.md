@@ -1,6 +1,12 @@
 Version History
 ===============
 
+Version 2.3.1 (2014-09-15)
+--------------------------
+
+* Removed “Paper” from the title box to conform to University standards.
+
+
 Version 2.3
 -----------
 
