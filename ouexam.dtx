@@ -1,6 +1,6 @@
-\def\ouexamdate{15 September 2014}
-\def\ouexamversion{2.3.1}
-\def\ouexamshortdate{2014/09/15}
+\def\ouexamdate{9 October 2014}
+\def\ouexamversion{2.3.2}
+\def\ouexamshortdate{2014/10/09}
 % \iffalse meta-comment
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -35,7 +35,7 @@
 %
 % \fi
 %
-%% \CheckSum{916}
+%% \CheckSum{919}
 %%
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -1372,6 +1372,8 @@
 % \changes{2.0}{2000/09/11}{NJS \textsf{question} environment no longer a redefinition of \textsf{enumerate}.}
 % \changes{2.0}{2001/05/15}{NJS Added penalty handling to ensure correct placement of marks in output.}
 % \changes{2.0}{2001/05/15}{NJS Total marks for a question are now printed only if the question has no sub-questions.}
+% \changes{2.3.2}{2014/10/09}{NJS Fixed crashing bug with verbatim environments
+% appearing at the end of questions.}
 % \changes{2.4}{2013/05/31}{NJS Check question depth when opening the environment.}
 % \begin{environment}{question}
 % The \textsf{question} environment specifies a top-level question, and produces
@@ -1425,7 +1427,7 @@
 % 	The total number of marks for the question is then printed right-justified on the line as ``(\emph{m} marks)'' where \emph{m} is the value of the |qrunning| counter. The environment determines whether to print ``mark'' or ``marks'' automatically, and figures out whether the number of marks will fit on the last line of the question or needs to be placed on the next line. The code for handling the line breaking is derived from an example on page 106 of \emph{The \TeX{}book}:
 % 
 %    \begin{macrocode}
-      \unskip\nobreak\hfil\penalty50\hskip2em\hbox{}\nobreak%
+      \vskip-\lastskip\nobreak\hfil\penalty50\hskip2em\hbox{}\nobreak%
       \hfil(\theqrunning~\ifnum\theqrunning=1 mark\else marks\fi)%
       \parfillskip=0pt \finalhyphendemerits=0 \par%
 %    \end{macrocode}
@@ -1468,6 +1470,8 @@
 % redefinition of \textsf{enumerate}.}
 % \changes{2.0}{2001/05/13}{NJS Added penalty handling to ensure correct placement
 % of marks in output.}
+% \changes{2.3.2}{2014/10/09}{NJS Fixed crashing bug with verbatim environments
+% appearing at the end of subquestions.}
 % \changes{2.4}{2013/05/31}{NJS Check question depth when opening the
 % environment.}
 % The \textsf{subquestion} environment is the analogue of \textsf{question} for
@@ -1515,7 +1519,7 @@
 % Then the number of marks for the sub-question are typeset in a similar manner
 % to the \textsf{question} environment:
 %    \begin{macrocode}
-      \unskip\nobreak\hfil\penalty50\hskip2em\hbox{}\nobreak%
+      \vskip-\lastskip\nobreak\hfil\penalty50\hskip2em\hbox{}\nobreak%
       \hfil(\thesubqrunning~\ifnum\thesubqrunning=1 mark\else marks\fi)%
       \parfillskip=0pt \finalhyphendemerits=0 \par%
 %    \end{macrocode}
@@ -1547,6 +1551,8 @@
 % redefinition of \textsf{enumerate}.}
 % \changes{2.0}{2001/05/13}{NJS Added penalty handling to ensure correct placement
 % of marks in output.}
+% \changes{2.3.2}{2014/10/09}{NJS Fixed crashing bug with verbatim environments
+% appearing at the end of subsubquestions.}
 % \changes{2.4}{2013/05/31}{NJS Check question depth when opening the
 % environment.}
 % This is similar to both \textsf{question} and \textsf{subquestion}, and
@@ -1587,7 +1593,7 @@
     \addtocounter{qrunning}{\value{subsubqexpected}}%
     \addtocounter{subqrunning}{\value{subsubqexpected}}%
     \setcounter{lastexpected}{\value{subsubqexpected}}%
-    \unskip\nobreak\hfil\penalty50\hskip2em\hbox{}\nobreak%
+    \vskip-\lastskip\nobreak\hfil\penalty50\hskip2em\hbox{}\nobreak%
     \hfil(\thesubsubqexpected~\ifnum\thesubsubqexpected=1 mark%
                               \else marks\fi)%
     \parfillskip=0pt \finalhyphendemerits=0 \par%
