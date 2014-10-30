@@ -63,5 +63,6 @@ FAQ
 
 You probably have a blank line between the end of your question text and the `\end{question}` macro that actually generates the number of marks. The line break gets processed by TeX before the number of marks is generated and effectively generates a new paragraph. Until I figure out how to stop this from happening, the workaround is to not leave blank lines between the end of the question text and the `\end{question}`.
 
-**Why can’t I build `content.tex`?**
+**Why can’t I build content.tex?**
+
 `content.tex` is an include file for both `example1.tex` and `example2.tex`. It doesn’t have a `\documentclass` and you therefore *can’t* `pdflatex` it! The only input files you should be building are `example1.tex` and `example2.tex`.
