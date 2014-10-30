@@ -1,11 +1,11 @@
-ouexam v2.3.1
+ouexam v2.3.2
 ===========
 
-ouexam document class v2.3.1, 15 September 2014
+ouexam document class v2.3.2, 9 October 2014
 
 Copyright 1999–2014 Nigel Stanger and University of Otago
 
-This LaTeX2e document class enables the production of University of Otago formatted examination papers. It handles all the fiddly layout requirements (such as printing “TURN OVER” at the bottom of every page except the last), and also ensures that the actual number of marks for questions in the examination add up to the expected number of marks.
+This LaTeX2ε document class enables the production of University of Otago formatted examination papers. It handles all the fiddly layout requirements (such as printing “**TURN OVER**” at the bottom of every page except the last), and also ensures that the actual number of marks for questions in the examination add up to the expected number of marks.
 
 
 Requirements
@@ -54,6 +54,7 @@ Put `eg*.pdf`, `ouexam.pdf`, `ouexam.dtx`, `ouexam.ins`, `HISTORY`, `MANIFEST`, 
 
 Put `Create*.pdf`, `example*.tex`, `example*.pdf` and `lstlang0.sty` in `/path/to/texmf/doc/latex/ouexam/example`.
 
+You can also build the examples using GUI tools such as TeXMaker, TeXShop, etc. (but see the FAQ below).
 
 FAQ
 ---
@@ -61,3 +62,7 @@ FAQ
 **The number of marks for my questions are not appearing at the end of the line even though there is plenty of room for them to fit.**
 
 You probably have a blank line between the end of your question text and the `\end{question}` macro that actually generates the number of marks. The line break gets processed by TeX before the number of marks is generated and effectively generates a new paragraph. Until I figure out how to stop this from happening, the workaround is to not leave blank lines between the end of the question text and the `\end{question}`.
+
+**Why can’t I build content.tex?**
+
+`content.tex` is an include file for both `example1.tex` and `example2.tex`. It doesn’t have a `\documentclass` and you therefore *can’t* `pdflatex` it! The only input files you should be building are `example1.tex` and `example2.tex`.
