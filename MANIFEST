@@ -1,21 +1,14 @@
-********************************************************************************
-**
-** File: $Id$
-**
-********************************************************************************
-
 CreateCluster.pdf		- images for the example document
 CreateIndex.pdf
 CreateObjectType.pdf
 CreateTable1.pdf
 CreateTable2.pdf
-FAQ
-INSTALL
+HISTORY.md
 MANIFEST
 Makefile
-README
-TODO
-example.tex				- example document source files
+README.md
+TODO.md
+content.tex				- example document source files
 example1.tex
 example2.tex
 lstlang0.sty			- listings language definitions for the example

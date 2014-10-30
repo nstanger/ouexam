@@ -45,7 +45,7 @@ $(EXAMPLE2_IMAGES): example2.pdf
 # Build the example only.
 example: example1.pdf example2.pdf
 
-example%.pdf: example%.tex example.tex ouexam.cls
+example%.pdf: example%.tex content.tex ouexam.cls
 	pdflatex $<
 	pdflatex $<
 
