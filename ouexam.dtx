@@ -294,35 +294,25 @@
 % \subsection{Sections}
 % \label{Sec:Sections}
 % 
-% Examination papers may optionally have multiple sections, ``numbered'' 
-% A, B, etc. Rather than redefine the existing \LaTeX\ section macros,
-% \textsf{ouexam} defines an \DescribeEnv{examsection} \textsf{examsection}
-% environment that generates a new section (there is also a
-% \DescribeEnv{examsection*} starred form that generates an unnumbered section).
-% The \textsf{examsection} environment has three mandatory arguments:
+% Examination papers may optionally have multiple sections, ``numbered'' A, B, etc. Rather than redefine the existing \LaTeX\ section macros, \textsf{ouexam} defines an \DescribeEnv{examsection} \textsf{examsection} environment that generates a new section. The \textsf{examsection} environment has three mandatory arguments:
 % \begin{enumerate}
-% 	\item The expected number of marks for the question. If you leave this
-% 	argument empty it defaults to zero. \textsf{ouexam} keeps a running total
-% 	of the \emph{actual} number of marks encountered within a section, which is
-% 	compared with the value of this argument when the environment is closed.
-% 	An error is raised if the values are not equal. The running total is also
-% 	typeset right-justified at the end of the section in the form
-% 	``\textbf{[SECTION A TOTAL 20 MARKS]}'' as an additional verification
-%   (or just ``\textbf{[TOTAL 20 MARKS]}'' for the starred form of the
-%   environment).
+% 	\item The expected number of marks for the question. If you leave this argument empty it defaults to zero. By default, \textsf{ouexam} keeps a running total of the \emph{actual} number of marks encountered within a section, which is compared with the value of this argument when the environment is closed (use the |ignoresubtotals| option to disable this, see below). An error is raised if the values are not equal. The running total is also typeset right-justified at the end of the section in the form ``\textbf{[SECTION A TOTAL 20 MARKS]}'' (unless the |hidetotal| option is specified, see below) as an additional verification (or just ``\textbf{[TOTAL 20 MARKS]}'' if the |hidetitle| option is specifed, see below).
 % 	
-% 	\item Instructions for answering questions in this section, such as
-% 	``\textbf{ANSWER ANY \underline{TWO} QUESTIONS.}''. The argument will be
-%   typeset in \textbf{bold face}. If you leave this argument empty it defaults
-%   to ``\textbf{ANSWER \underline{ALL} QUESTIONS (TOTAL xx MARKS).}'' (the
-%   marks total is omitted if it is zero).
+% 	\item Instructions for answering questions in this section, such as ``\textbf{ANSWER ANY \underline{TWO} QUESTIONS.}''. The argument will be typeset in \textbf{bold face}. If you leave this argument empty it defaults to ``\textbf{ANSWER \underline{ALL} QUESTIONS (TOTAL xx MARKS).}'' (the marks total is omitted if it is zero or if the |hidetotal| option is specified, see below).
 % 	
-% 	\item A description of the topic of the section (it could also be used to
-%   provide further, more detailed instructions). This can be left empty.
+% 	\item A description of the topic of the section (this could also be used to provide further, more detailed instructions). This can be left empty.
 % \end{enumerate}
-% Every section begins on a new page, and the section title is formatted as
-% ``\textbf{\underline{Section A}}'', in \cs{large} size. The starred form
-% omits the section title. For example:	\\
+%
+% The optional argument to \textsf{examsection} is a list of option keywords that control its behaviour. The available keys are:
+% \begin{description}
+%   \item[\texttt{showtitle}] Print the title of the section (enabled by default). Use |hidetitle| to suppress this.
+%
+%   \item[\texttt{showtotal}] Print a summary at the end of the section of the number of marks in the section (enabled by default). Use |hidetotal| to suppress this. This key does not cascade to any questions within the section.
+%
+%   \item[\texttt{checksubtotals}] Calculate the running total of marks for questions within the section, and verify that this matches the expected number of marks. Use |ignoresubtotals| to suppress this (this also implies |hidetotal|).
+% \end{description}
+%
+% Every section begins on a new page, and the section title is formatted as ``\textbf{\underline{Section A}}'', in \cs{large} size, unless the |hidetitle| option is specified. For example:	\\
 % 
 % \noindent|\begin{examsection}{25}{}{These questions are remarkably boring.}|	\\
 % \hspace*{1cm}\vdots	\\
@@ -343,7 +333,7 @@
 % 	}
 % \end{center}
 %
-% \noindent whereas the starred form will produce the following
+% \noindent whereas if we specify |hidetitle|:
 % 
 % \begin{center}
 % 	\fbox{%
@@ -1039,7 +1029,7 @@
 \RequirePackage{lmodern}
 %    \end{macrocode}
 %
-% \changes{2.4}{2016/05/03}{NJS Added requirement for \textsf{kvoptions}.
+% \changes{2.4}{2016/05/03}{NJS Added requirement for \textsf{kvoptions}.}
 %
 % Options to the \textsf{examsection} and various \textsf{question} environments require \textsf{kvoptions} to provide a more powerful interface.
 %
@@ -1051,27 +1041,30 @@
 % \changes{2.4}{2012/09/04}{NJS Added setup for \textsf{kvoptions}.}
 % \subsection{\textsf{kvoptions} setup}
 %
+% Separate key-value families are defined for each of the environments that need them, in order to avoid namespace clashes. Otherwise, something like hidetotal would cascade to all questions inside a section.
+%
+% The |xsection| family applies to the \textsf{examsection} environment.
 %    \begin{macrocode}
-%\SetupKeyvalOptions{family=ouexam,prefix=ouexam@}
+\SetupKeyvalOptions{family=xsection,prefix=xsection@}
 %    \end{macrocode}
-% |showtitle| enables the display of section titles. The opposite is |hidetitle| (this is the equivalent of a starred form in more ``traditional'' \LaTeX).
+% |showtitle| enables the display of section titles. The opposite is |hidetitle| (this equivalent to a starred form in more ``traditional'' \LaTeX).
 %    \begin{macrocode}
-%\DeclareBoolOption{showtitle}
-%\DeclareComplementaryOption{hidetitle}
+\DeclareBoolOption{showtitle}
+\DeclareComplementaryOption{hidetitle}{showtitle}
 %    \end{macrocode}
-% |showtotal| enables the display of marks totals for sections. The opposite is |hidetotal| (this is the equivalent of a starred form in more ``traditional'' \LaTeX).
+% |showtotal| enables the display of marks totals for sections. The opposite is |hidetotal|.
 %    \begin{macrocode}
-%\DeclareBoolOption{showtotal}
-%\DeclareComplementaryOption{hidetotal}
+\DeclareBoolOption{showtotal}
+\DeclareComplementaryOption{hidetotal}{showtotal}
 %    \end{macrocode}
-% |checksubtotals| causes \textsf{ouexam} to calculate a running total of all the sub-marks within a section or question and verify that this total matches the expected number of marks. The opposite is |ignoresubtotals|, which is useful for cases like optional questions, where the running total will normally sum to more than the expected number of marks. Obviously it's then up to the exam author to verify the totals are correct!
+% |checksubtotals| causes \textsf{examsection} to calculate a running total of all question marks within it and verify that this total matches the expected number of marks for the section. The opposite is |ignoresubtotals|, which is useful for cases like optional questions, where the running total will normally sum to more than the expected number of marks. Obviously it's then up to the exam author to verify the totals make sense!
 %    \begin{macrocode}
-%\DeclareBoolOption{checksubtotals}
-%\DeclareComplementaryOption{ignoresubtotals}
+\DeclareBoolOption{checksubtotals}
+\DeclareComplementaryOption{ignoresubtotals}{checksubtotals}
 %    \end{macrocode}
-% The defaults are |showtitle|, |showtotal|, and |checksubtotals|.
+% The defaults for the |xsection| family are |showtitle|, |showtotal|, and |checksubtotals|.
 %    \begin{macrocode}
-%\setkeys{ouexam}{showtitle,showtotal,checksubtotals}
+\setkeys{xsection}{showtitle,showtotal,checksubtotals}
 %    \end{macrocode}
 % 
 %
@@ -1756,82 +1749,67 @@
 % 
 % \subsection{Section handling}
 % 
-% \changes{2.0}{2002/01/09}{NJS new \textsf{examsection} environment.}
+% \changes{2.0}{2002/01/09}{NJS New \textsf{examsection} environment.}
 % \changes{2.0}{2002/01/09}{NJS New \cs{@defsecinst} macro.}
-% \changes{2.4}{2016/05/02}{NJS New \textsf{examsection*} environment.}
+% \changes{2.4}{2016/05/03}{NJS Added key-value options.}
 % \begin{environment}{examsection}
-% \begin{environment}{examsection*}
-% \begin{environment}{@examsection}
 % \begin{macro}{\@defsecinst}
-% \begin{macro}{\if@starsection}
 % The \textsf{examsection} environment specifies a major section of an
 % examination paper. Sections are sequentially numbered ``A'', ``B'', etc.
-% The environment has three arguments:
+% The environment has three mandatory arguments:
 % 
 % \begin{enumerate}
 % 	\item The expected number of marks for the section.
 % 
-% 	\item The instructions for this section. This defaults to ``ANSWER ALL
-%	QUESTIONS (TOTAL xx MARKS).'' if left blank (the marks total is also
-%   omitted if zero). To change the default text, redefine the
-%	\cs{@defsecinst} macro:
+% 	\item The instructions for this section. This defaults to ``ANSWER ALL QUESTIONS (TOTAL xx MARKS).'' if left blank (the marks total is also suppressed by |hidetotal|). To change the default text, redefine the \cs{@defsecinst} macro:
 %    \begin{macrocode}
 \def\@defsecinst{%
     ANSWER \underline{ALL} QUESTIONS%
-    \ifnum\thesectexpected=0%
-    \else\ (TOTAL \thesectexpected\ MARKS)\fi.%
+    \ifxsection@showtotal\ (TOTAL \thesectexpected\ MARKS)\fi.%
 }
 %    \end{macrocode}
 % 
 % 	\item A description of the contents of the section which may be left blank.
 % \end{enumerate}
-% 
-% The main environments are just wrappers around the \textsf{@examsection}
-% environment. The mode is indicated by setting the \cs{if@unnumberedsect}
-% switch:
-% 
-%    \begin{macrocode}
-\newif\if@unnumberedsect
-\newenvironment{examsection}[3]{%
-    \@unnumberedsectfalse%
-    \@examsection{#1}{#2}{#3}%
-}{\end@examsection}
-\newenvironment{examsection*}[3]{%
-    \@unnumberedsecttrue%
-    \@examsection{#1}{#2}{#3}%
-}{\end@examsection}
-%    \end{macrocode}
 %
-% The actual work is handled by the \textsf{@examsection} environment:
+% The optional argument to \textsf{examsection} is a list of keys that control its behaviour. The available keys are |showtitle| (default, opposite |hidetitle|), |showtotal| (default, opposite |hidetotal|), and |checksubtotals| (default, opposite |ignoresubtotals|).
 % 
 %    \begin{macrocode}
-\newenvironment{@examsection}[3]{%
+\newenvironment{examsection}[4][]{%
 %    \end{macrocode}
 % Every section begins on a new page regardless.
 %    \begin{macrocode}
+  \setkeys{xsection}{#1}%
   \newpage%
 %    \end{macrocode}
 % If the argument for the number of marks is left empty, default to zero.
 %    \begin{macrocode}
-  \def\@nummarks{#1}%
+  \def\@nummarks{#2}%
   \ifx\@nummarks\@empty\setcounter{sectexpected}{0}%
-  \else\setcounter{sectexpected}{#1}\fi%
+  \else\setcounter{sectexpected}{#2}\fi%
+%    \end{macrocode}
+% If the expected number of marks is zero, suppress the marks total.
+%    \begin{macrocode}
+  \ifnum\thesectexpected=0\setkeys{xsection}{hidetotal}\fi%
   \refstepcounter{xsection}%
-  \setcounter{sectrunning}{0}%
+%    \end{macrocode}
+% If |ignoresubtotals| is specified, set the running total to the expected total.
+%    \begin{macrocode}
+  \ifxsection@checksubtotals\setcounter{sectrunning}{0}%
+  \else\setcounter{sectrunning}{\thesectexpected}%
 %    \end{macrocode}
 % The section title is formatted as ``\textbf{\underline{Section A}}'', in
-% \cs{large} size. This is only output for the non-starred version.
+% \cs{large} size. Suppressed if |hidetitle| is specified.
 %    \begin{macrocode}
-  \if@unnumberedsect%
-  \else%
+  \ifxsection@showtitle%
     {\large\noindent\textbf{\underline{Section~\thexsection}}}%
     \\[0.5\baselineskip]%
   \fi%
-  \def\@usersecinst{#2}%
+  \def\@usersecinst{#3}%
   \noindent\textbf{\ifx\@usersecinst\@empty\@defsecinst%
                    \else\@usersecinst\fi%
   }\par%
-  \def\@usersectopic{#3}%
+  \def\@usersectopic{#4}%
   \noindent\ifx\@usersectopic\@empty%
            \else\par\noindent\@usersectopic\fi \\%
 }{%
@@ -1847,21 +1825,18 @@
     expected mark (\thesectexpected)}%
   \fi%
 %    \end{macrocode}
-% The total number marks for the section is printed in the form 
-% ``\textbf{[SECTION A TOTAL \emph{m} MARKS]}'' where \emph{m} is the value of
-% |sectrunning|. (The section number is omitted in the starred form.)
+% The total number marks for the section is printed in the form ``\textbf{[SECTION A TOTAL \emph{m} MARKS]}'' where \emph{m} is the value of |sectrunning|. The section number is suppressed if |hidetitle| is specified, while the entire total is suppressed if |hidetotal| is specified.
 % 
 %    \begin{macrocode}
-  \bigskip\hfill\textbf{%
-    \if@unnumberedsect{[}\else{[SECTION \thexsection\ }\fi TOTAL %
-                              \thesectrunning\ MARKS]%
-  }%
+  \ifxsection@showtotal%
+    \bigskip\hfill%
+    \textbf{[\ifxsection@showtitle{SECTION \thexsection\ }\fi%
+             TOTAL \thesectrunning\ MARKS]%
+    }%
+  \fi%
 }
 %    \end{macrocode}
 % \end{macro}
-% \end{macro}
-% \end{environment}
-% \end{environment}
 % \end{environment}
 % 
 % 
