@@ -1038,6 +1038,41 @@
 \RequirePackage{textcomp}
 \RequirePackage{lmodern}
 %    \end{macrocode}
+%
+% \changes{2.4}{2016/05/03}{NJS Added requirement for \textsf{kvoptions}.
+%
+% Options to the \textsf{examsection} and various \textsf{question} environments require \textsf{kvoptions} to provide a more powerful interface.
+%
+%    \begin{macrocode}
+\RequirePackage{kvoptions}
+%    \end{macrocode}
+% 
+%
+% \changes{2.4}{2012/09/04}{NJS Added setup for \textsf{kvoptions}.}
+% \subsection{\textsf{kvoptions} setup}
+%
+%    \begin{macrocode}
+%\SetupKeyvalOptions{family=ouexam,prefix=ouexam@}
+%    \end{macrocode}
+% |showtitle| enables the display of section titles. The opposite is |hidetitle| (this is the equivalent of a starred form in more ``traditional'' \LaTeX).
+%    \begin{macrocode}
+%\DeclareBoolOption{showtitle}
+%\DeclareComplementaryOption{hidetitle}
+%    \end{macrocode}
+% |showtotal| enables the display of marks totals for sections. The opposite is |hidetotal| (this is the equivalent of a starred form in more ``traditional'' \LaTeX).
+%    \begin{macrocode}
+%\DeclareBoolOption{showtotal}
+%\DeclareComplementaryOption{hidetotal}
+%    \end{macrocode}
+% |checksubtotals| causes \textsf{ouexam} to calculate a running total of all the sub-marks within a section or question and verify that this total matches the expected number of marks. The opposite is |ignoresubtotals|, which is useful for cases like optional questions, where the running total will normally sum to more than the expected number of marks. Obviously it's then up to the exam author to verify the totals are correct!
+%    \begin{macrocode}
+%\DeclareBoolOption{checksubtotals}
+%\DeclareComplementaryOption{ignoresubtotals}
+%    \end{macrocode}
+% The defaults are |showtitle|, |showtotal|, and |checksubtotals|.
+%    \begin{macrocode}
+%\setkeys{ouexam}{showtitle,showtotal,checksubtotals}
+%    \end{macrocode}
 % 
 %
 % \changes{2.3}{2012/09/04}{NJS Added font setup for \textsf{times} class
