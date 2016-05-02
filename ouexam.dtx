@@ -294,7 +294,12 @@
 % \subsection{Sections}
 % \label{Sec:Sections}
 % 
-% Examination papers may optionally have multiple sections, ``numbered'' A, B, \ldots. Rather than redefine the existing section macros, this class defines an \DescribeEnv{examsection} \textsf{examsection} environment that generates a new section. The \textsf{examsection} environment has three mandatory arguments:
+% Examination papers may optionally have multiple sections, ``numbered'' 
+% A, B, etc. Rather than redefine the existing \LaTeX\ section macros,
+% \textsf{ouexam} defines an \DescribeEnv{examsection} \textsf{examsection}
+% environment that generates a new section (there is also a
+% \DescribeEnv{examsection*} starred form that generates an unnumbered section).
+% The \textsf{examsection} environment has three mandatory arguments:
 % \begin{enumerate}
 % 	\item The expected number of marks for the question. If you leave this
 % 	argument empty it defaults to zero. \textsf{ouexam} keeps a running total
@@ -302,17 +307,22 @@
 % 	compared with the value of this argument when the environment is closed.
 % 	An error is raised if the values are not equal. The running total is also
 % 	typeset right-justified at the end of the section in the form
-% 	``\textbf{[SECTION A TOTAL 20 MARKS]}'' as an additional verification.
+% 	``\textbf{[SECTION A TOTAL 20 MARKS]}'' as an additional verification
+%   (or just ``\textbf{[TOTAL 20 MARKS]}'' for the starred form of the
+%   environment).
 % 	
-% 	\item Instructions for answering questions in this section (such as
-% 	``Answer any TWO questions.''). If you leave this argument empty it
-% 	defaults to ``ANSWER ALL QUESTIONS.''.
+% 	\item Instructions for answering questions in this section, such as
+% 	``\textbf{ANSWER ANY \underline{TWO} QUESTIONS.}''. The argument will be
+%   typeset in \textbf{bold face}. If you leave this argument empty it defaults
+%   to ``\textbf{ANSWER \underline{ALL} QUESTIONS (TOTAL xx MARKS).}'' (the
+%   marks total is omitted if it is zero).
 % 	
-% 	\item A description of the topic of the section. This can be left
-% 	empty.
+% 	\item A description of the topic of the section (it could also be used to
+%   provide further, more detailed instructions). This can be left empty.
 % \end{enumerate}
 % Every section begins on a new page, and the section title is formatted as
-% ``\textbf{\underline{Section A}}'', in \cs{large} size. For example:	\\
+% ``\textbf{\underline{Section A}}'', in \cs{large} size. The starred form
+% omits the section title. For example:	\\
 % 
 % \noindent|\begin{examsection}{25}{}{These questions are remarkably boring.}|	\\
 % \hspace*{1cm}\vdots	\\
@@ -325,14 +335,27 @@
 % 	\fbox{%
 % 	\begin{minipage}{0.9\columnwidth}
 % 		{\large\noindent\textbf{\underline{Section~A}}}	\\[0.5\baselineskip]
-% 		ANSWER ALL QUESTIONS.	\\
+% 		\textbf{ANSWER \underline{ALL} QUESTIONS (TOTAL 25 MARKS).}	\\
 % 		These questions are remarkably boring.	\\
 % 		\hspace*{2cm}\vdots	\\
 % 		\mbox{}\hfill\textbf{[SECTION A TOTAL 25 MARKS]}
 % 	\end{minipage}
 % 	}
 % \end{center}
+%
+% \noindent whereas the starred form will produce the following
 % 
+% \begin{center}
+% 	\fbox{%
+% 	\begin{minipage}{0.9\columnwidth}
+% 		\textbf{ANSWER \underline{ALL} QUESTIONS (TOTAL 25 MARKS).}	\\
+% 		These questions are remarkably boring.	\\
+% 		\hspace*{2cm}\vdots	\\
+% 		\mbox{}\hfill\textbf{[TOTAL 25 MARKS]}
+% 	\end{minipage}
+% 	}
+% \end{center}
+%
 % 
 % \subsection{Questions}
 % \label{Sec:Questions}
@@ -1692,29 +1715,56 @@
 % 
 % \changes{2.0}{2002/01/09}{NJS new \textsf{examsection} environment.}
 % \changes{2.0}{2002/01/09}{NJS New \cs{@defsecinst} macro.}
+% \changes{2.4}{2016/05/02}{NJS New \textsf{examsection*} environment.}
 % \begin{environment}{examsection}
+% \begin{environment}{examsection*}
+% \begin{environment}{@examsection}
 % \begin{macro}{\@defsecinst}
+% \begin{macro}{\if@starsection}
 % The \textsf{examsection} environment specifies a major section of an
-% examination paper. Sections are sequentially numbered ``A'', ``B'', etc. The
-% environment has three arguments:
+% examination paper. Sections are sequentially numbered ``A'', ``B'', etc.
+% The environment has three arguments:
 % 
 % \begin{enumerate}
 % 	\item The expected number of marks for the section.
 % 
 % 	\item The instructions for this section. This defaults to ``ANSWER ALL
-%	QUESTIONS.'' if left blank. To change the default text, redefine the
-%	\cs{@defsecinst} macro.
+%	QUESTIONS (TOTAL xx MARKS).'' if left blank (the marks total is also
+%   omitted if zero). To change the default text, redefine the
+%	\cs{@defsecinst} macro:
 %    \begin{macrocode}
-\def\@defsecinst{ANSWER ALL QUESTIONS\ifnum\thesectexpected=0\else\ (TOTAL \thesectexpected\ MARKS)\fi.}
+\def\@defsecinst{%
+    ANSWER \underline{ALL} QUESTIONS%
+    \ifnum\thesectexpected=0%
+    \else\ (TOTAL \thesectexpected\ MARKS)\fi.%
+}
 %    \end{macrocode}
 % 
 % 	\item A description of the contents of the section which may be left blank.
 % \end{enumerate}
 % 
+% The main environments are just wrappers around the \textsf{@examsection}
+% environment. The mode is indicated by setting the \cs{if@unnumberedsect}
+% switch:
+% 
 %    \begin{macrocode}
+\newif\if@unnumberedsect
 \newenvironment{examsection}[3]{%
+    \@unnumberedsectfalse%
+    \@examsection{#1}{#2}{#3}%
+}{\end@examsection}
+\newenvironment{examsection*}[3]{%
+    \@unnumberedsecttrue%
+    \@examsection{#1}{#2}{#3}%
+}{\end@examsection}
 %    \end{macrocode}
-% Every section begins on a new page.
+%
+% The actual work is handled by the \textsf{@examsection} environment:
+% 
+%    \begin{macrocode}
+\newenvironment{@examsection}[3]{%
+%    \end{macrocode}
+% Every section begins on a new page regardless.
 %    \begin{macrocode}
   \newpage%
 %    \end{macrocode}
@@ -1727,22 +1777,25 @@
   \setcounter{sectrunning}{0}%
 %    \end{macrocode}
 % The section title is formatted as ``\textbf{\underline{Section A}}'', in
-% \cs{large} size.
+% \cs{large} size. This is only output for the non-starred version.
 %    \begin{macrocode}
-  {\large\noindent\textbf{\underline{Section~\thexsection}}}%
-  \\[0.5\baselineskip]%
+  \if@unnumberedsect%
+  \else%
+    {\large\noindent\textbf{\underline{Section~\thexsection}}}%
+    \\[0.5\baselineskip]%
+  \fi%
   \def\@usersecinst{#2}%
-  \ifx\@usersecinst\@empty\@defsecinst\else\@usersecinst\fi\par%
+  \noindent\textbf{\ifx\@usersecinst\@empty\@defsecinst%
+                   \else\@usersecinst\fi%
+  }\par%
   \def\@usersectopic{#3}%
-  \ifx\@usersectopic\@empty\else\par\noindent\@usersectopic\fi \\%
+  \noindent\ifx\@usersectopic\@empty%
+           \else\par\noindent\@usersectopic\fi \\%
 }{%
 %    \end{macrocode}
 % 
 % When the environment closes, the value of |sectrunning| is compared against
-% |sectexpected|, and a warning is raised if they do not match. The total number
-% marks for the section is printed in the form ``\textbf{[SECTION A TOTAL
-% \emph{m} MARKS]}'' where \emph{m} is the value of |sectrunning|.
-% 
+% |sectexpected|, and a warning is raised if they do not match.
 %    \begin{macrocode}
   \ifnum\thesectrunning=\thesectexpected%
   \else\ClassWarning{ouexam}{%
@@ -1750,11 +1803,22 @@
     \thexsection\space doesn't match^^J%
     expected mark (\thesectexpected)}%
   \fi%
-  \bigskip\hfill\textbf{[SECTION \thexsection\ TOTAL %
-                              \thesectrunning\ MARKS]}%
+%    \end{macrocode}
+% The total number marks for the section is printed in the form 
+% ``\textbf{[SECTION A TOTAL \emph{m} MARKS]}'' where \emph{m} is the value of
+% |sectrunning|. (The section number is omitted in the starred form.)
+% 
+%    \begin{macrocode}
+  \bigskip\hfill\textbf{%
+    \if@unnumberedsect{[}\else{[SECTION \thexsection\ }\fi TOTAL %
+                              \thesectrunning\ MARKS]%
+  }%
 }
 %    \end{macrocode}
 % \end{macro}
+% \end{macro}
+% \end{environment}
+% \end{environment}
 % \end{environment}
 % 
 % 
