@@ -1705,7 +1705,7 @@
 %	QUESTIONS.'' if left blank. To change the default text, redefine the
 %	\cs{@defsecinst} macro.
 %    \begin{macrocode}
-\def\@defsecinst{ANSWER ALL QUESTIONS.}
+\def\@defsecinst{ANSWER ALL QUESTIONS\ifnum\thesectexpected=0\else\ (TOTAL \thesectexpected\ MARKS)\fi.}
 %    \end{macrocode}
 % 
 % 	\item A description of the contents of the section which may be left blank.
