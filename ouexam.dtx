@@ -372,13 +372,14 @@
 % 
 % All three environments have a single mandatory argument which is the
 % expected number of marks for the question, part or sub-part. If this
-% argument is left empty it will default to zero. This argument works in much
-% the same way as the first argument to the \textsf{examsection} environment
-% (see \hyperref[Sec:Sections]{section~\ref*{Sec:Sections}}): \textsf{ouexam}
-% keeps a running total of the number of marks encountered within each
-% question part and sub-part, and compares this total with the expected value
-% when the environment closes. Where appropriate, the running total is
-% typeset right-justified in the form ``(5 marks)''. For example:
+% argument is left empty it will default to zero (this has the side effect of
+% not printing the marks total at the end of the question). This argument works
+% in much the same way as the first argument to the \textsf{examsection}
+% environment (see \hyperref[Sec:Sections]{section~\ref*{Sec:Sections}}):
+% \textsf{ouexam} keeps a running total of the number of marks encountered
+% within each question part and sub-part, and compares this total with the
+% expected value when the environment closes. Where appropriate, the running
+% total is typeset right-justified in the form ``(5 marks)''. For example:
 % \begin{verbatim}
 % \begin{question}{5}
 %   \begin{subquestion}{2}
@@ -417,7 +418,8 @@
 % automatically, including considerations such as:
 % \begin{itemize}
 % 	\item whether or not to print the number of marks for a question at all
-% 	(they should not be printed if the question has sub-parts);
+% 	(they should not be printed if the question has sub-parts, and will also
+%   not be printed if the number of marks is zero);
 % 	
 % 	\item whether to print ``mark'' or ``marks'' (e.g., question 2 above); and
 % 	
@@ -1399,14 +1401,9 @@
 % appearing at the end of questions.}
 % \changes{2.4}{2013/05/31}{NJS Check question depth when opening the environment.}
 % \changes{2.4}{2015/08/19}{NJS Changed how question marks are positioned.}
+% \changes{2.4}{2016/05/02}{NJS Only output question marks if they're greater than zero.}
 % \begin{environment}{question}
-% The \textsf{question} environment specifies a top-level question, and produces
-% questions numbered in the form ``1.'', ``2.'', etc. It has one mandatory
-% argument, the number of marks allocated to the question, which is used to
-% initialise the |qexpected| counter\footnote{If it were not for the fact that
-% you can only refer to environment arguments in the environment preamble, the
-% \texttt{qexpected} counter would be unnecessary.}. If the argument is left
-% empty, default to zero for the number of marks:
+% The \textsf{question} environment specifies a top-level question, and produces questions numbered in the form ``1.'', ``2.'', etc. It has one mandatory argument, the number of marks allocated to the question, which is used to initialise the |qexpected| counter\footnote{If it were not for the fact that you can only refer to environment arguments in the environment preamble, the \texttt{qexpected} counter would be unnecessary.}. If the argument is left empty, default to zero for the number of marks:
 % 
 %    \begin{macrocode}
 \newenvironment{question}[1]{%
@@ -1448,12 +1445,15 @@
       \setcounter{qrunning}{\value{qexpected}}%
 %    \end{macrocode}
 % 
-% 	The total number of marks for the question is then printed right-justified on the line as ``(\emph{m} marks)'' where \emph{m} is the value of the |qrunning| counter. The environment determines whether to print ``mark'' or ``marks'' automatically, and figures out whether the number of marks will fit on the last line of the question or needs to be placed on the next line. The code for handling the line breaking is derived from an example on page 106 of \emph{The \TeX{}book}, with the addition of a \cs{leavevmode} to prevents \cs{unskip} (which can't be used in vertical mode) from crashing when the marks immediately follow a |verbatim| type environment. This may cause slightly more vertical space after environments (e.g., lists) than is ideal, but not enough to be a major problem.
+% 	The total number of marks for the question is then printed right-justified on the line as ``(\emph{m} marks)'' where \emph{m} is the value of the |qrunning| counter, \emph{unless} the number of marks is zero, in which case nothing is printed. The environment determines whether to print ``mark'' or ``marks'' automatically, and figures out whether the number of marks will fit on the last line of the question or needs to be placed on the next line. The code for handling the line breaking is derived from an example on page 106 of \emph{The \TeX{}book}, with the addition of a \cs{leavevmode} to prevent \cs{unskip} (which can't be used in vertical mode) from crashing when the marks immediately follow a |verbatim| type environment. This may cause slightly more vertical space after environments (e.g., lists) than is ideal, but not enough to be a major problem.
 % 
 %    \begin{macrocode}
-      \leavevmode\unskip\nobreak\hfil\penalty50\hskip2em\hbox{}\nobreak%
-      \hfil(\theqrunning~\ifnum\theqrunning=1 mark\else marks\fi)%
-      \parfillskip=0pt \finalhyphendemerits=0 \par%
+      \ifnum\theqexpected=0%
+      \else%
+        \leavevmode\unskip\nobreak\hfil\penalty50\hskip2em\hbox{}\nobreak%
+        \hfil(\theqrunning~\ifnum\theqrunning=1 mark\else marks\fi)%
+        \parfillskip=0pt \finalhyphendemerits=0 \par%
+      \fi%
 %    \end{macrocode}
 % 
 %   \item If the question \emph{does} have sub-questions, then |qrunning|, |examrunning| and |sectrunning| have already been set by the various sub-environments. The value of |qrunning| is then compared with |qexpected|, and a warning is raised if they do not match. The total number of marks for the question is \emph{not} printed in this case.
@@ -1498,6 +1498,7 @@
 % appearing at the end of subquestions.}
 % \changes{2.4}{2013/05/31}{NJS Check question depth when opening the environment.}
 % \changes{2.4}{2015/08/19}{NJS Changed how question marks are positioned.}
+% \changes{2.4}{2016/05/02}{NJS Only output question marks if they're greater than zero.}
 % The \textsf{subquestion} environment is the analogue of \textsf{question} for
 % sub-questions. On initialisation, it sets |subqexpected| to the value of the
 % mandatory argument (defaulting to zero if the argument is empty), increments
@@ -1543,9 +1544,12 @@
 % Then the number of marks for the sub-question are typeset in a similar manner
 % to the \textsf{question} environment:
 %    \begin{macrocode}
-      \leavevmode\unskip\nobreak\hfil\penalty50\hskip2em\hbox{}\nobreak%
-      \hfil(\thesubqrunning~\ifnum\thesubqrunning=1 mark\else marks\fi)%
-      \parfillskip=0pt \finalhyphendemerits=0 \par%
+      \ifnum\thesubqexpected=0%
+      \else%
+        \leavevmode\unskip\nobreak\hfil\penalty50\hskip2em\hbox{}\nobreak%
+        \hfil(\thesubqrunning~\ifnum\thesubqrunning=1 mark\else marks\fi)%
+        \parfillskip=0pt \finalhyphendemerits=0 \par%
+      \fi%
 %    \end{macrocode}
 % 
 % If the sub-question \emph{does} have sub-sub-questions, check the running total
@@ -1579,6 +1583,7 @@
 % appearing at the end of subsubquestions.}
 % \changes{2.4}{2013/05/31}{NJS Check question depth when opening the environment.}
 % \changes{2.4}{2015/08/19}{NJS Changed how question marks are positioned.}
+% \changes{2.4}{2016/05/02}{NJS Only output question marks if they're greater than zero.}
 % This is similar to both \textsf{question} and \textsf{subquestion}, and
 % generates an appropriately numbered sub-sub-question (``(i)'', ``(ii)'', etc.).
 %    \begin{macrocode}
@@ -1617,10 +1622,13 @@
     \addtocounter{qrunning}{\value{subsubqexpected}}%
     \addtocounter{subqrunning}{\value{subsubqexpected}}%
     \setcounter{lastexpected}{\value{subsubqexpected}}%
-    \leavevmode\unskip\nobreak\hfil\penalty50\hskip2em\hbox{}\nobreak%
-    \hfil(\thesubsubqexpected~\ifnum\thesubsubqexpected=1 mark%
-                              \else marks\fi)%
-    \parfillskip=0pt \finalhyphendemerits=0 \par%
+    \ifnum\thesubsubqexpected=0%
+    \else%
+      \leavevmode\unskip\nobreak\hfil\penalty50\hskip2em\hbox{}\nobreak%
+      \hfil(\thesubsubqexpected~\ifnum\thesubsubqexpected=1 mark%
+                                \else marks\fi)%
+      \parfillskip=0pt \finalhyphendemerits=0 \par%
+    \fi%
   \end{list}%
   \addtocounter{qdepth}{-1}%
 }
