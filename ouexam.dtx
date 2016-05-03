@@ -1029,42 +1029,157 @@
 \RequirePackage{lmodern}
 %    \end{macrocode}
 %
-% \changes{2.4}{2016/05/03}{NJS Added requirement for \textsf{kvoptions}.}
+% \changes{2.4}{2016/05/03}{NJS Added requirement for \textsf{pgfkeys}.}
 %
-% Options to the \textsf{examsection} and various \textsf{question} environments require \textsf{kvoptions} to provide a more powerful interface.
+% Options to the \textsf{examsection} and various \textsf{question} environments require \textsf{pgfkeys} to provide a more powerful interface.
 %
 %    \begin{macrocode}
-\RequirePackage{kvoptions}
+\RequirePackage{pgfkeys}
 %    \end{macrocode}
 % 
 %
-% \changes{2.4}{2012/09/04}{NJS Added setup for \textsf{kvoptions}.}
-% \subsection{\textsf{kvoptions} setup}
+% \changes{2.4}{2012/09/04}{NJS Added setup for \textsf{pgfkeys}.}
+% \subsection{\textsf{pgfkeys} setup}
 %
-% Separate key-value families are defined for each of the environments that need them, in order to avoid namespace clashes. Otherwise, something like hidetotal would cascade to all questions inside a section.
+% Separate key paths are defined for each of the environments that need them, in order to provide greater flexibility. Otherwise, options could cascade from the containing environment to its sub-environments. For example, we may wish to suppress the marks total for individual questions, but enable it for the enclosing section.
 %
-% The |xsection| family applies to the \textsf{examsection} environment.
+% \subsubsection{\texttt{/exam section/}}
+%
 %    \begin{macrocode}
-\SetupKeyvalOptions{family=xsection,prefix=xsection@}
+\newif\ifexamsection@showtitle
+\newif\ifexamsection@showtotal
+\newif\ifexamsection@verifytotal
+\pgfkeys{%
+  /exam section/.cd,%
 %    \end{macrocode}
-% |showtitle| enables the display of section titles. The opposite is |hidetitle| (this equivalent to a starred form in more ``traditional'' \LaTeX).
+% |show title| toggles the display of section titles.
 %    \begin{macrocode}
-\DeclareBoolOption{showtitle}
-\DeclareComplementaryOption{hidetitle}{showtitle}
+  show title/.is if=examsection@showtitle,%
+  show title/.default=true,%
 %    \end{macrocode}
-% |showtotal| enables the display of marks totals for sections. The opposite is |hidetotal|.
+% |show total| toggles the display of an overall marks total for a section.
 %    \begin{macrocode}
-\DeclareBoolOption{showtotal}
-\DeclareComplementaryOption{hidetotal}{showtotal}
+  show total/.is if=examsection@showtotal,%
+  show total/.default=true,%
 %    \end{macrocode}
-% |checksubtotals| causes \textsf{examsection} to calculate a running total of all question marks within it and verify that this total matches the expected number of marks for the section. The opposite is |ignoresubtotals|, which is useful for cases like optional questions, where the running total will normally sum to more than the expected number of marks. Obviously it's then up to the exam author to verify the totals make sense!
+% |verify total| (if |true|) causes \textsf{examsection} to calculate a running total of all question marks within it and verify that this total matches the expected number of marks for the section. Setting this to |false| is useful for cases like optional questions, where the running total will normally sum to more than the expected number of marks. Obviously it's then up to the exam author to verify the totals make sense!
 %    \begin{macrocode}
-\DeclareBoolOption{checksubtotals}
-\DeclareComplementaryOption{ignoresubtotals}{checksubtotals}
+  verify total/.is if=examsection@verifytotal,%
+  verify total/.default=true,%
 %    \end{macrocode}
-% The defaults for the |xsection| family are |showtitle|, |showtotal|, and |checksubtotals|.
+% Define some useful shortcut styles for disabling options.
 %    \begin{macrocode}
-\setkeys{xsection}{showtitle,showtotal,checksubtotals}
+  hide title/.style={show title=false},%
+  hide total/.style={show total=false},%
+  don't verify total/.style={verify total=false},%
+%    \end{macrocode}
+% Initialise defaults:
+%    \begin{macrocode}
+  show title,%
+  show total,%
+%   verify total%
+}
+%    \end{macrocode}
+%
+% \subsubsection{\texttt{/question/}}
+%
+%    \begin{macrocode}
+\newif\ifquestion@showmarks
+\newif\ifquestion@showtotal
+\newif\ifquestion@verifytotal
+\pgfkeys{%
+  /question/.cd,%
+%    \end{macrocode}
+% |show marks| toggles the display of marks for an individual question.
+%    \begin{macrocode}
+  show marks/.is if=question@showmarks,%
+  show marks/.default=true,%
+%    \end{macrocode}
+% |show total| toggles the display of an overall marks total for a question that has sub-parts (this also implies |show marks=false|, but we can't do that here). (Note that this doesn't actually do anything yet!)
+%    \begin{macrocode}
+  show total/.is if=question@showtotal,%
+  show total/.default=true,%
+%    \end{macrocode}
+% |verify total| works similarly to \textsf{examsection}.
+%    \begin{macrocode}
+  verify total/.is if=question@verifytotal,%
+  verify total/.default=true,%
+%    \end{macrocode}
+% Define some useful shortcut styles for disabling options.
+%    \begin{macrocode}
+  hide marks/.style={show marks=false},%
+  hide total/.style={show total=false},%
+  don't verify total/.style={verify total=false},%
+%    \end{macrocode}
+% Initialise defaults:
+%    \begin{macrocode}
+  show marks,%
+  hide total,%
+  verify total%
+}
+%    \end{macrocode}
+%
+% \subsubsection{\texttt{/subquestion/}}
+%
+%    \begin{macrocode}
+\newif\ifsubquestion@showmarks
+\newif\ifsubquestion@showtotal
+\newif\ifsubquestion@verifytotal
+\pgfkeys{%
+  /subquestion/.cd,%
+%    \end{macrocode}
+% |show marks| works similarly to \textsf{question}.
+%    \begin{macrocode}
+  show marks/.is if=subquestion@showmarks,%
+  show marks/.default=true,%
+%    \end{macrocode}
+% |show total| works similarly to \textsf{question}.
+%    \begin{macrocode}
+  show total/.is if=subquestion@showtotal,%
+  show total/.default=true,%
+%    \end{macrocode}
+% |verify total| works similarly to \textsf{examsection}.
+%    \begin{macrocode}
+  verify total/.is if=subquestion@verifytotal,%
+  verify total/.default=true,%
+%    \end{macrocode}
+% Define some useful shortcut styles for disabling options.
+%    \begin{macrocode}
+  hide marks/.style={show marks=false},%
+  hide total/.style={show total=false},%
+  don't verify total/.style={verify total=false},%
+%    \end{macrocode}
+% Initialise defaults:
+%    \begin{macrocode}
+  show marks,%
+  hide total,%
+  verify total%
+}
+%    \end{macrocode}
+%
+% \subsubsection{\texttt{/subsubquestion/}}
+%
+% Sub-sub-questions don't have sub-components, so |show total| and |verify total| are unnecessary.
+%
+%    \begin{macrocode}
+\newif\ifsubsubquestion@showmarks
+\newif\ifsubsubquestion@showtotal
+\pgfkeys{%
+  /subsubquestion/.cd,%
+%    \end{macrocode}
+% |show marks| works similarly to \textsf{question}.
+%    \begin{macrocode}
+  show marks/.is if=subsubquestion@showmarks,%
+  show marks/.default=true,%
+%    \end{macrocode}
+% Define some useful shortcut styles for disabling options.
+%    \begin{macrocode}
+  hide marks/.style={show marks=false},%
+%    \end{macrocode}
+% Initialise defaults:
+%    \begin{macrocode}
+  show marks%
+}
 %    \end{macrocode}
 % 
 %
@@ -1329,25 +1444,32 @@
 %    \end{macrocode}
 % \end{macro}
 % 
+% \begin{macro}{xsection}
+% \changes{2.0}{2002/01/29}{NJS New \texttt{xsection} counter.}
+% Set up a counter for the section ``number'' and define it so that it prints out as an upper case letter rather than a number. We could just redefine the |section| counter, but that interferes with the section numbering in the documentation, and we can't have that, can we? |:)|
+% 
+%    \begin{macrocode}
+\newcounter{xsection}
+\setcounter{xsection}{0}
+\renewcommand{\thexsection}{\Alph{xsection}}
+%    \end{macrocode}
+% \end{macro}
+% 
 % \begin{macro}{examrunning}
 % \changes{2.0}{2000/09/11}{NJS New \texttt{examrunning} counter.}
 % \begin{macro}{sectrunning}
 % \changes{2.0}{2002/01/09}{NJS New \texttt{sectrunning} counter.}
+% \changes{2.4}{2016/05/03}{NJS \texttt{sectrunning} now resets when the \texttt{xsection} counter increments.}
 % \begin{macro}{qrunning}
 % \changes{2.0}{2000/09/11}{NJS New \texttt{qrunning} counter.}
 % \begin{macro}{subqrunning}
 % \changes{2.0}{2000/09/11}{NJS New \texttt{subqrunning} counter.}
-% These four counters keep track of the running total of marks for the
-% current examination, section, question and subquestion respectively. This
-% is later compared against the corresponding expected total. A running total
-% is not needed for sub-sub-questions because they do not have sub-parts. The
-% |qrunning| and |subqrunning| counters are reset when the associated
-% question counters are incremented.
+% These four counters keep track of the running total of marks for the current examination, section, question and subquestion respectively. This is later compared against the corresponding expected total. A running total is not needed for sub-sub-questions because they do not have sub-parts. The |sectrunning|, |qrunning|, and |subqrunning| counters are reset when the associated counters are incremented.
 % 
 %    \begin{macrocode}
 \newcounter{examrunning}
 \setcounter{examrunning}{0}
-\newcounter{sectrunning}
+\newcounter{sectrunning}[xsection]
 \newcounter{qrunning}[question]
 \newcounter{subqrunning}[subquestion]
 %    \end{macrocode}
@@ -1395,20 +1517,6 @@
   \fi%
 }
 %    \end{macrocode}
-% 
-% \begin{macro}{xsection}
-% \changes{2.0}{2002/01/29}{NJS New \texttt{xsection} counter.}
-% Finally, we set up a counter for the section ``number'' and define it so
-% that it prints out as an upper case letter rather than a number. We could
-% just redefine the |section| counter, but that interferes with the section
-% numbering in the documentation, and we can't have that, can we? |:)|
-% 
-%    \begin{macrocode}
-\newcounter{xsection}
-\setcounter{xsection}{0}
-\renewcommand{\thexsection}{\Alph{xsection}}
-%    \end{macrocode}
-% \end{macro}
 %
 % 
 % \subsection{Question-building environments and associated items}
@@ -1434,11 +1542,25 @@
 % The \textsf{question} environment specifies a top-level question, and produces questions numbered in the form ``1.'', ``2.'', etc. It has one mandatory argument, the number of marks allocated to the question, which is used to initialise the |qexpected| counter\footnote{If it were not for the fact that you can only refer to environment arguments in the environment preamble, the \texttt{qexpected} counter would be unnecessary.}. If the argument is left empty, default to zero for the number of marks:
 % 
 %    \begin{macrocode}
-\newenvironment{question}[1]{%
-  \def\@nummarks{#1}%
-  \ifx\@nummarks\@empty\setcounter{qexpected}{0}%
-  \else\setcounter{qexpected}{#1}\fi%
+\newenvironment{question}[2][]{%
+  \def\@keyargs{#1}%
+  \ifx\@keyargs\@empty\else\pgfqkeys{/question}{#1}\fi%
 %    \end{macrocode}
+% If the argument for the number of marks is left empty, default to zero.
+%    \begin{macrocode}
+  \def\@nummarks{#2}%
+  \ifx\@nummarks\@empty\setcounter{qexpected}{0}%
+  \else\setcounter{qexpected}{#2}\fi%
+%    \end{macrocode}
+% If the expected number of marks is zero, suppress all marks display.
+%    \begin{macrocode}
+  \ifnum\theqexpected=0%
+    \pgfqkeys{/question}{show marks=false,show total=false}%
+  \fi%
+%    \end{macrocode}
+% |show total=true| implies |show marks=false|. It would be nice if this could just be handled in the pgfkeys initialisation, but it looks like you can't have a key with both code and a value.
+%    \begin{macrocode}
+  \ifquestion@showtotal\pgfqkeys{/question}{show marks=false}\fi%
 % 
 % Check that the environment is being opened at the correct depth. The \textsf{question} environment should normally only be opened at depth 0:
 %    \begin{macrocode}
@@ -1463,31 +1585,42 @@
 % 
 % When the environment closes, the following things happen:
 % \begin{enumerate}
-%   \item If the question has no sub-questions, the value of the |qexpected| counter is added to |examrunning| and |sectrunning|, and both |qrunning| and |lastexpected| are set to the value of |qexpected|.
+%   \item If the question has no sub-questions, the value of the |qexpected| counter is added to |examrunning| and |sectrunning| (unless |verify total=false| for the current section), and both |qrunning| and |lastexpected| are set to the value of |qexpected|.
 % 
 %    \begin{macrocode}
 }{%
     \ifnum\thehassubs=0%
-      \addtocounter{examrunning}{\value{qexpected}}%
-      \addtocounter{sectrunning}{\value{qexpected}}%
+      \ifexamsection@verifytotal%
+        \addtocounter{examrunning}{\value{qexpected}}%
+        \addtocounter{sectrunning}{\value{qexpected}}%
+      \fi%
       \setcounter{qrunning}{\value{qexpected}}%
 %    \end{macrocode}
 % 
-% 	The total number of marks for the question is then printed right-justified on the line as ``(\emph{m} marks)'' where \emph{m} is the value of the |qrunning| counter, \emph{unless} the number of marks is zero, in which case nothing is printed. The environment determines whether to print ``mark'' or ``marks'' automatically, and figures out whether the number of marks will fit on the last line of the question or needs to be placed on the next line. The code for handling the line breaking is derived from an example on page 106 of \emph{The \TeX{}book}, with the addition of a \cs{leavevmode} to prevent \cs{unskip} (which can't be used in vertical mode) from crashing when the marks immediately follow a |verbatim| type environment. This may cause slightly more vertical space after environments (e.g., lists) than is ideal, but not enough to be a major problem.
+% 	The total number of marks for the question is then printed right-justified on the line as ``(\emph{m} marks)'' where \emph{m} is the value of the |qrunning| counter, \emph{unless} the number of marks is zero or |show marks=false|, in which case nothing is printed. The environment determines whether to print ``mark'' or ``marks'' automatically, and figures out whether the number of marks will fit on the last line of the question or needs to be placed on the next line. The code for handling the line breaking is derived from an example on page 106 of \emph{The \TeX{}book}, with the addition of a \cs{leavevmode} to prevent \cs{unskip} (which can't be used in vertical mode) from crashing when the marks immediately follow a |verbatim| type environment. This may cause slightly more vertical space after environments (e.g., lists) than is ideal, but not enough to be a major problem.
 % 
 %    \begin{macrocode}
-      \ifnum\theqexpected=0%
-      \else%
+      \ifquestion@showmarks%
         \leavevmode\unskip\nobreak\hfil\penalty50\hskip2em\hbox{}\nobreak%
         \hfil(\theqrunning~\ifnum\theqrunning=1 mark\else marks\fi)%
         \parfillskip=0pt \finalhyphendemerits=0 \par%
       \fi%
 %    \end{macrocode}
 % 
-%   \item If the question \emph{does} have sub-questions, then |qrunning|, |examrunning| and |sectrunning| have already been set by the various sub-environments. The value of |qrunning| is then compared with |qexpected|, and a warning is raised if they do not match. The total number of marks for the question is \emph{not} printed in this case.
+%   \item If |show total=true|, then typeset the running total for the question, similar to that for sections.
+%
+%    \begin{macrocode}
+      \ifquestion@showtotal%
+        \par\hfill%
+        \textbf{[QUESTION \thequestion\ TOTAL \theqrunning\ MARKS]}%
+      \fi%
+%    \end{macrocode}
+% 
+%   \item If the question \emph{does} have sub-questions, then |qrunning|, |examrunning| and |sectrunning| have already been set by the various sub-environments. The value of |qrunning| is then compared with |qexpected|, and a warning is raised if they do not match. The total number of marks for the question is \emph{not} printed in this case. If |verify total=false|, |qrunning| is just set to the value of |qexpected|.
 % 
 %    \begin{macrocode}
     \else%
+      \ifquestion@verifytotal\else\setcounter{qrunning}{\value{qexpected}}\fi%
       \ifnum\theqrunning=\theqexpected%
       \else\ClassWarning{ouexam}{%
         actual mark (\theqrunning) for question %
@@ -1536,13 +1669,20 @@
 % ``(a)'', ``(b)'', etc.
 % 
 %    \begin{macrocode}
-\newenvironment{subquestion}[1]{%
-  \def\@nummarks{#1}%
+\newenvironment{subquestion}[2][]{%
+  \def\@keyargs{#1}%
+  \ifx\@keyargs\@empty\else\pgfqkeys{/subquestion}{#1}\fi%
+  \def\@nummarks{#2}%
   \ifx\@nummarks\@empty\setcounter{subqexpected}{0}%
-  \else\setcounter{subqexpected}{#1}\fi%
-  \setcounter{subqexpected}{#1}%
+  \else\setcounter{subqexpected}{#2}\fi%
+  \ifnum\thesubqexpected=0%
+    \pgfqkeys{/subquestion}{show marks=false,show total=false}%
+  \fi%
+  \ifsubquestion@showtotal\pgfqkeys{/subquestion}{show marks=false}\fi%
+%    \end{macrocode}
+% Increment |hassubs| so that the enclosing \textsf{question} environment can react appropriately:
+%    \begin{macrocode}
   \addtocounter{hassubs}{1}%
-  \refstepcounter{subquestion}%
 %    \end{macrocode}
 % The \textsf{subquestion} environment should normally only be opened at depth 1:
 %    \begin{macrocode}
@@ -1553,6 +1693,7 @@
     environment}%
   \fi%
   \addtocounter{qdepth}{1}%
+  \refstepcounter{subquestion}%
   \begin{list}{\labelsubquestion}{\settowidth{\labelwidth}{(m)}}%
     \item \ignorespaces%
 }{%
@@ -1564,19 +1705,30 @@
 % 
 %    \begin{macrocode}
     \ifnum\thehassubsubs=0%
-      \addtocounter{examrunning}{\value{subqexpected}}%
-      \addtocounter{sectrunning}{\value{subqexpected}}%
-      \addtocounter{qrunning}{\value{subqexpected}}%
+      \ifexamsection@verifytotal%
+        \addtocounter{examrunning}{\value{subqexpected}}%
+        \addtocounter{sectrunning}{\value{subqexpected}}%
+      \fi%
+%    \end{macrocode}
+%
+% If the parent question is |verify total=false|, don't add the marks for this sub-question to the parent's running total.
+%
+%    \begin{macrocode}
+      \ifquestion@verifytotal%
+        \addtocounter{qrunning}{\value{subqexpected}}%
+      \fi%
       \setcounter{subqrunning}{\value{subqexpected}}%
 %    \end{macrocode}
-% Then the number of marks for the sub-question are typeset in a similar manner
-% to the \textsf{question} environment:
+% Then the number of marks or the running total for the sub-question are typeset in a similar manner to the \textsf{question} environment:
 %    \begin{macrocode}
-      \ifnum\thesubqexpected=0%
-      \else%
+      \ifsubquestion@showmarks%
         \leavevmode\unskip\nobreak\hfil\penalty50\hskip2em\hbox{}\nobreak%
         \hfil(\thesubqrunning~\ifnum\thesubqrunning=1 mark\else marks\fi)%
         \parfillskip=0pt \finalhyphendemerits=0 \par%
+      \fi%
+      \ifsubquestion@showtotal%
+        \par\hfill%
+        \textbf{[QUESTION \thequestion(\alph{subquestion})\ TOTAL \thesubqrunning\ MARKS]}%
       \fi%
 %    \end{macrocode}
 % 
@@ -1584,6 +1736,7 @@
 % against the expected number and raise an error if they don't match.
 %    \begin{macrocode}
     \else%
+      \ifsubquestion@verifytotal\else\setcounter{subqrunning}{\value{subqexpected}}\fi%
       \ifnum\thesubqrunning=\thesubqexpected%
       \else\ClassWarning{ouexam}{%
         actual mark (\thesubqrunning) for question %
@@ -1615,10 +1768,15 @@
 % This is similar to both \textsf{question} and \textsf{subquestion}, and
 % generates an appropriately numbered sub-sub-question (``(i)'', ``(ii)'', etc.).
 %    \begin{macrocode}
-\newenvironment{subsubquestion}[1]{%
-  \def\@nummarks{#1}%
+\newenvironment{subsubquestion}[2][]{%
+  \def\@keyargs{#1}%
+  \ifx\@keyargs\@empty\else\pgfqkeys{/subsubquestion}{#1}\fi%
+  \def\@nummarks{#2}%
   \ifx\@nummarks\@empty\setcounter{subsubqexpected}{0}%
-  \else\setcounter{subsubqexpected}{#1}\fi%
+  \else\setcounter{subsubqexpected}{#2}\fi%
+  \ifnum\thesubsubqexpected=0%
+    \pgfqkeys{/subsubquestion}{show marks=false}%
+  \fi%
 %    \end{macrocode}
 % Increment |hassubsubs| so that the enclosing \textsf{subquestion} environment
 % can react appropriately:
@@ -1645,13 +1803,18 @@
 % the number of marks.
 % 
 %    \begin{macrocode}
-    \addtocounter{examrunning}{\value{subsubqexpected}}%
-    \addtocounter{sectrunning}{\value{subsubqexpected}}%
-    \addtocounter{qrunning}{\value{subsubqexpected}}%
-    \addtocounter{subqrunning}{\value{subsubqexpected}}%
+    \ifexamsection@verifytotal%
+      \addtocounter{examrunning}{\value{subsubqexpected}}%
+      \addtocounter{sectrunning}{\value{subsubqexpected}}%
+    \fi%
+    \ifquestion@verifytotal%
+      \addtocounter{qrunning}{\value{subsubqexpected}}%
+    \fi%
+    \ifsubquestion@verifytotal%
+      \addtocounter{subqrunning}{\value{subsubqexpected}}%
+    \fi%
     \setcounter{lastexpected}{\value{subsubqexpected}}%
-    \ifnum\thesubsubqexpected=0%
-    \else%
+    \ifsubsubquestion@showmarks%
       \leavevmode\unskip\nobreak\hfil\penalty50\hskip2em\hbox{}\nobreak%
       \hfil(\thesubsubqexpected~\ifnum\thesubsubqexpected=1 mark%
                                 \else marks\fi)%
@@ -1765,7 +1928,7 @@
 %    \begin{macrocode}
 \def\@defsecinst{%
     ANSWER \underline{ALL} QUESTIONS%
-    \ifxsection@showtotal\ (TOTAL \thesectexpected\ MARKS)\fi.%
+    \ifexamsection@showtotal\ (TOTAL \thesectexpected\ MARKS)\fi.%
 }
 %    \end{macrocode}
 % 
@@ -1776,10 +1939,11 @@
 % 
 %    \begin{macrocode}
 \newenvironment{examsection}[4][]{%
+  \def\@keyargs{#1}%
+  \ifx\@keyargs\@empty\else\pgfqkeys{/exam section}{#1}\fi%
 %    \end{macrocode}
 % Every section begins on a new page regardless.
 %    \begin{macrocode}
-  \setkeys{xsection}{#1}%
   \newpage%
 %    \end{macrocode}
 % If the argument for the number of marks is left empty, default to zero.
@@ -1790,18 +1954,21 @@
 %    \end{macrocode}
 % If the expected number of marks is zero, suppress the marks total.
 %    \begin{macrocode}
-  \ifnum\thesectexpected=0\setkeys{xsection}{hidetotal}\fi%
+  \ifnum\thesectexpected=0\pgfqkeys{/exam section}{show total=false}\fi%
   \refstepcounter{xsection}%
 %    \end{macrocode}
-% If |ignoresubtotals| is specified, set the running total to the expected total.
+% If |verify total=false|, set the section running total to the expected total, and add the same amount to the exam running total. Questions inside the section will honour this and not add their marks to either the section or exam running totals.
 %    \begin{macrocode}
-  \ifxsection@checksubtotals\setcounter{sectrunning}{0}%
-  \else\setcounter{sectrunning}{\thesectexpected}%
+  \ifexamsection@verifytotal\setcounter{sectrunning}{0}%
+  \else%
+    \setcounter{sectrunning}{\value{sectexpected}}%
+    \addtocounter{examrunning}{\value{sectexpected}}%
+  \fi%
 %    \end{macrocode}
 % The section title is formatted as ``\textbf{\underline{Section A}}'', in
 % \cs{large} size. Suppressed if |hidetitle| is specified.
 %    \begin{macrocode}
-  \ifxsection@showtitle%
+  \ifexamsection@showtitle%
     {\large\noindent\textbf{\underline{Section~\thexsection}}}%
     \\[0.5\baselineskip]%
   \fi%
@@ -1825,12 +1992,12 @@
     expected mark (\thesectexpected)}%
   \fi%
 %    \end{macrocode}
-% The total number marks for the section is printed in the form ``\textbf{[SECTION A TOTAL \emph{m} MARKS]}'' where \emph{m} is the value of |sectrunning|. The section number is suppressed if |hidetitle| is specified, while the entire total is suppressed if |hidetotal| is specified.
+% The total number marks for the section is printed in the form ``\textbf{[SECTION A TOTAL \emph{m} MARKS]}'' where \emph{m} is the value of |sectrunning|. The section number is suppressed if |show title=false|, while the entire total is suppressed if |show total=false|.
 % 
 %    \begin{macrocode}
-  \ifxsection@showtotal%
+  \ifexamsection@showtotal%
     \bigskip\hfill%
-    \textbf{[\ifxsection@showtitle{SECTION \thexsection\ }\fi%
+    \textbf{[\ifexamsection@showtitle{SECTION \thexsection\ }\fi%
              TOTAL \thesectrunning\ MARKS]%
     }%
   \fi%
