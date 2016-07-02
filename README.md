@@ -23,11 +23,11 @@ To install the easy way:
 
 2 `make`
 
-3 `make install TEXMF_INSTALL=/path/to/texmf`.
+3 `make install TEXMFHOME=/path/to/texmf`.
   `/path/to/texmf` should be the root of your preferred texmf tree
   (e.g., `/usr/share/texmf`). You may need to do this as root
   depending on which texmf tree you are installing into. You can
-  also define `TEXMF_INSTALL` as an environment variable then simply
+  also define `TEXMFHOME` as an environment variable then simply
   type make install.
 
 To install manually, unpack the distribution archive, cd to the distribution directory, and do the following (now you know why there’s a Makefile ☺).
