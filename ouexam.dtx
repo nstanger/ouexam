@@ -1,10 +1,10 @@
-\def\ouexamdate{9 October 2014}
-\def\ouexamversion{2.3.2}
-\def\ouexamshortdate{2014/10/09}
+\def\ouexamdate{25 August 2016}
+\def\ouexamversion{2.4}
+\def\ouexamshortdate{2016/08/25}
 % \iffalse meta-comment
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%% Copyright 1999--2013 Nigel Stanger and University of Otago
+%% Copyright 1999--2016 Nigel Stanger and University of Otago
 %% 
 %% You may use this package freely, and also distribute it
 %% provided that you don't change it, make any money off
@@ -18,10 +18,11 @@
 \CodelineNumbered
 \RecordChanges
 
+\renewcommand{\rmdefault}{ppl}
 \usepackage{graphicx}
 % change hyperref options as required
 \usepackage[colorlinks,pdfpagemode=None,urlcolor=blue,
-            linkcolor=red,pdfauthor={Nigel Stanger}]{hyperref}
+            linkcolor=blue,pdfauthor={Nigel Stanger}]{hyperref}
 
 \title{The \textsf{ouexam} document class, v\ouexamversion}
 \author{Nigel Stanger\\nstanger@infoscience.otago.ac.nz}
@@ -35,7 +36,7 @@
 %
 % \fi
 %
-%% \CheckSum{1070}
+%% \CheckSum{1068}
 %%
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -162,7 +163,8 @@
 % This class requires the \textsf{verbatim} package in order to implement
 % the marking schedule functionality. It also expects modern \LaTeX\ font
 % handling capabilities, and therefore requires the \textsf{fontenc},
-% \textsf{textcomp} and \textsf{lmodern} classes.
+% \textsf{textcomp} and \textsf{lmodern} classes. \textsf{pgfkeys} is used
+% for key-value option handling.
 % 
 % 
 % \subsection{Page margins}
@@ -200,7 +202,7 @@
 % \cs{maketitlepage} in the document body.
 % 
 % The \DescribeMacro{\examyear} \cs{examyear} macro lets you specify the year
-% in which the examination is being held, for example, |\examyear{1999}|. This
+% in which the examination is being held, for example, |\examyear{2016}|. This
 % macro is mandatory.
 % 
 % The \DescribeMacro{\department} \cs{department} macro lets you specify the
@@ -242,7 +244,7 @@
 % \DescribeMacro{\permitcalculators}
 % \cs{allowcalculators} macro (\cs{permitcalculators} will also work).
 % This macro is optional---if you omit it, a sentence is inserted saying
-% that calculators are \emph{not} permitted. \cs{allowcalculators} has a
+% that calculators are \emph{not} permitted. The macro has a
 % single optional argument that specifies the kind of calculators
 % permitted. If omitted, it defaults to ``any'' (see below). Otherwise,
 % this argument must be one of the following values:
@@ -275,7 +277,7 @@
 % 
 % The \DescribeMacro{\copiesof} \cs{copiesof} macro lets you specify any
 % material that candidates are allowed to bring into the examination, for
-% example, |\copiesof{McFadden &| |Hoffer, 5th edition}|. This macro is
+% example, |\copiesof{McFadden \&| |Hoffer, 5th edition}|. This macro is
 % optional.
 % 
 % The \DescribeMacro{\otherinstructions} \cs{otherinstructions} macro lets you
@@ -296,23 +298,23 @@
 % 
 % Examination papers may optionally have multiple sections, ``numbered'' A, B, etc. Rather than redefine the existing \LaTeX\ section macros, \textsf{ouexam} defines an \DescribeEnv{examsection} \textsf{examsection} environment that generates a new section. The \textsf{examsection} environment has three mandatory arguments:
 % \begin{enumerate}
-% 	\item The expected number of marks for the question. If you leave this argument empty it defaults to zero. By default, \textsf{ouexam} keeps a running total of the \emph{actual} number of marks encountered within a section, which is compared with the value of this argument when the environment is closed (use the |ignoresubtotals| option to disable this, see below). An error is raised if the values are not equal. The running total is also typeset right-justified at the end of the section in the form ``\textbf{[SECTION A TOTAL 20 MARKS]}'' (unless the |hidetotal| option is specified, see below) as an additional verification (or just ``\textbf{[TOTAL 20 MARKS]}'' if the |hidetitle| option is specifed, see below).
+% 	\item The expected number of marks for the question. If you leave this argument empty it defaults to zero. By default, \textsf{ouexam} keeps a running total of the \emph{actual} number of marks encountered within a section, which is compared with the value of this argument when the environment is closed (use the |don't verify total| option to disable this; see below). An error is raised if the values are not equal. The running total is also typeset right-justified at the end of the section in the form ``\textbf{[SECTION A TOTAL 20 MARKS]}'' (unless the |hide total| option is specified; see below) as an additional verification (or just ``\textbf{[TOTAL 20 MARKS]}'' if the |hide title| option is specifed; see below).
 % 	
-% 	\item Instructions for answering questions in this section, such as ``\textbf{ANSWER ANY \underline{TWO} QUESTIONS.}''. The argument will be typeset in \textbf{bold face}. If you leave this argument empty it defaults to ``\textbf{ANSWER \underline{ALL} QUESTIONS (TOTAL xx MARKS).}'' (the marks total is omitted if it is zero or if the |hidetotal| option is specified, see below).
+% 	\item Instructions for answering questions in this section, such as ``\textbf{ANSWER ANY \underline{TWO} QUESTIONS.}''. The argument will be typeset in \textbf{bold face}. If you leave this argument empty it defaults to ``\textbf{ANSWER \underline{ALL} QUESTIONS (TOTAL xx MARKS).}'' (the marks total is omitted if it is zero or if the |hide total| option is specified; see below).
 % 	
 % 	\item A description of the topic of the section (this could also be used to provide further, more detailed instructions). This can be left empty.
 % \end{enumerate}
 %
-% The optional argument to \textsf{examsection} is a list of option keywords that control its behaviour. The available keys are:
+% The optional argument to \textsf{examsection} is a list of option keywords that control its behaviour. The available options are:
 % \begin{description}
-%   \item[\texttt{showtitle}] Print the title of the section (enabled by default). Use |hidetitle| to suppress this.
+%   \item[\texttt{show title}] \DescribeMacro{show title}\DescribeMacro{hide title} Print the title of the section (enabled by default). Specify |hide title| to suppress this.
 %
-%   \item[\texttt{showtotal}] Print a summary at the end of the section of the number of marks in the section (enabled by default). Use |hidetotal| to suppress this. This key does not cascade to any questions within the section.
+%   \item[\texttt{show total}] \DescribeMacro{show total}\DescribeMacro{hide total} Print a summary at the end of the section of the number of marks in the section (enabled by default). Specify |hide total| to suppress this. This option does not cascade to any questions within the section.
 %
-%   \item[\texttt{checksubtotals}] Calculate the running total of marks for questions within the section, and verify that this matches the expected number of marks. Use |ignoresubtotals| to suppress this (this also implies |hidetotal|).
+%   \item[\texttt{verify total}] \DescribeMacro{verify total}\DescribeMacro{don't verify total} Calculate the running total of marks for questions within the section, and verify that this matches the expected number of marks. Specify |don't verify total| to suppress this (this also implies |hide total|).
 % \end{description}
 %
-% Every section begins on a new page, and the section title is formatted as ``\textbf{\underline{Section A}}'', in \cs{large} size, unless the |hidetitle| option is specified. For example:	\\
+% Every section begins on a new page, and the section title is formatted as ``\textbf{\underline{Section A}}'', in \cs{large} size, unless the |hide title| option is specified. For example:	\\
 % 
 % \noindent|\begin{examsection}{25}{}{These questions are remarkably boring.}|	\\
 % \hspace*{1cm}\vdots	\\
@@ -333,7 +335,7 @@
 % 	}
 % \end{center}
 %
-% \noindent whereas if we specify |hidetitle|:
+% \noindent whereas |\begin{examsection}[hide title]{25}{}{...}| will produce:
 % 
 % \begin{center}
 % 	\fbox{%
@@ -407,15 +409,23 @@
 % The \textsf{question} environments handle formatting of marks totals
 % automatically, including considerations such as:
 % \begin{itemize}
-% 	\item whether or not to print the number of marks for a question at all
-% 	(they should not be printed if the question has sub-parts, and will also
-%   not be printed if the number of marks is zero);
+% 	\item whether or not to print the number of marks for a question at all (they should not be printed if the question has sub-parts, and will also not be printed if the number of marks is zero, or if the |hide marks| option is specified; see below);
 % 	
 % 	\item whether to print ``mark'' or ``marks'' (e.g., question 2 above); and
 % 	
 % 	\item where to position the number of marks relative to the question,
 % 	depending on how full the last line of the question is.
 % \end{itemize}
+%
+% The optional argument to the various \textsf{question} environments is a list of option keywords that control its behaviour. The available options are:
+%
+% \begin{description}
+%   \item[\texttt{show marks}] \DescribeMacro{show marks}\DescribeMacro{hide marks} Print the number of marks for the question (enabled by default). Specify |hide marks| to suppress them. This option is available for the \textsf{question}, \textsf{subquestion}, and \textsf{subsubquestion} environments. Note that the marks will \emph{always} be suppressed when a question has sub-questions, or if its expected number of marks is set to zero.
+%
+%   \item[\texttt{show total}] \DescribeMacro{show total}\DescribeMacro{hide total} Print a summary at the end of the question of the number of marks in the section (enabled by default). This option does not cascade to any sub-questions within the question. This option is available for the \textsf{question} and \textsf{subquestion} environments only (a \textsf{subsubquestion} has no sub-components to total). Specify |hide total| to suppress this.
+%
+%   \item[\texttt{verify total}] \DescribeMacro{verify total}\DescribeMacro{don't verify total} Calculate the running total of marks for sub-questions within the question, and verify that this matches the expected number of marks. Specify |don't verify total| to suppress this (this also implies |hide total|). This option is available for the \textsf{question} and \textsf{subquestion} environments only (a \textsf{subsubquestion} has no sub-components to total).
+% \end{description}
 % 
 % \changes{2.4}{2013/05/31}{NJS Enforced proper question environment nesting.}
 % The various \textsf{question} environments must be correctly nested in order for the features described above to work correctly, i.e., \textsf{question} at the top level, followed by \textsf{subquestion} and \textsf{subsubquestion}. Any variation to this nesting order will cause an error.
@@ -1071,7 +1081,7 @@
 %    \begin{macrocode}
   hide title/.style={show title=false},%
   hide total/.style={show total=false},%
-  don't verify total/.style={verify total=false},%
+  don't verify total/.style={verify total=false,show total=false},%
 %    \end{macrocode}
 % Initialise defaults:
 %    \begin{macrocode}
@@ -1109,7 +1119,7 @@
 %    \begin{macrocode}
   hide marks/.style={show marks=false},%
   hide total/.style={show total=false},%
-  don't verify total/.style={verify total=false},%
+  don't verify total/.style={verify total=false,show total=false},%
 %    \end{macrocode}
 % Initialise defaults:
 %    \begin{macrocode}
@@ -1147,7 +1157,7 @@
 %    \begin{macrocode}
   hide marks/.style={show marks=false},%
   hide total/.style={show total=false},%
-  don't verify total/.style={verify total=false},%
+  don't verify total/.style={verify total=false,show total=false},%
 %    \end{macrocode}
 % Initialise defaults:
 %    \begin{macrocode}
@@ -1163,7 +1173,6 @@
 %
 %    \begin{macrocode}
 \newif\ifsubsubquestion@showmarks
-\newif\ifsubsubquestion@showtotal
 \pgfkeys{%
   /subsubquestion/.cd,%
 %    \end{macrocode}
@@ -1935,7 +1944,7 @@
 % 	\item A description of the contents of the section which may be left blank.
 % \end{enumerate}
 %
-% The optional argument to \textsf{examsection} is a list of keys that control its behaviour. The available keys are |showtitle| (default, opposite |hidetitle|), |showtotal| (default, opposite |hidetotal|), and |checksubtotals| (default, opposite |ignoresubtotals|).
+% The optional argument to \textsf{examsection} is a list of keys that control its behaviour. The available keys are |show title| (default, opposite |hide title|), |show total| (default, opposite |hide total|), and |verify total| (default, opposite |don't verify total|).
 % 
 %    \begin{macrocode}
 \newenvironment{examsection}[4][]{%
@@ -1966,7 +1975,7 @@
   \fi%
 %    \end{macrocode}
 % The section title is formatted as ``\textbf{\underline{Section A}}'', in
-% \cs{large} size. Suppressed if |hidetitle| is specified.
+% \cs{large} size. Suppressed if |hide title| is specified.
 %    \begin{macrocode}
   \ifexamsection@showtitle%
     {\large\noindent\textbf{\underline{Section~\thexsection}}}%

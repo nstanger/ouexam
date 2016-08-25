@@ -1,9 +1,9 @@
-ouexam v2.3.2
+ouexam v2.4
 ===========
 
-ouexam document class v2.3.2, 9 October 2014
+ouexam document class v2.4, 25 August 2016
 
-Copyright 1999–2014 Nigel Stanger and University of Otago
+Copyright 1999–2016 Nigel Stanger and University of Otago
 
 This LaTeX2ε document class enables the production of University of Otago formatted examination papers. It handles all the fiddly layout requirements (such as printing “**TURN OVER**” at the bottom of every page except the last), and also ensures that the actual number of marks for questions in the examination add up to the expected number of marks.
 
@@ -11,7 +11,7 @@ This LaTeX2ε document class enables the production of University of Otago forma
 Requirements
 ------------
 
-You will need the `verbatim`, `fontenc`, `textcomp` and `lmodern` packages in order to use `ouexam`. These should all come standard with most TeX installations. To build the documentation and example files, you will need `graphicx`, `hyperref`, at least version 1.1 of the `listings` package, and the `pdfjam` tool.
+You will need the `verbatim`, `fontenc`, `textcomp`, `lmodern`, and `pgfkeys` packages in order to use `ouexam`. These should all come standard with most TeX installations. To build the documentation and example files, you will need `graphicx`, `hyperref`, at least version 1.1 of the `listings` package, and the `pdfjam` tool.
 
 
 Installing

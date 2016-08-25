@@ -1,11 +1,31 @@
 Version History
 ===============
 
-Version 2.4 (2013)
-------------------
+Version 2.4 (2016-08-25)
+------------------------
 
-* The various question environments must now be correctly nested (sub-sub-questions
-  within sub-questions within questions).
+### New features ###
+
+* Key-value options for the `examsection`, `question`, `subquestion`, and
+  `subsubquestion` environments. These let you control things like whether
+  marks and section titles are printed, and whether or not to compute and
+  verify marks totals for sub-components of sections and questions.
+
+* A `\questionskip` length to let you adjust the spacing between top-level
+  questions.
+
+* Optional questions—e.g., answer any three of five, where each question is
+  worth 20 marks each, for a total of 60—freaked out the automatic total
+  verification. The totalling can now be disabled for a section using the
+  `don't verify total` option (see above).
+
+* Added new `embargo` class option for embargoed exam papers, which have
+  somewhat different title page formatting requirements.
+
+### Fixes ###
+
+* The various question environments must now be correctly nested (i.e.,
+  sub-sub-questions within sub-questions within questions). [Stephen Cranefield]
 
 * The `draft` class option now has the full functionality you would expect
   (change bars, etc.).
@@ -14,11 +34,14 @@ Version 2.4 (2013)
 
 * Obsoleted the `\newsection` macro, which has been deprecated for ten years!
 
-* `ouexam` was incompatible with the `hyperref` package. Fixed.
+* `ouexam` was incompatible with the `hyperref` package. Fixed. [Mark George]
 
 * Float pages on the last page of the document messed up both the page count
   and the “TURN OVER”/“END” sequencing. Fixed. (Also removed the `lastpage`
-  page style as part of this fix.)
+  page style as part of this fix.) [Stephen Cranefield]
+
+* Fixed bug that caused a crash when there was a `verbatim` environment
+  followed by a blank line at the end of a question. [Mark George]
 
 
 Version 2.3.1 (2014-09-15)
