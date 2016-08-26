@@ -1087,7 +1087,7 @@
 %    \begin{macrocode}
   show title,%
   show total,%
-%   verify total%
+  verify total%
 }
 %    \end{macrocode}
 %
@@ -1594,7 +1594,7 @@
 % 
 % When the environment closes, the following things happen:
 % \begin{enumerate}
-%   \item If the question has no sub-questions, the value of the |qexpected| counter is added to |examrunning| and |sectrunning| (unless |verify total=false| for the current section), and both |qrunning| and |lastexpected| are set to the value of |qexpected|.
+%   \item If the question has no sub-questions, the value of the |qexpected| counter is added to |examrunning| and |sectrunning| (unless |verify total=false| for the current section), and |qrunning| is set to the value of |qexpected|.
 % 
 %    \begin{macrocode}
 }{%
@@ -1822,13 +1822,13 @@
     \ifsubquestion@verifytotal%
       \addtocounter{subqrunning}{\value{subsubqexpected}}%
     \fi%
-    \setcounter{lastexpected}{\value{subsubqexpected}}%
     \ifsubsubquestion@showmarks%
       \leavevmode\unskip\nobreak\hfil\penalty50\hskip2em\hbox{}\nobreak%
       \hfil(\thesubsubqexpected~\ifnum\thesubsubqexpected=1 mark%
                                 \else marks\fi)%
       \parfillskip=0pt \finalhyphendemerits=0 \par%
     \fi%
+    \setcounter{lastexpected}{\value{subsubqexpected}}%
   \end{list}%
   \addtocounter{qdepth}{-1}%
 }
