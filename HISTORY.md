@@ -1,7 +1,7 @@
 Version History
 ===============
 
-Version 2.4 (2016-08-25)
+Version 2.4 (2016-08-27)
 ------------------------
 
 ### New features ###

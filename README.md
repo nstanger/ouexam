@@ -1,7 +1,7 @@
 ouexam v2.4
 ===========
 
-ouexam document class v2.4, 25 August 2016
+ouexam document class v2.4, 27 August 2016
 
 Copyright 1999–2016 Nigel Stanger and University of Otago
 
