@@ -1,6 +1,6 @@
-\def\ouexamdate{26 August 2016}
+\def\ouexamdate{27 August 2016}
 \def\ouexamversion{2.4}
-\def\ouexamshortdate{2016/08/26}
+\def\ouexamshortdate{2016/08/27}
 % \iffalse meta-comment
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -36,7 +36,7 @@
 %
 % \fi
 %
-%% \CheckSum{1090}
+%% \CheckSum{1177}
 %%
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -256,8 +256,11 @@
 % 	\item[\textsf{none}] A sentence is inserted noting that no calculators are
 % 	permitted.
 % 
-% 	\item[\textsf{approved}] A sentence is inserted noting that only approved
-% 	calculators are permitted.
+% 	\item[\textsf{scientific}] A sentence is inserted noting that only approved
+% 	scientific calculators are permitted.
+% 
+% 	\item[\textsf{graphing}] A sentence is inserted noting that only approved
+% 	scientific and graphing calculators are permitted.
 % 
 % 	\item[\textsf{any}] (default) A sentence is inserted noting that any
 % 	calculator that does not have a communication capability is
@@ -283,9 +286,7 @@
 % example, |\copiesof{McFadden \&| |Hoffer, 5th edition}|. This macro is
 % optional.
 % 
-% The \DescribeMacro{\otherinstructions} \cs{otherinstructions} macro lets you
-% specify any other instructions not covered by any of the above, for example,
-% |\otherinstructions{No smoking| |allowed.}|. This macro is optional.
+% The \DescribeMacro{\otherinstructions} \cs{otherinstructions} macro lets you specify any other instructions not covered by any of the above, for example, |\otherinstructions{No smoking| |allowed.}|. This macro is optional. Note that if the examination is embargoed using the \textsf{embargo} class option, additional instructions will be automatically inserted here.
 % 
 % Once you have specified the content of the title page using the above
 % macros, you simply issue a \DescribeMacro{\maketitlepage} \cs{maketitlepage}
@@ -301,23 +302,23 @@
 % 
 % Examination papers may optionally have multiple sections, ``numbered'' A, B, etc. Rather than redefine the existing \LaTeX\ section macros, \textsf{ouexam} defines an \DescribeEnv{examsection} \textsf{examsection} environment that generates a new section. The \textsf{examsection} environment has three mandatory arguments:
 % \begin{enumerate}
-% 	\item The expected number of marks for the question. If you leave this argument empty it defaults to zero. By default, \textsf{ouexam} keeps a running total of the \emph{actual} number of marks encountered within a section, which is compared with the value of this argument when the environment is closed (use the |don't verify total| option to disable this; see below). An error is raised if the values are not equal. The running total is also typeset right-justified at the end of the section in the form ``\textbf{[SECTION A TOTAL 20 MARKS]}'' (unless the |hide total| option is specified; see below) as an additional verification (or just ``\textbf{[TOTAL 20 MARKS]}'' if the |hide title| option is specifed; see below).
+% 	\item The expected number of marks for the question. If you leave this argument empty it defaults to zero. By default, \textsf{ouexam} keeps a running total of the \emph{actual} number of marks encountered within a section, which is compared with the value of this argument when the environment is closed (use the \textsf{don't verify total} option to disable this; see below). An error is raised if the values are not equal. The running total is also typeset right-justified at the end of the section in the form ``\textbf{[SECTION A TOTAL 20 MARKS]}'' (unless the \textsf{hide total} option is specified; see below) as an additional verification (or just ``\textbf{[TOTAL 20 MARKS]}'' if the \textsf{hide title} option is specifed; see below).
 % 	
-% 	\item Instructions for answering questions in this section, such as ``\textbf{ANSWER ANY \underline{TWO} QUESTIONS.}''. The argument will be typeset in \textbf{bold face}. If you leave this argument empty it defaults to ``\textbf{ANSWER \underline{ALL} QUESTIONS (TOTAL xx MARKS).}'' (the marks total is omitted if it is zero or if the |hide total| option is specified; see below).
+% 	\item Instructions for answering questions in this section, such as ``\textbf{ANSWER ANY \underline{TWO} QUESTIONS.}''. The argument will be typeset in \textbf{bold face}. If you leave this argument empty it defaults to ``\textbf{ANSWER \underline{ALL} QUESTIONS (TOTAL xx MARKS).}'' (the marks total is omitted if it is zero or if the \textsf{hide total} option is specified; see below).
 % 	
 % 	\item A description of the topic of the section (this could also be used to provide further, more detailed instructions). This can be left empty.
 % \end{enumerate}
 %
 % The optional argument to \textsf{examsection} is a list of option keywords that control its behaviour. The available options are:
 % \begin{description}
-%   \item[\texttt{show title}] \DescribeMacro{show title}\DescribeMacro{hide title} Print the title of the section (enabled by default). Specify |hide title| to suppress this.
+%   \item[\textsf{show title}] \DescribeMacro{show title}\DescribeMacro{hide title} Print the title of the section (enabled by default). Specify \textsf{hide title} to suppress this.
 %
-%   \item[\texttt{show total}] \DescribeMacro{show total}\DescribeMacro{hide total} Print a summary at the end of the section of the number of marks in the section (enabled by default). Specify |hide total| to suppress this. This option does not cascade to any questions within the section.
+%   \item[\textsf{show total}] \DescribeMacro{show total}\DescribeMacro{hide total} Print a summary at the end of the section of the number of marks in the section (enabled by default). Specify \textsf{hide total} to suppress this. This option does not cascade to any questions within the section.
 %
-%   \item[\texttt{verify total}] \DescribeMacro{verify total}\DescribeMacro{don't verify total} Calculate the running total of marks for questions within the section, and verify that this matches the expected number of marks. Specify |don't verify total| to suppress this (this also implies |hide total|).
+%   \item[\textsf{verify total}] \DescribeMacro{verify total}\DescribeMacro{don't verify total} Calculate the running total of marks for questions within the section, and verify that this matches the expected number of marks. Specify \textsf{don't verify total} to suppress this (this also implies \textsf{hide total}).
 % \end{description}
 %
-% Every section begins on a new page, and the section title is formatted as ``\textbf{\underline{Section A}}'', in \cs{large} size, unless the |hide title| option is specified. For example:	\\
+% Every section begins on a new page, and the section title is formatted as ``\textbf{\underline{Section A}}'', in \cs{large} size, unless the \textsf{hide title} option is specified. For example:	\\
 % 
 % \noindent|\begin{examsection}{25}{}{These questions are remarkably boring.}|	\\
 % \hspace*{1cm}\vdots	\\
@@ -412,7 +413,7 @@
 % The \textsf{question} environments handle formatting of marks totals
 % automatically, including considerations such as:
 % \begin{itemize}
-% 	\item whether or not to print the number of marks for a question at all (they should not be printed if the question has sub-parts, and will also not be printed if the number of marks is zero, or if the |hide marks| option is specified; see below);
+% 	\item whether or not to print the number of marks for a question at all (they should not be printed if the question has sub-parts, and will also not be printed if the number of marks is zero, or if the \textsf{hide marks} option is specified; see below);
 % 	
 % 	\item whether to print ``mark'' or ``marks'' (e.g., question 2 above); and
 % 	
@@ -423,11 +424,11 @@
 % The optional argument to the various \textsf{question} environments is a list of option keywords that control its behaviour. The available options are:
 %
 % \begin{description}
-%   \item[\texttt{show marks}] \DescribeMacro{show marks}\DescribeMacro{hide marks} Print the number of marks for the question (enabled by default). Specify |hide marks| to suppress them. This option is available for the \textsf{question}, \textsf{subquestion}, and \textsf{subsubquestion} environments. Note that the marks will \emph{always} be suppressed when a question has sub-questions, or if its expected number of marks is set to zero.
+%   \item[\textsf{show marks}] \DescribeMacro{show marks}\DescribeMacro{hide marks} Print the number of marks for the question (enabled by default). Specify \textsf{hide marks} to suppress them. This option is available for the \textsf{question}, \textsf{subquestion}, and \textsf{subsubquestion} environments. Note that the marks will \emph{always} be suppressed when a question has sub-questions, or if its expected number of marks is set to zero.
 %
-%   \item[\texttt{show total}] \DescribeMacro{show total}\DescribeMacro{hide total} Print a summary at the end of the question of the number of marks in the section (enabled by default). This option does not cascade to any sub-questions within the question. This option is available for the \textsf{question} and \textsf{subquestion} environments only (a \textsf{subsubquestion} has no sub-components to total). Specify |hide total| to suppress this.
+%   \item[\textsf{show total}] \DescribeMacro{show total}\DescribeMacro{hide total} Print a summary at the end of the question of the number of marks in the section (enabled by default). This option does not cascade to any sub-questions within the question. This option is available for the \textsf{question} and \textsf{subquestion} environments only (a \textsf{subsubquestion} has no sub-components to total). Specify \textsf{hide total} to suppress this.
 %
-%   \item[\texttt{verify total}] \DescribeMacro{verify total}\DescribeMacro{don't verify total} Calculate the running total of marks for sub-questions within the question, and verify that this matches the expected number of marks. Specify |don't verify total| to suppress this (this also implies |hide total|). This option is available for the \textsf{question} and \textsf{subquestion} environments only (a \textsf{subsubquestion} has no sub-components to total).
+%   \item[\textsf{verify total}] \DescribeMacro{verify total}\DescribeMacro{don't verify total} Calculate the running total of marks for sub-questions within the question, and verify that this matches the expected number of marks. Specify \textsf{don't verify total} to suppress this (this also implies \textsf{hide total}). This option is available for the \textsf{question} and \textsf{subquestion} environments only (a \textsf{subsubquestion} has no sub-components to total).
 % \end{description}
 % 
 % \changes{2.4}{2013/05/31}{NJS Enforced proper question environment nesting.}
@@ -990,8 +991,8 @@
 % \changes{2.3}{2012/09/03}{NJS New \textsf{times} class option.}
 % \begin{macro}{\if@times}
 % \changes{2.3}{2012/09/03}{NJS New switch for \textsf{times}.}
-% The \textsf{times} option formats the exam paper using 13pt Times. If this
-% option is not specified, then the exam paper is formatted using 12pt Palatino.
+% The \textsf{times} option formats the examination paper using 13pt Times. If this
+% option is not specified, then the examination paper is formatted using 12pt Palatino.
 %
 %    \begin{macrocode}
 \newif\if@times \@timesfalse
@@ -1004,7 +1005,7 @@
 % \changes{2.4}{2016/09/26}{NJS New \textsf{embargo} class option.}
 % \begin{macro}{\if@embargo}
 % \changes{2.4}{2016/09/26}{NJS New switch for \textsf{embargo}.}
-% Specify the \textsf{embargo} option if the exam paper is to be embargoed. This will print a field for the candidate to enter their student ID in the top right corner of the title page, and add relevant text to the other instructions section of the title page.
+% Specify the \textsf{embargo} option if the examination paper is to be embargoed. This will print a field for the candidate to enter their student ID in the top right corner of the title page, and add relevant text to the other instructions section of the title page.
 %
 %    \begin{macrocode}
 \newif\if@embargo \@embargofalse
@@ -1088,7 +1089,7 @@
   show total/.is if=examsection@showtotal,%
   show total/.default=true,%
 %    \end{macrocode}
-% |verify total| (if |true|) causes \textsf{examsection} to calculate a running total of all question marks within it and verify that this total matches the expected number of marks for the section. Setting this to |false| is useful for cases like optional questions, where the running total will normally sum to more than the expected number of marks. Obviously it's then up to the exam author to verify the totals make sense!
+% |verify total| (if |true|) causes \textsf{examsection} to calculate a running total of all question marks within it and verify that this total matches the expected number of marks for the section. Setting this to |false| is useful for cases like optional questions, where the running total will normally sum to more than the expected number of marks. Obviously it's then up to the examination author to verify the totals make sense!
 %    \begin{macrocode}
   verify total/.is if=examsection@verifytotal,%
   verify total/.default=true,%
@@ -1360,7 +1361,7 @@
 %    \end{macrocode}
 % 
 % \begin{macro}{\ps@titlepage}
-% The \textsf{titlepage} page style is similar to \textsf{plain}, but without the header. If the exam is embargoed, insert a field for the candidate to write in their student ID in the top right corner.
+% The \textsf{titlepage} page style is similar to \textsf{plain}, but without the header. If the examination is embargoed, insert a field for the candidate to write in their student ID in the top right corner.
 %    \begin{macrocode}
 \def\ps@titlepage{%
   \def\@oddhead{%
@@ -2218,48 +2219,63 @@
 % If you omit it, it defaults to ``N/A''.
 % \end{macro}
 % \end{macro}
+%
+% \begin{macro}{\@inspection}
+% \changes{2.4}{2016/08/27}{NJS Refactored ``subject to inspection'' generation.}
+% Various items on the title page may have ``(Subject to inspection by the examiners)'' or similar text printed below them. Redefine the \cs{@inspection} macro to change this text. (Implemented as a separate macro to enable more flexible formatting.)
+%    \begin{macrocode}
+\def\@inspection{(Subject to inspection by the examiners)}
+%    \end{macrocode}
+% \end{macro}
 % 
 % \begin{macro}{\allowcalculators}
 % \begin{macro}{\@calculators}
 % \changes{2.1}{2004/04/05}{NJS Modified calculator macros to conform to
 % new University calculator regulations.}
+% \changes{2.1.2}{2008/08/14}{NJS Ensured that the correct default is set regardless of whether the calculators macro is called.}
+% \changes{2.4}{2016/08/27}{NJS Implemented updated calculator rules for 2016 onwards.}
+% \changes{2.4}{2016/08/27}{NJS Incorporated ``subject to inspection'' line.}
 % The \cs{allowcalculators} macro specifies whether or not calculators are
 % allowed in the examination (\cs{permitcalculators} is a synonym). If
 % \cs{allowcalculators} is omitted, \cs{@calculators} defaults to ``No
 % calculators are permitted.'':
 %    \begin{macrocode}
-\def\@calculators{No calculators are permitted.}
+\def\@calculators{No calculators permitted.}
 %    \end{macrocode}
-% Issuing an \cs{allowcalculators[none]} does nothing, as the default is
-% to disallow calculators anyway. Issuing an \cs{allowcalculators} or
-% \cs{allowcalculators[any]} redefines \cs{@calculators} to ``No
-% restriction on the model of calculator to be used, but no device with
-% communication capability shall be accepted as a calculator.'' Issuing an
-% \cs{allowcalculators[approved]} redefines \cs{@calculators} to ``Only
-% calculators on the University of Otago list of approved calculators are
-% permitted.'':
+% Issuing an \cs{allowcalculators[none]} does nothing, as the default is to disallow calculators anyway. Issuing an \cs{allowcalculators} or \cs{allowcalculators[any]} redefines \cs{@calculators} to ``Any model of calculator may be used provided it is battery powered, silent, truly portable and free of communication capabilities.'' Issuing an \cs{allowcalculators[scientific]} redefines \cs{@calculators} to ``Only calculators on the University of Otago list of approved scientific calculators may be used (any version of the following models: Casio FX82, Casio FX95, Casio FX100, Casio FX570, Sharp EL531).'' Issuing an \cs{allowcalculators[graphing]} redefines \cs{@calculators} to ``Only calculators appearing on the University of Otago list of approved scientific and graphing calculators may be used (any version of the following models: Casio FX82, Casio FX95, Casio FX100, Casio FX570, Casio FX9750, Casio FX9860, Sharp EL531).'' \emph{\textbf{[Deprecated from 2016; maintained for backwards compatibility only]} Issuing an \cs{allowcalculators[approved]} redefines \cs{@calculators} to ``Only calculators on the University of Otago list of approved calculators may be used.''}:
 %    \begin{macrocode}
 \def\@CalcNONE{none}
 \def\@CalcANY{any}
 \def\@CalcAPPROVED{approved}
-%    \end{macrocode}
-% \changes{2.1.2}{2008/08/14}{NJS Ensured that the correct default is set
-% regardless of whether the calculators macro is called.}
-%    \begin{macrocode}
+\def\@CalcSCIENTIFIC{scientific}
+\def\@CalcGRAPHING{graphing}
+
 \let\@calc\@CalcNONE
 \newcommand{\allowcalculators}[1][any]{%
   \def\@calc{#1}%
   \ifx\@calc\@CalcNONE%
-  \else\ifx\@calc\@CalcANY\def\@calculators{No restriction on the %
-    model of calculator to be used, but no device with communication %
-    capability shall be accepted as a calculator.}%
+  \else\ifx\@calc\@CalcANY\def\@calculators{Any model of calculator may be %
+    used provided it is battery powered, silent, truly portable and free of %
+    communication capabilities.\\[0.5\baselineskip]%
+    \mbox{}\hfill\@inspection}%
   \else\ifx\@calc\@CalcAPPROVED\def\@calculators{Only calculators on %
-    the University of Otago list of approved calculators are permitted.}%
+    the University of Otago list of approved calculators may be used.\\%
+    \mbox{}\hfill\@inspection}%
+  \else\ifx\@calc\@CalcSCIENTIFIC\def\@calculators{Only calculators on the %
+    University of Otago list of approved scientific calculators may be used %
+    (any version of the following models: Casio FX82, Casio FX95, Casio FX100, %
+    Casio FX570, Sharp EL531).\\%
+    \mbox{}\hfill\@inspection}%
+  \else\ifx\@calc\@CalcGRAPHING\def\@calculators{Only calculators on the %
+    University of Otago list of approved scientific and graphing calculators %
+    may be used (any version of the following models: Casio FX82, Casio FX95, %
+    Casio FX100, Casio FX570, Casio FX9750, Casio FX9860, Sharp EL531).\\[0.5\baselineskip]%
+    \mbox{}\hfill\@inspection}%
   \else\ClassWarning{ouexam}{%
     invalid argument `#1' for^^J%
-    \protect\allowcalculators; valid values are `none', `any' and `approved'.^^J%
+    \protect\allowcalculators; valid values are `none', `any', `scientific', and `graphing'.^^J%
     No calculators will be permitted}%
-  \fi\fi\fi%
+  \fi\fi\fi\fi\fi%
 }
 %    \end{macrocode}
 % \cs{@calculators} is used in \cs{@maketitlepage}.
@@ -2278,12 +2294,32 @@
 % \begin{macro}{\copiesof}
 % \begin{macro}{\@copiesof}
 % \changes{2.1.3}{2009/04/28}{NJS Changed default to ``N/A'' for \cs{copiesof}.}
+% \changes{2.4}{2016/08/27}{NJS Incorporated ``subject to inspection'' line.}
 % The \cs{copiesof} macro specifies any material that candidates are allowed to
 % bring into the examination, and is optional. It redefines the \cs{@copiesof}
 % macro that is used in \cs{@maketitlepage}:
 %    \begin{macrocode}
+\newlength{\@inspectionwidth}
+\settowidth{\@inspectionwidth}{\@inspection}
+
 \let\@copiesof\@NA
-\newcommand{\copiesof}[1]{\def\@copiesof{#1}}
+\newcommand{\copiesof}[1]{\def\@copiesof{%
+  #1%
+%    \end{macrocode}
+% We do some clever jiggery-pokery here (from \texttt{http://tex.stackexchange.com/questions/107726/how-to-get-the-natural-width-of-the-last-box-in-a-paragraph}) to insert extra vertical space between the text and the ``subject to inspection'' line if they overlap horizontally.
+%    \begin{macrocode}
+  {\abovedisplayshortskip\z@\abovedisplayskip\z@%
+   \belowdisplayshortskip\z@\belowdisplayskip\z@%
+   $$\global\dimen\@ne\predisplaysize%
+   \xdef\tmp{%
+     \predisplaysize\the\predisplaysize%
+     \prevgraf\the\prevgraf\relax}%
+   $$\vskip\dimexpr-\parskip-\baselineskip\relax}\tmp%
+  \ifdim\dimexpr\linewidth-\dimen\@ne\relax<\@inspectionwidth%
+    \vskip0.5\baselineskip%
+  \fi%
+  \mbox{}\hfill\@inspection%
+}}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -2360,62 +2396,47 @@
 %    \begin{macrocode}
   \underline{Candidates should answer questions as follows:}%
   \\[\baselineskip]%
-  \hspace*{1cm}\begin{minipage}{13.5cm}\@instructions\end{minipage}%
+  \hspace*{\parindent}\begin{minipage}{\dimexpr\textwidth-\parindent}\@instructions\end{minipage}%
   \\[\baselineskip]%
 %    \end{macrocode}
 % Print out any provided material:
 %    \begin{macrocode}
   \underline{The following material is provided:}%
   \\[\baselineskip]%
-  \hspace*{1cm}\begin{minipage}{13.5cm}\@material\end{minipage}%
+  \hspace*{\parindent}\begin{minipage}{\dimexpr\textwidth-\parindent}\@material\end{minipage}%
   \\[\baselineskip]%
 %    \end{macrocode}
 % Print out use of calculators section:
 %    \begin{macrocode}
   \underline{Use of calculators:} \\[\baselineskip]%
-  \hspace*{1cm}\begin{minipage}{13.5cm}\@calculators\end{minipage}%
+  \hspace*{\parindent}\begin{minipage}{\dimexpr\textwidth-\parindent}\@calculators\end{minipage}%
   \\[\baselineskip]%
 %    \end{macrocode}
 % \changes{2.1.3}{2009/04/28}{NJS Fixed vertical spacing.}
-% \changes{2.1.2}{2008/08/14}{NJS Ensure that the ``subject to inspection''
-% line for calculators is only printed when calculators actually are allowed.}
-% Only print out the ``subject to inspection'' line if calculators actually
-% are allowed (irrelevant otherwise):
-%    \begin{macrocode}
-  \ifx\@calc\@CalcNONE%
-  \else\mbox{}\hfill(Subject to inspection by the examiners.)%
-    \\[\baselineskip]%
-  \fi%
-%    \end{macrocode}
+% \changes{2.1.2}{2008/08/14}{NJS Ensure that the ``subject to inspection'' line for calculators is only printed when calculators actually are allowed.}
+% \changes{2.4}{2016-08-27}{NJS Refactored ``subject to inspection'' line (now done in \@calculators).}
 % Print out anything that candidates are allowed to bring:
 %    \begin{macrocode}
   \underline{Candidates are permitted copies of:}%
   \\[\baselineskip]%
-  \hspace*{1cm}\begin{minipage}{13.5cm}\@copiesof\end{minipage}%
+  \hspace*{\parindent}\begin{minipage}{\dimexpr\textwidth-\parindent}\@copiesof\end{minipage}%
   \\[\baselineskip]%
 %    \end{macrocode}
 % \changes{2.1.3}{2009/04/28}{NJS Fixed vertical spacing.}
 % \changes{2.1.2}{2008/08/14}{NJS Ensure that the ``subject to inspection''
 % line for other material is only printed when there actually \emph{is}
 % other material.}
-% Only print out the ``subject to inspection'' line if there actually
-% \emph{is} other material (irrelevant otherwise):
-%    \begin{macrocode}
-  \ifx\@copiesof\@NA%
-  \else\mbox{}\hfill(Subject to inspection by the examiners.)%
-    \\[\baselineskip]%
-  \fi%
-%    \end{macrocode}
+% \changes{2.4}{2016-08-27}{NJS Refactored ``subject to inspection'' line (now done in \@copiesof).}
 % \changes{2.1.3}{2009/04/28}{NJS Removed superfluous blank line.}
 % \changes{2.4}{2016/08/26}{NJS Added instruction for embargoed exams.}
 % Print out other instructions, and finish. Automatically insert an instruction to hand in the entire exam if it's embargoed.
 %    \begin{macrocode}
   \underline{Other Instructions:}%
   \\[\baselineskip]%
-  \hspace*{1cm}%
-  \begin{minipage}{13.5cm}%
+  \hspace*{\parindent}%
+  \begin{minipage}{\dimexpr\textwidth-\parindent}%
     \if@embargo%
-      Hand in entire exam attached to answer book(s).%
+      Hand in entire examination paper attached to answer book(s).%
       \ifx\@otherinst\@NA\else \\ \@otherinst\fi%
     \else\@otherinst%
     \fi%
