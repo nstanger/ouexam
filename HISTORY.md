@@ -43,6 +43,8 @@ Version 2.4 (2016-08-25)
 * Fixed bug that caused a crash when there was a `verbatim` environment
   followed by a blank line at the end of a question. [Mark George]
 
+* Updated to latest 2016 calculator rules.
+
 
 Version 2.3.1 (2014-09-15)
 --------------------------
