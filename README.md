@@ -59,10 +59,14 @@ You can also build the examples using GUI tools such as TeXMaker, TeXShop, etc. 
 FAQ
 ---
 
-**The number of marks for my questions are not appearing at the end of the line even though there is plenty of room for them to fit.**
+### The number of marks for my questions are not appearing at the end of the line even though there is plenty of room for them to fit. ###
 
 You probably have a blank line between the end of your question text and the `\end{question}` macro that actually generates the number of marks. The line break gets processed by TeX before the number of marks is generated and effectively generates a new paragraph. Until I figure out how to stop this from happening, the workaround is to not leave blank lines between the end of the question text and the `\end{question}`.
 
-**Why can’t I build content.tex?**
+### I fixed that, but there’s still vertical space between the end of my question and the number of marks. ###
+
+This is almost certainly because the question text ends with a list-based environment of some sort (including `itemize`, `enumerate`, `description`, `list`, `quote`, `quotation`, `center`, `flushleft`, and `flushright`). I’m not convinced that this can be fixed in a general way, but a workaround is to subtract a negative multiple of `\lastskip` immediately before the `\end{question}` (or whatever), e.g., `\vskip-2\lastskip`. -2 is about right if you want the marks to appear on the line following the question text, while -4.75 is about right if you want the marks to be aligned with the final line of the question text.
+
+### Why can’t I build content.tex? ###
 
 `content.tex` is an include file for both `example1.tex` and `example2.tex`. It doesn’t have a `\documentclass` and you therefore *can’t* `pdflatex` it! The only input files you should be building are `example1.tex` and `example2.tex`.
