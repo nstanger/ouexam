@@ -1,6 +1,15 @@
 Version History
 ===============
 
+Version 2.4.1 (2017-08-30)
+--------------------------
+
+### Updates ###
+
+* Added a little more detail to the automatically generated instructions for
+  embargoed exams.
+
+
 Version 2.4 (2016-08-27)
 ------------------------
 

@@ -1,10 +1,10 @@
-\def\ouexamdate{27 August 2016}
-\def\ouexamversion{2.4}
-\def\ouexamshortdate{2016/08/27}
+\def\ouexamdate{30 August 2017}
+\def\ouexamversion{2.4.1}
+\def\ouexamshortdate{2017/08/30}
 % \iffalse meta-comment
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%% Copyright 1999--2016 Nigel Stanger and University of Otago
+%% Copyright 1999--2017 Nigel Stanger and University of Otago
 %% 
 %% You may use this package freely, and also distribute it
 %% provided that you don't change it, make any money off
@@ -25,7 +25,7 @@
             linkcolor=blue,pdfauthor={Nigel Stanger}]{hyperref}
 
 \title{The \textsf{ouexam} document class, v\ouexamversion}
-\author{Nigel Stanger\\nstanger@infoscience.otago.ac.nz}
+\author{Nigel Stanger\\nigel.stanger@otago.ac.nz}
 \date{\ouexamdate}
 
 \begin{document}
@@ -2429,6 +2429,7 @@
 % \changes{2.4}{2016-08-27}{NJS Refactored ``subject to inspection'' line (now done in \@copiesof).}
 % \changes{2.1.3}{2009/04/28}{NJS Removed superfluous blank line.}
 % \changes{2.4}{2016/08/26}{NJS Added instruction for embargoed exams.}
+% \changes{2.4.1}{2017/08/30}{NJS Added detail to instruction for embargoed exams.}
 % Print out other instructions, and finish. Automatically insert an instruction to hand in the entire exam if it's embargoed.
 %    \begin{macrocode}
   \underline{Other Instructions:}%
@@ -2436,7 +2437,7 @@
   \hspace*{\parindent}%
   \begin{minipage}{\dimexpr\textwidth-\parindent}%
     \if@embargo%
-      Hand in entire examination paper attached to answer book(s).%
+      You must hand in the entire examination paper attached to your answer book(s) using the provided tie.%
       \ifx\@otherinst\@NA\else \\ \@otherinst\fi%
     \else\@otherinst%
     \fi%
