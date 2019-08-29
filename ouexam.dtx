@@ -1,6 +1,6 @@
-\def\ouexamdate{30 August 2017}
-\def\ouexamversion{2.4.1}
-\def\ouexamshortdate{2017/08/30}
+\def\ouexamdate{30 August 2019}
+\def\ouexamversion{2.4.2}
+\def\ouexamshortdate{2019/08/30}
 % \iffalse meta-comment
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -36,7 +36,7 @@
 %
 % \fi
 %
-%% \CheckSum{1177}
+%% \CheckSum{1149}
 %%
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -420,6 +420,8 @@
 % 	\item where to position the number of marks relative to the question,
 % 	depending on how full the last line of the question is.
 % \end{itemize}
+% \changes{2.4.2}{2019/08/30}{NJS Refactored marks printing.}
+% If you want to change the way marks are typeset (positioning, appearance, etc.), you can redefine the \DescribeMacro{printmarks} \textsf{printmarks} macro, but be aware that \textsf{printmarks} does a lot for you (see Section~\ref{sec-src-questions})! (There will probably be a more flexible solution in a future version for changing the way marks are typeset.)
 %
 % The optional argument to the various \textsf{question} environments is a list of option keywords that control its behaviour. The available options are:
 %
@@ -1549,10 +1551,10 @@
 %    \end{macrocode}
 %
 % 
-% \subsection{Question-building environments and associated items}
+% \subsection{Question-building environments and associated items}\label{sec-src-questions}
 % 
-% \changes{2.4}{2013/06/13}{NJS Added \cs{questionskip} to control spacing between questions.}
 % \begin{macro}{\questionskip}
+% \changes{2.4}{2013/06/13}{NJS Added \cs{questionskip} to control spacing between questions.}
 % \cs{questionskip} is the minimum amount of space between the end of one question and the start of the next. It defaults to the value of \cs{baselineskip}.
 %    \begin{macrocode}
 \newlength{\questionskip}
@@ -1560,6 +1562,19 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\printmarks}
+% \changes{2.4.2}{2019/08/30}{NJS Refactored marks printing.}
+% \cs{printmarks} prints the marks at the end of a \{sub-, subsub-\}question, and you can redefine it to change how marks are printed. The total number of marks for the question is printed right-justified on the line as ``(\emph{m} marks)'' where \emph{m} is the value of the relevant question counter (|qrunning|, |subqrunning|, or |subsubqexpected|), \emph{unless} the number of marks is zero or |show marks=false|, in which case nothing is printed. The macro determines whether to print ``mark'' or ``marks'' automatically, and figures out whether the number of marks will fit on the last line of the question or needs to be placed on the next line. The code for handling the line breaking is derived from an example on page 106 of \emph{The \TeX{}book}, with the addition of a \cs{leavevmode} to prevent \cs{unskip} (which can't be used in vertical mode) from crashing when the marks immediately follow a |verbatim| type environment. This may cause slightly more vertical space after environments (e.g., lists) than is ideal, but not enough to be a major problem.
+%    \begin{macrocode}
+\newcommand{\printmarks}[1]{%
+  \leavevmode\unskip\nobreak\hfil\penalty50\hskip2em\hbox{}\nobreak%
+  \hfil(#1~\ifnum#1=1 mark\else marks\fi)%
+  \parfillskip=0pt \finalhyphendemerits=0 \par%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{environment}{question}
 % \changes{2.0}{2000/09/11}{NJS \textsf{question} environment no longer a redefinition of \textsf{enumerate}.}
 % \changes{2.0}{2001/05/15}{NJS Added penalty handling to ensure correct placement of marks in output.}
 % \changes{2.0}{2001/05/15}{NJS Total marks for a question are now printed only if the question has no sub-questions.}
@@ -1568,7 +1583,7 @@
 % \changes{2.4}{2013/05/31}{NJS Check question depth when opening the environment.}
 % \changes{2.4}{2015/08/19}{NJS Changed how question marks are positioned.}
 % \changes{2.4}{2016/05/02}{NJS Only output question marks if they're greater than zero.}
-% \begin{environment}{question}
+% \changes{2.4.2}{2019/08/30}{NJS Refactored marks printing.}
 % The \textsf{question} environment specifies a top-level question, and produces questions numbered in the form ``1.'', ``2.'', etc. It has one mandatory argument, the number of marks allocated to the question, which is used to initialise the |qexpected| counter\footnote{If it were not for the fact that you can only refer to environment arguments in the environment preamble, the \texttt{qexpected} counter would be unnecessary.}. If the argument is left empty, default to zero for the number of marks:
 % 
 %    \begin{macrocode}
@@ -1627,13 +1642,11 @@
       \setcounter{qrunning}{\value{qexpected}}%
 %    \end{macrocode}
 % 
-% 	The total number of marks for the question is then printed right-justified on the line as ``(\emph{m} marks)'' where \emph{m} is the value of the |qrunning| counter, \emph{unless} the number of marks is zero or |show marks=false|, in which case nothing is printed. The environment determines whether to print ``mark'' or ``marks'' automatically, and figures out whether the number of marks will fit on the last line of the question or needs to be placed on the next line. The code for handling the line breaking is derived from an example on page 106 of \emph{The \TeX{}book}, with the addition of a \cs{leavevmode} to prevent \cs{unskip} (which can't be used in vertical mode) from crashing when the marks immediately follow a |verbatim| type environment. This may cause slightly more vertical space after environments (e.g., lists) than is ideal, but not enough to be a major problem.
+% 	The total number of marks for the question is then typeset.
 % 
 %    \begin{macrocode}
       \ifquestion@showmarks%
-        \leavevmode\unskip\nobreak\hfil\penalty50\hskip2em\hbox{}\nobreak%
-        \hfil(\theqrunning~\ifnum\theqrunning=1 mark\else marks\fi)%
-        \parfillskip=0pt \finalhyphendemerits=0 \par%
+        \printmarks{\theqrunning}%
       \fi%
 %    \end{macrocode}
 % 
@@ -1690,6 +1703,7 @@
 % \changes{2.4}{2013/05/31}{NJS Check question depth when opening the environment.}
 % \changes{2.4}{2015/08/19}{NJS Changed how question marks are positioned.}
 % \changes{2.4}{2016/05/02}{NJS Only output question marks if they're greater than zero.}
+% \changes{2.4.2}{2019/08/30}{NJS Refactored marks printing.}
 % The \textsf{subquestion} environment is the analogue of \textsf{question} for
 % sub-questions. On initialisation, it sets |subqexpected| to the value of the
 % mandatory argument (defaulting to zero if the argument is empty), increments
@@ -1749,12 +1763,10 @@
       \fi%
       \setcounter{subqrunning}{\value{subqexpected}}%
 %    \end{macrocode}
-% Then the number of marks or the running total for the sub-question are typeset in a similar manner to the \textsf{question} environment:
+% Then the number of marks or the running total for the sub-question are typeset:
 %    \begin{macrocode}
       \ifsubquestion@showmarks%
-        \leavevmode\unskip\nobreak\hfil\penalty50\hskip2em\hbox{}\nobreak%
-        \hfil(\thesubqrunning~\ifnum\thesubqrunning=1 mark\else marks\fi)%
-        \parfillskip=0pt \finalhyphendemerits=0 \par%
+        \printmarks{\thesubqrunning}%
       \fi%
       \ifsubquestion@showtotal%
         \par\hfill%
@@ -1795,6 +1807,7 @@
 % \changes{2.4}{2013/05/31}{NJS Check question depth when opening the environment.}
 % \changes{2.4}{2015/08/19}{NJS Changed how question marks are positioned.}
 % \changes{2.4}{2016/05/02}{NJS Only output question marks if they're greater than zero.}
+% \changes{2.4.2}{2019/08/30}{NJS Refactored marks printing.}
 % This is similar to both \textsf{question} and \textsf{subquestion}, and
 % generates an appropriately numbered sub-sub-question (``(i)'', ``(ii)'', etc.).
 %    \begin{macrocode}
@@ -1844,10 +1857,7 @@
       \addtocounter{subqrunning}{\value{subsubqexpected}}%
     \fi%
     \ifsubsubquestion@showmarks%
-      \leavevmode\unskip\nobreak\hfil\penalty50\hskip2em\hbox{}\nobreak%
-      \hfil(\thesubsubqexpected~\ifnum\thesubsubqexpected=1 mark%
-                                \else marks\fi)%
-      \parfillskip=0pt \finalhyphendemerits=0 \par%
+      \printmarks{\thesubsubqexpected}%
     \fi%
     \setcounter{lastexpected}{\value{subsubqexpected}}%
   \end{list}%
