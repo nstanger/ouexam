@@ -58,7 +58,7 @@
 %
 % \MakeShortVerb{\|}
 % 
-% \changes{1.0}{1999/04/15}{Initial version.}
+% \changes{1.0}{1999/04/15}{Initial version}
 %
 % \begin{abstract}
 % This document class allows you to create Otago University final
@@ -77,7 +77,7 @@
 % 
 % \section{Overview}
 % 
-% \changes{2.1}{2004/04/10}{Added requirements and installation instructions.}
+% \changes{2.1}{2004/04/10}{Added requirements and installation instructions}
 % \changes{2.3}{2012/09/04}{Dropped vanilla \LaTeX\ for building docs.}
 % \subsection{Requirements and installation}
 % 
@@ -106,7 +106,7 @@
 % You can, of course, always install manually if you wish.
 % 
 % 
-% \changes{2.0}{2002/01/11}{Added note on backwards compatibility.}
+% \changes{2.0}{2002/01/11}{Note on backwards compatibility}
 % \subsection{Important note on backwards compatibility}
 % 
 % Version 2.0 of \textsf{ouexam} introduced several major changes from earlier
@@ -178,8 +178,6 @@
 % 2cm (headers and footers are inside this margin), left and right 2.54cm (1in).
 % 
 % 
-% \changes{2.1.1}{2006/08/21}{Updated \textsf{lastpage} style to display
-% ``\textbf{END}''.}
 % \subsection{Page styles}
 % 
 % There are two page styles defined in this class:
@@ -193,8 +191,7 @@
 % \section{Writing an examination paper}
 % 
 % 
-% \changes{2.0.2}{2002/05/11}{Moved the title page subsection to the start
-% of this section.}
+% \changes{2.0.2}{2002/05/11}{Moved title page subsection}
 % \subsection{The title page}
 % \label{Sec:TitlePage}
 % 
@@ -225,8 +222,7 @@
 % title of the paper, for example, 
 % |\papertitle{Systems Analysis and Design Methods}|. This macro is mandatory.
 % 
-% \changes{2.0.2}{2002/08/22}{Added `FY' to the \cs{semester} macro
-% description.}
+% \changes{2.0.2}{2002/08/22}{Added `FY' to \cs{semester} macro description}
 % Some papers are offered in more than one semester. The
 % \DescribeMacro{\semester} \cs{semester} macro lets you specify which
 % semester the examination is for. The argument can be either ``1'' or ``2''
@@ -239,11 +235,7 @@
 % length of the examination in hours, for example, |\timeallowed{2}|. This
 % macro is optional---if you omit it, it defaults to three (3) hours.
 % 
-% \changes{2.1}{2004/04/05}{Modified \cs{allowcalculators} to conform
-% to the new University calculator regulations.}
-% \changes{2.1}{2004/04/05}{Added \cs{permitcalculators} as a synonym
-% for \cs{allowcalculators}.}
-% If calculators are permitted in the examination, use the
+% If calculators are permitted in the examination, use the 
 % \DescribeMacro{\allowcalculators}
 % \DescribeMacro{\permitcalculators}
 % \cs{allowcalculators} macro (\cs{permitcalculators} will also work).
@@ -467,7 +459,7 @@
 % and \fbox{MARKING SCHEDULE} will also be printed in the header of every
 % page.
 % 
-% \changes{2.1}{2004/04/10}{Added driver file tip.}
+% \changes{2.1}{2004/04/10}{Added driver file tip}
 % A useful tip for writing examination papers is to create two separate
 % ``driver'' documents that are set up the document class for the
 % ``plain'' and ``marking schedule'' versions of the examination,
@@ -542,12 +534,12 @@
 % \hspace*{1em}mark (\ldots)} \\
 % The actual number of marks supplied for a particular question (calculated by summing the marks of all its sub-parts) is not the same as the expected total for that question. Adjust the marks for the sub-parts of the question until the totals match. The question number is given in the warning. \\
 % 
-% \changes{2.0.2}{2002/08/22}{Added `FY' to \cs{semester} error description.}
+% \changes{2.0.2}{2002/08/22}{Added `FY' to \cs{semester} error description}
 % \noindent\texttt{invalid value `\ldots' for \cs{semester}; valid values are `1', `2', \\*
 % \hspace*{1em}`SS', `FY' and `SP'. No semester information will be printed} \\
 % You have provided an invalid value as the argument to the \cs{semester} macro. The allowed values are ``1'' (semester one), ``2'' (semester two), ``SS'' (summer school), ``FY'' (full-year) and ``SP'' (special examination). Any other values will be ignored. Note that these are case-sensitive, for example, `sp' is invalid.  \\
 % 
-% \changes{2.1}{2004/04/05}{Added \cs{allowcalculators} error description.}
+% \changes{2.1}{2004/04/05}{Added error description for \cs{allowcalculators}}
 % \noindent\texttt{invalid value `\ldots' for \cs{allowcalculators}; valid values are \\*
 % \hspace*{1em}`none', `any' and `approved'. No calculators will be permitted} \\
 % You have provided an invalid value as the argument to the \cs{allowcalculators} macro. The allowed values are ``none'' (no calculators permitted), ``any'' (any calculator permitted) and ``approved'' (only approved calculators permitted). Any other values will be ignored, and \textsf{ouexam} will assume that no calculators are permitted. Note that these are case-sensitive, for example, `NONE' is invalid.  \\
@@ -555,9 +547,9 @@
 % 
 % \section{Example}
 % 
-% \changes{2.1}{2004/04/10}{Updated example to conform to 2.1 changes.}
-% \changes{2.0}{2002/01/25}{Updated example to conform to 2.0 changes.}
-% \changes{1.1}{1999/04/20}{Updated example to conform to 1.1 changes.}
+% \changes{1.1}{1999/04/20}{Updated example}
+% \changes{2.0}{2002/01/25}{Updated example}
+% \changes{2.1}{2004/04/10}{Updated example}
 % The code given below is for the first three pages of the INFO~321 2001
 % final examination. The output produced by this source is shown in
 % \hyperref[Fig.Example]{figure~\ref*{Fig.Example} on
@@ -871,7 +863,7 @@
 % 
 % \StopEventually{\PrintChanges\PrintIndex}
 % 
-% \changes{2.0}{2002/01/10}{Revamped and tided up documentation and code.}
+% \changes{2.0}{2002/01/10}{Revamped and tided up documentation and code}
 % 
 % \section{The code}
 % 
@@ -885,7 +877,7 @@
 %    \end{macrocode}
 % 
 % \begin{macro}{\@ouexam@obsolete}
-% \changes{2.0}{2002/01/10}{New \cs{@unsupported} macro.}
+% \changes{2.0}{2002/01/10}{New \cs{@unsupported} macro}
 % \changes{2.4}{2013/06/07}{Renamed \cs{@unsupported} macro to \cs{@ouexam@obsolete}.}
 % This macro is used to handle documents written for older versions of \textsf{ouexam}. All obsolete macros map to this macro, which prints out an appropriate error message. It needs to be defined early because it is used to trap use of the obsolete \textsf{multichoice} class option.
 %
@@ -912,8 +904,8 @@
 % \end{macro}
 %
 % \begin{macro}{multichoice}
-% \changes{1.1}{1999/04/20}{New \textsf{multichoice} class option.}
-% \changes{2.0}{2000/09/04}{Removed support for \textsf{multichoice} option.}
+% \changes{1.1}{1999/04/20}{New class option}
+% \changes{2.0}{2000/09/04}{Removed option}
 % The \textsf{multichoice} class option is no longer supported, but rather than just breaking older documents, we can at least try to present a reasonable error message.
 %
 %    \begin{macrocode}
@@ -924,7 +916,7 @@
 % \end{macro}
 %
 % \begin{macro}{twoside}
-% \changes{1.1}{1999/04/20}{Turned off \textsf{twoside} option.}
+% \changes{1.1}{1999/04/20}{Switched off option}
 % This document class is based on the \textsf{article} class and accepts any of the options accepted by \textsf{article}. The \textsf{twoside} option does not really make sense, however---all Otago examination papers are printed single-sided anyway, and the format is such that two-sided printing would look no different. The \textsf{twoside} option is therefore not used in this class.
 %
 %    \begin{macrocode}
@@ -955,9 +947,9 @@
 % \end{macro}
 %
 % \begin{macro}{draft}
-% \changes{2.0}{2001/05/15}{New \textsf{draft} class option.}
+% \changes{2.0}{2001/05/15}{New class option}
 % \begin{macro}{\if@draft}
-% \changes{2.0}{2001/05/15}{New switch for \textsf{draft}.}
+% \changes{2.0}{2001/05/15}{New switch for \textsf{draft}}
 % The \textsf{draft} option determines whether the examination is to be printed
 % in draft mode (default off). The \cs{if@draft} switch is used to determine
 % whether this is in effect (default false). Draft mode has the usual effects
@@ -980,9 +972,9 @@
 % \end{macro}
 % 
 % \begin{macro}{markingschedule}
-% \changes{2.0}{2000/09/05}{New \textsf{markingschedule} class option.}
+% \changes{2.0}{2000/09/05}{New class option}
 % \begin{macro}{\if@markingschedule}
-% \changes{2.0}{2000/09/05}{New switch for \textsf{markingschedule}.}
+% \changes{2.0}{2000/09/05}{New switch for \textsf{markingschedule}}
 % The \textsf{markingschedule} option determines whether marking schedule
 % information is printed in addition to the questions (default off). The
 % \cs{if@markingschedule} switch is used to determine whether this is in effect
@@ -1029,7 +1021,7 @@
 \ProcessOptions
 %    \end{macrocode}
 %
-% \changes{1.1}{1999/04/20}{Changed default point size to 12pt.}
+% \changes{1.1}{1999/04/20}{Default font \(\Rightarrow\) 12pt}
 % The defaults for this class are \textsf{onecolumn}, \textsf{oneside},
 % \textsf{a4paper} and \textsf{12pt}. The font size is the only one that might
 % need to change.
@@ -1041,8 +1033,8 @@
 % 
 % \subsection{Required packages}
 % 
-% \changes{2.0}{2001/05/08}{Removed requirement for \textsf{calc} and
-% \textsf{ifthen} packages.}
+% \changes{2.0}{2001/05/08}{Removed \textsf{calc} and
+% \textsf{ifthen} dependencies}
 % The \textsf{verbatim} package, is used to implement the \textsf{marking}
 % environment:
 %
@@ -1273,11 +1265,11 @@
 % 
 % \subsection{Page styles}\label{pagestyles}
 %
-% \changes{2.0}{2001/05/17}{Added support to page styles for \textsf{draft} and \textsf{markingschedule} class options.}
-% \changes{2.0}{2002/01/15}{Fixed headers so that the page number is always centered.}
-% \changes{2.1.1}{2006/08/21}{Updated \textsf{lastpage} style to display ``\textbf{END}''.}
-% \changes{2.3}{2012/09/03}{Rearranged headers and footers to conform to the latest formatting requirements. Swapped \fbox{MARKING SCHEDULE} and \fbox{DRAFT} between header and footer so that the page number doesn't get overprinted.}
+% \begin{macro}{\ps@lastpage}
+% \changes{2.1.1}{2006/08/21}{Updated to display ``\textbf{END}''}
 % \changes{2.4}{2013/06/06}{Replaced the \textsf{lastpage} page style with direct manipulation of the footer contents in the \textsf{plain} page style, as \cs{pagestyle} and \cs{thispagestyle} don't affect automatically generated float pages on the last page of the document.}
+% \end{macro}
+% \changes{2.3}{2012/09/03}{Rearranged headers and footers to conform to the latest formatting requirements. Swapped \fbox{MARKING SCHEDULE} and \fbox{DRAFT} between header and footer so that the page number doesn't get overprinted.}
 % \changes{2.4}{2016/08/26}{Added support to \textsf{titlepage} page style for new \textsf{embargo} class option.}
 % 
 %\begin{macro}{\if@lastpagetext}
@@ -1291,6 +1283,8 @@
 % \end{macro}
 % 
 % \begin{macro}{\ps@plain}
+% \changes{2.0}{2001/05/17}{Added support for \textsf{draft} and \textsf{markingschedule}}
+% \changes{2.0}{2002/01/15}{Ensured page number is always centered}
 % The \textsf{plain} page style is based on that in the \textsf{article} class, and produces pages with the page number centered at the bottom, the paper number in the top right corner and the text ``\textbf{TURN OVER}'' in the bottom right. If semester information is specified, this is included in parentheses after the paper code, for example, ``COMP 101 (Semester Two)''. \fbox{MARKING SCHEDULE} is printed at top left if the \textsf{markingschedule} class option is used.
 %    \begin{macrocode}
 \def\ps@plain{%
@@ -1369,6 +1363,7 @@
 %    \end{macrocode}
 % 
 % \begin{macro}{\ps@titlepage}
+% \changes{2.0}{2001/05/17}{Added support for \textsf{draft} and \textsf{markingschedule}}
 % The \textsf{titlepage} page style is similar to \textsf{plain}, but without the header. If the examination is embargoed, insert a field for the candidate to write in their student ID in the top right corner.
 %    \begin{macrocode}
 \def\ps@titlepage{%
@@ -1393,17 +1388,12 @@
 % 
 % \begin{macro}{question}
 % \begin{macro}{subquestion}
-% \changes{2.0}{2000/09/11}{New \texttt{subquestion} counter.}
-% \changes{2.0.1}{2000/04/30}{Removed prefixed question number from
-% \cs{labelsubquestion} macro so that references now print as just ``(a)''
-% instead of ``1(a)''.}
+% \changes{2.0}{2000/09/11}{New counter}
+% \changes{2.0.1}{2000/04/30}{References now print as ``(a)'', not ``1(a)''}
 % \begin{macro}{subsubquestion}
-% \changes{2.0}{2000/09/11}{New \texttt{subsubquestion} counter.}
-% \changes{2.0.1}{2000/04/30}{The \texttt{subsubquestion} was incorrectly
-% printing as ``(a)'' rather than ``(i)''. Fixed.}
-% \changes{2.0.1}{2000/04/30}{Removed prefixed question numbers from
-% \cs{labelsubsubquestion} macro so that references now print as just ``(i)''
-% instead of ``1(a)(i)''.}
+% \changes{2.0}{2000/09/11}{New counter}
+% \changes{2.0.1}{2000/04/30}{Fixed ``(i)'' incorrectly printing as ``(a)''}
+% \changes{2.0.1}{2000/04/30}{References now print as ``(i)'', not ``1(a)(i)''}
 % First, we define three counters for the three possible levels of question:
 % top-level question, second-level sub-question or third-level sub-sub-question:
 %    \begin{macrocode}
@@ -1429,7 +1419,7 @@
 % \end{macro}
 % 
 % \begin{macro}{examexpected}
-% \changes{2.0}{2000/09/11}{New \texttt{examexpected} counter.}
+% \changes{2.0}{2000/09/11}{New counter}
 % The |examexpected| counter stores the total expected number of marks for the
 % examination, and defaults to 100:
 %    \begin{macrocode}
@@ -1438,7 +1428,7 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{examoutof}
-% \changes{2.0}{2000/09/11}{New \texttt{examoutof} macro.}
+% \changes{2.0}{2000/09/11}{New macro}
 % To specify that an examination is out of some number of marks other than
 % 100, use the \cs{examoutof} macro to set the value:
 %    \begin{macrocode}
@@ -1447,13 +1437,13 @@
 % \end{macro}
 % 
 % \begin{macro}{sectexpected}
-% \changes{2.0}{2002/01/09}{New \cs{sectexpected} counter.}
+% \changes{2.0}{2002/01/09}{New counter}
 % \begin{macro}{qexpected}
-% \changes{2.0}{2000/09/11}{New \cs{qexpected} counter.}
+% \changes{2.0}{2000/09/11}{New counter}
 % \begin{macro}{subqexpected}
-% \changes{2.0}{2000/09/11}{New \texttt{subqexpected} counter.}
+% \changes{2.0}{2000/09/11}{New counter}
 % \begin{macro}{subsubqexpected}
-% \changes{2.0}{2000/09/11}{New \texttt{subsubqexpected} counter.}
+% \changes{2.0}{2000/09/11}{New counter}
 % The next four counters perform the same function as the |examexpected| counter
 % for sections, questions, sub-questions and sub-sub-questions respectively. No
 % macros are required to set these values as they are set automatically by the
@@ -1471,7 +1461,7 @@
 % \end{macro}
 % 
 % \begin{macro}{lastexpected}
-% \changes{2.0}{2000/09/11}{New \texttt{lastexpected} counter.}
+% \changes{2.0}{2000/09/11}{New counter}
 % The |lastexpected| counter records the expected marks total for the last
 % question. This will eventually be used to verify that the marks total for a
 % marking schedule equals the marks total for the corresponding question, but
@@ -1483,7 +1473,7 @@
 % \end{macro}
 % 
 % \begin{macro}{xsection}
-% \changes{2.0}{2002/01/29}{New \texttt{xsection} counter.}
+% \changes{2.0}{2002/01/29}{New counter}
 % Set up a counter for the section ``number'' and define it so that it prints out as an upper case letter rather than a number. We could just redefine the |section| counter, but that interferes with the section numbering in the documentation, and we can't have that, can we? |:)|
 % 
 %    \begin{macrocode}
@@ -1494,14 +1484,14 @@
 % \end{macro}
 % 
 % \begin{macro}{examrunning}
-% \changes{2.0}{2000/09/11}{New \texttt{examrunning} counter.}
+% \changes{2.0}{2000/09/11}{New counter}
 % \begin{macro}{sectrunning}
-% \changes{2.0}{2002/01/09}{New \texttt{sectrunning} counter.}
+% \changes{2.0}{2002/01/09}{New counter}
 % \changes{2.4}{2016/05/03}{\texttt{sectrunning} now resets when the \texttt{xsection} counter increments.}
 % \begin{macro}{qrunning}
-% \changes{2.0}{2000/09/11}{New \texttt{qrunning} counter.}
+% \changes{2.0}{2000/09/11}{New counter}
 % \begin{macro}{subqrunning}
-% \changes{2.0}{2000/09/11}{New \texttt{subqrunning} counter.}
+% \changes{2.0}{2000/09/11}{New counter}
 % These four counters keep track of the running total of marks for the current examination, section, question and subquestion respectively. This is later compared against the corresponding expected total. A running total is not needed for sub-sub-questions because they do not have sub-parts. The |sectrunning|, |qrunning|, and |subqrunning| counters are reset when the associated counters are incremented.
 % 
 %    \begin{macrocode}
@@ -1517,9 +1507,9 @@
 % \end{macro}
 % 
 % \begin{macro}{hassubs}
-% \changes{2.0}{2000/09/11}{New \texttt{hassubs} counter.}
+% \changes{2.0}{2000/09/11}{New counter}
 % \begin{macro}{hassubsubs}
-% \changes{2.0}{2000/09/11}{New \texttt{hassubsubs} counter.}
+% \changes{2.0}{2000/09/11}{New counter}
 % These two counters are used to track whether questions and
 % sub-questions have sub-parts. Counters are used rather than booleans because
 % counters are set globally and booleans are not (or at least do not appear to
@@ -1581,9 +1571,9 @@
 % \end{macro}
 %
 % \begin{environment}{question}
-% \changes{2.0}{2000/09/11}{\textsf{question} environment no longer a redefinition of \textsf{enumerate}.}
-% \changes{2.0}{2001/05/15}{Added penalty handling to ensure correct placement of marks in output.}
-% \changes{2.0}{2001/05/15}{Total marks for a question are now printed only if the question has no sub-questions.}
+% \changes{2.0}{2000/09/11}{No longer redefines \textsf{enumerate}}
+% \changes{2.0}{2001/05/15}{Penalty handling for correct marks placement}
+% \changes{2.0}{2001/05/15}{Total marks only printed if no sub-questions}
 % \changes{2.3.2}{2014/10/09}{Fixed crashing bug with verbatim environments
 % appearing at the end of questions.}
 % \changes{2.4}{2013/05/31}{Check question depth when opening the environment.}
@@ -1703,10 +1693,8 @@
 % \end{environment}
 % 
 % \begin{environment}{subquestion}
-% \changes{2.0}{2000/09/11}{\textsf{subquestion} environment no longer a
-% redefinition of \textsf{enumerate}.}
-% \changes{2.0}{2001/05/13}{Added penalty handling to ensure correct placement
-% of marks in output.}
+% \changes{2.0}{2000/09/11}{No longer redefines \textsf{enumerate}}
+% \changes{2.0}{2001/05/13}{Penalty handling for correct marks placement}
 % \changes{2.3.2}{2014/10/09}{Fixed crashing bug with verbatim environments
 % appearing at the end of subquestions.}
 % \changes{2.4}{2013/05/31}{Check question depth when opening the environment.}
@@ -1809,10 +1797,8 @@
 % \end{environment}
 % 
 % \begin{environment}{subsubquestion}
-% \changes{2.0}{2000/09/11}{\textsf{subsubquestion} environment no longer a
-% redefinition of \textsf{enumerate}.}
-% \changes{2.0}{2001/05/13}{Added penalty handling to ensure correct placement
-% of marks in output.}
+% \changes{2.0}{2000/09/11}{No longer redefines \textsf{enumerate}}
+% \changes{2.0}{2001/05/13}{Penalty handling for correct marks placement}
 % \changes{2.3.2}{2014/10/09}{Fixed crashing bug with verbatim environments
 % appearing at the end of subsubquestions.}
 % \changes{2.4}{2013/05/31}{Check question depth when opening the environment.}
@@ -1881,7 +1867,7 @@
 % \subsection{Draft examination printing}
 % 
 % \begin{macro}{\@marking}
-% \changes{2.0}{2001/05/17}{New \cs{@draft} macro.}
+% \changes{2.0}{2001/05/17}{New macro}
 % Specifying the \textsf{draft} option causes \textsf{ouexam} to print
 % \fbox{DRAFT} in large letters in the footer of every page. This is drawn by
 % the \cs{@draft} macro, which is included in the page footer definition of
@@ -1925,11 +1911,9 @@
 % \subsection{Marking schedule information}
 % 
 % \begin{environment}{marking}
+% \changes{1.2}{1999/10/26}{New environment}
 % \begin{macro}{\@markingschedule}
-% \changes{1.2}{1999/10/26}{New \textsf{marking} environment for including
-% answers and/or marking schedule information.}
-% \changes{2.0}{2000/09/11}{Now prints ``MARKING SCHEDULE'' at the bottom
-% of every page if the \textsf{markingschedule} class option is specified.}
+% \changes{2.0}{2000/09/11}{Print ``MARKING SCHEDULE'' on every page if \textsf{markingschedule} is specified}
 % The \textsf{marking} environment allows the specification of marking
 % schedule information in the same location as the questions. If the
 % \textsf{markingschedule} class option is specified, marking schedule
@@ -1963,11 +1947,11 @@
 % 
 % \subsection{Section handling}
 % 
-% \changes{2.0}{2002/01/09}{New \textsf{examsection} environment.}
-% \changes{2.0}{2002/01/09}{New \cs{@defsecinst} macro.}
-% \changes{2.4}{2016/05/03}{Added key-value options.}
 % \begin{environment}{examsection}
+% \changes{2.0}{2002/01/09}{New environment}
+% \changes{2.4}{2016/05/03}{Added key-value options.}
 % \begin{macro}{\@defsecinst}
+% \changes{2.0}{2002/01/09}{New macro}
 % The \textsf{examsection} environment specifies a major section of an
 % examination paper. Sections are sequentially numbered ``A'', ``B'', etc.
 % The environment has three mandatory arguments:
@@ -2062,7 +2046,7 @@
 % 
 % \begin{macro}{\examyear}
 % \begin{macro}{\@year}
-% \changes{2.0.2}{2002/08/22}{Put back \@eha at end of the \ClassError. Don't know what this does, but the macro crashes without it there. It seems to be required if there's a \cs{protect}.}
+% \changes{2.0.2}{2002/08/22}{Restored \cs{@eha} at end of \cs{ClassError}}
 % The \cs{examyear} macro specifies the year in which the examination is being held. It redefines the \cs{@year} macro which is used in \cs{@maketitlepage}:
 %    \begin{macrocode}
 \newcommand{\examyear}[1]{\def\@year{#1}}
@@ -2073,12 +2057,13 @@
   \ClassError{ouexam}{no \protect\examyear\space was specified}\@eha%
 }
 %    \end{macrocode}
+% I currently don't know what \cs{@eha} does, but \cs{@year} crashes without it! It seems to be required if there's a \cs{protect}. The same applies for \cs{@dept}, \cs{@pnumber}, and \cs{@ptitle} below.
 % \end{macro}
 % \end{macro}
 % 
 % \begin{macro}{\department}
 % \begin{macro}{\@dept}
-% \changes{2.0.2}{2002/08/22}{Put back \@eha at end of the \ClassError. Don't know what this does, but the macro crashes without it there. It seems to be required if there's a \cs{protect}.}
+% \changes{2.0.2}{2002/08/22}{Restored \cs{@eha} at end of \cs{ClassError}}
 % The \cs{department} macro specifies the name of the department, and is required. It redefines the \cs{@dept} macro which is used in \cs{@maketitlepage}:
 %    \begin{macrocode}
 \newcommand{\department}[1]{\def\@dept{#1}}
@@ -2091,7 +2076,7 @@
 % 
 % \begin{macro}{\papernumber}
 % \begin{macro}{\@pnumber}
-% \changes{2.0.2}{2002/08/22}{Put back \@eha at end of the \ClassError. Don't know what this does, but the macro crashes without it there. It seems to be required if there's a \cs{protect}.}
+% \changes{2.0.2}{2002/08/22}{Restored \cs{@eha} at end of \cs{ClassError}}
 % The \cs{papernumber} macro specifies the paper number, and is required. It redefines the \cs{@pnumber} macro which is used in \cs{@maketitlepage}:
 %    \begin{macrocode}
 \newcommand{\papernumber}[1]{\def\@pnumber{#1}}
@@ -2104,7 +2089,7 @@
 % 
 % \begin{macro}{\papertitle}
 % \begin{macro}{\@ptitle}
-% \changes{2.0.2}{2002/08/22}{Put back \@eha at end of the \ClassError. Don't know what this does, but the macro crashes without it there. It seems to be required if there's a \cs{protect}.}
+% \changes{2.0.2}{2002/08/22}{Restored \cs{@eha} at end of \cs{ClassError}}
 % The \cs{papertitle} macro specifies the title of the paper, and is required. It redefines the \cs{@ptitle} macro which is used in \cs{@maketitlepage}:
 %    \begin{macrocode}
 \newcommand{\papertitle}[1]{\def\@ptitle{#1}}
@@ -2116,10 +2101,9 @@
 % \end{macro}
 % 
 % \begin{macro}{\semester}
+% \changes{2.0}{2002/01/14}{Support for summer school and special exams}
+% \changes{2.0.2}{2002/08/22}{Added full-year support}
 % \begin{macro}{\@semester}
-% \changes{2.0.2}{2002/08/22}{Added full-year support to \cs{semester}.}
-% \changes{2.0}{2002/01/14}{Rewrote \cs{semester} to support summer school
-% and special exams.}
 % The \cs{semester} macro specifies which semester the examination is for.
 % Legal values for the argument are ``1'', ``2'', ``SS'' for summer school,
 % ``FY'' for full-year or ``SP'' for a special examination---anything else is
@@ -2171,7 +2155,7 @@
 % \end{macro}
 % 
 % \begin{macro}{num.pages}
-% \changes{1.1}{1999/04/20}{Renamed \texttt{page.last} label to \texttt{num.pages}.}
+% \changes{1.1}{1999/04/20}{Renamed from \texttt{page.last}}
 % \changes{2.4}{2013/06/05}{Added check for \textsf{hyperref} being loaded.}
 % There is no macro to specify the number of pages in the examination because it is done automatically by inserting a \cs{newlabel} that refers to the last page directly into the |.aux| file. The \textsf{hyperref} package redefines the \cs{newlabel} macro (in particular it increases the number of arguments), so we need to test whether \textsf{hyperref} is loaded and write the appropriate string to the |.aux| file. We borrow a technique from the \textsf{pageslts} package of checking for the existence of \cs{Hy@Warning}. (Ideally we would use \cs{if@packageloaded}, but this can't be used after \cs{AtBeginDocument}, and can be foiled by a package loading \textsf{hyperref} \cs{AtBeginDocument}.)
 %    \begin{macrocode}
@@ -2187,7 +2171,7 @@
 % \end{macro}
 % 
 % \begin{macro}{num.questions}
-% \changes{1.1}{1999/04/20}{Added \cs{num.questions} label representing the number of questions.}
+% \changes{1.1}{1999/04/20}{New label for number of questions}
 % \changes{2.4}{2013/06/05}{Added check for \textsf{hyperref} being loaded.}
 % Similarly, there is no macro to specify the number of questions in the examination. This is calculated using the same method as for the number of pages.
 %    \begin{macrocode}
@@ -2251,9 +2235,9 @@
 % \end{macro}
 % 
 % \begin{macro}{\allowcalculators}
+% \changes{2.1}{2004/04/05}{Conformed to new University calculator regulations}
 % \begin{macro}{\@calculators}
-% \changes{2.1}{2004/04/05}{Modified calculator macros to conform to
-% new University calculator regulations.}
+% \changes{2.1}{2004/04/05}{Conformed to new University calculator regulations}
 % \changes{2.1.2}{2008/08/14}{Ensured that the correct default is set regardless of whether the calculators macro is called.}
 % \changes{2.4}{2016/08/27}{Implemented updated calculator rules for 2016 onwards.}
 % \changes{2.4}{2016/08/27}{Incorporated ``subject to inspection'' line.}
@@ -2305,8 +2289,7 @@
 % \end{macro}
 % 
 % \begin{macro}{\permitcalculators}
-% \changes{2.1}{2004/04/05}{Added \cs{permitcalculators} as a synonym
-% for \cs{allowcalculators}.}
+% \changes{2.1}{2004/04/05}{New synonym for \cs{allowcalculators}}
 % \cs{permitcalculators} is a synonym for \cs{allowcalculators}.
 %    \begin{macrocode}
 \let\permitcalculators\allowcalculators
@@ -2373,7 +2356,7 @@
 % \end{macro}
 %
 % \begin{macro}{\@maketitlepage}
-% \changes{1.1}{1999/04/20}{Renamed macro from \cs{maketitlepage}.}
+% \changes{1.1}{1999/04/20}{Renamed from \cs{maketitlepage}}
 % \changes{2.3.1}{2014/09/15}{Removed ``Paper'' from the title box.}
 % \changes{2.4}{2013/06/05}{Added check for \textsf{hyperref} being loaded.}
 % The \cs{@maketitlepage} macro generates an examination title page that meets the Otago University requirements for final examination papers. You can redefine this if you want to change the format, but normally you would not do this.
@@ -2490,12 +2473,8 @@
 %
 % \subsection{Obsolete macros and environments}
 % 
-% \changes{2.0}{2002/01/09}{All \textsf{multichoice} macros and environments
-% made obsolete.}
-% \changes{2.0}{2002/01/09}{\cs{markingschedule}, \cs{marks}, \cs{totalmarks}
-% macros made obsolete.}
-% \changes{2.0}{2002/01/09}{\textsf{questions}, \textsf{subquestions},
-% \textsf{subsubquestions} environments made obsolete.}
+% \changes{2.0}{2002/01/09}{Obsoleted all \textsf{multichoice} macros and environments}
+%
 % The following macros and environments are no longer supported as of version
 % 2.0. Documents that use these macros can be processed using ouexam v1.2 or
 % earlier. The obsolete multiple-choice examination support is dealt with
@@ -2503,26 +2482,30 @@
 % macros.
 % 
 % \begin{environment}{questions}
+% \changes{2.0}{2002/01/09}{Obsoleted}
 % \begin{environment}{subquestions}
-% \changes{1.1}{1999/04/20}{Now disabled when \textsf{multichoice} is
-% active.}
+% \changes{1.1}{1999/04/20}{Now disabled when \textsf{multichoice} active}
+% \changes{2.0}{2002/01/09}{Obsoleted}
 % \begin{environment}{subsubquestions}
-% \changes{1.1}{1999/04/20}{Now disabled when \textsf{multichoice} is
-% active.}
-% \begin{macro}{markingschedule}
-% \changes{1.2}{1999/10/26}{New macro to turn marking information on and
-% off.}
+% \changes{1.1}{1999/04/20}{Now disabled when \textsf{multichoice} active}
+% \changes{2.0}{2002/01/09}{Obsoleted}
 % The \textsf{questions}, \textsf{subquestions} and \textsf{subsubquestions}
 % environments have been replaced by the \textsf{question},
 % \textsf{subquestion} and \textsf{subsubquestion} environments respectively.
 %   \begin{macrocode}
 \newenvironment{questions}{%
-  \def\item{\@ouexam@obsolete{questions environment}{1.2}}}{}
+\def\item{\@ouexam@obsolete{questions environment}{1.2}}}{}
 \newenvironment{subquestions}{%
-  \def\item{\@ouexam@obsolete{subquestions environment}{1.2}}}{}
+\def\item{\@ouexam@obsolete{subquestions environment}{1.2}}}{}
 \newenvironment{subsubquestions}{%
-  \def\item{\@ouexam@obsolete{subsubquestions environment}{1.2}}}{}
+\def\item{\@ouexam@obsolete{subsubquestions environment}{1.2}}}{}
 %    \end{macrocode}
+% \end{environment}
+% \end{environment}
+% \end{environment}
+% \begin{macro}{\markingschedule}
+% \changes{1.2}{1999/10/26}{New macro}
+% \changes{2.0}{2002/01/09}{Obsoleted}
 % The \cs{markingschedule} macro has been replaced by the
 % \textsf{markingschedule} class option. We can't map this to the
 % \cs{@unsupported} macro because \cs{markingschedule} occurs in the document
@@ -2532,22 +2515,24 @@
 \let\markingschedule\@empty
 %    \end{macrocode}
 % \end{macro}
-% \end{environment}
-% \end{environment}
-% \end{environment}
 % 
-% \changes{2.1}{2004/04/16}{Removed the \texttt{marks} macro entirely because it conflicts with a macro in e-TeX.}
-% \changes{1.1}{1999/04/20}{This macro now increments the \texttt{marks} counter.}
+% \begin{macro}{\marks}
+% \changes{1.1}{1999/04/20}{Now increments \texttt{marks} counter}
+% \changes{2.0}{2002/01/09}{Obsoleted}
+% \changes{2.1}{2004/04/16}{Removed: e-TeX conflict}
+% The \cs{marks} macro conflicted with a macro of the same name in e-TeX, so it was replaced by the argument to the various question-building environments.
+% \end{macro}
 % \begin{macro}{\totalmarks}
-% \changes{1.1}{1999/04/20}{Removed the parameter for the number of marks; Both these macros have been replaced by automatic calculations within the question-building environments.}
-% The \cs{marks} macro has been replaced by the argument to the various question-building environments. The \cs{totalmarks} macro has been replaced by automatic calculations within these environments.
+% \changes{1.1}{1999/04/20}{Removed number of marks argument}
+% \changes{2.0}{2002/01/09}{Obsoleted}
+% The \cs{totalmarks} macro has been replaced by automatic calculations within these environments.
 %    \begin{macrocode}
 \newcommand{\totalmarks}{\@ouexam@obsolete{totalmarks macro}{1.2}}
 %    \end{macrocode}
 % \end{macro}
 % 
-% \changes{2.4}{2004/06/05}{Obsoleted the long-deprecated \cs{newsection} macro.}
 % \begin{macro}{\newsection}
+% \changes{2.4}{2004/06/05}{Obsoleted the long-deprecated \cs{newsection} macro.}
 % The \cs{newsection} macro has been deprecated since version 2.0. Ten years seems a long enough time for it to now be safe to remove completely!
 %    \begin{macrocode}
 \newcommand{\newsection}{\@ouexam@obsolete{newsection macro}{2.3}}
