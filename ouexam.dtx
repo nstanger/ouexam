@@ -36,7 +36,7 @@
 %
 % \fi
 %
-%% \CheckSum{1149}
+%% \CheckSum{1147}
 %%
 %% \CharacterTable
 %%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -1606,6 +1606,7 @@
 % |show total=true| implies |show marks=false|. It would be nice if this could just be handled in the pgfkeys initialisation, but it looks like you can't have a key with both code and a value.
 %    \begin{macrocode}
   \ifquestion@showtotal\pgfqkeys{/question}{show marks=false}\fi%
+%    \end{macrocode}
 % 
 % Check that the environment is being opened at the correct depth. The \textsf{question} environment should normally only be opened at depth 0:
 %    \begin{macrocode}
