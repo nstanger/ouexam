@@ -90,17 +90,17 @@
 % Installation is relatively simple:
 % \begin{enumerate}
 % 
-% 	\item Unpack the distribution archive and \texttt{cd} to the
-% 	distribution directory.
-% 	
-% 	\item \texttt{make}.
-% 	
-% 	\item \texttt{make install TEXMF\_INSTALL=/path/to/texmf}.
-% 	\texttt{/path/to/texmf} should be the root of your preferred
-% 	\texttt{texmf} tree (e.g., \texttt{/usr/share/texmf}). You may need
-% 	to do this as root depending on which \texttt{texmf} tree you are
-% 	installing into. You can also define \texttt{TEXMF\_INSTALL} as an
-% 	environment variable then simply type \texttt{make install}.
+%   \item Unpack the distribution archive and \texttt{cd} to the
+%   distribution directory.
+%   
+%   \item \texttt{make}.
+%   
+%   \item \texttt{make install TEXMF\_INSTALL=/path/to/texmf}.
+%   \texttt{/path/to/texmf} should be the root of your preferred
+%   \texttt{texmf} tree (e.g., \texttt{/usr/share/texmf}). You may need
+%   to do this as root depending on which \texttt{texmf} tree you are
+%   installing into. You can also define \texttt{TEXMF\_INSTALL} as an
+%   environment variable then simply type \texttt{make install}.
 % 
 % \end{enumerate}
 % You can, of course, always install manually if you wish.
@@ -131,34 +131,34 @@
 % \textsf{12pt}. In addition, \textsf{ouexam} accepts the following
 % ``native'' class options:
 % \begin{description}
-% 	\item[\textsf{draft}] \DescribeMacro{draft} This option has the usual
-% 	effects that you would expect for \textsf{draft} mode in the
-% 	\textsf{article} class, plus \fbox{DRAFT} is printed in
-% 	the footer of every page. Note that if you use the \textsf{graphicx}
-% 	package and turn on the \textsf{draft} option in \textsf{ouexam}, all
-% 	included graphics will be drawn in draft mode unless you specify the
-% 	|draft=false| option to \cs{includegraphics}.
-% 	
-% 	\item[\textsf{markingschedule}] \DescribeMacro{markingschedule}
-% 	Rather than write a separate marking schedule for an examination paper, you
-% 	can use the \textsf{marking} environment to embed marking information
-% 	within questions (see 
-% 	\hyperref[Sec:Questions:Marking]{section~\ref*{Sec:Questions:Marking}}).
-% 	By default this information is not printed (for obvious reasons!), but
-% 	when it comes time to print a marking schedule for the examination,
-% 	including the \textsf{markingschedule} class option in the
-% 	\cs{usepackage} command will cause \textsf{ouexam} to print the hidden
-% 	content. It will also print \fbox{MARKING SCHEDULE} in the header of
-% 	every page.
-% 	
-% 	\item[\textsf{times}] \DescribeMacro{times}
-% 	The Examinations Office prefers all examination papers to be set in 12pt
-% 	Palatino. However, if this is not available, they will accept 13pt Times
-% 	instead. The \textsf{times} class option enables the latter, but should
-% 	only be used if Palatino is not available.
-% 	
-% 	\item[\textsf{embargo}] \DescribeMacro{embargo}
-% 	Specify this option if the examination paper is to be embargoed. This will add a field for the candidate to enter their student ID in the top right of the title page, and automatically insert an instruction under ``other instructions'' to hand in the entire examination paper.
+%   \item[\textsf{draft}] \DescribeMacro{draft} This option has the usual
+%   effects that you would expect for \textsf{draft} mode in the
+%   \textsf{article} class, plus \fbox{DRAFT} is printed in
+%   the footer of every page. Note that if you use the \textsf{graphicx}
+%   package and turn on the \textsf{draft} option in \textsf{ouexam}, all
+%   included graphics will be drawn in draft mode unless you specify the
+%   |draft=false| option to \cs{includegraphics}.
+% 
+%   \item[\textsf{markingschedule}] \DescribeMacro{markingschedule}
+%   Rather than write a separate marking schedule for an examination paper, you
+%   can use the \textsf{marking} environment to embed marking information
+%   within questions (see 
+%   \hyperref[Sec:Questions:Marking]{section~\ref*{Sec:Questions:Marking}}).
+%   By default this information is not printed (for obvious reasons!), but
+%   when it comes time to print a marking schedule for the examination,
+%   including the \textsf{markingschedule} class option in the
+%   \cs{usepackage} command will cause \textsf{ouexam} to print the hidden
+%   content. It will also print \fbox{MARKING SCHEDULE} in the header of
+%   every page.
+%   
+%   \item[\textsf{times}] \DescribeMacro{times}
+%   The Examinations Office prefers all examination papers to be set in 12pt
+%   Palatino. However, if this is not available, they will accept 13pt Times
+%   instead. The \textsf{times} class option enables the latter, but should
+%   only be used if Palatino is not available.
+%   
+%   \item[\textsf{embargo}] \DescribeMacro{embargo}
+%   Specify this option if the examination paper is to be embargoed. This will add a field for the candidate to enter their student ID in the top right of the title page, and automatically insert an instruction under ``other instructions'' to hand in the entire examination paper.
 % \end{description}
 % 
 % 
@@ -184,9 +184,9 @@
 % 
 % There are two page styles defined in this class:
 % \begin{description}
-% 	\item[\textsf{plain}] \DescribeMacro{plain} This is a slight modification of the \textsf{plain} page style from \textsf{article}. It produces pages that have the page number centered at the bottom, the paper number in the top right corner and the text ``\textbf{TURN OVER}'' in the bottom right of every page except the last page, which has ``\textbf{END}'' instead. This is the default page style.
-% 	
-% 	\item[\textsf{titlepage}] \DescribeMacro{titlepage} This is similar to \textsf{plain} but without the page header, and is used for the title page of the paper. You will normally not use this yourself, because the \cs{maketitlepage} macro handles this automatically (see \hyperref[Sec:TitlePage]{section~\ref*{Sec:TitlePage}}).
+%   \item[\textsf{plain}] \DescribeMacro{plain} This is a slight modification of the \textsf{plain} page style from \textsf{article}. It produces pages that have the page number centered at the bottom, the paper number in the top right corner and the text ``\textbf{TURN OVER}'' in the bottom right of every page except the last page, which has ``\textbf{END}'' instead. This is the default page style.
+% 
+%   \item[\textsf{titlepage}] \DescribeMacro{titlepage} This is similar to \textsf{plain} but without the page header, and is used for the title page of the paper. You will normally not use this yourself, because the \cs{maketitlepage} macro handles this automatically (see \hyperref[Sec:TitlePage]{section~\ref*{Sec:TitlePage}}).
 % \end{description}
 % 
 % 
@@ -254,18 +254,18 @@
 % this argument must be one of the following values:
 % \begin{description}
 % 
-% 	\item[\textsf{none}] A sentence is inserted noting that no calculators are
-% 	permitted.
+%   \item[\textsf{none}] A sentence is inserted noting that no calculators are
+%   permitted.
 % 
-% 	\item[\textsf{scientific}] A sentence is inserted noting that only approved
-% 	scientific calculators are permitted.
+%   \item[\textsf{scientific}] A sentence is inserted noting that only approved
+%   scientific calculators are permitted.
 % 
-% 	\item[\textsf{graphing}] A sentence is inserted noting that only approved
-% 	scientific and graphing calculators are permitted.
+%   \item[\textsf{graphing}] A sentence is inserted noting that only approved
+%   scientific and graphing calculators are permitted.
 % 
-% 	\item[\textsf{any}] (default) A sentence is inserted noting that any
-% 	calculator that does not have a communication capability is
-% 	permitted.
+%   \item[\textsf{any}] (default) A sentence is inserted noting that any
+%   calculator that does not have a communication capability is
+%   permitted.
 % 
 % \end{description}
 % 
@@ -303,11 +303,11 @@
 % 
 % Examination papers may optionally have multiple sections, ``numbered'' A, B, etc. Rather than redefine the existing \LaTeX\ section macros, \textsf{ouexam} defines an \DescribeEnv{examsection} \textsf{examsection} environment that generates a new section. The \textsf{examsection} environment has three mandatory arguments:
 % \begin{enumerate}
-% 	\item The expected number of marks for the question. If you leave this argument empty it defaults to zero. By default, \textsf{ouexam} keeps a running total of the \emph{actual} number of marks encountered within a section, which is compared with the value of this argument when the environment is closed (use the \textsf{don't verify total} option to disable this; see below). An error is raised if the values are not equal. The running total is also typeset right-justified at the end of the section in the form ``\textbf{[SECTION A TOTAL 20 MARKS]}'' (unless the \textsf{hide total} option is specified; see below) as an additional verification (or just ``\textbf{[TOTAL 20 MARKS]}'' if the \textsf{hide title} option is specifed; see below).
-% 	
-% 	\item Instructions for answering questions in this section, such as ``\textbf{ANSWER ANY \underline{TWO} QUESTIONS.}''. The argument will be typeset in \textbf{bold face}. If you leave this argument empty it defaults to ``\textbf{ANSWER \underline{ALL} QUESTIONS (TOTAL xx MARKS).}'' (the marks total is omitted if it is zero or if the \textsf{hide total} option is specified; see below).
-% 	
-% 	\item A description of the topic of the section (this could also be used to provide further, more detailed instructions). This can be left empty.
+%   \item The expected number of marks for the question. If you leave this argument empty it defaults to zero. By default, \textsf{ouexam} keeps a running total of the \emph{actual} number of marks encountered within a section, which is compared with the value of this argument when the environment is closed (use the \textsf{don't verify total} option to disable this; see below). An error is raised if the values are not equal. The running total is also typeset right-justified at the end of the section in the form ``\textbf{[SECTION A TOTAL 20 MARKS]}'' (unless the \textsf{hide total} option is specified; see below) as an additional verification (or just ``\textbf{[TOTAL 20 MARKS]}'' if the \textsf{hide title} option is specifed; see below).
+% 
+%   \item Instructions for answering questions in this section, such as ``\textbf{ANSWER ANY \underline{TWO} QUESTIONS.}''. The argument will be typeset in \textbf{bold face}. If you leave this argument empty it defaults to ``\textbf{ANSWER \underline{ALL} QUESTIONS (TOTAL xx MARKS).}'' (the marks total is omitted if it is zero or if the \textsf{hide total} option is specified; see below).
+% 
+%   \item A description of the topic of the section (this could also be used to provide further, more detailed instructions). This can be left empty.
 % \end{enumerate}
 %
 % The optional argument to \textsf{examsection} is a list of option keywords that control its behaviour. The available options are:
@@ -319,38 +319,38 @@
 %   \item[\textsf{verify total}] \DescribeMacro{verify total}\DescribeMacro{don't verify total} Calculate the running total of marks for questions within the section, and verify that this matches the expected number of marks. Specify \textsf{don't verify total} to suppress this (this also implies \textsf{hide total}).
 % \end{description}
 %
-% Every section begins on a new page, and the section title is formatted as ``\textbf{\underline{Section A}}'', in \cs{large} size, unless the \textsf{hide title} option is specified. For example:	\\
+% Every section begins on a new page, and the section title is formatted as ``\textbf{\underline{Section A}}'', in \cs{large} size, unless the \textsf{hide title} option is specified. For example: \\
 % 
-% \noindent|\begin{examsection}{25}{}{These questions are remarkably boring.}|	\\
-% \hspace*{1cm}\vdots	\\
-% |\end{examsection}|	\\
+% \noindent|\begin{examsection}{25}{}{These questions are remarkably boring.}| \\
+% \hspace*{1cm}\vdots \\
+% |\end{examsection}| \\
 % 
 % \noindent will produce the following (assuming that the actual number of
 % marks in the question is correct):
 % 
 % \begin{center}
-% 	\fbox{%
-% 	\begin{minipage}{0.9\columnwidth}
-% 		{\large\noindent\textbf{\underline{Section~A}}}	\\[0.5\baselineskip]
-% 		\textbf{ANSWER \underline{ALL} QUESTIONS (TOTAL 25 MARKS).}	\\
-% 		These questions are remarkably boring.	\\
-% 		\hspace*{2cm}\vdots	\\
-% 		\mbox{}\hfill\textbf{[SECTION A TOTAL 25 MARKS]}
-% 	\end{minipage}
-% 	}
+%   \fbox{%
+%   \begin{minipage}{0.9\columnwidth}
+%     {\large\noindent\textbf{\underline{Section~A}}} \\[0.5\baselineskip]
+%     \textbf{ANSWER \underline{ALL} QUESTIONS (TOTAL 25 MARKS).} \\
+%     These questions are remarkably boring. \\
+%     \hspace*{2cm}\vdots \\
+%     \mbox{}\hfill\textbf{[SECTION A TOTAL 25 MARKS]}
+%   \end{minipage}
+%   }
 % \end{center}
 %
 % \noindent whereas |\begin{examsection}[hide title]{25}{}{...}| will produce:
 % 
 % \begin{center}
-% 	\fbox{%
-% 	\begin{minipage}{0.9\columnwidth}
-% 		\textbf{ANSWER \underline{ALL} QUESTIONS (TOTAL 25 MARKS).}	\\
-% 		These questions are remarkably boring.	\\
-% 		\hspace*{2cm}\vdots	\\
-% 		\mbox{}\hfill\textbf{[TOTAL 25 MARKS]}
-% 	\end{minipage}
-% 	}
+%   \fbox{%
+%   \begin{minipage}{0.9\columnwidth}
+%     \textbf{ANSWER \underline{ALL} QUESTIONS (TOTAL 25 MARKS).} \\
+%     These questions are remarkably boring. \\
+%     \hspace*{2cm}\vdots \\
+%     \mbox{}\hfill\textbf{[TOTAL 25 MARKS]}
+%   \end{minipage}
+%   }
 % \end{center}
 %
 % 
@@ -393,33 +393,33 @@
 % 
 % \noindent will produce the following:
 % \begin{center}
-% 	\fbox{%
-% 	\begin{minipage}{0.9\columnwidth}
-% 		\begin{enumerate}
-% 			\item
-% 			\begin{enumerate}
-% 				\item Why is the sky blue? \hfill (2 marks)
+%   \fbox{%
+%   \begin{minipage}{0.9\columnwidth}
+%     \begin{enumerate}
+%       \item
+%       \begin{enumerate}
+%         \item Why is the sky blue? \hfill (2 marks)
 % 
-% 				\item Explain in detail how the sky can be made pink. \hfill (3
-% 				marks)
-% 			\end{enumerate}
+%         \item Explain in detail how the sky can be made pink. \hfill (3
+%         marks)
+%       \end{enumerate}
 % 
-% 			\item Define the term ``floccinaucinihilipilification''. \hfill (1
-% 			mark)
-% 		\end{enumerate}
-% 	\end{minipage}
-% 	}
+%       \item Define the term ``floccinaucinihilipilification''. \hfill (1
+%       mark)
+%     \end{enumerate}
+%   \end{minipage}
+%   }
 % \end{center}
 % 
 % The \textsf{question} environments handle formatting of marks totals
 % automatically, including considerations such as:
 % \begin{itemize}
-% 	\item whether or not to print the number of marks for a question at all (they should not be printed if the question has sub-parts, and will also not be printed if the number of marks is zero, or if the \textsf{hide marks} option is specified; see below);
-% 	
-% 	\item whether to print ``mark'' or ``marks'' (e.g., question 2 above); and
-% 	
-% 	\item where to position the number of marks relative to the question,
-% 	depending on how full the last line of the question is.
+%   \item whether or not to print the number of marks for a question at all (they should not be printed if the question has sub-parts, and will also not be printed if the number of marks is zero, or if the \textsf{hide marks} option is specified; see below);
+% 
+%   \item whether to print ``mark'' or ``marks'' (e.g., question 2 above); and
+% 
+%   \item where to position the number of marks relative to the question,
+%   depending on how full the last line of the question is.
 % \end{itemize}
 % \changes{2.4.2}{2019/08/30}{NJS Refactored marks printing.}
 % If you want to change the way marks are typeset (positioning, appearance, etc.), you can redefine the \DescribeMacro{printmarks} \textsf{printmarks} macro, but be aware that \textsf{printmarks} does a lot for you (see Section~\ref{sec-src-questions})! (There will probably be a more flexible solution in a future version for changing the way marks are typeset.)
@@ -508,49 +508,49 @@
 % \subsection{Error messages}
 % 
 % \noindent\texttt{OBSOLETE (\ldots): this document was written for an
-% earlier}	\\
-% \texttt{version of ouexam \ldots}	\\
-% You are trying to use v2.0 or later of \textsf{ouexam} with a document that was written for \textsf{ouexam} v1.2 or earlier. Versions 2.0 and later of \textsf{ouexam} are \emph{fundamentally incompatible} with earlier versions. The only solutions here are either to revert to \textsf{ouexam} v1.2 or earlier (you can put a copy of the class file in the same directory as the document), or rewrite the document to conform to the current version of \textsf{ouexam}. You should be able to download a copy of v1.2 from the same location that you found the current version.	\\
-% 	
-% \noindent\texttt{no \cs{examyear} was specified}	\\
-% \noindent\texttt{no \cs{department} was specified}	\\
-% \noindent\texttt{no \cs{papernumber} was specified}	\\
-% \noindent\texttt{no \cs{papertitle} was specified}	\\
-% You have not specified one of these macros. All four of these macros are mandatory and must be included in the preamble of any \textsf{ouexam} document.	\\
+% earlier} \\
+% \texttt{version of ouexam \ldots} \\
+% You are trying to use v2.0 or later of \textsf{ouexam} with a document that was written for \textsf{ouexam} v1.2 or earlier. Versions 2.0 and later of \textsf{ouexam} are \emph{fundamentally incompatible} with earlier versions. The only solutions here are either to revert to \textsf{ouexam} v1.2 or earlier (you can put a copy of the class file in the same directory as the document), or rewrite the document to conform to the current version of \textsf{ouexam}. You should be able to download a copy of v1.2 from the same location that you found the current version. \\
+% 
+% \noindent\texttt{no \cs{examyear} was specified} \\
+% \noindent\texttt{no \cs{department} was specified} \\
+% \noindent\texttt{no \cs{papernumber} was specified} \\
+% \noindent\texttt{no \cs{papertitle} was specified} \\
+% You have not specified one of these macros. All four of these macros are mandatory and must be included in the preamble of any \textsf{ouexam} document. \\
 % 
 % 
 % \noindent\texttt{question environment nested inside another question, subquestion or \\*
-% \hspace*{1em}subsubquestion environment}	\\
-% \noindent\texttt{subquestion environment either outside a question environment, or	\\*
-% \hspace*{1em}nested inside another subquestion or subsubquestion environment}	\\
+% \hspace*{1em}subsubquestion environment} \\
+% \noindent\texttt{subquestion environment either outside a question environment, or \\*
+% \hspace*{1em}nested inside another subquestion or subsubquestion environment} \\
 % \noindent\texttt{subsubquestion environment either outside a subquestion \\*
-% \hspace*{1em}environment,	or nested inside another subsubquestion environment}	\\
-% These errors all mean that you have incorrectly nested your \textsf{question} environments in some way. \textsf{question}s must always appear at the outermost level, \textsf{subquestion}s must always appear inside \textsf{question}s, and \textsf{subsubquestion}s must always appear inside \textsf{subquestion}s. Any other kind of nesting is an error.	\\
+% \hspace*{1em}environment, or nested inside another subsubquestion environment} \\
+% These errors all mean that you have incorrectly nested your \textsf{question} environments in some way. \textsf{question}s must always appear at the outermost level, \textsf{subquestion}s must always appear inside \textsf{question}s, and \textsf{subsubquestion}s must always appear inside \textsf{subquestion}s. Any other kind of nesting is an error. \\
 % 
 % 
 % \subsection{Warnings}
 % 
-% \noindent\texttt{actual number of marks for exam (\ldots) does not match expected	\\*
-% \hspace*{1em}number of marks (\ldots)}	\\
-% The actual number of marks supplied for the whole examination (calculated by summing the marks for all the questions) is not the same as the expected total for the examination. Adjust the marks for the questions until the totals match.	\\
+% \noindent\texttt{actual number of marks for exam (\ldots) does not match expected \\*
+% \hspace*{1em}number of marks (\ldots)} \\
+% The actual number of marks supplied for the whole examination (calculated by summing the marks for all the questions) is not the same as the expected total for the examination. Adjust the marks for the questions until the totals match. \\
 % 
-% \noindent\texttt{actual mark (\ldots) for section \ldots\ does not match expected	\\*
-% \hspace*{1em}mark (\ldots)}	\\
-% The actual number of marks supplied for a particular section (calculated by summing the marks for all the questions in that section) is not the same as the expected total for that section. Adjust the marks for the questions in the section concerned until the totals match. The section number is given in the warning.	\\
+% \noindent\texttt{actual mark (\ldots) for section \ldots\ does not match expected \\*
+% \hspace*{1em}mark (\ldots)} \\
+% The actual number of marks supplied for a particular section (calculated by summing the marks for all the questions in that section) is not the same as the expected total for that section. Adjust the marks for the questions in the section concerned until the totals match. The section number is given in the warning. \\
 % 
-% \noindent\texttt{actual mark (\ldots) for question \ldots\ does not match expected	\\*
-% \hspace*{1em}mark (\ldots)}	\\
-% The actual number of marks supplied for a particular question (calculated by summing the marks of all its sub-parts) is not the same as the expected total for that question. Adjust the marks for the sub-parts of the question until the totals match. The question number is given in the warning.	\\
+% \noindent\texttt{actual mark (\ldots) for question \ldots\ does not match expected \\*
+% \hspace*{1em}mark (\ldots)} \\
+% The actual number of marks supplied for a particular question (calculated by summing the marks of all its sub-parts) is not the same as the expected total for that question. Adjust the marks for the sub-parts of the question until the totals match. The question number is given in the warning. \\
 % 
 % \changes{2.0.2}{2002/08/22}{NJS Added `FY' to \cs{semester} error description.}
-% \noindent\texttt{invalid value `\ldots' for \cs{semester}; valid values are `1', `2',	\\*
-% \hspace*{1em}`SS', `FY' and `SP'. No semester information will be printed}	\\
-% You have provided an invalid value as the argument to the \cs{semester} macro. The allowed values are ``1'' (semester one), ``2'' (semester two), ``SS'' (summer school), ``FY'' (full-year) and ``SP'' (special examination). Any other values will be ignored. Note that these are case-sensitive, for example, `sp' is invalid. 	\\
+% \noindent\texttt{invalid value `\ldots' for \cs{semester}; valid values are `1', `2', \\*
+% \hspace*{1em}`SS', `FY' and `SP'. No semester information will be printed} \\
+% You have provided an invalid value as the argument to the \cs{semester} macro. The allowed values are ``1'' (semester one), ``2'' (semester two), ``SS'' (summer school), ``FY'' (full-year) and ``SP'' (special examination). Any other values will be ignored. Note that these are case-sensitive, for example, `sp' is invalid.  \\
 % 
 % \changes{2.1}{2004/04/05}{NJS Added \cs{allowcalculators} error description.}
-% \noindent\texttt{invalid value `\ldots' for \cs{allowcalculators}; valid values are	\\*
-% \hspace*{1em}`none', `any' and `approved'. No calculators will be permitted}	\\
-% You have provided an invalid value as the argument to the \cs{allowcalculators} macro. The allowed values are ``none'' (no calculators permitted), ``any'' (any calculator permitted) and ``approved'' (only approved calculators permitted). Any other values will be ignored, and \textsf{ouexam} will assume that no calculators are permitted. Note that these are case-sensitive, for example, `NONE' is invalid. 	\\
+% \noindent\texttt{invalid value `\ldots' for \cs{allowcalculators}; valid values are \\*
+% \hspace*{1em}`none', `any' and `approved'. No calculators will be permitted} \\
+% You have provided an invalid value as the argument to the \cs{allowcalculators} macro. The allowed values are ``none'' (no calculators permitted), ``any'' (any calculator permitted) and ``approved'' (only approved calculators permitted). Any other values will be ignored, and \textsf{ouexam} will assume that no calculators are permitted. Note that these are case-sensitive, for example, `NONE' is invalid.  \\
 % 
 % 
 % \section{Example}
@@ -565,23 +565,23 @@
 % are:
 % \begin{itemize}
 % 
-% 	\item The number of hours is not specified, so it defaults to three.
+%   \item The number of hours is not specified, so it defaults to three.
 % 
-% 	\item This examination allows only approved calculators.
-% 	
-% 	\item The \textsf{listings} package (v1.1 or later) is used to
-% 	typeset code listings.
+%   \item This examination allows only approved calculators.
+%   
+%   \item The \textsf{listings} package (v1.1 or later) is used to
+%   typeset code listings.
 % 
-% 	\item The argument of the \cs{instructions} macro can be just about
-% 	anything, as can the arguments of the \cs{material}, \cs{copiesof} and
-% 	\cs{otherinstructions} macros. In this example, the \cs{instructions}
-% 	macro has been omitted, causing \textsf{ouexam} to output the default
-%	instructions.
+%   \item The argument of the \cs{instructions} macro can be just about
+%   anything, as can the arguments of the \cs{material}, \cs{copiesof} and
+%   \cs{otherinstructions} macros. In this example, the \cs{instructions}
+%   macro has been omitted, causing \textsf{ouexam} to output the default
+%   instructions.
 % 
-% 	\item Marking schedule information has been embedded within the
-% 	questions. \hyperref[Fig.Example2]{Figure~\ref*{Fig.Example2} on
-% 	page~\pageref*{Fig.Example2}} shows the output produced by this source
-% 	when the \textsf{markingschedule} class option is used.
+%   \item Marking schedule information has been embedded within the
+%   questions. \hyperref[Fig.Example2]{Figure~\ref*{Fig.Example2} on
+%   page~\pageref*{Fig.Example2}} shows the output produced by this source
+%   when the \textsf{markingschedule} class option is used.
 % 
 % \end{itemize}
 % The full source for this example may be found in the
@@ -620,7 +620,7 @@
 %   A major U.S. mail order firm is having performance problems with queries
 %   on the \textsf{Customer} table in its Oracle8 order-processing database.
 %   Consider the following information about the \textsf{Customer} table,
-%   then answer the questions below:	\\
+%   then answer the questions below: \\
 % 
 %   \textsf{\textbf{Customer}(\underline{customer\_no}, name, address, city,
 %   state, country, phone, email, status)}
@@ -840,32 +840,32 @@
 % \normalsize
 % 
 % \begin{figure}
-% 	\fbox{\includegraphics[scale=0.28]{eg1-1}}
-% 	\hfill
-% 	\fbox{\includegraphics[scale=0.28]{eg1-2}}
-% 	
-% 	\begin{center}
-% 		\fbox{\includegraphics[scale=0.28]{eg1-3}}
-% 	\end{center}
+%   \fbox{\includegraphics[scale=0.28]{eg1-1}}
+%   \hfill
+%   \fbox{\includegraphics[scale=0.28]{eg1-2}}
+%   
+%   \begin{center}
+%     \fbox{\includegraphics[scale=0.28]{eg1-3}}
+%   \end{center}
 % 
-% 	\caption{Output produced by \textsf{ouexam}.}
-% 	\label{Fig.Example}
+%   \caption{Output produced by \textsf{ouexam}.}
+%   \label{Fig.Example}
 % \end{figure}
 % 
 % \begin{figure}
-% 	\fbox{\includegraphics[scale=0.28]{eg2-2}}
-% 	\hfill
-% 	\fbox{\includegraphics[scale=0.28]{eg2-3}}
+%   \fbox{\includegraphics[scale=0.28]{eg2-2}}
+%   \hfill
+%   \fbox{\includegraphics[scale=0.28]{eg2-3}}
 % 
-% 	\bigskip
-% 	
-% 	\fbox{\includegraphics[scale=0.28]{eg2-4}}
-% 	\hfill
-% 	\fbox{\includegraphics[scale=0.28]{eg2-5}}
+%   \bigskip
+%   
+%   \fbox{\includegraphics[scale=0.28]{eg2-4}}
+%   \hfill
+%   \fbox{\includegraphics[scale=0.28]{eg2-5}}
 % 
-% 	\caption{Output produced by \textsf{ouexam} when
-% 			\textsf{markingschedule} is used.}
-% 	\label{Fig.Example2}
+%   \caption{Output produced by \textsf{ouexam} when
+%       \textsf{markingschedule} is used.}
+%   \label{Fig.Example2}
 % \end{figure}
 % 
 % 
@@ -880,8 +880,8 @@
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}[1998/06/01]
 \ProvidesClass{ouexam}[\ouexamshortdate\space %
-                           v\ouexamversion\space Otago %
-                           University examination paper]
+                       v\ouexamversion\space Otago %
+                       University examination paper]
 %    \end{macrocode}
 % 
 % \begin{macro}{\@ouexam@obsolete}
@@ -1313,27 +1313,27 @@
 % 
 % \begin{itemize}
 % 
-% 	\item If there are no unprocessed floats, meaning that the last page of the document will be a text page (indicated by \cs{@lastpagetexttrue}), then output ``\textbf{END}''.
-% 	
-% 	\item If there are unprocessed floats, meaning that the last page of the document will be a float page (indicated by \cs{@lastpagefloattrue}), then:
-% 	
-% 	\begin{itemize}
-% 		
-% 		\item If a float page is currently being generated (which is indicated by \cs{@fcolmadetrue} from \texttt{latex.ltx}), then:
-% 		
-% 		\begin{itemize}
-% 		
-% 			\item If there are no more unprocessed floats (\cs{@deferlist} is empty), output ``\textbf{END}''.
-% 			
-% 			\item Otherwise, output ``\textbf{TURN OVER}''.
-% 		
-% 		\end{itemize}
-% 	
-% 		\item Otherwise, output ``\textbf{TURN OVER}''.
-% 	
-% 	\end{itemize}
-% 	
-% 	\item Otherwise, output ``\textbf{TURN OVER}''.
+%   \item If there are no unprocessed floats, meaning that the last page of the document will be a text page (indicated by \cs{@lastpagetexttrue}), then output ``\textbf{END}''.
+% 
+%   \item If there are unprocessed floats, meaning that the last page of the document will be a float page (indicated by \cs{@lastpagefloattrue}), then:
+% 
+%   \begin{itemize}
+% 
+%     \item If a float page is currently being generated (which is indicated by \cs{@fcolmadetrue} from \texttt{latex.ltx}), then:
+% 
+%     \begin{itemize}
+%     
+%       \item If there are no more unprocessed floats (\cs{@deferlist} is empty), output ``\textbf{END}''.
+%       
+%       \item Otherwise, output ``\textbf{TURN OVER}''.
+%     
+%     \end{itemize}
+% 
+%     \item Otherwise, output ``\textbf{TURN OVER}''.
+% 
+%   \end{itemize}
+% 
+%   \item Otherwise, output ``\textbf{TURN OVER}''.
 % 
 % \end{itemize}
 %    \begin{macrocode}
@@ -1649,7 +1649,7 @@
       \setcounter{qrunning}{\value{qexpected}}%
 %    \end{macrocode}
 % 
-% 	The total number of marks for the question is then typeset.
+%   The total number of marks for the question is then typeset.
 % 
 %    \begin{macrocode}
       \ifquestion@showmarks%
@@ -1973,9 +1973,9 @@
 % The environment has three mandatory arguments:
 % 
 % \begin{enumerate}
-% 	\item The expected number of marks for the section.
+%   \item The expected number of marks for the section.
 % 
-% 	\item The instructions for this section. This defaults to ``ANSWER ALL QUESTIONS (TOTAL xx MARKS).'' if left blank (the marks total is also suppressed by |hidetotal|). To change the default text, redefine the \cs{@defsecinst} macro:
+%   \item The instructions for this section. This defaults to ``ANSWER ALL QUESTIONS (TOTAL xx MARKS).'' if left blank (the marks total is also suppressed by |hidetotal|). To change the default text, redefine the \cs{@defsecinst} macro:
 %    \begin{macrocode}
 \def\@defsecinst{%
     ANSWER \underline{ALL} QUESTIONS%
@@ -1983,7 +1983,7 @@
 }
 %    \end{macrocode}
 % 
-% 	\item A description of the contents of the section which may be left blank.
+%   \item A description of the contents of the section which may be left blank.
 % \end{enumerate}
 %
 % The optional argument to \textsf{examsection} is a list of keys that control its behaviour. The available keys are |show title| (default, opposite |hide title|), |show total| (default, opposite |hide total|), and |verify total| (default, opposite |don't verify total|).
