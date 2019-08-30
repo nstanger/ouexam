@@ -20,8 +20,9 @@
 
 \renewcommand{\rmdefault}{ppl}
 \usepackage{graphicx}
+\usepackage{microtype}
 % change hyperref options as required
-\usepackage[colorlinks,pdfpagemode=None,urlcolor=blue,
+\usepackage[colorlinks,pdfpagemode=UseNone,urlcolor=blue,
             linkcolor=blue,pdfauthor={Nigel Stanger}]{hyperref}
 
 \title{The \textsf{ouexam} document class, v\ouexamversion}
@@ -518,12 +519,12 @@
 % You have not specified one of these macros. All four of these macros are mandatory and must be included in the preamble of any \textsf{ouexam} document.	\\
 % 
 % 
-% \noindent\texttt{question environment nested inside another question, subquestion or	\\*
+% \noindent\texttt{question environment nested inside another question, subquestion or \\*
 % \hspace*{1em}subsubquestion environment}	\\
 % \noindent\texttt{subquestion environment either outside a question environment, or	\\*
 % \hspace*{1em}nested inside another subquestion or subsubquestion environment}	\\
-% \noindent\texttt{subsubquestion environment either outside a subquestion environment,	\\*
-% \hspace*{1em}or nested inside another subsubquestion environment}	\\
+% \noindent\texttt{subsubquestion environment either outside a subquestion \\*
+% \hspace*{1em}environment,	or nested inside another subsubquestion environment}	\\
 % These errors all mean that you have incorrectly nested your \textsf{question} environments in some way. \textsf{question}s must always appear at the outermost level, \textsf{subquestion}s must always appear inside \textsf{question}s, and \textsf{subsubquestion}s must always appear inside \textsf{subquestion}s. Any other kind of nesting is an error.	\\
 % 
 % 
@@ -892,9 +893,10 @@
 \def\@ouexam@obsolete#1#2{\ClassError{ouexam}{%
   ^^JOBSOLETE (#1)^^J%
   This document was written for an earlier version of ouexam and is^^J%
-  not compatible with ouexam v\ouexamversion. Please either update your document^^J%
-  or use ouexam v#2 or earlier to process it. Version #2 can be^^J%
-  downloaded from the same location as version\space\ouexamversion}}
+  not compatible with ouexam v\ouexamversion. Please either update^^J%
+  your document or use ouexam v#2 or earlier to process it.^^J%
+  Version #2 can be downloaded from the same location as %
+  version\space\ouexamversion}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -915,7 +917,9 @@
 % The \textsf{multichoice} class option is no longer supported, but rather than just breaking older documents, we can at least try to present a reasonable error message.
 %
 %    \begin{macrocode}
-\DeclareOption{multichoice}{\@ouexam@obsolete{multichoice class option}{1.2}}
+\DeclareOption{multichoice}{%
+  \@ouexam@obsolete{multichoice class option}{1.2}%
+}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -962,7 +966,9 @@
 %
 %    \begin{macrocode}
 \newif\if@draft \@draftfalse
-\DeclareOption{draft}{\@drafttrue\PassOptionsToClass{\CurrentOption}{article}}
+\DeclareOption{draft}{%
+  \@drafttrue\PassOptionsToClass{\CurrentOption}{article}%
+}
 %    \end{macrocode}
 % 
 % Note that if you use the \textsf{graphicx} package and turn on the
@@ -1313,7 +1319,7 @@
 % 	
 % 	\begin{itemize}
 % 		
-% 		\item If a float page is currently being generated (indicated by \cs{@fcolmadetrue} from \texttt{latex.ltx}), then:
+% 		\item If a float page is currently being generated (which is indicated by \cs{@fcolmadetrue} from \texttt{latex.ltx}), then:
 % 		
 % 		\begin{itemize}
 % 		
@@ -1349,7 +1355,7 @@
 \pagestyle{plain}
 %    \end{macrocode}
 % 
-% \cs{AtEndDocument}, we need to set the \texttt{lastpage} switches accordingly. The \cs{@deferlist} macro from \texttt{latex.ltx} holds a list of any unprocessed floats, so if this is empty, we know that there's nothing more to do and can just set \cs{@lastpagetexttrue}. If the list still contains unprocessed floats, set \cs{@lastpagefloattrue} then \cs{clearpage} to force the floats out. We also need to decrement the page counter by one, otherwise it ends up being one too many, which is presumably a side effect of the explicit \cs{clearpage}.
+% \cs{AtEndDocument}, we need to set the \texttt{lastpage} switches accordingly. The \cs{@deferlist} macro from \texttt{latex.ltx} holds a list of unprocessed floats. If this is empty, there's nothing more to do and can we just set \cs{@lastpagetexttrue}. If the list still contains unprocessed floats, set \cs{@lastpagefloattrue} then \cs{clearpage} to flush them out. We also need to decrement the page counter by one, otherwise it ends up being one too many, which is presumably a side effect of the explicit \cs{clearpage}.
 %    \begin{macrocode}
 \AtEndDocument{%
   \ifx\@deferlist\@empty%
@@ -1656,7 +1662,8 @@
 %    \begin{macrocode}
       \ifquestion@showtotal%
         \par\hfill%
-        \textbf{[QUESTION \thequestion\ TOTAL \theqrunning\ MARKS]}%
+        \textbf{[QUESTION \thequestion\ TOTAL %
+          \theqrunning\ MARKS]}%
       \fi%
 %    \end{macrocode}
 % 
@@ -1664,7 +1671,8 @@
 % 
 %    \begin{macrocode}
     \else%
-      \ifquestion@verifytotal\else\setcounter{qrunning}{\value{qexpected}}\fi%
+      \ifquestion@verifytotal%
+      \else\setcounter{qrunning}{\value{qexpected}}\fi%
       \ifnum\theqrunning=\theqexpected%
       \else\ClassWarning{ouexam}{%
         actual mark (\theqrunning) for question %
@@ -1734,8 +1742,8 @@
   \ifnum\theqdepth=1%
   \else\ClassError{ouexam}{%
     subquestion environment either outside a question^^J%
-    environment, or nested inside another subquestion or subsubquestion^^J%
-    environment}%
+    environment, or nested inside another subquestion or^^J%
+    subsubquestion environment}%
   \fi%
   \addtocounter{qdepth}{1}%
   \refstepcounter{subquestion}%
@@ -1771,7 +1779,8 @@
       \fi%
       \ifsubquestion@showtotal%
         \par\hfill%
-        \textbf{[QUESTION \thequestion(\alph{subquestion})\ TOTAL \thesubqrunning\ MARKS]}%
+        \textbf{[QUESTION \thequestion(\alph{subquestion})\ TOTAL %
+          \thesubqrunning\ MARKS]}%
       \fi%
 %    \end{macrocode}
 % 
@@ -1779,7 +1788,8 @@
 % against the expected number and raise an error if they don't match.
 %    \begin{macrocode}
     \else%
-      \ifsubquestion@verifytotal\else\setcounter{subqrunning}{\value{subqexpected}}\fi%
+      \ifsubquestion@verifytotal%
+      \else\setcounter{subqrunning}{\value{subqexpected}}\fi%
       \ifnum\thesubqrunning=\thesubqexpected%
       \else\ClassWarning{ouexam}{%
         actual mark (\thesubqrunning) for question %
@@ -2399,7 +2409,10 @@
 % The number of pages is automatically calculated, as described earlier. All we need to do is \cs{pageref} the |num.pages| label that we wrote into the |.aux| file, or \cs{pageref*} if \textsf{hyperref} is loaded to inhibit hyperlink generation.
 %    \begin{macrocode}
   \underline{This examination paper comprises %
-    \@ifundefined{Hy@Warning}{\pageref{num.pages}}{\pageref*{num.pages}} pages.%
+    \@ifundefined{Hy@Warning}%
+      {\pageref{num.pages}}%
+      {\pageref*{num.pages}} %
+    pages.%
   }%
   \\[\baselineskip]%
 %    \end{macrocode}
@@ -2407,20 +2420,29 @@
 %    \begin{macrocode}
   \underline{Candidates should answer questions as follows:}%
   \\[\baselineskip]%
-  \hspace*{\parindent}\begin{minipage}{\dimexpr\textwidth-\parindent}\@instructions\end{minipage}%
+  \hspace*{\parindent}%
+  \begin{minipage}{\dimexpr\textwidth-\parindent}%
+    \@instructions%
+  \end{minipage}%
   \\[\baselineskip]%
 %    \end{macrocode}
 % Print out any provided material:
 %    \begin{macrocode}
   \underline{The following material is provided:}%
   \\[\baselineskip]%
-  \hspace*{\parindent}\begin{minipage}{\dimexpr\textwidth-\parindent}\@material\end{minipage}%
+  \hspace*{\parindent}%
+  \begin{minipage}{\dimexpr\textwidth-\parindent}%
+    \@material%
+  \end{minipage}%
   \\[\baselineskip]%
 %    \end{macrocode}
 % Print out use of calculators section:
 %    \begin{macrocode}
   \underline{Use of calculators:} \\[\baselineskip]%
-  \hspace*{\parindent}\begin{minipage}{\dimexpr\textwidth-\parindent}\@calculators\end{minipage}%
+  \hspace*{\parindent}%
+  \begin{minipage}{\dimexpr\textwidth-\parindent}%
+    \@calculators%
+  \end{minipage}%
   \\[\baselineskip]%
 %    \end{macrocode}
 % \changes{2.1.3}{2009/04/28}{NJS Fixed vertical spacing.}
@@ -2430,7 +2452,10 @@
 %    \begin{macrocode}
   \underline{Candidates are permitted copies of:}%
   \\[\baselineskip]%
-  \hspace*{\parindent}\begin{minipage}{\dimexpr\textwidth-\parindent}\@copiesof\end{minipage}%
+  \hspace*{\parindent}%
+  \begin{minipage}{\dimexpr\textwidth-\parindent}%
+    \@copiesof%
+  \end{minipage}%
   \\[\baselineskip]%
 %    \end{macrocode}
 % \changes{2.1.3}{2009/04/28}{NJS Fixed vertical spacing.}
@@ -2448,7 +2473,8 @@
   \hspace*{\parindent}%
   \begin{minipage}{\dimexpr\textwidth-\parindent}%
     \if@embargo%
-      You must hand in the entire examination paper attached to your answer book(s) using the provided tie.%
+      You must hand in the entire examination paper attached to your %
+      answer book(s) using the provided tie.%
       \ifx\@otherinst\@NA\else \\ \@otherinst\fi%
     \else\@otherinst%
     \fi%
