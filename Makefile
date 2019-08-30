@@ -33,6 +33,7 @@ doc: ouexam.pdf
 
 ouexam.pdf:	ouexam.dtx $(EXAMPLE1_IMAGES) $(EXAMPLE2_IMAGES)
 	$(PDFLATEX) $<
+	makeindex -s gglo.ist -o ouexam.gls ouexam.glo
 	$(PDFLATEX) $<
 	$(PDFLATEX) $<
 

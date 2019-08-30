@@ -4,7 +4,7 @@
 % \iffalse meta-comment
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%% Copyright 1999--2017 Nigel Stanger and University of Otago
+%% Copyright 1999--2019 Nigel Stanger and University of Otago
 %% 
 %% You may use this package freely, and also distribute it
 %% provided that you don't change it, make any money off
@@ -77,8 +77,8 @@
 % 
 % \section{Overview}
 % 
-% \changes{2.1}{2004/04/10}{NJS Added requirements and installation instructions.}
-% \changes{2.3}{2012/09/04}{NJS Dropped vanilla \LaTeX\ for building docs.}
+% \changes{2.1}{2004/04/10}{Added requirements and installation instructions.}
+% \changes{2.3}{2012/09/04}{Dropped vanilla \LaTeX\ for building docs.}
 % \subsection{Requirements and installation}
 % 
 % The \textsf{ouexam} package requires the \textsf{verbatim},
@@ -106,7 +106,7 @@
 % You can, of course, always install manually if you wish.
 % 
 % 
-% \changes{2.0}{2002/01/11}{NJS Added note on backwards compatibility.}
+% \changes{2.0}{2002/01/11}{Added note on backwards compatibility.}
 % \subsection{Important note on backwards compatibility}
 % 
 % Version 2.0 of \textsf{ouexam} introduced several major changes from earlier
@@ -178,7 +178,7 @@
 % 2cm (headers and footers are inside this margin), left and right 2.54cm (1in).
 % 
 % 
-% \changes{2.1.1}{2006/08/21}{NJS Updated \textsf{lastpage} style to display
+% \changes{2.1.1}{2006/08/21}{Updated \textsf{lastpage} style to display
 % ``\textbf{END}''.}
 % \subsection{Page styles}
 % 
@@ -193,7 +193,7 @@
 % \section{Writing an examination paper}
 % 
 % 
-% \changes{2.0.2}{2002/05/11}{NJS Moved the title page subsection to the start
+% \changes{2.0.2}{2002/05/11}{Moved the title page subsection to the start
 % of this section.}
 % \subsection{The title page}
 % \label{Sec:TitlePage}
@@ -225,7 +225,7 @@
 % title of the paper, for example, 
 % |\papertitle{Systems Analysis and Design Methods}|. This macro is mandatory.
 % 
-% \changes{2.0.2}{2002/08/22}{NJS Added `FY' to the \cs{semester} macro
+% \changes{2.0.2}{2002/08/22}{Added `FY' to the \cs{semester} macro
 % description.}
 % Some papers are offered in more than one semester. The
 % \DescribeMacro{\semester} \cs{semester} macro lets you specify which
@@ -239,9 +239,9 @@
 % length of the examination in hours, for example, |\timeallowed{2}|. This
 % macro is optional---if you omit it, it defaults to three (3) hours.
 % 
-% \changes{2.1}{2004/04/05}{NJS Modified \cs{allowcalculators} to conform
+% \changes{2.1}{2004/04/05}{Modified \cs{allowcalculators} to conform
 % to the new University calculator regulations.}
-% \changes{2.1}{2004/04/05}{NJS Added \cs{permitcalculators} as a synonym
+% \changes{2.1}{2004/04/05}{Added \cs{permitcalculators} as a synonym
 % for \cs{allowcalculators}.}
 % If calculators are permitted in the examination, use the
 % \DescribeMacro{\allowcalculators}
@@ -421,7 +421,7 @@
 %   \item where to position the number of marks relative to the question,
 %   depending on how full the last line of the question is.
 % \end{itemize}
-% \changes{2.4.2}{2019/08/30}{NJS Refactored marks printing.}
+% \changes{2.4.2}{2019/08/30}{Refactored marks printing.}
 % If you want to change the way marks are typeset (positioning, appearance, etc.), you can redefine the \DescribeMacro{printmarks} \textsf{printmarks} macro, but be aware that \textsf{printmarks} does a lot for you (see Section~\ref{sec-src-questions})! (There will probably be a more flexible solution in a future version for changing the way marks are typeset.)
 %
 % The optional argument to the various \textsf{question} environments is a list of option keywords that control its behaviour. The available options are:
@@ -434,14 +434,14 @@
 %   \item[\textsf{verify total}] \DescribeMacro{verify total}\DescribeMacro{don't verify total} Calculate the running total of marks for sub-questions within the question, and verify that this matches the expected number of marks. Specify \textsf{don't verify total} to suppress this (this also implies \textsf{hide total}). This option is available for the \textsf{question} and \textsf{subquestion} environments only (a \textsf{subsubquestion} has no sub-components to total).
 % \end{description}
 % 
-% \changes{2.4}{2013/05/31}{NJS Enforced proper question environment nesting.}
+% \changes{2.4}{2013/05/31}{Enforced proper question environment nesting.}
 % The various \textsf{question} environments must be correctly nested in order for the features described above to work correctly, i.e., \textsf{question} at the top level, followed by \textsf{subquestion} and \textsf{subsubquestion}. Any variation to this nesting order will cause an error.
 % 
-% \changes{2.4}{2013/06/13}{NJS Added \cs{questionskip} to control spacing between questions.}
+% \changes{2.4}{2013/06/13}{Added \cs{questionskip} to control spacing between questions.}
 % You can control the spacing between top-level questions by redefining the \DescribeMacro{\questionskip} \cs{questionskip} length. It defaults to \cs{baselineskip}. Note that this applies only to the \textsf{question} environment; there are no equivalent lengths for \textsf{subquestion} or \textsf{subsubquestion}.
 % 
 % 
-% \changes{2.2}{2010/04/26}{NJS Added time allocation macros.}
+% \changes{2.2}{2010/04/26}{Added time allocation macros.}
 % \subsection{Time allocations}
 % \label{Sec-Questions-Time}
 % 
@@ -467,7 +467,7 @@
 % and \fbox{MARKING SCHEDULE} will also be printed in the header of every
 % page.
 % 
-% \changes{2.1}{2004/04/10}{NJS Added driver file tip.}
+% \changes{2.1}{2004/04/10}{Added driver file tip.}
 % A useful tip for writing examination papers is to create two separate
 % ``driver'' documents that are set up the document class for the
 % ``plain'' and ``marking schedule'' versions of the examination,
@@ -542,12 +542,12 @@
 % \hspace*{1em}mark (\ldots)} \\
 % The actual number of marks supplied for a particular question (calculated by summing the marks of all its sub-parts) is not the same as the expected total for that question. Adjust the marks for the sub-parts of the question until the totals match. The question number is given in the warning. \\
 % 
-% \changes{2.0.2}{2002/08/22}{NJS Added `FY' to \cs{semester} error description.}
+% \changes{2.0.2}{2002/08/22}{Added `FY' to \cs{semester} error description.}
 % \noindent\texttt{invalid value `\ldots' for \cs{semester}; valid values are `1', `2', \\*
 % \hspace*{1em}`SS', `FY' and `SP'. No semester information will be printed} \\
 % You have provided an invalid value as the argument to the \cs{semester} macro. The allowed values are ``1'' (semester one), ``2'' (semester two), ``SS'' (summer school), ``FY'' (full-year) and ``SP'' (special examination). Any other values will be ignored. Note that these are case-sensitive, for example, `sp' is invalid.  \\
 % 
-% \changes{2.1}{2004/04/05}{NJS Added \cs{allowcalculators} error description.}
+% \changes{2.1}{2004/04/05}{Added \cs{allowcalculators} error description.}
 % \noindent\texttt{invalid value `\ldots' for \cs{allowcalculators}; valid values are \\*
 % \hspace*{1em}`none', `any' and `approved'. No calculators will be permitted} \\
 % You have provided an invalid value as the argument to the \cs{allowcalculators} macro. The allowed values are ``none'' (no calculators permitted), ``any'' (any calculator permitted) and ``approved'' (only approved calculators permitted). Any other values will be ignored, and \textsf{ouexam} will assume that no calculators are permitted. Note that these are case-sensitive, for example, `NONE' is invalid.  \\
@@ -555,9 +555,9 @@
 % 
 % \section{Example}
 % 
-% \changes{2.1}{2004/04/10}{NJS Updated example to conform to 2.1 changes.}
-% \changes{2.0}{2002/01/25}{NJS Updated example to conform to 2.0 changes.}
-% \changes{1.1}{1999/04/20}{NJS Updated example to conform to 1.1 changes.}
+% \changes{2.1}{2004/04/10}{Updated example to conform to 2.1 changes.}
+% \changes{2.0}{2002/01/25}{Updated example to conform to 2.0 changes.}
+% \changes{1.1}{1999/04/20}{Updated example to conform to 1.1 changes.}
 % The code given below is for the first three pages of the INFO~321 2001
 % final examination. The output produced by this source is shown in
 % \hyperref[Fig.Example]{figure~\ref*{Fig.Example} on
@@ -869,9 +869,9 @@
 % \end{figure}
 % 
 % 
-% \StopEventually{}
+% \StopEventually{\PrintChanges\PrintIndex}
 % 
-% \changes{2.0}{2002/01/10}{NJS Revamped and tided up documentation and code.}
+% \changes{2.0}{2002/01/10}{Revamped and tided up documentation and code.}
 % 
 % \section{The code}
 % 
@@ -885,8 +885,8 @@
 %    \end{macrocode}
 % 
 % \begin{macro}{\@ouexam@obsolete}
-% \changes{2.0}{2002/01/10}{NJS New \cs{@unsupported} macro.}
-% \changes{2.4}{2013/06/07}{NJS Renamed \cs{@unsupported} macro to \cs{@ouexam@obsolete}.}
+% \changes{2.0}{2002/01/10}{New \cs{@unsupported} macro.}
+% \changes{2.4}{2013/06/07}{Renamed \cs{@unsupported} macro to \cs{@ouexam@obsolete}.}
 % This macro is used to handle documents written for older versions of \textsf{ouexam}. All obsolete macros map to this macro, which prints out an appropriate error message. It needs to be defined early because it is used to trap use of the obsolete \textsf{multichoice} class option.
 %
 %    \begin{macrocode}
@@ -901,7 +901,7 @@
 % \end{macro}
 %
 % \begin{macro}{\@ouexam@unused}
-% \changes{2.4}{2013/06/07}{NJS New \cs{@ouexam@unused} macro.}
+% \changes{2.4}{2013/06/07}{New \cs{@ouexam@unused} macro.}
 % This macro is used to warn the user about class options that are not used by this class, and that will therefore be ignored. All unused macros map to this macro, which prints out an appropriate warning message.
 %
 %    \begin{macrocode}
@@ -912,8 +912,8 @@
 % \end{macro}
 %
 % \begin{macro}{multichoice}
-% \changes{1.1}{1999/04/20}{NJS New \textsf{multichoice} class option.}
-% \changes{2.0}{2000/09/04}{NJS Removed support for \textsf{multichoice} option.}
+% \changes{1.1}{1999/04/20}{New \textsf{multichoice} class option.}
+% \changes{2.0}{2000/09/04}{Removed support for \textsf{multichoice} option.}
 % The \textsf{multichoice} class option is no longer supported, but rather than just breaking older documents, we can at least try to present a reasonable error message.
 %
 %    \begin{macrocode}
@@ -924,7 +924,7 @@
 % \end{macro}
 %
 % \begin{macro}{twoside}
-% \changes{1.1}{1999/04/20}{NJS Turned off \textsf{twoside} option.}
+% \changes{1.1}{1999/04/20}{Turned off \textsf{twoside} option.}
 % This document class is based on the \textsf{article} class and accepts any of the options accepted by \textsf{article}. The \textsf{twoside} option does not really make sense, however---all Otago examination papers are printed single-sided anyway, and the format is such that two-sided printing would look no different. The \textsf{twoside} option is therefore not used in this class.
 %
 %    \begin{macrocode}
@@ -933,7 +933,7 @@
 % \end{macro}
 %
 % \begin{macro}{twocolumn}
-% \changes{2.3}{2013/06/07}{NJS Turned off \textsf{twocolumn} option.}
+% \changes{2.3}{2013/06/07}{Turned off \textsf{twocolumn} option.}
 % The \textsf{twocolumn} option also does not make much sense for Otago examination papers.
 %
 %    \begin{macrocode}
@@ -943,7 +943,7 @@
 %
 % \begin{macro}{10pt}
 % \begin{macro}{11pt}
-% \changes{2.3}{1999/04/20}{NJS Turned off \textsf{10pt} and \textsf{11pt}
+% \changes{2.3}{1999/04/20}{Turned off \textsf{10pt} and \textsf{11pt}
 % options.}
 % The Examinations Office specifies a minimum of 12pt for the font size, so the \textsf{10pt} and \textsf{11pt} options are not used in this class.
 %
@@ -955,9 +955,9 @@
 % \end{macro}
 %
 % \begin{macro}{draft}
-% \changes{2.0}{2001/05/15}{NJS New \textsf{draft} class option.}
+% \changes{2.0}{2001/05/15}{New \textsf{draft} class option.}
 % \begin{macro}{\if@draft}
-% \changes{2.0}{2001/05/15}{NJS New switch for \textsf{draft}.}
+% \changes{2.0}{2001/05/15}{New switch for \textsf{draft}.}
 % The \textsf{draft} option determines whether the examination is to be printed
 % in draft mode (default off). The \cs{if@draft} switch is used to determine
 % whether this is in effect (default false). Draft mode has the usual effects
@@ -980,9 +980,9 @@
 % \end{macro}
 % 
 % \begin{macro}{markingschedule}
-% \changes{2.0}{2000/09/05}{NJS New \textsf{markingschedule} class option.}
+% \changes{2.0}{2000/09/05}{New \textsf{markingschedule} class option.}
 % \begin{macro}{\if@markingschedule}
-% \changes{2.0}{2000/09/05}{NJS New switch for \textsf{markingschedule}.}
+% \changes{2.0}{2000/09/05}{New switch for \textsf{markingschedule}.}
 % The \textsf{markingschedule} option determines whether marking schedule
 % information is printed in addition to the questions (default off). The
 % \cs{if@markingschedule} switch is used to determine whether this is in effect
@@ -996,9 +996,9 @@
 % \end{macro}
 % 
 % \begin{macro}{times}
-% \changes{2.3}{2012/09/03}{NJS New \textsf{times} class option.}
+% \changes{2.3}{2012/09/03}{New \textsf{times} class option.}
 % \begin{macro}{\if@times}
-% \changes{2.3}{2012/09/03}{NJS New switch for \textsf{times}.}
+% \changes{2.3}{2012/09/03}{New switch for \textsf{times}.}
 % The \textsf{times} option formats the examination paper using 13pt Times. If this
 % option is not specified, then the examination paper is formatted using 12pt Palatino.
 %
@@ -1010,9 +1010,9 @@
 % \end{macro}
 % 
 % \begin{macro}{embargo}
-% \changes{2.4}{2016/09/26}{NJS New \textsf{embargo} class option.}
+% \changes{2.4}{2016/09/26}{New \textsf{embargo} class option.}
 % \begin{macro}{\if@embargo}
-% \changes{2.4}{2016/09/26}{NJS New switch for \textsf{embargo}.}
+% \changes{2.4}{2016/09/26}{New switch for \textsf{embargo}.}
 % Specify the \textsf{embargo} option if the examination paper is to be embargoed. This will print a field for the candidate to enter their student ID in the top right corner of the title page, and add relevant text to the other instructions section of the title page.
 %
 %    \begin{macrocode}
@@ -1029,7 +1029,7 @@
 \ProcessOptions
 %    \end{macrocode}
 %
-% \changes{1.1}{1999/04/20}{NJS Changed default point size to 12pt.}
+% \changes{1.1}{1999/04/20}{Changed default point size to 12pt.}
 % The defaults for this class are \textsf{onecolumn}, \textsf{oneside},
 % \textsf{a4paper} and \textsf{12pt}. The font size is the only one that might
 % need to change.
@@ -1041,7 +1041,7 @@
 % 
 % \subsection{Required packages}
 % 
-% \changes{2.0}{2001/05/08}{NJS Removed requirement for \textsf{calc} and
+% \changes{2.0}{2001/05/08}{Removed requirement for \textsf{calc} and
 % \textsf{ifthen} packages.}
 % The \textsf{verbatim} package, is used to implement the \textsf{marking}
 % environment:
@@ -1050,7 +1050,7 @@
 \RequirePackage{verbatim}
 %    \end{macrocode}
 %
-% \changes{2.3}{2012/09/04}{NJS Added requirement for \textsf{fontenc},
+% \changes{2.3}{2012/09/04}{Added requirement for \textsf{fontenc},
 % \textsf{textcomp} and \textsf{lmodern} packages.}
 %
 % Running under vanilla OT1 encoding often causes all sorts of font substitution
@@ -1064,7 +1064,7 @@
 \RequirePackage{lmodern}
 %    \end{macrocode}
 %
-% \changes{2.4}{2016/05/03}{NJS Added requirement for \textsf{pgfkeys}.}
+% \changes{2.4}{2016/05/03}{Added requirement for \textsf{pgfkeys}.}
 %
 % Options to the \textsf{examsection} and various \textsf{question} environments require \textsf{pgfkeys} to provide a more powerful interface.
 %
@@ -1073,7 +1073,7 @@
 %    \end{macrocode}
 % 
 %
-% \changes{2.4}{2012/09/04}{NJS Added setup for \textsf{pgfkeys}.}
+% \changes{2.4}{2012/09/04}{Added setup for \textsf{pgfkeys}.}
 % \subsection{\textsf{pgfkeys} setup}
 %
 % Separate key paths are defined for each of the environments that need them, in order to provide greater flexibility. Otherwise, options could cascade from the containing environment to its sub-environments. For example, we may wish to suppress the marks total for individual questions, but enable it for the enclosing section.
@@ -1217,7 +1217,7 @@
 %    \end{macrocode}
 % 
 %
-% \changes{2.3}{2012/09/04}{NJS Added font setup for \textsf{times} class
+% \changes{2.3}{2012/09/04}{Added font setup for \textsf{times} class
 % option.}
 % \subsection{Font setup}
 % 
@@ -1273,12 +1273,12 @@
 % 
 % \subsection{Page styles}\label{pagestyles}
 %
-% \changes{2.0}{2001/05/17}{NJS Added support to page styles for \textsf{draft} and \textsf{markingschedule} class options.}
-% \changes{2.0}{2002/01/15}{NJS Fixed headers so that the page number is always centered.}
-% \changes{2.1.1}{2006/08/21}{NJS Updated \textsf{lastpage} style to display ``\textbf{END}''.}
-% \changes{2.3}{2012/09/03}{NJS Rearranged headers and footers to conform to the latest formatting requirements. Swapped \fbox{MARKING SCHEDULE} and \fbox{DRAFT} between header and footer so that the page number doesn't get overprinted.}
-% \changes{2.4}{2013/06/06}{NJS Replaced the \textsf{lastpage} page style with direct manipulation of the footer contents in the \textsf{plain} page style, as \cs{pagestyle} and \cs{thispagestyle} don't affect automatically generated float pages on the last page of the document.}
-% \changes{2.4}{2016/08/26}{NJS Added support to \textsf{titlepage} page style for new \textsf{embargo} class option.}
+% \changes{2.0}{2001/05/17}{Added support to page styles for \textsf{draft} and \textsf{markingschedule} class options.}
+% \changes{2.0}{2002/01/15}{Fixed headers so that the page number is always centered.}
+% \changes{2.1.1}{2006/08/21}{Updated \textsf{lastpage} style to display ``\textbf{END}''.}
+% \changes{2.3}{2012/09/03}{Rearranged headers and footers to conform to the latest formatting requirements. Swapped \fbox{MARKING SCHEDULE} and \fbox{DRAFT} between header and footer so that the page number doesn't get overprinted.}
+% \changes{2.4}{2013/06/06}{Replaced the \textsf{lastpage} page style with direct manipulation of the footer contents in the \textsf{plain} page style, as \cs{pagestyle} and \cs{thispagestyle} don't affect automatically generated float pages on the last page of the document.}
+% \changes{2.4}{2016/08/26}{Added support to \textsf{titlepage} page style for new \textsf{embargo} class option.}
 % 
 %\begin{macro}{\if@lastpagetext}
 %\begin{macro}{\if@lastpagefloat}
@@ -1393,15 +1393,15 @@
 % 
 % \begin{macro}{question}
 % \begin{macro}{subquestion}
-% \changes{2.0}{2000/09/11}{NJS New \texttt{subquestion} counter.}
-% \changes{2.0.1}{2000/04/30}{NJS Removed prefixed question number from
+% \changes{2.0}{2000/09/11}{New \texttt{subquestion} counter.}
+% \changes{2.0.1}{2000/04/30}{Removed prefixed question number from
 % \cs{labelsubquestion} macro so that references now print as just ``(a)''
 % instead of ``1(a)''.}
 % \begin{macro}{subsubquestion}
-% \changes{2.0}{2000/09/11}{NJS New \texttt{subsubquestion} counter.}
-% \changes{2.0.1}{2000/04/30}{NJS The \texttt{subsubquestion} was incorrectly
+% \changes{2.0}{2000/09/11}{New \texttt{subsubquestion} counter.}
+% \changes{2.0.1}{2000/04/30}{The \texttt{subsubquestion} was incorrectly
 % printing as ``(a)'' rather than ``(i)''. Fixed.}
-% \changes{2.0.1}{2000/04/30}{NJS Removed prefixed question numbers from
+% \changes{2.0.1}{2000/04/30}{Removed prefixed question numbers from
 % \cs{labelsubsubquestion} macro so that references now print as just ``(i)''
 % instead of ``1(a)(i)''.}
 % First, we define three counters for the three possible levels of question:
@@ -1429,7 +1429,7 @@
 % \end{macro}
 % 
 % \begin{macro}{examexpected}
-% \changes{2.0}{2000/09/11}{NJS New \texttt{examexpected} counter.}
+% \changes{2.0}{2000/09/11}{New \texttt{examexpected} counter.}
 % The |examexpected| counter stores the total expected number of marks for the
 % examination, and defaults to 100:
 %    \begin{macrocode}
@@ -1438,7 +1438,7 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{examoutof}
-% \changes{2.0}{2000/09/11}{NJS New \texttt{examoutof} macro.}
+% \changes{2.0}{2000/09/11}{New \texttt{examoutof} macro.}
 % To specify that an examination is out of some number of marks other than
 % 100, use the \cs{examoutof} macro to set the value:
 %    \begin{macrocode}
@@ -1447,13 +1447,13 @@
 % \end{macro}
 % 
 % \begin{macro}{sectexpected}
-% \changes{2.0}{2002/01/09}{NJS New \cs{sectexpected} counter.}
+% \changes{2.0}{2002/01/09}{New \cs{sectexpected} counter.}
 % \begin{macro}{qexpected}
-% \changes{2.0}{2000/09/11}{NJS New \cs{qexpected} counter.}
+% \changes{2.0}{2000/09/11}{New \cs{qexpected} counter.}
 % \begin{macro}{subqexpected}
-% \changes{2.0}{2000/09/11}{NJS New \texttt{subqexpected} counter.}
+% \changes{2.0}{2000/09/11}{New \texttt{subqexpected} counter.}
 % \begin{macro}{subsubqexpected}
-% \changes{2.0}{2000/09/11}{NJS New \texttt{subsubqexpected} counter.}
+% \changes{2.0}{2000/09/11}{New \texttt{subsubqexpected} counter.}
 % The next four counters perform the same function as the |examexpected| counter
 % for sections, questions, sub-questions and sub-sub-questions respectively. No
 % macros are required to set these values as they are set automatically by the
@@ -1471,7 +1471,7 @@
 % \end{macro}
 % 
 % \begin{macro}{lastexpected}
-% \changes{2.0}{2000/09/11}{NJS New \texttt{lastexpected} counter.}
+% \changes{2.0}{2000/09/11}{New \texttt{lastexpected} counter.}
 % The |lastexpected| counter records the expected marks total for the last
 % question. This will eventually be used to verify that the marks total for a
 % marking schedule equals the marks total for the corresponding question, but
@@ -1483,7 +1483,7 @@
 % \end{macro}
 % 
 % \begin{macro}{xsection}
-% \changes{2.0}{2002/01/29}{NJS New \texttt{xsection} counter.}
+% \changes{2.0}{2002/01/29}{New \texttt{xsection} counter.}
 % Set up a counter for the section ``number'' and define it so that it prints out as an upper case letter rather than a number. We could just redefine the |section| counter, but that interferes with the section numbering in the documentation, and we can't have that, can we? |:)|
 % 
 %    \begin{macrocode}
@@ -1494,14 +1494,14 @@
 % \end{macro}
 % 
 % \begin{macro}{examrunning}
-% \changes{2.0}{2000/09/11}{NJS New \texttt{examrunning} counter.}
+% \changes{2.0}{2000/09/11}{New \texttt{examrunning} counter.}
 % \begin{macro}{sectrunning}
-% \changes{2.0}{2002/01/09}{NJS New \texttt{sectrunning} counter.}
-% \changes{2.4}{2016/05/03}{NJS \texttt{sectrunning} now resets when the \texttt{xsection} counter increments.}
+% \changes{2.0}{2002/01/09}{New \texttt{sectrunning} counter.}
+% \changes{2.4}{2016/05/03}{\texttt{sectrunning} now resets when the \texttt{xsection} counter increments.}
 % \begin{macro}{qrunning}
-% \changes{2.0}{2000/09/11}{NJS New \texttt{qrunning} counter.}
+% \changes{2.0}{2000/09/11}{New \texttt{qrunning} counter.}
 % \begin{macro}{subqrunning}
-% \changes{2.0}{2000/09/11}{NJS New \texttt{subqrunning} counter.}
+% \changes{2.0}{2000/09/11}{New \texttt{subqrunning} counter.}
 % These four counters keep track of the running total of marks for the current examination, section, question and subquestion respectively. This is later compared against the corresponding expected total. A running total is not needed for sub-sub-questions because they do not have sub-parts. The |sectrunning|, |qrunning|, and |subqrunning| counters are reset when the associated counters are incremented.
 % 
 %    \begin{macrocode}
@@ -1517,9 +1517,9 @@
 % \end{macro}
 % 
 % \begin{macro}{hassubs}
-% \changes{2.0}{2000/09/11}{NJS New \texttt{hassubs} counter.}
+% \changes{2.0}{2000/09/11}{New \texttt{hassubs} counter.}
 % \begin{macro}{hassubsubs}
-% \changes{2.0}{2000/09/11}{NJS New \texttt{hassubsubs} counter.}
+% \changes{2.0}{2000/09/11}{New \texttt{hassubsubs} counter.}
 % These two counters are used to track whether questions and
 % sub-questions have sub-parts. Counters are used rather than booleans because
 % counters are set globally and booleans are not (or at least do not appear to
@@ -1534,7 +1534,7 @@
 % \end{macro}
 % 
 % \begin{macro}{qdepth}
-% \changes{2.4}{2013/05/31}{NJS New \texttt{qdepth} counter.}
+% \changes{2.4}{2013/05/31}{New \texttt{qdepth} counter.}
 % This counter is incremented every time a \textsf{question}, \textsf{subquestion} or \textsf{subsubquestion} environment is opened, and decremented every time these environments close. It measures the nesting depth of questions, and is used to check that we do not have things like a \texttt{subquestion} not enclosed by a \texttt{question}, or a \texttt{question} nested inside another \texttt{question}. Note that this counter does \emph{not} reset inside any other environment.
 % 
 %    \begin{macrocode}
@@ -1560,7 +1560,7 @@
 % \subsection{Question-building environments and associated items}\label{sec-src-questions}
 % 
 % \begin{macro}{\questionskip}
-% \changes{2.4}{2013/06/13}{NJS Added \cs{questionskip} to control spacing between questions.}
+% \changes{2.4}{2013/06/13}{Added \cs{questionskip} to control spacing between questions.}
 % \cs{questionskip} is the minimum amount of space between the end of one question and the start of the next. It defaults to the value of \cs{baselineskip}.
 %    \begin{macrocode}
 \newlength{\questionskip}
@@ -1569,7 +1569,7 @@
 % \end{macro}
 %
 % \begin{macro}{\printmarks}
-% \changes{2.4.2}{2019/08/30}{NJS Refactored marks printing.}
+% \changes{2.4.2}{2019/08/30}{Refactored marks printing.}
 % \cs{printmarks} prints the marks at the end of a \{sub-, subsub-\}question, and you can redefine it to change how marks are printed. The total number of marks for the question is printed right-justified on the line as ``(\emph{m} marks)'' where \emph{m} is the value of the relevant question counter (|qrunning|, |subqrunning|, or |subsubqexpected|), \emph{unless} the number of marks is zero or |show marks=false|, in which case nothing is printed. The macro determines whether to print ``mark'' or ``marks'' automatically, and figures out whether the number of marks will fit on the last line of the question or needs to be placed on the next line. The code for handling the line breaking is derived from an example on page 106 of \emph{The \TeX{}book}, with the addition of a \cs{leavevmode} to prevent \cs{unskip} (which can't be used in vertical mode) from crashing when the marks immediately follow a |verbatim| type environment. This may cause slightly more vertical space after environments (e.g., lists) than is ideal, but not enough to be a major problem.
 %    \begin{macrocode}
 \newcommand{\printmarks}[1]{%
@@ -1581,15 +1581,15 @@
 % \end{macro}
 %
 % \begin{environment}{question}
-% \changes{2.0}{2000/09/11}{NJS \textsf{question} environment no longer a redefinition of \textsf{enumerate}.}
-% \changes{2.0}{2001/05/15}{NJS Added penalty handling to ensure correct placement of marks in output.}
-% \changes{2.0}{2001/05/15}{NJS Total marks for a question are now printed only if the question has no sub-questions.}
-% \changes{2.3.2}{2014/10/09}{NJS Fixed crashing bug with verbatim environments
+% \changes{2.0}{2000/09/11}{\textsf{question} environment no longer a redefinition of \textsf{enumerate}.}
+% \changes{2.0}{2001/05/15}{Added penalty handling to ensure correct placement of marks in output.}
+% \changes{2.0}{2001/05/15}{Total marks for a question are now printed only if the question has no sub-questions.}
+% \changes{2.3.2}{2014/10/09}{Fixed crashing bug with verbatim environments
 % appearing at the end of questions.}
-% \changes{2.4}{2013/05/31}{NJS Check question depth when opening the environment.}
-% \changes{2.4}{2015/08/19}{NJS Changed how question marks are positioned.}
-% \changes{2.4}{2016/05/02}{NJS Only output question marks if they're greater than zero.}
-% \changes{2.4.2}{2019/08/30}{NJS Refactored marks printing.}
+% \changes{2.4}{2013/05/31}{Check question depth when opening the environment.}
+% \changes{2.4}{2015/08/19}{Changed how question marks are positioned.}
+% \changes{2.4}{2016/05/02}{Only output question marks if they're greater than zero.}
+% \changes{2.4.2}{2019/08/30}{Refactored marks printing.}
 % The \textsf{question} environment specifies a top-level question, and produces questions numbered in the form ``1.'', ``2.'', etc. It has one mandatory argument, the number of marks allocated to the question, which is used to initialise the |qexpected| counter\footnote{If it were not for the fact that you can only refer to environment arguments in the environment preamble, the \texttt{qexpected} counter would be unnecessary.}. If the argument is left empty, default to zero for the number of marks:
 % 
 %    \begin{macrocode}
@@ -1703,16 +1703,16 @@
 % \end{environment}
 % 
 % \begin{environment}{subquestion}
-% \changes{2.0}{2000/09/11}{NJS \textsf{subquestion} environment no longer a
+% \changes{2.0}{2000/09/11}{\textsf{subquestion} environment no longer a
 % redefinition of \textsf{enumerate}.}
-% \changes{2.0}{2001/05/13}{NJS Added penalty handling to ensure correct placement
+% \changes{2.0}{2001/05/13}{Added penalty handling to ensure correct placement
 % of marks in output.}
-% \changes{2.3.2}{2014/10/09}{NJS Fixed crashing bug with verbatim environments
+% \changes{2.3.2}{2014/10/09}{Fixed crashing bug with verbatim environments
 % appearing at the end of subquestions.}
-% \changes{2.4}{2013/05/31}{NJS Check question depth when opening the environment.}
-% \changes{2.4}{2015/08/19}{NJS Changed how question marks are positioned.}
-% \changes{2.4}{2016/05/02}{NJS Only output question marks if they're greater than zero.}
-% \changes{2.4.2}{2019/08/30}{NJS Refactored marks printing.}
+% \changes{2.4}{2013/05/31}{Check question depth when opening the environment.}
+% \changes{2.4}{2015/08/19}{Changed how question marks are positioned.}
+% \changes{2.4}{2016/05/02}{Only output question marks if they're greater than zero.}
+% \changes{2.4.2}{2019/08/30}{Refactored marks printing.}
 % The \textsf{subquestion} environment is the analogue of \textsf{question} for
 % sub-questions. On initialisation, it sets |subqexpected| to the value of the
 % mandatory argument (defaulting to zero if the argument is empty), increments
@@ -1809,16 +1809,16 @@
 % \end{environment}
 % 
 % \begin{environment}{subsubquestion}
-% \changes{2.0}{2000/09/11}{NJS \textsf{subsubquestion} environment no longer a
+% \changes{2.0}{2000/09/11}{\textsf{subsubquestion} environment no longer a
 % redefinition of \textsf{enumerate}.}
-% \changes{2.0}{2001/05/13}{NJS Added penalty handling to ensure correct placement
+% \changes{2.0}{2001/05/13}{Added penalty handling to ensure correct placement
 % of marks in output.}
-% \changes{2.3.2}{2014/10/09}{NJS Fixed crashing bug with verbatim environments
+% \changes{2.3.2}{2014/10/09}{Fixed crashing bug with verbatim environments
 % appearing at the end of subsubquestions.}
-% \changes{2.4}{2013/05/31}{NJS Check question depth when opening the environment.}
-% \changes{2.4}{2015/08/19}{NJS Changed how question marks are positioned.}
-% \changes{2.4}{2016/05/02}{NJS Only output question marks if they're greater than zero.}
-% \changes{2.4.2}{2019/08/30}{NJS Refactored marks printing.}
+% \changes{2.4}{2013/05/31}{Check question depth when opening the environment.}
+% \changes{2.4}{2015/08/19}{Changed how question marks are positioned.}
+% \changes{2.4}{2016/05/02}{Only output question marks if they're greater than zero.}
+% \changes{2.4.2}{2019/08/30}{Refactored marks printing.}
 % This is similar to both \textsf{question} and \textsf{subquestion}, and
 % generates an appropriately numbered sub-sub-question (``(i)'', ``(ii)'', etc.).
 %    \begin{macrocode}
@@ -1881,7 +1881,7 @@
 % \subsection{Draft examination printing}
 % 
 % \begin{macro}{\@marking}
-% \changes{2.0}{2001/05/17}{NJS New \cs{@draft} macro.}
+% \changes{2.0}{2001/05/17}{New \cs{@draft} macro.}
 % Specifying the \textsf{draft} option causes \textsf{ouexam} to print
 % \fbox{DRAFT} in large letters in the footer of every page. This is drawn by
 % the \cs{@draft} macro, which is included in the page footer definition of
@@ -1899,7 +1899,7 @@
 % \end{macro}
 % 
 % 
-% \changes{2.2}{2010/04/26}{NJS Added time allocation macros.}
+% \changes{2.2}{2010/04/26}{Added time allocation macros.}
 % \subsection{Time allocations}
 % 
 % \begin{macro}{\timeallocation}
@@ -1926,9 +1926,9 @@
 % 
 % \begin{environment}{marking}
 % \begin{macro}{\@markingschedule}
-% \changes{1.2}{1999/10/26}{NJS New \textsf{marking} environment for including
+% \changes{1.2}{1999/10/26}{New \textsf{marking} environment for including
 % answers and/or marking schedule information.}
-% \changes{2.0}{2000/09/11}{NJS Now prints ``MARKING SCHEDULE'' at the bottom
+% \changes{2.0}{2000/09/11}{Now prints ``MARKING SCHEDULE'' at the bottom
 % of every page if the \textsf{markingschedule} class option is specified.}
 % The \textsf{marking} environment allows the specification of marking
 % schedule information in the same location as the questions. If the
@@ -1963,9 +1963,9 @@
 % 
 % \subsection{Section handling}
 % 
-% \changes{2.0}{2002/01/09}{NJS New \textsf{examsection} environment.}
-% \changes{2.0}{2002/01/09}{NJS New \cs{@defsecinst} macro.}
-% \changes{2.4}{2016/05/03}{NJS Added key-value options.}
+% \changes{2.0}{2002/01/09}{New \textsf{examsection} environment.}
+% \changes{2.0}{2002/01/09}{New \cs{@defsecinst} macro.}
+% \changes{2.4}{2016/05/03}{Added key-value options.}
 % \begin{environment}{examsection}
 % \begin{macro}{\@defsecinst}
 % The \textsf{examsection} environment specifies a major section of an
@@ -2062,7 +2062,7 @@
 % 
 % \begin{macro}{\examyear}
 % \begin{macro}{\@year}
-% \changes{2.0.2}{2002/08/22}{NJS Put back \@eha at end of the \ClassError. Don't know what this does, but the macro crashes without it there. It seems to be required if there's a \cs{protect}.}
+% \changes{2.0.2}{2002/08/22}{Put back \@eha at end of the \ClassError. Don't know what this does, but the macro crashes without it there. It seems to be required if there's a \cs{protect}.}
 % The \cs{examyear} macro specifies the year in which the examination is being held. It redefines the \cs{@year} macro which is used in \cs{@maketitlepage}:
 %    \begin{macrocode}
 \newcommand{\examyear}[1]{\def\@year{#1}}
@@ -2078,7 +2078,7 @@
 % 
 % \begin{macro}{\department}
 % \begin{macro}{\@dept}
-% \changes{2.0.2}{2002/08/22}{NJS Put back \@eha at end of the \ClassError. Don't know what this does, but the macro crashes without it there. It seems to be required if there's a \cs{protect}.}
+% \changes{2.0.2}{2002/08/22}{Put back \@eha at end of the \ClassError. Don't know what this does, but the macro crashes without it there. It seems to be required if there's a \cs{protect}.}
 % The \cs{department} macro specifies the name of the department, and is required. It redefines the \cs{@dept} macro which is used in \cs{@maketitlepage}:
 %    \begin{macrocode}
 \newcommand{\department}[1]{\def\@dept{#1}}
@@ -2091,7 +2091,7 @@
 % 
 % \begin{macro}{\papernumber}
 % \begin{macro}{\@pnumber}
-% \changes{2.0.2}{2002/08/22}{NJS Put back \@eha at end of the \ClassError. Don't know what this does, but the macro crashes without it there. It seems to be required if there's a \cs{protect}.}
+% \changes{2.0.2}{2002/08/22}{Put back \@eha at end of the \ClassError. Don't know what this does, but the macro crashes without it there. It seems to be required if there's a \cs{protect}.}
 % The \cs{papernumber} macro specifies the paper number, and is required. It redefines the \cs{@pnumber} macro which is used in \cs{@maketitlepage}:
 %    \begin{macrocode}
 \newcommand{\papernumber}[1]{\def\@pnumber{#1}}
@@ -2104,7 +2104,7 @@
 % 
 % \begin{macro}{\papertitle}
 % \begin{macro}{\@ptitle}
-% \changes{2.0.2}{2002/08/22}{NJS Put back \@eha at end of the \ClassError. Don't know what this does, but the macro crashes without it there. It seems to be required if there's a \cs{protect}.}
+% \changes{2.0.2}{2002/08/22}{Put back \@eha at end of the \ClassError. Don't know what this does, but the macro crashes without it there. It seems to be required if there's a \cs{protect}.}
 % The \cs{papertitle} macro specifies the title of the paper, and is required. It redefines the \cs{@ptitle} macro which is used in \cs{@maketitlepage}:
 %    \begin{macrocode}
 \newcommand{\papertitle}[1]{\def\@ptitle{#1}}
@@ -2117,8 +2117,8 @@
 % 
 % \begin{macro}{\semester}
 % \begin{macro}{\@semester}
-% \changes{2.0.2}{2002/08/22}{NJS Added full-year support to \cs{semester}.}
-% \changes{2.0}{2002/01/14}{NJS Rewrote \cs{semester} to support summer school
+% \changes{2.0.2}{2002/08/22}{Added full-year support to \cs{semester}.}
+% \changes{2.0}{2002/01/14}{Rewrote \cs{semester} to support summer school
 % and special exams.}
 % The \cs{semester} macro specifies which semester the examination is for.
 % Legal values for the argument are ``1'', ``2'', ``SS'' for summer school,
@@ -2171,8 +2171,8 @@
 % \end{macro}
 % 
 % \begin{macro}{num.pages}
-% \changes{1.1}{1999/04/20}{NJS Renamed \texttt{page.last} label to \texttt{num.pages}.}
-% \changes{2.4}{2013/06/05}{NJS Added check for \textsf{hyperref} being loaded.}
+% \changes{1.1}{1999/04/20}{Renamed \texttt{page.last} label to \texttt{num.pages}.}
+% \changes{2.4}{2013/06/05}{Added check for \textsf{hyperref} being loaded.}
 % There is no macro to specify the number of pages in the examination because it is done automatically by inserting a \cs{newlabel} that refers to the last page directly into the |.aux| file. The \textsf{hyperref} package redefines the \cs{newlabel} macro (in particular it increases the number of arguments), so we need to test whether \textsf{hyperref} is loaded and write the appropriate string to the |.aux| file. We borrow a technique from the \textsf{pageslts} package of checking for the existence of \cs{Hy@Warning}. (Ideally we would use \cs{if@packageloaded}, but this can't be used after \cs{AtBeginDocument}, and can be foiled by a package loading \textsf{hyperref} \cs{AtBeginDocument}.)
 %    \begin{macrocode}
 \AtEndDocument{%
@@ -2187,8 +2187,8 @@
 % \end{macro}
 % 
 % \begin{macro}{num.questions}
-% \changes{1.1}{1999/04/20}{NJS Added \cs{num.questions} label representing the number of questions.}
-% \changes{2.4}{2013/06/05}{NJS Added check for \textsf{hyperref} being loaded.}
+% \changes{1.1}{1999/04/20}{Added \cs{num.questions} label representing the number of questions.}
+% \changes{2.4}{2013/06/05}{Added check for \textsf{hyperref} being loaded.}
 % Similarly, there is no macro to specify the number of questions in the examination. This is calculated using the same method as for the number of pages.
 %    \begin{macrocode}
 \AtEndDocument{%
@@ -2218,18 +2218,19 @@
 % \end{macro}
 %
 % \begin{macro}{\@NA}
-% \changes{2.1.3}{2009/04/28}{NJS Added \cs{@NA} macro.}
+% \changes{2.1.3}{2009/04/28}{Added \cs{@NA} macro.}
 % The \cs{@NA} macro enables us to easily assign and test for the default value
-% (``N/A'') for some of the title page macros. (There is certain text that
+% (``Nil'') for some of the title page macros. (There is certain text that
 % should not be output when particular macros are allowed to default.)
 %    \begin{macrocode}
-\def\@NA{N/A}
+\def\@NA{Nil}
 %    \end{macrocode}
 % \end{macro}
 % 
 % \begin{macro}{\material}
 % \begin{macro}{\@material}
-% \changes{2.1.3}{2009/04/28}{NJS Changed default to ``N/A'' for \cs{material}.}
+% \changes{2.1.3}{2009/04/28}{Changed default to ``N/A'' for \cs{material}.}
+% \changes{2.4.2}{2019/08/30}{Changed default to ``Nil'' for \cs{material}.}
 % The \cs{material} macro lets specifies any additional material that candidates
 % are provided in addition to the examination paper itself, and is optional.
 % It redefines the \cs{@material} macro that is used in \cs{@maketitlepage}:
@@ -2237,12 +2238,12 @@
 \let\@material\@NA
 \newcommand{\material}[1]{\def\@material{#1}}
 %    \end{macrocode}
-% If you omit it, it defaults to ``N/A''.
+% If you omit it, it defaults to ``Nil''.
 % \end{macro}
 % \end{macro}
 %
 % \begin{macro}{\@inspection}
-% \changes{2.4}{2016/08/27}{NJS Refactored ``subject to inspection'' generation.}
+% \changes{2.4}{2016/08/27}{Refactored ``subject to inspection'' generation.}
 % Various items on the title page may have ``(Subject to inspection by the examiners)'' or similar text printed below them. Redefine the \cs{@inspection} macro to change this text. (Implemented as a separate macro to enable more flexible formatting.)
 %    \begin{macrocode}
 \def\@inspection{(Subject to inspection by the examiners)}
@@ -2251,11 +2252,11 @@
 % 
 % \begin{macro}{\allowcalculators}
 % \begin{macro}{\@calculators}
-% \changes{2.1}{2004/04/05}{NJS Modified calculator macros to conform to
+% \changes{2.1}{2004/04/05}{Modified calculator macros to conform to
 % new University calculator regulations.}
-% \changes{2.1.2}{2008/08/14}{NJS Ensured that the correct default is set regardless of whether the calculators macro is called.}
-% \changes{2.4}{2016/08/27}{NJS Implemented updated calculator rules for 2016 onwards.}
-% \changes{2.4}{2016/08/27}{NJS Incorporated ``subject to inspection'' line.}
+% \changes{2.1.2}{2008/08/14}{Ensured that the correct default is set regardless of whether the calculators macro is called.}
+% \changes{2.4}{2016/08/27}{Implemented updated calculator rules for 2016 onwards.}
+% \changes{2.4}{2016/08/27}{Incorporated ``subject to inspection'' line.}
 % The \cs{allowcalculators} macro specifies whether or not calculators are
 % allowed in the examination (\cs{permitcalculators} is a synonym). If
 % \cs{allowcalculators} is omitted, \cs{@calculators} defaults to ``No
@@ -2304,7 +2305,7 @@
 % \end{macro}
 % 
 % \begin{macro}{\permitcalculators}
-% \changes{2.1}{2004/04/05}{NJS Added \cs{permitcalculators} as a synonym
+% \changes{2.1}{2004/04/05}{Added \cs{permitcalculators} as a synonym
 % for \cs{allowcalculators}.}
 % \cs{permitcalculators} is a synonym for \cs{allowcalculators}.
 %    \begin{macrocode}
@@ -2314,8 +2315,9 @@
 % 
 % \begin{macro}{\copiesof}
 % \begin{macro}{\@copiesof}
-% \changes{2.1.3}{2009/04/28}{NJS Changed default to ``N/A'' for \cs{copiesof}.}
-% \changes{2.4}{2016/08/27}{NJS Incorporated ``subject to inspection'' line.}
+% \changes{2.1.3}{2009/04/28}{Changed default to ``N/A'' for \cs{copiesof}.}
+% \changes{2.4}{2016/08/27}{Incorporated ``subject to inspection'' line.}
+% \changes{2.4.2}{2019/08/30}{Changed default to ``Nil'' for \cs{copiesof}.}
 % The \cs{copiesof} macro specifies any material that candidates are allowed to
 % bring into the examination, and is optional. It redefines the \cs{@copiesof}
 % macro that is used in \cs{@maketitlepage}:
@@ -2347,8 +2349,8 @@
 % 
 % \begin{macro}{\otherinstructions}
 % \begin{macro}{\@otherinst}
-% \changes{2.1.3}{2009/04/28}{NJS Changed default to ``N/A'' for
-% \cs{otherinstructions}.}
+% \changes{2.1.3}{2009/04/28}{Changed default to ``N/A'' for \cs{otherinstructions}.}
+% \changes{2.4.2}{2019/08/30}{Changed default to ``Nil'' for \cs{otherinstructions}.}
 % The \cs{otherinstructions} macro specifies any other instructions not covered
 % by any of the above, and is optional. It redefines the \cs{@otherinst}
 % macro that is used in \cs{@maketitlepage}:
@@ -2371,9 +2373,9 @@
 % \end{macro}
 %
 % \begin{macro}{\@maketitlepage}
-% \changes{1.1}{1999/04/20}{NJS Renamed macro from \cs{maketitlepage}.}
-% \changes{2.3.1}{2014/09/15}{NJS Removed ``Paper'' from the title box.}
-% \changes{2.4}{2013/06/05}{NJS Added check for \textsf{hyperref} being loaded.}
+% \changes{1.1}{1999/04/20}{Renamed macro from \cs{maketitlepage}.}
+% \changes{2.3.1}{2014/09/15}{Removed ``Paper'' from the title box.}
+% \changes{2.4}{2013/06/05}{Added check for \textsf{hyperref} being loaded.}
 % The \cs{@maketitlepage} macro generates an examination title page that meets the Otago University requirements for final examination papers. You can redefine this if you want to change the format, but normally you would not do this.
 %    \begin{macrocode}
 \def\@maketitlepage{%
@@ -2445,9 +2447,9 @@
   \end{minipage}%
   \\[\baselineskip]%
 %    \end{macrocode}
-% \changes{2.1.3}{2009/04/28}{NJS Fixed vertical spacing.}
-% \changes{2.1.2}{2008/08/14}{NJS Ensure that the ``subject to inspection'' line for calculators is only printed when calculators actually are allowed.}
-% \changes{2.4}{2016-08-27}{NJS Refactored ``subject to inspection'' line (now done in \@calculators).}
+% \changes{2.1.3}{2009/04/28}{Fixed vertical spacing.}
+% \changes{2.1.2}{2008/08/14}{Ensure that the ``subject to inspection'' line for calculators is only printed when calculators actually are allowed.}
+% \changes{2.4}{2016-08-27}{Refactored ``subject to inspection'' line (now done in \@calculators).}
 % Print out anything that candidates are allowed to bring:
 %    \begin{macrocode}
   \underline{Candidates are permitted copies of:}%
@@ -2458,14 +2460,14 @@
   \end{minipage}%
   \\[\baselineskip]%
 %    \end{macrocode}
-% \changes{2.1.3}{2009/04/28}{NJS Fixed vertical spacing.}
-% \changes{2.1.2}{2008/08/14}{NJS Ensure that the ``subject to inspection''
+% \changes{2.1.3}{2009/04/28}{Fixed vertical spacing.}
+% \changes{2.1.2}{2008/08/14}{Ensure that the ``subject to inspection''
 % line for other material is only printed when there actually \emph{is}
 % other material.}
-% \changes{2.4}{2016-08-27}{NJS Refactored ``subject to inspection'' line (now done in \@copiesof).}
-% \changes{2.1.3}{2009/04/28}{NJS Removed superfluous blank line.}
-% \changes{2.4}{2016/08/26}{NJS Added instruction for embargoed exams.}
-% \changes{2.4.1}{2017/08/30}{NJS Added detail to instruction for embargoed exams.}
+% \changes{2.4}{2016-08-27}{Refactored ``subject to inspection'' line (now done in \@copiesof).}
+% \changes{2.1.3}{2009/04/28}{Removed superfluous blank line.}
+% \changes{2.4}{2016/08/26}{Added instruction for embargoed exams.}
+% \changes{2.4.1}{2017/08/30}{Added detail to instruction for embargoed exams.}
 % Print out other instructions, and finish. Automatically insert an instruction to hand in the entire exam if it's embargoed.
 %    \begin{macrocode}
   \underline{Other Instructions:}%
@@ -2488,11 +2490,11 @@
 %
 % \subsection{Obsolete macros and environments}
 % 
-% \changes{2.0}{2002/01/09}{NJS All \textsf{multichoice} macros and environments
+% \changes{2.0}{2002/01/09}{All \textsf{multichoice} macros and environments
 % made obsolete.}
-% \changes{2.0}{2002/01/09}{NJS \cs{markingschedule}, \cs{marks}, \cs{totalmarks}
+% \changes{2.0}{2002/01/09}{\cs{markingschedule}, \cs{marks}, \cs{totalmarks}
 % macros made obsolete.}
-% \changes{2.0}{2002/01/09}{NJS \textsf{questions}, \textsf{subquestions},
+% \changes{2.0}{2002/01/09}{\textsf{questions}, \textsf{subquestions},
 % \textsf{subsubquestions} environments made obsolete.}
 % The following macros and environments are no longer supported as of version
 % 2.0. Documents that use these macros can be processed using ouexam v1.2 or
@@ -2502,13 +2504,13 @@
 % 
 % \begin{environment}{questions}
 % \begin{environment}{subquestions}
-% \changes{1.1}{1999/04/20}{NJS Now disabled when \textsf{multichoice} is
+% \changes{1.1}{1999/04/20}{Now disabled when \textsf{multichoice} is
 % active.}
 % \begin{environment}{subsubquestions}
-% \changes{1.1}{1999/04/20}{NJS Now disabled when \textsf{multichoice} is
+% \changes{1.1}{1999/04/20}{Now disabled when \textsf{multichoice} is
 % active.}
 % \begin{macro}{markingschedule}
-% \changes{1.2}{1999/10/26}{NJS New macro to turn marking information on and
+% \changes{1.2}{1999/10/26}{New macro to turn marking information on and
 % off.}
 % The \textsf{questions}, \textsf{subquestions} and \textsf{subsubquestions}
 % environments have been replaced by the \textsf{question},
@@ -2534,17 +2536,17 @@
 % \end{environment}
 % \end{environment}
 % 
-% \changes{2.1}{2004/04/16}{NJS Removed the \texttt{marks} macro entirely because it conflicts with a macro in e-TeX.}
-% \changes{1.1}{1999/04/20}{NJS This macro now increments the \texttt{marks} counter.}
+% \changes{2.1}{2004/04/16}{Removed the \texttt{marks} macro entirely because it conflicts with a macro in e-TeX.}
+% \changes{1.1}{1999/04/20}{This macro now increments the \texttt{marks} counter.}
 % \begin{macro}{\totalmarks}
-% \changes{1.1}{1999/04/20}{NJS Removed the parameter for the number of marks; Both these macros have been replaced by automatic calculations within the question-building environments.}
+% \changes{1.1}{1999/04/20}{Removed the parameter for the number of marks; Both these macros have been replaced by automatic calculations within the question-building environments.}
 % The \cs{marks} macro has been replaced by the argument to the various question-building environments. The \cs{totalmarks} macro has been replaced by automatic calculations within these environments.
 %    \begin{macrocode}
 \newcommand{\totalmarks}{\@ouexam@obsolete{totalmarks macro}{1.2}}
 %    \end{macrocode}
 % \end{macro}
 % 
-% \changes{2.4}{2004/06/05}{NJS Obsoleted the long-deprecated \cs{newsection} macro.}
+% \changes{2.4}{2004/06/05}{Obsoleted the long-deprecated \cs{newsection} macro.}
 % \begin{macro}{\newsection}
 % The \cs{newsection} macro has been deprecated since version 2.0. Ten years seems a long enough time for it to now be safe to remove completely!
 %    \begin{macrocode}
