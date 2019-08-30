@@ -10,9 +10,12 @@ SHELL=/bin/sh
 .PHONY: class doc example install tidy clean
 
 
+# commands
+PDFLATEX=pdflatex -shell-escape -synctex=1 -interaction=nonstopmode -file-line-error
+
 # files
-EXAMPLE1_IMAGES = eg1-1.pdf eg1-2.pdf eg1-3.pdf
-EXAMPLE2_IMAGES = eg2-2.pdf eg2-3.pdf eg2-4.pdf eg2-5.pdf
+EXAMPLE1_IMAGES=eg1-1.pdf eg1-2.pdf eg1-3.pdf
+EXAMPLE2_IMAGES=eg2-2.pdf eg2-3.pdf eg2-4.pdf eg2-5.pdf
 
 
 # Build everything.
@@ -29,9 +32,9 @@ ouexam.cls: ouexam.dtx
 doc: ouexam.pdf
 
 ouexam.pdf:	ouexam.dtx $(EXAMPLE1_IMAGES) $(EXAMPLE2_IMAGES)
-	pdflatex $<
-	pdflatex $<
-	pdflatex $<
+	$(PDFLATEX) $<
+	$(PDFLATEX) $<
+	$(PDFLATEX) $<
 
 $(EXAMPLE1_IMAGES): example1.pdf
 	pdfjam --outfile $@ $< `echo $@ | cut -c 5`
@@ -44,8 +47,8 @@ $(EXAMPLE2_IMAGES): example2.pdf
 example: example1.pdf example2.pdf
 
 example%.pdf: example%.tex content.tex ouexam.cls
-	pdflatex $<
-	pdflatex $<
+	$(PDFLATEX) $<
+	$(PDFLATEX) $<
 
 
 # Install files in the appropriate locations in the texmf tree rooted at
