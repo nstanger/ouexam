@@ -1,3 +1,67 @@
 {
-    "latex-workshop.latex.autoBuild.run": "never"
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "make doc",
+            "tools": [
+                "make doc",
+            ]
+        },
+        {
+            "name": "make class",
+            "tools": [
+                "make class",
+            ]
+        },
+        {
+            "name": "make example",
+            "tools": [
+                "make example",
+            ]
+        },
+        {
+            "name": "pdflatex × 2",
+            "tools": [
+                "pdflatex",
+                "pdflatex"
+            ]
+        },
+    ],
+    "latex-workshop.latex.tools": [
+        {
+            "name": "pdflatex",
+            "command": "/opt/local/bin/pdflatex",
+            "args": [
+                "-shell-escape",
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "make class",
+            "command": "/opt/local/bin/gmake",
+            "args": [
+                "class"
+            ],
+            "env": {}
+        },
+        {
+            "name": "make doc",
+            "command": "/opt/local/bin/gmake",
+            "args": [
+                "doc"
+            ],
+            "env": {}
+        },
+        {
+            "name": "make example",
+            "command": "/opt/local/bin/gmake",
+            "args": [
+                "example"
+            ],
+            "env": {}
+        },
+    ],
 }
