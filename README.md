@@ -66,3 +66,31 @@ This is almost certainly because the question text ends with a list-based enviro
 ### Why can’t I build content.tex?
 
 `content.tex` is an include file for both `example1.tex` and `example2.tex`. It doesn’t have a `\documentclass` and you therefore *can’t* `pdflatex` it! The only input files you should be building are `example1.tex` and `example2.tex`.
+
+### How do I get rid of “(Subject to inspection by the examiners)”?
+
+Add this to the document preamble:
+
+```tex
+\makeatletter
+\def\@copiesof{Blah blah blah.}
+\makeatother
+```
+
+**Do not use the `\copiesof` macro.**
+
+### How do I change “N/A” to “NIL” (or or similar)?
+
+Add this to the document preamble, **before** you use any of `\material`, `\copiesof`, or `\otherinstructions`:
+
+```tex
+\makeatletter
+% Replace "N/A" with "NIL" to keep exams office happy :P
+\def\@NA{NIL}
+\let\@material\@NA
+\let\@copiesof\@NA
+\let\@otherinst\@NA
+\makeatother
+```
+
+You can then use `\material`, `\copiesof`, or `\otherinstructions` as required. Unused options will print as “NIL”.
