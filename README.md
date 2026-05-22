@@ -1,8 +1,8 @@
 # ouexam v2.4.2
 
-ouexam document class v2.4.2, 30 August 2019
+ouexam document class v2.4.2, 21 May 2021
 
-Copyright 1999–2021 Nigel Stanger and University of Otago
+Copyright 1999–2026 Nigel Stanger and University of Otago
 
 This LaTeX2ε document class enables the production of University of Otago formatted examination papers. It handles all the fiddly layout requirements (such as printing “**TURN OVER**” at the bottom of every page except the last), and also ensures that the actual number of marks for questions in the examination add up to the expected number of marks.
 
